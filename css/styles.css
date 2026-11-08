@@ -350,3 +350,33 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 .cal-leyenda .marca-ambos { background: linear-gradient(135deg, var(--gym-fondo) 50%, var(--run-fondo) 50%); }
 .centro { text-align: center; margin: 0; }
 .gym-resumen strong { font-size: 1.5rem; }
+
+/* ---------- Gym: personaje y mapa de músculos ---------- */
+.figura .hueso { stroke: var(--texto); stroke-width: 3.4; stroke-linecap: round; }
+.figura .cabeza { fill: var(--texto); }
+.figura .plataforma { stroke: var(--muted); stroke-width: 4; stroke-linecap: round; }
+.figura .disco { fill: var(--superficie); stroke: var(--acento); stroke-width: 2.4; }
+.figura .pesa { fill: var(--acento); }
+.figura .cable { stroke: var(--muted); stroke-width: 1; }
+.figura .prop { fill: #3a404c; }
+.figura .prop-linea { stroke: #4a515e; stroke-width: 3; stroke-linecap: round; }
+.figura .prop-trazo { fill: none; stroke: #3a404c; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+.figura .suelo { stroke: var(--borde); stroke-width: 1.5; }
+.mapa-musculos .cuerpo > * { fill: #2a2f38; }
+.mapa-musculos .musculo { fill: #3a414d; }
+.mapa-musculos .musculo.s { fill: color-mix(in srgb, var(--acento) 40%, #2a2f38); }
+.mapa-musculos .musculo.p { fill: var(--acento); }
+.ej-visual { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.ej-figura { width: 100px; height: 100px; flex: 0 0 auto; background: var(--superficie); border-radius: 10px; }
+.ej-figura svg { display: block; width: 100%; height: 100%; }
+.ej-visual .mapa-musculos {
+  width: 112px; height: 100px; flex: 0 0 auto; padding: 4px;
+  background: var(--superficie); border-radius: 10px;
+}
+/* Al lado si cabe (ordenador); debajo, a todo el ancho, en el móvil. */
+.ej-musculos { display: flex; flex-direction: column; gap: 4px; flex: 1 1 160px; min-width: 0; font-size: .88rem; }
+.ej-musculos > span { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 6px; }
+.ej-musculos .etq { color: var(--muted); font-size: .68rem; letter-spacing: .05em; text-transform: uppercase; }
+.musc-marca { display: inline-block; width: 9px; height: 9px; border-radius: 2px; align-self: center; }
+.musc-marca.p { background: var(--acento); }
+.musc-marca.s { background: color-mix(in srgb, var(--acento) 40%, #2a2f38); }
