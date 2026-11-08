@@ -4,7 +4,14 @@ const U = {
   esc(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   },
-  euros: n => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(n),
+  // Lee cantidades escritas a la española o a la inglesa: "1.500,50", "1500,5", "1500.5".
+  numero(texto) {
+    let t = String(texto).trim().replace(/\s|€/g, '');
+    t = t.includes(',') ? t.replace(/\./g, '').replace(',', '.') : t;
+    return Math.round((parseFloat(t) || 0) * 100) / 100;
+  },
+  // useGrouping 'always' pone el punto de miles también en cifras de 4 dígitos (1.500 €).
+  euros: n => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', useGrouping: 'always' }).format(n),
   // Fecha local en formato AAAA-MM-DD (sin desfases de zona horaria).
   iso(d = new Date()) {
     const p = n => String(n).padStart(2, '0');

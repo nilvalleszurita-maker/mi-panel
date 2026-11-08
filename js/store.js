@@ -4,7 +4,13 @@ const Store = (() => {
   const KEY = 'mi-panel:v1';
 
   const porDefecto = () => ({
-    finanzas: { movimientos: [] },
+    finanzas: {
+      movimientos: [],
+      // Dónde está el dinero. "color" es un hueco fijo de la paleta (1–8),
+      // así cada categoría conserva su color aunque se borren otras.
+      cuentas: ['Robo advisor', 'Dinero', 'Efectivo', 'S&P 500', 'Cuenta remunerada']
+        .map((nombre, i) => ({ id: 'c' + i, nombre, saldo: 0, color: i + 1 })),
+    },
     entrenos: { plan: {}, hechos: {} },
   });
 

@@ -4,7 +4,7 @@ Web app personal (móvil y ordenador) para controlar finanzas y entrenos. Diseñ
 
 ## Secciones
 
-- **Finanzas**: ingresos y gastos por categoría, resumen mensual (ingresos, gastos y balance) y gasto por categoría.
+- **Finanzas**: gráfica de anillo con dónde tienes el dinero (categorías editables: Robo advisor, Dinero, Efectivo, S&P 500, Cuenta remunerada…), gráfica de línea con el gasto de los últimos 12 meses, resumen mensual (ingresos, gastos y balance), gasto por categoría y lista de movimientos.
 - **Entrenos**: plan semanal (qué toca cada día, con ejercicios, series, repeticiones y peso) y registro de los días hechos en cada semana.
 - *Próximamente*: comidas, horario diario y outfits.
 
