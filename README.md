@@ -12,6 +12,7 @@ Web app personal (móvil y ordenador) para controlar finanzas y entrenos. Diseñ
 - **Gym**: registro diario de la planificación semanal.
   - Vista **Semana**: los 7 días con su sesión (se abre el de hoy). Cada ejercicio tiene casilla de hecho, una fila de kg y reps por serie, el objetivo de repeticiones, lo que hiciste la última vez (en gris) y botones para añadir o quitar series. Los días de carrera tienen distancia, tiempo (`52` o `52:30`) y el ritmo calculado en min/km. Notas por día. Todo se guarda al escribir.
   - Vista **Calendario**: días de gym en azul, de carrera en naranja y con las dos cosas partidos en diagonal. Pulsar un día lo abre en la vista Semana. Resumen del mes: días de gym, días de carrera y km.
+  - Cada ejercicio muestra un personaje animado haciéndolo y un mapa del cuerpo (frente y espalda) con los músculos principales y secundarios.
   - La planificación está en `js/gym-plan.js`: cambia ejercicios, series o reps ahí sin tocar la lógica.
 - *Próximamente*: comidas, horario diario y outfits.
 
@@ -32,6 +33,7 @@ js/utils.js           Utilidades (fechas, formato de euros…)
 js/finanzas.js        Módulo de finanzas
 js/entrenos.js        Módulo de entrenos
 js/gym-plan.js        Planificación del gym (solo datos, editable)
+js/gym-figuras.js     Dibujos del gym: personajes animados y mapa de músculos
 js/gym.js             Módulo de gym
 js/app.js             Pestañas, eventos y copia de seguridad
 sw.js, manifest…      Instalación como app y uso sin conexión

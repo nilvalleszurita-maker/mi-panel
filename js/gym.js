@@ -185,6 +185,7 @@ const Gym = (() => {
             ${info ? `<span class="muted peq">${info}</span>` : ''}
           </span>
         </label>
+        ${visual(e)}
         ${prev ? `<p class="anterior">Última vez (${fechaCorta(prev.fecha)}): ${prev.series.filter(conDatos)
           .map(s => `${U.esc(s.kg || '–')} kg × ${U.esc(s.reps || '–')}`).join(' · ')}</p>` : ''}
         <div class="series">
@@ -202,6 +203,24 @@ const Gym = (() => {
           <button class="btn btn-sec btn-mini" data-acc="quitar-serie" ${attrs} ${series.length <= 1 ? 'disabled' : ''}>− Serie</button>
           <button class="btn btn-sec btn-mini" data-acc="add-serie" ${attrs}>+ Serie</button>
         </div>
+      </div>`;
+  }
+
+  // Personaje haciendo el ejercicio + mapa de músculos (datos en gym-plan.js).
+  function visual(e) {
+    const principales = e.musculos || [], secundarios = e.secundarios || [];
+    if (!e.figura && !principales.length) return '';
+    const nombres = l => { const t = l.map(GymDibujos.nombre).join(', '); return t.charAt(0).toUpperCase() + t.slice(1); };
+    return `
+      <div class="ej-visual">
+        ${e.figura ? `<div class="ej-figura">${GymDibujos.figura(e.figura, `Cómo se hace: ${e.nombre}`)}</div>` : ''}
+        ${principales.length ? `
+          ${GymDibujos.musculos(principales, secundarios)}
+          <div class="ej-musculos">
+            <span><i class="musc-marca p"></i><span class="etq">Principal</span> ${nombres(principales)}</span>
+            ${secundarios.length ? `
+              <span class="muted"><i class="musc-marca s"></i><span class="etq">Secundario</span> ${nombres(secundarios)}</span>` : ''}
+          </div>` : ''}
       </div>`;
   }
 
