@@ -12,7 +12,7 @@ function pintar() {
     <a href="#${m.id}" class="tab ${m === actual ? 'activa' : ''}" ${m === actual ? 'aria-current="page"' : ''}>
       <span class="tab-icono" aria-hidden="true">${m.icono}</span><span>${m.nombre}</span>
     </a>`).join('');
-  actual.render(vista);
+  render();
 }
 
 window.addEventListener('hashchange', () => {
@@ -21,7 +21,12 @@ window.addEventListener('hashchange', () => {
   window.scrollTo(0, 0);
 });
 
-const rerender = () => actual.render(vista);
+// Al repintar se oculta el tooltip, que si no se quedaría con datos viejos.
+function render() {
+  document.querySelector('.tip')?.setAttribute('hidden', '');
+  actual.render(vista);
+}
+const rerender = render;
 vista.addEventListener('click', e => actual.alClic?.(e, rerender));
 vista.addEventListener('submit', e => actual.alEnviar?.(e, rerender));
 vista.addEventListener('input', e => actual.alEscribir?.(e, rerender));
