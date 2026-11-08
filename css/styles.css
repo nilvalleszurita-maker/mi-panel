@@ -12,6 +12,17 @@
   --neg: #f87171;
   --radio: 14px;
   --nav-alto: 64px;
+  /* Paleta de categorías para gráficas (validada para fondo oscuro y daltonismo).
+     El orden importa: colores vecinos se distinguen entre sí. */
+  --serie-1: #3987e5;
+  --serie-2: #d95926;
+  --serie-3: #199e70;
+  --serie-4: #c98500;
+  --serie-5: #d55181;
+  --serie-6: #008300;
+  --serie-7: #9085e9;
+  --serie-8: #e66767;
+  --serie-otros: #5c6370;
   color-scheme: dark;
 }
 
@@ -133,7 +144,7 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 .resumen { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .resumen .tarjeta { display: flex; flex-direction: column; gap: 4px; padding: 12px; min-width: 0; }
 .resumen span { font-size: .8rem; }
-.resumen strong { font-size: 1.05rem; overflow-wrap: anywhere; }
+.resumen strong { font-size: clamp(.85rem, 3.6vw, 1.05rem); overflow-wrap: anywhere; }
 @media (max-width: 380px) {
   .resumen { grid-template-columns: 1fr 1fr; }
   .resumen .tarjeta:last-child { grid-column: span 2; }
@@ -182,3 +193,73 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 .dialogo::backdrop { background: rgba(0, 0, 0, .6); }
 .dialogo h2 { text-transform: none; margin-bottom: 8px; }
 .dialogo .fila-botones { margin: 16px 0 10px; }
+
+/* ---------- Gráficas ---------- */
+.cab-bloque { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.cab-bloque .enlace { align-self: center; }
+
+.anillo-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+@media (min-width: 560px) {
+  .anillo-wrap { flex-direction: row; align-items: center; gap: 28px; }
+}
+.anillo { position: relative; width: 180px; height: 180px; flex: 0 0 auto; }
+.anillo svg { display: block; }
+.anillo circle[data-tip-t] { cursor: pointer; transition: opacity .15s; }
+.anillo svg:hover circle[data-tip-t]:not(:hover) { opacity: .55; }
+.anillo-fondo { stroke: var(--superficie-2); }
+.anillo-centro {
+  position: absolute; inset: 0; pointer-events: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.anillo-centro strong { font-size: 1.15rem; }
+
+.leyenda { list-style: none; margin: 0; padding: 0; width: 100%; display: flex; flex-direction: column; gap: 8px; }
+.leyenda li { display: flex; align-items: center; gap: 10px; font-size: .95rem; }
+.leyenda li.apagada { color: var(--muted); }
+.leyenda li.apagada strong { font-weight: 400; }
+.punto { width: 10px; height: 10px; border-radius: 3px; flex: 0 0 auto; }
+
+.editor-cuentas { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+.cuenta-fila { display: grid; grid-template-columns: 10px 1fr 96px 32px; gap: 8px; align-items: center; }
+.cuenta-fila input { min-height: 40px; padding: 0 10px; }
+.cuenta-fila input[data-campo="saldo"] { text-align: right; }
+
+.graf-linea { width: 100%; min-height: 190px; }
+.graf-linea svg { display: block; overflow: visible; }
+.graf-linea .rejilla { stroke: var(--borde); stroke-width: 1; stroke-dasharray: 2 4; }
+.graf-linea .eje { stroke: var(--borde); stroke-width: 1; }
+.graf-linea .etiq { fill: var(--muted); font-size: 11px; }
+.graf-linea .etiq.sel { fill: var(--texto); font-weight: 600; }
+.graf-linea .linea { fill: none; stroke: var(--acento); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.graf-linea .punto-linea { fill: var(--acento); stroke: var(--superficie); stroke-width: 2; }
+.graf-linea .col { cursor: pointer; }
+.graf-linea .cruz { opacity: 0; transition: opacity .1s; pointer-events: none; }
+.graf-linea line.cruz { stroke: var(--muted); stroke-width: 1; }
+.graf-linea .col:hover .cruz { opacity: 1; }
+
+.tip {
+  position: fixed; z-index: 50; pointer-events: none;
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 8px 12px; border-radius: 10px;
+  background: var(--superficie-2); border: 1px solid var(--borde);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .4); font-size: .9rem;
+}
+.tip .muted:first-letter { text-transform: uppercase; }
+
+/* ---------- Traspasos y categorías ---------- */
+.btn-mini { min-height: 34px; padding: 0 12px; font-size: .88rem; font-weight: 500; border-radius: 999px; }
+.sub-form { display: flex; flex-direction: column; gap: 12px; padding: 14px; border-radius: 12px; background: var(--superficie-2); }
+.sub-form input, .sub-form select { background: var(--superficie); }
+.dos-col > * { min-width: 0; }
+.nota { margin: 0; }
+.chip {
+  display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px;
+  border: 1px solid var(--borde); color: var(--muted); font-size: .7rem; vertical-align: 2px;
+}
+.candado { width: 32px; text-align: center; font-size: .85rem; opacity: .6; }
+.cab-bloque h3 { flex: 1; min-width: 0; }
+.cab-bloque .acciones { flex: 0 0 auto; gap: 12px; }
+.btn-mini { white-space: nowrap; }
+@media (max-width: 480px) {
+  .dos-col.apilar { grid-template-columns: 1fr; }
+}

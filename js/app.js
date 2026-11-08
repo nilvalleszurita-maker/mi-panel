@@ -26,6 +26,36 @@ vista.addEventListener('click', e => actual.alClic?.(e, rerender));
 vista.addEventListener('submit', e => actual.alEnviar?.(e, rerender));
 vista.addEventListener('input', e => actual.alEscribir?.(e, rerender));
 
+// Tooltip compartido: cualquier elemento con data-tip-t / data-tip-v lo muestra
+// al pasar el ratón o al tocarlo con el dedo.
+const tip = Object.assign(document.createElement('div'), { className: 'tip', hidden: true });
+document.body.append(tip);
+function mostrarTip(e) {
+  const t = e.target.closest?.('[data-tip-t]');
+  if (!t) { tip.hidden = true; return; }
+  tip.replaceChildren(
+    Object.assign(document.createElement('div'), { className: 'muted peq', textContent: t.dataset.tipT }),
+    Object.assign(document.createElement('strong'), { textContent: t.dataset.tipV }),
+  );
+  tip.hidden = false;
+  const x = Math.max(8, Math.min(e.clientX + 12, innerWidth - tip.offsetWidth - 8));
+  const y = e.clientY - tip.offsetHeight - 14;
+  tip.style.left = x + 'px';
+  tip.style.top = (y < 8 ? e.clientY + 18 : y) + 'px';
+}
+vista.addEventListener('pointermove', mostrarTip);
+vista.addEventListener('pointerdown', mostrarTip);
+vista.addEventListener('pointerleave', () => { tip.hidden = true; });
+window.addEventListener('scroll', () => { tip.hidden = true; }, { passive: true });
+
+// Al cambiar el tamaño de la ventana solo se redibujan las gráficas
+// (no toda la vista, para no cerrar el teclado del móvil mientras escribes).
+let espera;
+window.addEventListener('resize', () => {
+  clearTimeout(espera);
+  espera = setTimeout(() => actual.alRedimensionar?.(), 120);
+});
+
 // Copia de seguridad: exportar / importar todo el estado en JSON.
 const dlg = document.getElementById('dlg-ajustes');
 document.getElementById('btn-ajustes').onclick = () => dlg.showModal();

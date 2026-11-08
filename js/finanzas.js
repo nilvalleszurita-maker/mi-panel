@@ -1,35 +1,66 @@
-// Módulo de Finanzas: ingresos y gastos por mes, resumen y gasto por categoría.
+// Módulo de Finanzas: dónde está el dinero (anillo), gasto mensual (línea),
+// ingresos y gastos por mes, gasto por categoría y traspasos entre categorías.
 const Finanzas = (() => {
   const CATEGORIAS = {
     gasto: ['Comida', 'Casa', 'Transporte', 'Ocio', 'Ropa', 'Salud', 'Suscripciones', 'Otros'],
     ingreso: ['Nómina', 'Extra', 'Otros'],
   };
+  const COLORES = 8; // huecos de la paleta en css (--serie-1 … --serie-8)
 
-  // Estado de la vista (no se guarda): mes visible y formulario.
+  // Estado de la vista (no se guarda): mes visible, formularios y edición.
   const hoy = new Date();
   let mes = { a: hoy.getFullYear(), m: hoy.getMonth() };
   let tipo = 'gasto';
   let formAbierto = false;
+  let moviendo = false;       // formulario de traspaso abierto
+  let editandoCuentas = false;
+  let enfocar = null;         // selector del campo donde poner el cursor tras pintar
 
   const datos = () => Store.get().finanzas;
-  const clave = () => `${mes.a}-${String(mes.m + 1).padStart(2, '0')}`;
+  const principal = () => datos().cuentas.find(c => c.principal);
+  const claveMes = (a, m) => `${a}-${String(m + 1).padStart(2, '0')}`;
+  const pct = n => new Intl.NumberFormat('es-ES', { style: 'percent', maximumFractionDigits: 1 }).format(n);
+  const color = c => c.color ? `var(--serie-${c.color})` : 'var(--serie-otros)';
+  const redondo = n => Math.round(n * 100) / 100;
+
+  // Saldo actual de cada categoría, calculado (nunca guardado):
+  //   saldo de partida + ingresos − gastos (solo la principal) ± traspasos.
+  // Así, al borrar un movimiento o un traspaso, los saldos se corrigen solos.
+  function saldos() {
+    const f = datos();
+    const s = Object.fromEntries(f.cuentas.map(c => [c.id, c.base]));
+    const p = principal();
+    if (p) for (const m of f.movimientos) s[p.id] += m.tipo === 'ingreso' ? m.importe : -m.importe;
+    for (const t of f.traspasos) {
+      if (t.de in s) s[t.de] -= t.importe;
+      if (t.a in s) s[t.a] += t.importe;
+    }
+    for (const k in s) s[k] = redondo(s[k]);
+    return s;
+  }
 
   function render(el) {
-    const lista = datos().movimientos
-      .filter(x => x.fecha.startsWith(clave()))
-      .sort((a, b) => b.fecha.localeCompare(a.fecha) || b.creado - a.creado);
-
-    const ingresos = lista.filter(x => x.tipo === 'ingreso').reduce((s, x) => s + x.importe, 0);
-    const gastos = lista.filter(x => x.tipo === 'gasto').reduce((s, x) => s + x.importe, 0);
+    const clave = claveMes(mes.a, mes.m);
+    const delMes = datos().movimientos.filter(x => x.fecha.startsWith(clave));
+    const ingresos = delMes.filter(x => x.tipo === 'ingreso').reduce((s, x) => s + x.importe, 0);
+    const gastos = delMes.filter(x => x.tipo === 'gasto').reduce((s, x) => s + x.importe, 0);
     const balance = ingresos - gastos;
+
+    // Lista del mes: movimientos y traspasos juntos, del más reciente al más antiguo.
+    const lista = [
+      ...delMes,
+      ...datos().traspasos.filter(t => t.fecha.startsWith(clave)).map(t => ({ ...t, tipo: 'traspaso' })),
+    ].sort((a, b) => b.fecha.localeCompare(a.fecha) || b.creado - a.creado);
 
     // Gasto agrupado por categoría, de mayor a menor.
     const porCat = {};
-    lista.filter(x => x.tipo === 'gasto').forEach(x => { porCat[x.categoria] = (porCat[x.categoria] || 0) + x.importe; });
+    delMes.filter(x => x.tipo === 'gasto').forEach(x => { porCat[x.categoria] = (porCat[x.categoria] || 0) + x.importe; });
     const cats = Object.entries(porCat).sort((a, b) => b[1] - a[1]);
     const max = cats.length ? cats[0][1] : 0;
 
     el.innerHTML = `
+      ${seccionCuentas()}
+
       <div class="nav-periodo">
         <button class="icon-btn" data-acc="mes-ant" aria-label="Mes anterior">‹</button>
         <h2>${U.MESES[mes.m]} ${mes.a}</h2>
@@ -43,6 +74,11 @@ const Finanzas = (() => {
       </section>
 
       ${formAbierto ? formulario() : `<button class="btn ancho" data-acc="abrir">+ Añadir movimiento</button>`}
+
+      <section class="bloque">
+        <h3>Gasto mensual</h3>
+        <div id="graf-linea" class="graf-linea"></div>
+      </section>
 
       ${cats.length ? `
       <section class="bloque">
@@ -59,16 +95,219 @@ const Finanzas = (() => {
         ${lista.length ? `<ul class="lista">${lista.map(fila).join('')}</ul>`
           : `<p class="vacio">No hay movimientos este mes.</p>`}
       </section>`;
+
+    // La línea se dibuja al ancho real disponible, para que el texto no se deforme.
+    dibujarLinea();
+    if (enfocar) {
+      const campo = document.querySelector(enfocar);
+      campo?.focus();
+      campo?.select?.();
+      enfocar = null;
+    }
   }
 
+  // ---------- Anillo: dónde tengo el dinero ----------
+  function seccionCuentas() {
+    const cuentas = datos().cuentas;
+    const s = saldos();
+    const total = redondo(cuentas.reduce((t, c) => t + s[c.id], 0));
+    const positivo = cuentas.reduce((t, c) => t + Math.max(0, s[c.id]), 0);
+
+    return `
+      <section class="bloque">
+        <div class="cab-bloque">
+          <h3>¿Dónde tengo el dinero?</h3>
+          <div class="acciones">
+            ${editandoCuentas ? '' : `<button class="btn btn-sec btn-mini" data-acc="mover">⇄ Mover</button>`}
+            <button class="enlace" data-acc="editar-cuentas">${editandoCuentas ? 'Listo' : 'Editar'}</button>
+          </div>
+        </div>
+        ${moviendo && !editandoCuentas ? formTraspaso(cuentas, s) : ''}
+        <div class="anillo-wrap">
+          ${anillo(cuentas, s, total, positivo)}
+          ${editandoCuentas ? editorCuentas(cuentas, s) : leyenda(cuentas, s, positivo)}
+        </div>
+      </section>`;
+  }
+
+  function anillo(cuentas, s, total, positivo) {
+    const T = 180, r = 70, grosor = 26, C = 2 * Math.PI * r;
+    // Solo se dibujan saldos positivos; uno negativo aparece en la leyenda en rojo.
+    const visibles = cuentas.filter(c => s[c.id] > 0);
+    const hueco = visibles.length > 1 ? 2 : 0; // separación de 2px entre tramos
+    let inicio = 0;
+
+    const tramos = visibles.map(c => {
+      const largo = (s[c.id] / positivo) * C;
+      const t = `
+        <circle cx="${T / 2}" cy="${T / 2}" r="${r}" fill="none" stroke-width="${grosor}"
+          style="stroke:${color(c)}"
+          stroke-dasharray="${Math.max(largo - hueco, 0.5)} ${C}" stroke-dashoffset="${-inicio}"
+          data-tip-t="${U.esc(c.nombre)}" data-tip-v="${U.euros(s[c.id])} · ${pct(s[c.id] / positivo)}"></circle>`;
+      inicio += largo;
+      return t;
+    }).join('');
+
+    return `
+      <div class="anillo">
+        <svg viewBox="0 0 ${T} ${T}" width="${T}" height="${T}" role="img"
+          aria-label="Reparto del dinero: ${visibles.map(c => `${U.esc(c.nombre)} ${pct(s[c.id] / positivo)}`).join(', ') || 'sin saldos'}">
+          <circle cx="${T / 2}" cy="${T / 2}" r="${r}" fill="none" stroke-width="${grosor}" class="anillo-fondo"></circle>
+          <g transform="rotate(-90 ${T / 2} ${T / 2})">${tramos}</g>
+        </svg>
+        <div class="anillo-centro">
+          <span class="muted peq">Total</span>
+          <strong class="${total < 0 ? 'neg' : ''}">${U.euros(total)}</strong>
+        </div>
+      </div>`;
+  }
+
+  // La leyenda hace también de tabla: nombre, porcentaje e importe de cada categoría.
+  function leyenda(cuentas, s, positivo) {
+    if (!cuentas.some(c => s[c.id])) {
+      return `<p class="vacio crece">Añade un ingreso y aparecerá en ${U.esc(principal()?.nombre || 'Dinero')}, o pulsa «Editar» para escribir lo que ya tienes en cada sitio.</p>`;
+    }
+    return `
+      <ul class="leyenda">
+        ${cuentas.map(c => `
+          <li class="${s[c.id] > 0 ? '' : 'apagada'}">
+            <span class="punto" style="background:${color(c)}"></span>
+            <span class="crece">${U.esc(c.nombre)}${c.principal ? ' <span class="chip">principal</span>' : ''}</span>
+            <span class="muted peq">${s[c.id] > 0 ? pct(s[c.id] / positivo) : '—'}</span>
+            <strong class="${s[c.id] < 0 ? 'neg' : ''}">${U.euros(s[c.id])}</strong>
+          </li>`).join('')}
+      </ul>`;
+  }
+
+  function editorCuentas(cuentas, s) {
+    return `
+      <div class="editor-cuentas">
+        ${cuentas.map(c => `
+          <div class="cuenta-fila">
+            <span class="punto" style="background:${color(c)}"></span>
+            <input data-cuenta="${c.id}" data-campo="nombre" value="${U.esc(c.nombre)}" maxlength="30" aria-label="Nombre de la categoría">
+            <input data-cuenta="${c.id}" data-campo="saldo" value="${s[c.id] || ''}" inputmode="decimal" placeholder="0" aria-label="Saldo actual de ${U.esc(c.nombre)} en euros">
+            ${c.principal
+              ? `<span class="candado" title="La categoría principal recibe los ingresos y paga los gastos; no se puede borrar">🔒</span>`
+              : `<button class="icon-btn peq" data-acc="borrar-cuenta" data-id="${c.id}" aria-label="Borrar ${U.esc(c.nombre)}">×</button>`}
+          </div>`).join('')}
+        <button class="enlace" data-acc="nueva-cuenta">+ Añadir categoría</button>
+        <p class="muted peq nota">Escribe el saldo real si no cuadra con tu banco. Los ingresos, gastos y traspasos se seguirán sumando a partir de ahí.</p>
+      </div>`;
+  }
+
+  // ---------- Traspasos entre categorías ----------
+  function formTraspaso(cuentas, s) {
+    const p = principal();
+    const destino = cuentas.find(c => c !== p)?.id;
+    const opciones = sel => cuentas.map(c =>
+      `<option value="${c.id}" ${c.id === sel ? 'selected' : ''}>${U.esc(c.nombre)} · ${U.euros(s[c.id])}</option>`).join('');
+    return `
+      <form class="form sub-form" id="form-traspaso">
+        <div class="dos-col apilar">
+          <label>Desde<select name="de">${opciones(p?.id)}</select></label>
+          <label>Hacia<select name="a">${opciones(destino)}</select></label>
+        </div>
+        <div class="dos-col">
+          <label>Importe (€)<input name="importe" inputmode="decimal" placeholder="0,00" autocomplete="off" required></label>
+          <label>Fecha<input name="fecha" type="date" value="${U.iso()}" required></label>
+        </div>
+        <div class="fila-botones">
+          <button type="button" class="btn btn-sec" data-acc="cerrar-mover">Cancelar</button>
+          <button class="btn">Mover dinero</button>
+        </div>
+      </form>`;
+  }
+
+
+  // Primer hueco de color libre; si están los 8 ocupados, gris neutro
+  // (nunca se repite un color: dos categorías serían indistinguibles).
+  function colorLibre() {
+    const usados = new Set(datos().cuentas.map(c => c.color));
+    for (let i = 1; i <= COLORES; i++) if (!usados.has(i)) return i;
+    return 0;
+  }
+
+  // ---------- Línea: gasto de los últimos 12 meses ----------
+  function dibujarLinea() {
+    const cont = document.getElementById('graf-linea');
+    if (!cont) return;
+
+    // Últimos 12 meses, pero sin los anteriores al primer movimiento
+    // (si no, parecería que esos meses no gastaste nada).
+    const primero = datos().movimientos.reduce((min, x) => x.fecha < min ? x.fecha : min, '9999').slice(0, 7);
+    const meses = [];
+    for (let i = 11; i >= 0; i--) {
+      const d = new Date(mes.a, mes.m - i, 1);
+      if (claveMes(d.getFullYear(), d.getMonth()) >= primero || i === 0) meses.push({ a: d.getFullYear(), m: d.getMonth(), total: 0 });
+    }
+    const idx = Object.fromEntries(meses.map((x, i) => [claveMes(x.a, x.m), i]));
+    for (const x of datos().movimientos) {
+      const i = idx[x.fecha.slice(0, 7)];
+      if (x.tipo === 'gasto' && i !== undefined) meses[i].total += x.importe;
+    }
+
+    const W = cont.clientWidth, H = 190;
+    const m = { izq: 52, der: 10, arr: 12, abj: 26 };
+    const ancho = W - m.izq - m.der, alto = H - m.arr - m.abj;
+    const tope = escalaBonita(Math.max(...meses.map(x => x.total)));
+    const n = meses.length;
+    // Con un solo mes, el punto va centrado.
+    const x = i => n > 1 ? m.izq + (i / (n - 1)) * ancho : m.izq + ancho / 2;
+    const y = v => m.arr + alto - (v / tope) * alto;
+    const paso = n > 1 ? ancho / (n - 1) : ancho;
+    const cadaCuanto = W < 440 && n > 7 ? 2 : 1; // en móvil, una etiqueta de mes sí y otra no
+    const abrev = (x) => U.MESES[x.m].slice(0, 3);
+    const yEtiq = v => new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0, useGrouping: 'always' }).format(v) + ' €';
+    const sel = meses.length - 1;
+
+    const lineas = [0, 0.25, 0.5, 0.75, 1].map(f => `
+      <line x1="${m.izq}" x2="${W - m.der}" y1="${y(tope * f)}" y2="${y(tope * f)}" class="${f ? 'rejilla' : 'eje'}"></line>
+      ${f % 0.5 === 0 ? `<text x="${m.izq - 8}" y="${y(tope * f)}" class="etiq" text-anchor="end" dominant-baseline="middle">${yEtiq(tope * f)}</text>` : ''}`).join('');
+
+    const etiquetasX = meses.map((p, i) => (sel - i) % cadaCuanto === 0 ? `
+      <text x="${x(i)}" y="${H - 6}" class="etiq ${i === sel ? 'sel' : ''}" text-anchor="middle">${abrev(p)}</text>` : '').join('');
+
+    const ruta = meses.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.total).toFixed(1)}`).join(' ');
+
+    // Columnas invisibles más anchas que la línea: zona para pasar el ratón o el dedo.
+    const columnas = meses.map((p, i) => `
+      <g class="col" data-acc="ir-mes" data-a="${p.a}" data-m="${p.m}"
+        data-tip-t="${U.MESES[p.m]} ${p.a}" data-tip-v="${U.euros(p.total)} gastados">
+        <rect x="${x(i) - paso / 2}" y="${m.arr}" width="${paso}" height="${alto}" fill="transparent"></rect>
+        <line class="cruz" x1="${x(i)}" x2="${x(i)}" y1="${m.arr}" y2="${m.arr + alto}"></line>
+        <circle class="cruz punto-linea" cx="${x(i)}" cy="${y(p.total)}" r="4.5"></circle>
+      </g>`).join('');
+
+    cont.innerHTML = `
+      <svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img"
+        aria-label="Gasto mensual de los últimos 12 meses: ${meses.map(p => `${abrev(p)} ${U.euros(p.total)}`).join(', ')}">
+        ${lineas}
+        ${etiquetasX}
+        <path d="${ruta}" class="linea"></path>
+        <circle class="punto-linea" cx="${x(sel)}" cy="${y(meses[sel].total)}" r="4.5"></circle>
+        ${columnas}
+      </svg>`;
+  }
+
+  // Redondea el máximo hacia arriba a una cifra limpia (1.200, 1.500, 2.000…)
+  // cuya mitad también sea redonda, para las etiquetas del eje.
+  function escalaBonita(v) {
+    if (v <= 0) return 100;
+    const p = 10 ** Math.floor(Math.log10(v));
+    return [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10].map(f => f * p).find(t => t >= v);
+  }
+
+  // ---------- Movimientos ----------
   function formulario() {
+    const p = principal()?.nombre || 'Dinero';
     return `
       <form class="bloque form" id="form-mov">
         <div class="segmentado">
           <button type="button" class="${tipo === 'gasto' ? 'activo' : ''}" data-acc="tipo" data-tipo="gasto">Gasto</button>
           <button type="button" class="${tipo === 'ingreso' ? 'activo' : ''}" data-acc="tipo" data-tipo="ingreso">Ingreso</button>
         </div>
-        <label>Importe (€)<input name="importe" type="number" inputmode="decimal" step="0.01" min="0.01" required autofocus></label>
+        <label>Importe (€)<input name="importe" inputmode="decimal" placeholder="0,00" autocomplete="off" required autofocus></label>
         <div class="dos-col">
           <label>Categoría
             <select name="categoria">${CATEGORIAS[tipo].map(c => `<option>${c}</option>`).join('')}</select>
@@ -76,6 +315,7 @@ const Finanzas = (() => {
           <label>Fecha<input name="fecha" type="date" value="${U.iso()}" required></label>
         </div>
         <label>Nota<input name="nota" type="text" maxlength="80" placeholder="Opcional"></label>
+        <p class="muted peq nota">${tipo === 'ingreso' ? `Se sumará a ${U.esc(p)}.` : `Se restará de ${U.esc(p)}.`}</p>
         <div class="fila-botones">
           <button type="button" class="btn btn-sec" data-acc="cerrar">Cancelar</button>
           <button class="btn">Guardar</button>
@@ -85,9 +325,28 @@ const Finanzas = (() => {
 
   function fila(x) {
     const d = U.deIso(x.fecha);
+    const fecha = `<div class="fecha-mini"><strong>${d.getDate()}</strong><span>${U.MESES[d.getMonth()].slice(0, 3)}</span></div>`;
+
+    if (x.tipo === 'traspaso') {
+      const nombre = id => datos().cuentas.find(c => c.id === id)?.nombre;
+      const de = nombre(x.de), a = nombre(x.a);
+      return `
+        <li>
+          ${fecha}
+          <div class="crece">
+            <div>${U.esc(de || 'categoría borrada')} → ${U.esc(a || 'categoría borrada')}</div>
+            <div class="muted peq">Traspaso</div>
+          </div>
+          <strong class="muted">${U.euros(x.importe)}</strong>
+          ${de && a
+            ? `<button class="icon-btn peq" data-acc="borrar-traspaso" data-id="${x.id}" aria-label="Deshacer traspaso">×</button>`
+            : `<span class="icon-btn peq" aria-hidden="true"></span>`}
+        </li>`;
+    }
+
     return `
       <li>
-        <div class="fecha-mini"><strong>${d.getDate()}</strong><span>${U.MESES[d.getMonth()].slice(0, 3)}</span></div>
+        ${fecha}
         <div class="crece">
           <div>${U.esc(x.categoria)}</div>
           ${x.nota ? `<div class="muted peq">${U.esc(x.nota)}</div>` : ''}
@@ -102,46 +361,117 @@ const Finanzas = (() => {
     const b = e.target.closest('[data-acc]');
     if (!b) return;
     const acc = b.dataset.acc;
+    const f = datos();
+
     if (acc === 'mes-ant' || acc === 'mes-sig') {
       const d = new Date(mes.a, mes.m + (acc === 'mes-sig' ? 1 : -1), 1);
       mes = { a: d.getFullYear(), m: d.getMonth() };
+    } else if (acc === 'ir-mes') {
+      mes = { a: Number(b.dataset.a), m: Number(b.dataset.m) };
     } else if (acc === 'abrir') { formAbierto = true; tipo = 'gasto'; }
     else if (acc === 'cerrar') formAbierto = false;
     else if (acc === 'tipo') {
       // Conserva lo escrito al cambiar entre gasto e ingreso.
-      const f = document.getElementById('form-mov');
-      const prev = { importe: f.importe.value, fecha: f.fecha.value, nota: f.nota.value };
+      const form = document.getElementById('form-mov');
+      const prev = { importe: form.importe.value, fecha: form.fecha.value, nota: form.nota.value };
       tipo = b.dataset.tipo;
       rerender();
       const n = document.getElementById('form-mov');
-      Object.assign(n.importe, { value: prev.importe }); n.fecha.value = prev.fecha; n.nota.value = prev.nota;
+      n.importe.value = prev.importe; n.fecha.value = prev.fecha; n.nota.value = prev.nota;
       return;
     } else if (acc === 'borrar') {
-      if (!confirm('¿Borrar este movimiento?')) return;
-      const f = datos();
+      if (!confirm('¿Borrar este movimiento? Su importe se devolverá al saldo.')) return;
       f.movimientos = f.movimientos.filter(x => x.id !== b.dataset.id);
+      Store.guardar();
+    } else if (acc === 'mover') {
+      moviendo = !moviendo;
+      if (moviendo) enfocar = '#form-traspaso [name=importe]';
+    } else if (acc === 'cerrar-mover') moviendo = false;
+    else if (acc === 'borrar-traspaso') {
+      if (!confirm('¿Deshacer este traspaso? El dinero volverá a su categoría de origen.')) return;
+      f.traspasos = f.traspasos.filter(x => x.id !== b.dataset.id);
+      Store.guardar();
+    } else if (acc === 'editar-cuentas') {
+      editandoCuentas = !editandoCuentas;
+      // Al terminar, se quitan las categorías que se hayan quedado sin nombre.
+      if (!editandoCuentas) {
+        f.cuentas.filter(c => !c.nombre.trim()).forEach(c => { if (c.principal) c.nombre = 'Dinero'; else quitarCuenta(c); });
+        Store.guardar();
+      }
+    } else if (acc === 'nueva-cuenta') {
+      const c = { id: Store.id(), nombre: 'Nueva categoría', base: 0, color: colorLibre() };
+      f.cuentas.push(c);
+      Store.guardar();
+      enfocar = `[data-cuenta="${c.id}"][data-campo="nombre"]`;
+    } else if (acc === 'borrar-cuenta') {
+      const c = f.cuentas.find(x => x.id === b.dataset.id);
+      const saldo = saldos()[c.id];
+      const aviso = saldo ? ` Su saldo (${U.euros(saldo)}) pasará a ${principal().nombre}.` : '';
+      if (!confirm(`¿Borrar «${c.nombre}»?${aviso}`)) return;
+      quitarCuenta(c);
       Store.guardar();
     } else return;
     rerender();
   }
 
-  function alEnviar(e, rerender) {
-    if (e.target.id !== 'form-mov') return;
-    e.preventDefault();
-    const f = e.target;
-    const importe = Math.round(parseFloat(f.importe.value.replace(',', '.')) * 100) / 100;
-    if (!(importe > 0)) return;
-    datos().movimientos.push({
-      id: Store.id(), tipo, importe,
-      categoria: f.categoria.value, fecha: f.fecha.value, nota: f.nota.value.trim(), creado: Date.now(),
-    });
+  // Al borrar una categoría su dinero no desaparece: pasa a la principal,
+  // así el total sigue cuadrando.
+  function quitarCuenta(c) {
+    const f = datos(), p = principal();
+    const saldo = saldos()[c.id];
+    if (p && p !== c) p.base = redondo(p.base + saldo);
+    f.cuentas = f.cuentas.filter(x => x !== c);
+  }
+
+  // Lo escrito en el editor de categorías se guarda al momento (sin repintar,
+  // para no perder el foco); el anillo se actualiza al pulsar «Listo».
+  // Al escribir un saldo se ajusta el saldo de partida para que el actual sea ese.
+  function alEscribir(e) {
+    const t = e.target, c = datos().cuentas.find(x => x.id === t.dataset.cuenta);
+    if (!c) return;
+    if (t.dataset.campo === 'nombre') c.nombre = t.value;
+    else c.base = redondo(c.base + U.numero(t.value) - saldos()[c.id]);
     Store.guardar();
-    // Salta al mes del movimiento para que se vea al guardarlo.
-    const d = U.deIso(f.fecha.value);
-    mes = { a: d.getFullYear(), m: d.getMonth() };
-    formAbierto = false;
+  }
+
+  function alEnviar(e, rerender) {
+    const form = e.target;
+    if (form.id === 'form-mov') {
+      e.preventDefault();
+      const importe = U.numero(form.importe.value);
+      if (!(importe > 0)) return avisar(form.importe, 'Escribe un importe mayor que 0');
+      datos().movimientos.push({
+        id: Store.id(), tipo, importe,
+        categoria: form.categoria.value, fecha: form.fecha.value, nota: form.nota.value.trim(), creado: Date.now(),
+      });
+      // Salta al mes del movimiento para que se vea al guardarlo.
+      const d = U.deIso(form.fecha.value);
+      mes = { a: d.getFullYear(), m: d.getMonth() };
+      formAbierto = false;
+    } else if (form.id === 'form-traspaso') {
+      e.preventDefault();
+      const importe = U.numero(form.importe.value);
+      const de = form.de.value, a = form.a.value;
+      if (de === a) return avisar(form.a, 'Elige una categoría distinta a la de origen');
+      if (!(importe > 0)) return avisar(form.importe, 'Escribe un importe mayor que 0');
+      const disponible = saldos()[de];
+      const nombre = datos().cuentas.find(c => c.id === de).nombre;
+      if (importe > disponible && !confirm(`En ${nombre} solo hay ${U.euros(disponible)}. Si mueves ${U.euros(importe)} se quedará en negativo. ¿Continuar?`)) return;
+      datos().traspasos.push({ id: Store.id(), de, a, importe, fecha: form.fecha.value, creado: Date.now() });
+      moviendo = false;
+    } else return;
+    Store.guardar();
     rerender();
   }
 
-  return { id: 'finanzas', nombre: 'Finanzas', icono: '€', render, alClic, alEnviar };
+  function avisar(campo, texto) {
+    campo.setCustomValidity(texto);
+    campo.reportValidity();
+    campo.addEventListener('input', () => campo.setCustomValidity(''), { once: true });
+  }
+
+  return {
+    id: 'finanzas', nombre: 'Finanzas', icono: '€',
+    render, alClic, alEnviar, alEscribir, alRedimensionar: dibujarLinea,
+  };
 })();
