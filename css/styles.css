@@ -144,7 +144,7 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 .resumen { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .resumen .tarjeta { display: flex; flex-direction: column; gap: 4px; padding: 12px; min-width: 0; }
 .resumen span { font-size: .8rem; }
-.resumen strong { font-size: 1.05rem; overflow-wrap: anywhere; }
+.resumen strong { font-size: clamp(.85rem, 3.6vw, 1.05rem); overflow-wrap: anywhere; }
 @media (max-width: 380px) {
   .resumen { grid-template-columns: 1fr 1fr; }
   .resumen .tarjeta:last-child { grid-column: span 2; }
@@ -245,3 +245,21 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
   box-shadow: 0 6px 20px rgba(0, 0, 0, .4); font-size: .9rem;
 }
 .tip .muted:first-letter { text-transform: uppercase; }
+
+/* ---------- Traspasos y categorías ---------- */
+.btn-mini { min-height: 34px; padding: 0 12px; font-size: .88rem; font-weight: 500; border-radius: 999px; }
+.sub-form { display: flex; flex-direction: column; gap: 12px; padding: 14px; border-radius: 12px; background: var(--superficie-2); }
+.sub-form input, .sub-form select { background: var(--superficie); }
+.dos-col > * { min-width: 0; }
+.nota { margin: 0; }
+.chip {
+  display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px;
+  border: 1px solid var(--borde); color: var(--muted); font-size: .7rem; vertical-align: 2px;
+}
+.candado { width: 32px; text-align: center; font-size: .85rem; opacity: .6; }
+.cab-bloque h3 { flex: 1; min-width: 0; }
+.cab-bloque .acciones { flex: 0 0 auto; gap: 12px; }
+.btn-mini { white-space: nowrap; }
+@media (max-width: 480px) {
+  .dos-col.apilar { grid-template-columns: 1fr; }
+}
