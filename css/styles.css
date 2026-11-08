@@ -232,7 +232,7 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 .graf-linea .etiq.sel { fill: var(--texto); font-weight: 600; }
 .graf-linea .linea { fill: none; stroke: var(--acento); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
 .graf-linea .punto-linea { fill: var(--acento); stroke: var(--superficie); stroke-width: 2; }
-.graf-linea .col { cursor: pointer; }
+.graf-linea .col { cursor: crosshair; }
 .graf-linea .cruz { opacity: 0; transition: opacity .1s; pointer-events: none; }
 .graf-linea line.cruz { stroke: var(--muted); stroke-width: 1; }
 .graf-linea .col:hover .cruz { opacity: 1; }
@@ -244,6 +244,8 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
   background: var(--superficie-2); border: 1px solid var(--borde);
   box-shadow: 0 6px 20px rgba(0, 0, 0, .4); font-size: .9rem;
 }
+/* Sin esto, display:flex ganaría al atributo hidden y el tooltip no se ocultaría nunca. */
+.tip[hidden] { display: none; }
 .tip .muted:first-letter { text-transform: uppercase; }
 
 /* ---------- Traspasos y categorías ---------- */

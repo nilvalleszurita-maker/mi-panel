@@ -6,7 +6,7 @@ Web app personal (móvil y ordenador) para controlar finanzas y entrenos. Diseñ
 
 - **Finanzas**:
   - Gráfica de anillo con dónde tienes el dinero (Robo advisor, Dinero, Efectivo, S&P 500, Cuenta remunerada… y las que añadas). Los saldos se calculan solos: los **ingresos se suman a Dinero**, los **gastos se restan de Dinero** y con **⇄ Mover** pasas dinero entre categorías sin cambiar el total. Con «Editar» puedes corregir un saldo para que cuadre con tu banco.
-  - Gráfica de línea con el gasto de los últimos 12 meses.
+  - Gráfica de línea con el gasto acumulado del mes: empieza en 0 € y sube en escalón con cada gasto (en el mes actual, hasta hoy).
   - Resumen mensual (ingresos, gastos y balance), gasto por categoría y lista de movimientos y traspasos (borrarlos deshace su efecto en los saldos).
 - **Entrenos**: plan semanal (qué toca cada día, con ejercicios, series, repeticiones y peso) y registro de los días hechos en cada semana.
 - *Próximamente*: comidas, horario diario y outfits.

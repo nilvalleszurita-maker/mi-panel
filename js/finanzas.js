@@ -76,7 +76,7 @@ const Finanzas = (() => {
       ${formAbierto ? formulario() : `<button class="btn ancho" data-acc="abrir">+ Añadir movimiento</button>`}
 
       <section class="bloque">
-        <h3>Gasto mensual</h3>
+        <h3>Gasto acumulado del mes</h3>
         <div id="graf-linea" class="graf-linea"></div>
       </section>
 
@@ -228,66 +228,71 @@ const Finanzas = (() => {
     return 0;
   }
 
-  // ---------- Línea: gasto de los últimos 12 meses ----------
+  // ---------- Línea: gasto acumulado del mes visible ----------
+  // Empieza en 0 € y cada día sube lo que se gastó ese día (en escalón).
+  // En el mes actual la línea llega solo hasta hoy.
   function dibujarLinea() {
     const cont = document.getElementById('graf-linea');
     if (!cont) return;
 
-    // Últimos 12 meses, pero sin los anteriores al primer movimiento
-    // (si no, parecería que esos meses no gastaste nada).
-    const primero = datos().movimientos.reduce((min, x) => x.fecha < min ? x.fecha : min, '9999').slice(0, 7);
-    const meses = [];
-    for (let i = 11; i >= 0; i--) {
-      const d = new Date(mes.a, mes.m - i, 1);
-      if (claveMes(d.getFullYear(), d.getMonth()) >= primero || i === 0) meses.push({ a: d.getFullYear(), m: d.getMonth(), total: 0 });
-    }
-    const idx = Object.fromEntries(meses.map((x, i) => [claveMes(x.a, x.m), i]));
+    const diasMes = new Date(mes.a, mes.m + 1, 0).getDate();
+    const clave = claveMes(mes.a, mes.m);
+    const claveHoy = claveMes(hoy.getFullYear(), hoy.getMonth());
+    // Días con línea: todo el mes si ya pasó, hasta hoy si es el actual, ninguno si es futuro.
+    const hasta = clave < claveHoy ? diasMes : clave === claveHoy ? new Date().getDate() : 0;
+
+    const delDia = Array(diasMes + 1).fill(0); // delDia[d] = gastado el día d
     for (const x of datos().movimientos) {
-      const i = idx[x.fecha.slice(0, 7)];
-      if (x.tipo === 'gasto' && i !== undefined) meses[i].total += x.importe;
+      if (x.tipo === 'gasto' && x.fecha.startsWith(clave)) delDia[Number(x.fecha.slice(8, 10))] += x.importe;
     }
+    const acum = [0]; // acum[d] = gastado del día 1 al d
+    for (let d = 1; d <= diasMes; d++) acum[d] = redondo(acum[d - 1] + delDia[d]);
 
     const W = cont.clientWidth, H = 190;
-    const m = { izq: 52, der: 10, arr: 12, abj: 26 };
+    const m = { izq: 52, der: 12, arr: 12, abj: 26 };
     const ancho = W - m.izq - m.der, alto = H - m.arr - m.abj;
-    const tope = escalaBonita(Math.max(...meses.map(x => x.total)));
-    const n = meses.length;
-    // Con un solo mes, el punto va centrado.
-    const x = i => n > 1 ? m.izq + (i / (n - 1)) * ancho : m.izq + ancho / 2;
+    const tope = escalaBonita(acum[Math.max(hasta, 0)]);
+    const x = d => m.izq + (d / diasMes) * ancho; // 0 = inicio del mes, d = final del día d
     const y = v => m.arr + alto - (v / tope) * alto;
-    const paso = n > 1 ? ancho / (n - 1) : ancho;
-    const cadaCuanto = W < 440 && n > 7 ? 2 : 1; // en móvil, una etiqueta de mes sí y otra no
-    const abrev = (x) => U.MESES[x.m].slice(0, 3);
+    const paso = ancho / diasMes;
     const yEtiq = v => new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0, useGrouping: 'always' }).format(v) + ' €';
-    const sel = meses.length - 1;
+    const nombreMes = U.MESES[mes.m];
 
     const lineas = [0, 0.25, 0.5, 0.75, 1].map(f => `
       <line x1="${m.izq}" x2="${W - m.der}" y1="${y(tope * f)}" y2="${y(tope * f)}" class="${f ? 'rejilla' : 'eje'}"></line>
       ${f % 0.5 === 0 ? `<text x="${m.izq - 8}" y="${y(tope * f)}" class="etiq" text-anchor="end" dominant-baseline="middle">${yEtiq(tope * f)}</text>` : ''}`).join('');
 
-    const etiquetasX = meses.map((p, i) => (sel - i) % cadaCuanto === 0 ? `
-      <text x="${x(i)}" y="${H - 6}" class="etiq ${i === sel ? 'sel' : ''}" text-anchor="middle">${abrev(p)}</text>` : '').join('');
+    // Etiquetas de día: 1, 5, 10, 15, 20, 25 y el último (sin pisarse).
+    const marcas = [1, 5, 10, 15, 20, 25].filter(d => diasMes - d >= 3).concat(diasMes);
+    const etiquetasX = marcas.map(d => `
+      <text x="${x(d)}" y="${H - 6}" class="etiq ${d === hasta ? 'sel' : ''}" text-anchor="middle">${d}</text>`).join('');
 
-    const ruta = meses.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.total).toFixed(1)}`).join(' ');
+    // Escalones: plano mientras no hay gastos, sube de golpe el día que gastas.
+    let ruta = `M${x(0).toFixed(1)},${y(0).toFixed(1)}`;
+    for (let d = 1; d <= hasta; d++) ruta += ` H${x(d).toFixed(1)} V${y(acum[d]).toFixed(1)}`;
 
-    // Columnas invisibles más anchas que la línea: zona para pasar el ratón o el dedo.
-    const columnas = meses.map((p, i) => `
-      <g class="col" data-acc="ir-mes" data-a="${p.a}" data-m="${p.m}"
-        data-tip-t="${U.MESES[p.m]} ${p.a}" data-tip-v="${U.euros(p.total)} gastados">
-        <rect x="${x(i) - paso / 2}" y="${m.arr}" width="${paso}" height="${alto}" fill="transparent"></rect>
-        <line class="cruz" x1="${x(i)}" x2="${x(i)}" y1="${m.arr}" y2="${m.arr + alto}"></line>
-        <circle class="cruz punto-linea" cx="${x(i)}" cy="${y(p.total)}" r="4.5"></circle>
-      </g>`).join('');
+    // Una columna invisible por día (zona para el ratón o el dedo).
+    const columnas = [];
+    for (let d = 1; d <= hasta; d++) {
+      columnas.push(`
+      <g class="col" data-tip-t="${d} de ${nombreMes}"
+        data-tip-v="${U.euros(acum[d])} acumulado${delDia[d] ? ` · +${U.euros(delDia[d])} ese día` : ''}">
+        <rect x="${x(d) - paso / 2}" y="${m.arr}" width="${paso}" height="${alto}" fill="transparent"></rect>
+        <line class="cruz" x1="${x(d)}" x2="${x(d)}" y1="${m.arr}" y2="${m.arr + alto}"></line>
+        <circle class="cruz punto-linea" cx="${x(d)}" cy="${y(acum[d])}" r="4.5"></circle>
+      </g>`);
+    }
 
     cont.innerHTML = `
       <svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img"
-        aria-label="Gasto mensual de los últimos 12 meses: ${meses.map(p => `${abrev(p)} ${U.euros(p.total)}`).join(', ')}">
+        aria-label="Gasto acumulado de ${nombreMes}: ${U.euros(acum[hasta] || 0)}${hasta && hasta < diasMes ? ` a día ${hasta}` : ''}">
         ${lineas}
         ${etiquetasX}
-        <path d="${ruta}" class="linea"></path>
-        <circle class="punto-linea" cx="${x(sel)}" cy="${y(meses[sel].total)}" r="4.5"></circle>
-        ${columnas}
-      </svg>`;
+        ${hasta ? `<path d="${ruta}" class="linea"></path>
+        <circle class="punto-linea" cx="${x(hasta)}" cy="${y(acum[hasta])}" r="4.5"></circle>` : ''}
+        ${columnas.join('')}
+      </svg>
+      ${hasta ? '' : `<p class="vacio peq">Este mes aún no ha empezado.</p>`}`;
   }
 
   // Redondea el máximo hacia arriba a una cifra limpia (1.200, 1.500, 2.000…)
@@ -366,8 +371,6 @@ const Finanzas = (() => {
     if (acc === 'mes-ant' || acc === 'mes-sig') {
       const d = new Date(mes.a, mes.m + (acc === 'mes-sig' ? 1 : -1), 1);
       mes = { a: d.getFullYear(), m: d.getMonth() };
-    } else if (acc === 'ir-mes') {
-      mes = { a: Number(b.dataset.a), m: Number(b.dataset.m) };
     } else if (acc === 'abrir') { formAbierto = true; tipo = 'gasto'; }
     else if (acc === 'cerrar') formAbierto = false;
     else if (acc === 'tipo') {
