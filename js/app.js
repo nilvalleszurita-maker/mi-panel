@@ -1,7 +1,7 @@
 // Arranque: registra los módulos, pinta las pestañas y reparte los eventos.
 // Para añadir una sección nueva (Comidas, Horario, Outfits…) basta con crear
 // su archivo en js/, incluirlo en index.html y añadirlo a esta lista.
-const MODULOS = [Finanzas, Entrenos];
+const MODULOS = [Finanzas, Entrenos, Gym];
 
 const vista = document.getElementById('vista');
 const tabs = document.getElementById('tabs');

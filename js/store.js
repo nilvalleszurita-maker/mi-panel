@@ -19,6 +19,8 @@ const Store = (() => {
       traspasos: [],
     },
     entrenos: { plan: {}, hechos: {} },
+    // Registro del gym por fecha (AAAA-MM-DD). Ver la estructura en js/gym.js.
+    gym: { registros: {} },
   });
 
   function cargar() {
