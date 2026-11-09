@@ -63,14 +63,47 @@ const Store = (() => {
     f.version = VERSION_FINANZAS;
   }
 
+  // ¿Deja el navegador guardar de verdad? (Puede impedirlo el modo secreto o
+  // tener bloqueados los datos de sitios.) Se prueba escribiendo y leyendo.
+  function funciona() {
+    try {
+      const k = KEY + ':prueba';
+      localStorage.setItem(k, '1');
+      const ok = localStorage.getItem(k) === '1';
+      localStorage.removeItem(k);
+      return ok;
+    } catch {
+      return false;
+    }
+  }
+
   let estado = cargar();
+  let ok = funciona();
+
+  // Si no se puede guardar, se avisa (evento) en vez de fallar en silencio.
+  function escribir() {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(estado));
+      localStorage.setItem(KEY + ':guardado', String(Date.now()));
+      ok = true;
+    } catch {
+      ok = false;
+    }
+    window.dispatchEvent(new CustomEvent('mi-panel:guardado', { detail: { ok } }));
+  }
 
   return {
     get: () => estado,
-    guardar: () => localStorage.setItem(KEY, JSON.stringify(estado)),
+    guardar: escribir,
     reemplazar(datos) {
       estado = fusionar(datos);
-      localStorage.setItem(KEY, JSON.stringify(estado));
+      escribir();
+    },
+    // Estado del guardado, para mostrarlo al usuario.
+    info() {
+      let ultimo = null;
+      try { ultimo = Number(localStorage.getItem(KEY + ':guardado')) || null; } catch { /* sin acceso */ }
+      return { ok, ultimo };
     },
     id: () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
   };

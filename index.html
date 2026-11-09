@@ -19,9 +19,26 @@
     <button class="icon-btn" id="btn-ajustes" aria-label="Ajustes" title="Copia de seguridad">⋯</button>
   </header>
 
+  <div id="aviso-guardado" class="aviso" role="alert" hidden>
+    <strong>⚠️ Tus datos no se están guardando</strong>
+    <span>Este navegador no deja que la app guarde información, así que se borrará al cerrarla.</span>
+    <button class="enlace" id="btn-aviso">Ver cómo solucionarlo</button>
+  </div>
+
   <main id="vista" class="vista"></main>
 
   <dialog id="dlg-ajustes" class="dialogo">
+    <h2>Estado del guardado</h2>
+    <ul class="estado-guardado" id="estado-guardado"></ul>
+    <div id="consejos-guardado" class="consejos" hidden>
+      <p><strong>Cómo solucionarlo</strong></p>
+      <ul>
+        <li>Abre la app en <strong>Chrome</strong> e instálala desde ahí (menú ⋮ → «Instalar aplicación»). Es lo más fiable.</li>
+        <li>No la uses en <strong>modo secreto</strong> o incógnito: al cerrarlo se borra todo.</li>
+        <li>En <strong>Samsung Internet</strong>: en Ajustes, desactiva la opción de eliminar los datos de navegación al salir y permite que los sitios guarden cookies y datos.</li>
+      </ul>
+    </div>
+
     <h2>Copia de seguridad</h2>
     <p class="muted">Tus datos se guardan solo en este dispositivo. Exporta una copia para guardarla o pasarla a otro dispositivo.</p>
     <div class="fila-botones">

@@ -61,9 +61,42 @@ window.addEventListener('resize', () => {
   espera = setTimeout(() => actual.alRedimensionar?.(), 120);
 });
 
+// ---------- Estado del guardado ----------
+// Pide al navegador que no borre los datos de la app aunque necesite espacio.
+let persistente = null; // true / false / null (el navegador no lo indica)
+navigator.storage?.persist?.().then(r => { persistente = r; }).catch(() => {});
+
+const aviso = document.getElementById('aviso-guardado');
+const mostrarAviso = ok => { aviso.hidden = ok; };
+window.addEventListener('mi-panel:guardado', e => mostrarAviso(e.detail.ok));
+mostrarAviso(Store.info().ok);
+
+async function pintarEstado() {
+  const { ok, ultimo } = Store.info();
+  if (persistente === null) persistente = await navigator.storage?.persisted?.().catch(() => null) ?? null;
+  const d = Store.get();
+  const movs = d.finanzas.movimientos.length + d.finanzas.traspasos.length;
+  const dias = Object.keys(d.gym.registros).length;
+  const cuando = ultimo
+    ? new Date(ultimo).toLocaleString('es-ES', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+    : 'nunca';
+  const fila = (bien, texto) => `<li class="${bien ? 'pos' : 'neg'}"><span aria-hidden="true">${bien ? '✓' : '✗'}</span> ${texto}</li>`;
+  document.getElementById('estado-guardado').innerHTML = [
+    fila(ok, ok ? 'Este navegador guarda los datos' : 'Este navegador <strong>no</strong> está guardando los datos'),
+    persistente === null ? '' : fila(persistente, persistente
+      ? 'Protegidos: el navegador no los borrará para liberar espacio'
+      : 'Sin protección: el navegador podría borrarlos si le falta espacio'),
+    `<li class="muted">Último guardado: ${cuando}</li>`,
+    `<li class="muted">Guardado ahora: ${movs} ${movs === 1 ? 'movimiento' : 'movimientos'} de finanzas · ${dias} ${dias === 1 ? 'día' : 'días'} de gym</li>`,
+  ].join('');
+  document.getElementById('consejos-guardado').hidden = ok;
+}
+
 // Copia de seguridad: exportar / importar todo el estado en JSON.
 const dlg = document.getElementById('dlg-ajustes');
-document.getElementById('btn-ajustes').onclick = () => dlg.showModal();
+const abrirAjustes = () => { pintarEstado(); dlg.showModal(); };
+document.getElementById('btn-ajustes').onclick = abrirAjustes;
+document.getElementById('btn-aviso').onclick = abrirAjustes;
 document.getElementById('btn-exportar').onclick = () => {
   const blob = new Blob([JSON.stringify(Store.get(), null, 2)], { type: 'application/json' });
   const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: `mi-panel-${U.iso()}.json` });
