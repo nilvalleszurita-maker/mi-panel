@@ -89,21 +89,23 @@ body.en-hoy .topbar { display: none; }
   .nav {
     top: 0; right: auto; width: var(--lateral);
     display: flex; flex-direction: column; gap: 4px;
-    padding: 28px 14px 20px;
+    padding: 28px 16px 20px;
     border-top: 0; border-right: 1px solid var(--borde);
   }
   .nav-marca {
-    display: block; padding: 0 12px 24px;
-    font-family: var(--fuente-titulos); font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em;
+    display: block; padding: 0 12px 20px;
+    font-family: var(--fuente-titulos); font-size: 20px; font-weight: 700; letter-spacing: -0.01em;
   }
   .tabs { display: flex; flex-direction: column; gap: 4px; }
+  /* Según el diseño de escritorio: solo texto, activo en azul. */
+  .tabs { gap: 6px; }
+  .tab svg { display: none; }
   .tab, .nav-ajustes {
     min-height: 44px; flex-direction: row; justify-content: flex-start; gap: 12px;
-    padding: 0 12px; font-size: 14px; font-weight: 500;
+    padding: 0 12px; font-size: 14px; font-weight: 400; color: var(--texto-2);
   }
   .tab:hover, .nav-ajustes:hover { background: var(--superficie); color: var(--texto); }
-  .tab.activa { background: var(--superficie-2); color: var(--texto); }
-  .tab.activa svg { color: var(--acento); }
+  .tab.activa { background: var(--superficie-2); color: var(--acento); font-weight: 600; }
   .nav-ajustes {
     display: flex; align-items: center; margin-top: auto;
     background: none; border: 0; border-radius: 12px; color: var(--muted); cursor: pointer;
@@ -454,4 +456,38 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 @media (min-width: 860px) {
   .hoy-cab { padding-top: 0; }
   .hoy-saludo h1 { font-size: 34px; }
+}
+
+/* Mostrar u ocultar según el tamaño (el diseño cambia textos y tarjetas).
+   Solo se oculta: así cada elemento conserva su propio display. */
+@media (max-width: 859px) { .solo-escritorio { display: none !important; } }
+@media (min-width: 860px) {
+  .solo-movil { display: none !important; }
+  .vista.vista-hoy { max-width: 1180px; margin: 0; gap: 24px; }
+  .hoy-cab { align-items: flex-end; }
+  .btn-mas { width: auto; height: auto; min-height: 44px; padding: 0 18px; gap: 6px; display: flex; align-items: center; border-radius: 12px; font-weight: 600; font-size: 14px; }
+  .btn-mas svg { width: 16px; height: 16px; }
+  .menu-rapido { top: 52px; }
+}
+
+/* Tarjetas resumen */
+.kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.kpi {
+  display: flex; flex-direction: column; gap: 6px; min-width: 0;
+  padding: 14px 12px; background: var(--superficie); border-radius: 16px;
+}
+.kpi-titulo, .kpi-pie { font-size: 11px; color: var(--muted); }
+.kpi-valor { font-family: var(--fuente-titulos); font-size: 20px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.kpi-de { font-family: var(--fuente); font-size: 14px; font-weight: 400; color: var(--muted); }
+.kpi-barra { height: 4px; border-radius: 4px; background: var(--pista); overflow: hidden; }
+.kpi-barra > div { height: 100%; border-radius: inherit; transition: width .3s; }
+.kpi-segmentos { display: flex; gap: 3px; }
+.kpi-segmentos > div { flex: 1; height: 4px; border-radius: 4px; background: var(--pista); }
+.kpi-segmentos > div.on { background: var(--ambar); }
+@media (min-width: 860px) {
+  .kpis { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  .kpi { padding: 18px; gap: 8px; }
+  .kpi-titulo { font-size: 12px; }
+  .kpi-valor { font-size: 26px; }
+  .kpi-barra { height: 6px; border-radius: 6px; }
 }

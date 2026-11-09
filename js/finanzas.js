@@ -480,9 +480,15 @@ const Finanzas = (() => {
     mes = { a: new Date().getFullYear(), m: new Date().getMonth() };
   }
 
+  // Para Hoy: gasto entre dos fechas (AAAA-MM-DD, ambas incluidas) y dinero total.
+  const gastoEntre = (desde, hasta) => redondo(datos().movimientos
+    .filter(x => x.tipo === 'gasto' && x.fecha >= desde && x.fecha <= hasta)
+    .reduce((s, x) => s + x.importe, 0));
+  const dineroTotal = () => { const s = saldos(); return redondo(datos().cuentas.reduce((t, c) => t + s[c.id], 0)); };
+
   return {
     id: 'finanzas', nombre: 'Finanzas', icono: '€',
     render, alClic, alEnviar, alEscribir, alRedimensionar: dibujarLinea,
-    abrirFormulario,
+    abrirFormulario, gastoEntre, dineroTotal,
   };
 })();

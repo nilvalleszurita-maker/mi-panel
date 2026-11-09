@@ -377,5 +377,22 @@ const Gym = (() => {
     desplazar = true;
   }
 
-  return { id: 'gym', nombre: 'Gym', icono: '🏋️', render, alClic, alEscribir, irAHoy };
+  // Para Hoy: días de gym y de carrera hechos en la semana que empieza en «lunes»,
+  // frente a los planificados.
+  function resumenSemana(lunes = U.lunes()) {
+    let gym = 0, carreras = 0, km = 0;
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(lunes); d.setDate(d.getDate() + i);
+      const st = estado(U.iso(d));
+      if (st.gym) gym++;
+      if (st.run) { carreras++; km += st.km; }
+    }
+    return {
+      gym, carreras, km,
+      planGym: GYM_PLAN.filter(p => p.tipo === 'gym').length,
+      planCarreras: GYM_PLAN.filter(p => p.tipo === 'carrera').length,
+    };
+  }
+
+  return { id: 'gym', nombre: 'Gym', icono: '🏋️', render, alClic, alEscribir, irAHoy, resumenSemana, estado };
 })();

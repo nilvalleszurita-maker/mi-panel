@@ -22,7 +22,13 @@ const Store = (() => {
     // Registro del gym por fecha (AAAA-MM-DD). Ver la estructura en js/gym.js.
     gym: { registros: {} },
     // Preferencias de la pantalla Hoy (nombre del saludo y objetivos).
-    ajustes: { nombre: 'Nil', presupuestoSemanal: 120, objetivoProteina: 150, objetivoKcal: 3000 },
+    ajustes: {
+      nombre: 'Nil', presupuestoSemanal: 120, objetivoProteina: 150, objetivoKcal: 3000,
+      metaAhorro: { nombre: 'el piso', objetivo: 25000 },
+    },
+    // Datos de la pantalla Hoy que aún no tienen pantalla propia (comidas, hábitos,
+    // tareas, agenda). Estructura de tablas: ver js/hoy-datos.js.
+    hoy: { sembrado: false, comidas: [], habitos: [], habitos_registro: [], tareas: [], agenda: [] },
   });
 
   function cargar() {

@@ -38,6 +38,7 @@ window.addEventListener('hashchange', () => {
 // Al repintar se oculta el tooltip, que si no se quedaría con datos viejos.
 function render() {
   document.querySelector('.tip')?.setAttribute('hidden', '');
+  vista.classList.remove('vista-hoy'); // Hoy la vuelve a poner (vista más ancha en escritorio)
   actual.render(vista);
 }
 const rerender = render;
