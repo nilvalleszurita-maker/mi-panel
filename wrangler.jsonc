@@ -1,0 +1,10 @@
+// Publicación en Cloudflare: un Worker que lleva dentro los archivos de la app.
+// No ejecutes «wrangler deploy» directamente: usa ./publicar.sh, que genera
+// dist/worker.js a partir del último commit.
+// La app se sirve en https://mi-paneldiario.nilvalleszurita.workers.dev
+{
+  "name": "mi-paneldiario",
+  "main": "dist/worker.js",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true
+}

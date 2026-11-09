@@ -19,9 +19,19 @@ Web app personal (móvil y ordenador) para controlar finanzas y entrenos. Diseñ
 ## Cómo usarla
 
 - **En local**: abre `index.html` en el navegador.
-- **En el móvil**: publícala con GitHub Pages (Settings → Pages → rama `main`, carpeta `/`), abre la URL y usa «Añadir a pantalla de inicio». Funciona sin conexión.
+- **Publicada**: https://mi-paneldiario.nilvalleszurita.workers.dev (Cloudflare). En el móvil, ábrela con Chrome y usa «Instalar aplicación». Funciona sin conexión.
 
-Los datos se guardan **solo en el navegador de cada dispositivo** (`localStorage`). Usa el botón `⋯` para exportar o importar una copia en JSON (respaldo o paso de datos entre móvil y ordenador).
+Los datos se guardan **solo en el navegador de cada dispositivo** (`localStorage`). Usa el botón `⋯` para ver el estado del guardado y para exportar o importar una copia en JSON (respaldo o paso de datos entre móvil y ordenador).
+
+## Publicar una versión nueva
+
+La app se publica como un Worker de Cloudflare (`mi-paneldiario`) que lleva dentro todos los archivos:
+
+```bash
+CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=… ./publicar.sh
+```
+
+`publicar.sh` copia a `dist/` solo los archivos de la app tal como están en el último commit, genera `dist/worker.js` con `scripts/construir-worker.mjs` y lo sube con Wrangler. Sube también la versión de caché de `sw.js` cuando cambien los archivos, para que la app instalada se actualice.
 
 ## Estructura
 
@@ -37,6 +47,9 @@ js/gym-figuras.js     Dibujos del gym: personajes animados y mapa de músculos
 js/gym.js             Módulo de gym
 js/app.js             Pestañas, eventos y copia de seguridad
 sw.js, manifest…      Instalación como app y uso sin conexión
+publicar.sh           Publica la app en Cloudflare
+wrangler.jsonc        Configuración de Cloudflare
+scripts/              Generador del Worker que sirve la app
 ```
 
 ### Añadir una sección nueva
