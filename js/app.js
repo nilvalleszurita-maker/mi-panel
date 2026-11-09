@@ -1,22 +1,36 @@
 // Arranque: registra los módulos, pinta las pestañas y reparte los eventos.
 // Para añadir una sección nueva (Comidas, Horario, Outfits…) basta con crear
 // su archivo en js/, incluirlo en index.html y añadirlo a esta lista.
-const MODULOS = [Finanzas, Entrenos, Gym];
+// La primera es la pantalla de inicio.
+const MODULOS = [Hoy, Finanzas, Gym, Entrenos];
+
+// Iconos del menú (trazos del diseño). Si un módulo no tiene, se usa su emoji.
+const trazo = d => `<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const ICONOS = {
+  hoy: trazo('<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path>'),
+  finanzas: trazo('<rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18"></path>'),
+  gym: trazo('<path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"></path>'),
+  entrenos: trazo('<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"></path>'),
+};
 
 const vista = document.getElementById('vista');
 const tabs = document.getElementById('tabs');
-let actual = MODULOS.find(m => m.id === location.hash.slice(1)) || MODULOS[0];
+const elegir = () => MODULOS.find(m => m.id === location.hash.slice(1)) || MODULOS[0];
+let actual = elegir();
 
 function pintar() {
   tabs.innerHTML = MODULOS.map(m => `
     <a href="#${m.id}" class="tab ${m === actual ? 'activa' : ''}" ${m === actual ? 'aria-current="page"' : ''}>
-      <span class="tab-icono" aria-hidden="true">${m.icono}</span><span>${m.nombre}</span>
+      ${ICONOS[m.id] || `<span aria-hidden="true">${m.icono}</span>`}<span>${m.nombre}</span>
     </a>`).join('');
+  document.getElementById('titulo-pantalla').textContent = actual.nombre;
+  document.body.classList.toggle('en-hoy', actual.id === 'hoy');
+  document.title = actual.id === 'hoy' ? 'Mi Panel' : `${actual.nombre} · Mi Panel`;
   render();
 }
 
 window.addEventListener('hashchange', () => {
-  actual = MODULOS.find(m => m.id === location.hash.slice(1)) || MODULOS[0];
+  actual = elegir();
   pintar();
   window.scrollTo(0, 0);
 });
@@ -94,8 +108,10 @@ async function pintarEstado() {
 
 // Copia de seguridad: exportar / importar todo el estado en JSON.
 const dlg = document.getElementById('dlg-ajustes');
-const abrirAjustes = () => { pintarEstado(); dlg.showModal(); };
+// Global: también la usa el menú «+» de la pantalla Hoy.
+function abrirAjustes() { pintarEstado(); dlg.showModal(); }
 document.getElementById('btn-ajustes').onclick = abrirAjustes;
+document.getElementById('btn-ajustes-lateral').onclick = abrirAjustes;
 document.getElementById('btn-aviso').onclick = abrirAjustes;
 document.getElementById('btn-exportar').onclick = () => {
   const blob = new Blob([JSON.stringify(Store.get(), null, 2)], { type: 'application/json' });

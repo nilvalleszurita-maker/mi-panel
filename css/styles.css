@@ -1,17 +1,26 @@
 /* ---------- Colores y medidas (cámbialos aquí para todo el diseño) ---------- */
+/* Paleta y tipografías del diseño «Hoy» (diseno/Main.dc.html). */
 :root {
   --fondo: #0f1115;
-  --superficie: #181b21;
-  --superficie-2: #20242c;
-  --borde: #2a2f38;
-  --texto: #e7e9ee;
-  --muted: #8b93a1;
-  --acento: #4fd1c5;
-  --acento-texto: #0b1a19;
+  --superficie: #181b22;      /* tarjetas */
+  --superficie-2: #1f2533;    /* tarjeta destacada, campos, elementos activos */
+  --nav-fondo: #151820;       /* barra de navegación */
+  --borde: #252a34;
+  --pista: #2a2f3a;           /* fondo de barras de progreso */
+  --texto: #e8eaf0;
+  --texto-2: #b4bdcc;         /* texto secundario sobre tarjeta destacada */
+  --muted: #9aa3b2;
+  --acento: #8fa8ff;
+  --acento-texto: #0f1115;
+  --ambar: #f5a524;
+  --verde: #7dd3a8;
   --pos: #4ade80;
   --neg: #f87171;
-  --radio: 14px;
-  --nav-alto: 64px;
+  --radio: 16px;
+  --nav-alto: 76px;
+  --lateral: 232px;           /* ancho del menú lateral en escritorio */
+  --fuente: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fuente-titulos: "Space Grotesk", var(--fuente);
   /* Paleta de categorías para gráficas (validada para fondo oscuro y daltonismo).
      El orden importa: colores vecinos se distinguen entre sí. */
   --serie-1: #3987e5;
@@ -32,15 +41,33 @@ body {
   margin: 0;
   background: var(--fondo);
   color: var(--texto);
-  font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font: 16px/1.45 var(--fuente);
   -webkit-font-smoothing: antialiased;
 }
 button, input, select { font: inherit; color: inherit; }
 h1, h2, h3 { margin: 0; font-weight: 600; }
+h1, h2 { font-family: var(--fuente-titulos); letter-spacing: -0.01em; }
 h2 { font-size: 1.1rem; text-transform: capitalize; }
 h3 { font-size: 1rem; }
+svg.icono { width: 22px; height: 22px; flex: 0 0 auto; }
 
-/* ---------- Cabecera y pestañas ---------- */
+/* ---------- Navegación ---------- */
+/* Móvil: barra fija abajo. Escritorio (≥ 860 px): menú lateral. */
+.nav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  background: var(--nav-fondo);
+  border-top: 1px solid var(--borde);
+}
+.nav-marca, .nav-ajustes { display: none; }
+.tabs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+.tab {
+  min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  color: var(--muted); text-decoration: none; font-size: 11px; border-radius: 12px;
+}
+.tab.activa { color: var(--acento); font-weight: 600; }
+
+/* Cabecera de las pantallas en el móvil (en «Hoy» la sustituye su propia cabecera). */
 .topbar {
   position: sticky; top: 0; z-index: 10;
   display: flex; align-items: center; gap: 16px;
@@ -48,23 +75,8 @@ h3 { font-size: 1rem; }
   background: var(--fondo);
   border-bottom: 1px solid var(--borde);
 }
-.brand { font-size: 1.1rem; flex: 1; }
-
-/* Móvil: pestañas fijas abajo */
-.tabs {
-  position: fixed; left: 0; right: 0; bottom: 0;
-  display: flex;
-  height: calc(var(--nav-alto) + env(safe-area-inset-bottom));
-  padding-bottom: env(safe-area-inset-bottom);
-  background: var(--superficie);
-  border-top: 1px solid var(--borde);
-}
-.tab {
-  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-  color: var(--muted); text-decoration: none; font-size: .78rem;
-}
-.tab-icono { font-size: 1.25rem; line-height: 1; }
-.tab.activa { color: var(--acento); }
+.brand { font-size: 1.15rem; flex: 1; }
+body.en-hoy .topbar { display: none; }
 
 .vista {
   max-width: 720px; margin: 0 auto;
@@ -72,16 +84,32 @@ h3 { font-size: 1rem; }
   display: flex; flex-direction: column; gap: 14px;
 }
 
-/* Ordenador/tablet: pestañas arriba en la cabecera */
-@media (min-width: 768px) {
-  /* El desenfoque solo aquí: en móvil rompería la barra fija de abajo */
-  .topbar { padding: 14px 24px; background: rgba(15, 17, 21, .85); backdrop-filter: blur(10px); }
-  .brand { flex: 0 0 auto; margin-right: 16px; }
-  .tabs { position: static; height: auto; padding: 0; background: none; border: 0; gap: 6px; flex: 1; }
-  .tab { flex: 0 0 auto; flex-direction: row; gap: 8px; padding: 8px 14px; border-radius: 999px; font-size: .95rem; }
-  .tab.activa { background: var(--superficie-2); }
-  .tab-icono { font-size: 1rem; }
-  .vista { padding: 24px 24px 48px; }
+@media (min-width: 860px) {
+  body { padding-left: var(--lateral); }
+  .nav {
+    top: 0; right: auto; width: var(--lateral);
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 28px 14px 20px;
+    border-top: 0; border-right: 1px solid var(--borde);
+  }
+  .nav-marca {
+    display: block; padding: 0 12px 24px;
+    font-family: var(--fuente-titulos); font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em;
+  }
+  .tabs { display: flex; flex-direction: column; gap: 4px; }
+  .tab, .nav-ajustes {
+    min-height: 44px; flex-direction: row; justify-content: flex-start; gap: 12px;
+    padding: 0 12px; font-size: 14px; font-weight: 500;
+  }
+  .tab:hover, .nav-ajustes:hover { background: var(--superficie); color: var(--texto); }
+  .tab.activa { background: var(--superficie-2); color: var(--texto); }
+  .tab.activa svg { color: var(--acento); }
+  .nav-ajustes {
+    display: flex; align-items: center; margin-top: auto;
+    background: none; border: 0; border-radius: 12px; color: var(--muted); cursor: pointer;
+  }
+  .topbar { display: none; }
+  .vista { padding: 32px 32px 48px; }
 }
 
 /* ---------- Piezas comunes ---------- */
@@ -394,3 +422,36 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 .consejos p { margin: 0 0 6px; }
 .consejos ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
 .dialogo { max-height: calc(100dvh - 32px); overflow-y: auto; }
+
+/* ---------- Hoy ---------- */
+.hoy-cab { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding-top: 12px; }
+.hoy-saludo { display: flex; flex-direction: column; gap: 4px; }
+.hoy-fecha { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.hoy-saludo h1 { font-size: 30px; font-weight: 700; line-height: 1.15; }
+.rapido { position: relative; flex: 0 0 auto; }
+.btn-mas {
+  width: 44px; height: 44px; display: grid; place-items: center;
+  border: 0; border-radius: 14px; background: var(--acento); color: var(--acento-texto); cursor: pointer;
+}
+.btn-mas[aria-expanded="true"] svg { transform: rotate(45deg); }
+.btn-mas svg { transition: transform .15s; }
+.menu-rapido {
+  position: absolute; right: 0; top: 52px; z-index: 15; min-width: 230px;
+  display: flex; flex-direction: column; padding: 6px;
+  background: var(--superficie-2); border: 1px solid var(--borde); border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .45);
+}
+.menu-rapido button {
+  display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px;
+  background: none; border: 0; border-radius: 10px; text-align: left; font-size: 15px; cursor: pointer;
+  white-space: nowrap;
+}
+.menu-rapido button:hover, .menu-rapido button:focus-visible { background: var(--superficie); }
+.menu-icono {
+  width: 28px; height: 28px; display: grid; place-items: center; flex: 0 0 auto;
+  background: var(--superficie); border-radius: 8px; color: var(--acento); font-weight: 600;
+}
+@media (min-width: 860px) {
+  .hoy-cab { padding-top: 0; }
+  .hoy-saludo h1 { font-size: 34px; }
+}

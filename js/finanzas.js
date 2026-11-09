@@ -473,8 +473,16 @@ const Finanzas = (() => {
     campo.addEventListener('input', () => campo.setCustomValidity(''), { once: true });
   }
 
+  // Para el botón «+» de Hoy: abre el formulario de un movimiento en el mes actual.
+  function abrirFormulario(t = 'gasto') {
+    tipo = t;
+    formAbierto = true;
+    mes = { a: new Date().getFullYear(), m: new Date().getMonth() };
+  }
+
   return {
     id: 'finanzas', nombre: 'Finanzas', icono: '€',
     render, alClic, alEnviar, alEscribir, alRedimensionar: dibujarLinea,
+    abrirFormulario,
   };
 })();

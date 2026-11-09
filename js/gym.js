@@ -369,5 +369,13 @@ const Gym = (() => {
     if (t.type === 'checkbox') rerender();
   }
 
-  return { id: 'gym', nombre: 'Gym', icono: '🏋️', render, alClic, alEscribir };
+  // Para Hoy: abre la vista semanal en el día de hoy.
+  function irAHoy() {
+    vista = 'registro';
+    semana = U.lunes();
+    abierto = U.diaSemana();
+    desplazar = true;
+  }
+
+  return { id: 'gym', nombre: 'Gym', icono: '🏋️', render, alClic, alEscribir, irAHoy };
 })();
