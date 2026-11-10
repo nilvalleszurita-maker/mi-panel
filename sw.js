@@ -1,7 +1,7 @@
 // Service worker: guarda los archivos de la app para que funcione sin conexión.
 // Estrategia "red primero": si hay internet usa la versión más nueva,
 // si no, tira de la copia guardada.
-const CACHE = 'mi-panel-v15';
+const CACHE = 'mi-panel-v16';
 const ARCHIVOS = [
   './', 'index.html', 'css/styles.css', 'manifest.webmanifest',
   'js/store.js', 'js/utils.js', 'js/hoy-datos.js', 'js/hoy.js', 'js/finanzas.js', 'js/gym-plan.js', 'js/gym-figuras.js', 'js/gym.js', 'js/outfits-datos.js', 'js/outfits.js', 'js/app.js',

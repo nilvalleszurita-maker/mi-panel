@@ -16,6 +16,7 @@ const Outfits = (() => {
   let editor = null;              // { origen: id|null, b: borrador } mientras se edita o crea
   let selector = null;            // { capa, i } mientras se elige una prenda para una capa
   let elVista = null;
+  let avisoArmario = null;        // resumen de la última sincronización, hasta que se toque algo
   // Armario
   let filtroTipo = '';
   let filtroColor = '';
@@ -44,7 +45,10 @@ const Outfits = (() => {
     if (!D.estaSincronizado()) {
       D.asegurar().then(() => { if (elVista === el && el.isConnected && location.hash === '#outfits') render(el); });
     }
-    const cambio = D.tomarCambio();
+    // El aviso se queda hasta que se toque algo (si no, otro repintado, p. ej. al
+    // llegar el tiempo, lo borraría al instante).
+    avisoArmario = D.tomarCambio() || avisoArmario;
+    const cambio = avisoArmario;
     const avisoCambio = cambio ? `<p class="aviso-suave">Armario actualizado: ${[
       cambio.prendasNuevas && `${cambio.prendasNuevas} ${cambio.prendasNuevas === 1 ? 'prenda nueva' : 'prendas nuevas'}`,
       cambio.outfitsNuevos && `${cambio.outfitsNuevos} ${cambio.outfitsNuevos === 1 ? 'outfit nuevo' : 'outfits nuevos'}`,
@@ -427,6 +431,7 @@ const Outfits = (() => {
   function alClic(e, rerender) {
     const b = e.target.closest('[data-acc]');
     if (!b) return;
+    avisoArmario = null;
     const acc = b.dataset.acc;
     // Clic en el fondo oscuro del selector (no dentro de él): cerrar.
     if (acc === 'cerrar-selector' && b.classList.contains('selector-fondo') && e.target !== b) return;
