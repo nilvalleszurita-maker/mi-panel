@@ -4,7 +4,13 @@ const Outfits = (() => {
   const D = OutfitsDatos;
 
   // Estado de la vista (no se guarda).
-  let vista = 'outfits';          // 'hoy' | 'outfits' | 'armario'
+  let vista = 'hoy';              // 'hoy' | 'outfits' | 'armario'
+  // Outfit de hoy
+  let climaManual = null;         // clima elegido a mano (si no, el del tiempo)
+  let situacionHoy = U.diaSemana() < 5 ? 'clase' : 'tomar_algo';
+  let indiceHoy = 0;              // «Otro» avanza en la lista de propuestas
+  let pidiendoTiempo = false;
+  let sinTiempo = false;          // no se pudo consultar (sin conexión)
   let filtroClima = '';
   let filtroSituacion = '';
   let editor = null;              // { origen: id|null, b: borrador } mientras se edita o crea
@@ -33,7 +39,7 @@ const Outfits = (() => {
         ${[['hoy', 'Outfit de hoy'], ['outfits', 'Outfits'], ['armario', 'Armario']].map(([v, t]) =>
           `<button type="button" role="tab" aria-selected="${vista === v}" class="${vista === v ? 'activo' : ''}" data-acc="vista" data-v="${v}">${t}</button>`).join('')}
       </div>`}
-      ${editor ? vistaEditor() : vista === 'outfits' ? vistaOutfits() : `<p class="vacio">Esta vista llega en la siguiente parte.</p>`}
+      ${editor ? vistaEditor() : vista === 'outfits' ? vistaOutfits() : vista === 'hoy' ? vistaHoy() : `<p class="vacio">Esta vista llega en la siguiente parte.</p>`}
       ${selector ? vistaSelector() : ''}`;
   }
 
@@ -78,6 +84,82 @@ const Outfits = (() => {
       ${o.ocasiones.filter(x => x !== 'casa').map(x => `<span class="etq etq-situacion">${N(x)}</span>`).join('')}
       ${o.clima.map(x => `<span class="etq etq-clima">${N(x)}</span>`).join('')}
     </div>`;
+
+  // ---------- Vista Outfit de hoy ----------
+  function vistaHoy() {
+    const t = D.tiempoGuardado();
+    if (!t && !pidiendoTiempo && !sinTiempo) {
+      pidiendoTiempo = true;
+      D.tiempo().then(r => {
+        pidiendoTiempo = false;
+        sinTiempo = !r;
+        if (location.hash === '#outfits' && vista === 'hoy' && !editor && elVista?.isConnected) render(elVista);
+      });
+    }
+    const climaAuto = t?.clima || null;
+    const clima = climaManual || climaAuto;
+
+    const cabTiempo = t ? `
+        <div class="tiempo-cifra">${String(Math.round(t.max * 10) / 10).replace('.', ',')}<span>°C</span></div>
+        <div class="tiempo-texto">
+          <strong>Barcelona · ${U.esc(t.cielo)}</strong>
+          <span class="muted peq">máx ${String(t.max).replace('.', ',')} °C · mín ${String(t.min).replace('.', ',')} °C</span>
+          ${t.lluvia ? `<span class="peq tiempo-aviso">☂ Puede llover: mejor calzado que aguante.</span>` : ''}
+        </div>`
+      : pidiendoTiempo ? `<p class="muted">Mirando el tiempo en Barcelona…</p>`
+      : `<p class="muted">Sin conexión para ver el tiempo: elige el clima a mano.</p>`;
+
+    const chipsClima = D.CLIMAS.map(c => `
+      <button class="chip ${clima === c ? 'on' : ''}" data-acc="hoy-clima" data-v="${c}" aria-pressed="${clima === c}">
+        ${N(c)}${c === climaAuto ? ' <span aria-hidden="true">·</span> <span class="peq">hoy</span>' : ''}
+      </button>`).join('');
+    const chipsSituacion = D.SITUACIONES.map(s => `
+      <button class="chip ${situacionHoy === s ? 'on' : ''}" data-acc="hoy-situacion" data-v="${s}" aria-pressed="${situacionHoy === s}">${N(s)}</button>`).join('');
+
+    let cuerpo = '';
+    const puesto = D.puestoEl();
+    if (puesto && D.outfit(puesto.outfit_id)) {
+      cuerpo = `
+        <p class="hoy-puesto">✓ Hoy te pones esto</p>
+        ${tarjetaOutfit(D.outfit(puesto.outfit_id))}
+        <button class="btn btn-sec ancho" data-acc="hoy-cambiar">Elegir otro</button>`;
+    } else if (clima) {
+      const { lista, aviso, todosUsados } = D.propuestas(clima, situacionHoy);
+      if (lista.length) {
+        const o = lista[indiceHoy % lista.length];
+        cuerpo = `
+          ${aviso ? `<p class="aviso-suave">${U.esc(aviso)}</p>` : ''}
+          ${todosUsados ? `<p class="aviso-suave">Todos los outfits que encajan los has llevado en los últimos 3 días.</p>` : ''}
+          ${tarjetaOutfit(o)}
+          <div class="fila-botones">
+            ${lista.length > 1 ? `<button class="btn btn-sec" data-acc="hoy-otro">Otro <span class="muted peq">(${indiceHoy % lista.length + 1}/${lista.length})</span></button>` : ''}
+            <button class="btn" data-acc="hoy-poner" data-outfit="${U.esc(o.id)}">Me lo pongo</button>
+          </div>`;
+      } else cuerpo = `<p class="vacio">${U.esc(aviso)}</p>`;
+    }
+
+    const hist = D.historial(5);
+    return `
+      <section class="tiempo-hoy">${cabTiempo}</section>
+      <div class="campo">Clima<div class="chips">${chipsClima}</div></div>
+      <div class="campo">¿Qué toca hoy?<div class="chips">${chipsSituacion}</div></div>
+      ${cuerpo}
+      ${hist.length ? `
+        <section class="bloque">
+          <h3>Últimos días</h3>
+          <ul class="lista historial">
+            ${hist.map(h => `<li><span class="muted">${fechaRelativa(h.fecha)}</span><span class="crece">${U.esc(D.outfit(h.outfit_id)?.nombre || 'Outfit borrado')}</span></li>`).join('')}
+          </ul>
+        </section>` : ''}`;
+  }
+
+  function fechaRelativa(f) {
+    const dias = Math.round((U.deIso(U.iso()) - U.deIso(f)) / 864e5);
+    if (dias === 0) return 'Hoy';
+    if (dias === 1) return 'Ayer';
+    const d = U.deIso(f);
+    return `${U.DIAS[U.diaSemana(d)].slice(0, 3)} ${d.getDate()}`;
+  }
 
   // ---------- Vista Outfits ----------
   function vistaOutfits() {
@@ -192,6 +274,11 @@ const Outfits = (() => {
     if (acc === 'cerrar-selector' && b.classList.contains('selector-fondo') && e.target !== b) return;
 
     if (acc === 'vista') vista = b.dataset.v;
+    else if (acc === 'hoy-clima') { climaManual = b.dataset.v === D.tiempoGuardado()?.clima ? null : b.dataset.v; indiceHoy = 0; }
+    else if (acc === 'hoy-situacion') { situacionHoy = b.dataset.v; indiceHoy = 0; }
+    else if (acc === 'hoy-otro') indiceHoy++;
+    else if (acc === 'hoy-poner') D.ponerHoy(b.dataset.outfit);
+    else if (acc === 'hoy-cambiar') { D.quitarHoy(); indiceHoy++; }
     else if (acc === 'reintentar') { render(elVista); return; }
     else if (acc === 'f-clima') filtroClima = b.dataset.v;
     else if (acc === 'f-situacion') filtroSituacion = b.dataset.v;

@@ -1,7 +1,7 @@
 // Service worker: guarda los archivos de la app para que funcione sin conexión.
 // Estrategia "red primero": si hay internet usa la versión más nueva,
 // si no, tira de la copia guardada.
-const CACHE = 'mi-panel-v10';
+const CACHE = 'mi-panel-v11';
 const ARCHIVOS = [
   './', 'index.html', 'css/styles.css', 'manifest.webmanifest',
   'js/store.js', 'js/utils.js', 'js/hoy-datos.js', 'js/hoy.js', 'js/finanzas.js', 'js/entrenos.js', 'js/gym-plan.js', 'js/gym-figuras.js', 'js/gym.js', 'js/outfits-datos.js', 'js/outfits.js', 'js/app.js',
@@ -18,11 +18,21 @@ self.addEventListener('activate', e => {
   self.clients.claim();
 });
 
+// Solo se ocupa de los archivos de la propia app y de las tipografías. Las peticiones
+// a otras webs (p. ej. el tiempo de Open-Meteo) van directas: la app gestiona si fallan.
+const TIPOGRAFIAS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
+
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+  const url = new URL(e.request.url);
+  if (url.origin !== self.location.origin && !TIPOGRAFIAS.includes(url.hostname)) return;
   e.respondWith(
     fetch(e.request)
-      .then(r => { const copia = r.clone(); caches.open(CACHE).then(c => c.put(e.request, copia)); return r; })
-      .catch(() => caches.match(e.request).then(r => r || caches.match('index.html')))
+      .then(r => {
+        if (r.ok || r.type === 'opaque') { const copia = r.clone(); caches.open(CACHE).then(c => c.put(e.request, copia)); }
+        return r;
+      })
+      // Sin conexión: la copia guardada; y si se está abriendo la app, su página de inicio.
+      .catch(() => caches.match(e.request).then(r => r || (e.request.mode === 'navigate' ? caches.match('index.html') : Response.error())))
   );
 });

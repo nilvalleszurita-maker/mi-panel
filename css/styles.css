@@ -532,8 +532,7 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 .cab-seccion { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .cab-seccion h2 { text-transform: none; }
 .filtros { display: flex; flex-direction: column; gap: 8px; }
-.chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
-.chips::-webkit-scrollbar { display: none; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
   flex: 0 0 auto; min-height: 36px; padding: 0 14px; border-radius: 999px; cursor: pointer;
   background: var(--superficie); border: 1px solid var(--borde); color: var(--texto-2); font-size: 14px; white-space: nowrap;
@@ -619,4 +618,22 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
   position: relative; z-index: 1; width: 100%; padding: 6px 8px; font-size: 12px; text-align: left;
   color: var(--texto); background: rgba(15, 17, 21, .72);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Outfit de hoy */
+.tiempo-hoy {
+  display: flex; align-items: center; gap: 16px; min-height: 76px;
+  padding: 16px 18px; background: var(--superficie-2); border-radius: 18px;
+}
+.tiempo-hoy p { margin: 0; }
+.tiempo-cifra { font-family: var(--fuente-titulos); font-size: 44px; font-weight: 600; line-height: 1; }
+.tiempo-cifra span { font-size: 20px; color: var(--texto-2); margin-left: 2px; }
+.tiempo-texto { display: flex; flex-direction: column; gap: 2px; }
+.tiempo-aviso { color: var(--ambar); }
+.hoy-puesto { margin: 0; color: var(--verde); font-weight: 600; }
+.aviso-suave { margin: 0; padding: 10px 14px; border-radius: 12px; font-size: 14px; color: var(--texto-2); background: var(--superficie); border: 1px dashed var(--borde); }
+.historial li { gap: 14px; }
+.historial li .muted { width: 56px; flex: 0 0 auto; font-size: 14px; }
+@media (min-width: 860px) {
+  .vista:has(.tiempo-hoy) { max-width: 560px; }
 }
