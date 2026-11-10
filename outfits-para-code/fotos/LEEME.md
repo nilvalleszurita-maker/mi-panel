@@ -14,14 +14,9 @@ Cada foto se llama <id>.png, con el id de la prenda en armario.json.
 - Zapatillas retro negras → `asics-negras-01.png`
 - Zapatillas negras lisas → `zapatillas-negras-lisas-01.png`
 - Plumífero negro con capucha → `plumifero-negro-01.png`
-
-## Generadas en Canva, falta descargarlas aquí
-
-| Prenda | Archivo | Enlace |
-|---|---|---|
-| Camiseta de tirantes blanca | `tirantes-blanca-01.png` | https://www.canva.com/M/MAHahxdRAVc |
-| Camiseta de tirantes negra | `tirantes-negra-01.png` | https://www.canva.com/M/MAHah-Wv718 |
-| Sudadera negra con cremallera y capucha | `hoodie-cremallera-negra-01.png` | https://www.canva.com/M/MAHahwg3aK0 |
+- Sudadera negra con cremallera y capucha → `hoodie-cremallera-negra-01.png`
+- Camiseta de tirantes blanca → `tirantes-blanca-01.png`
+- Camiseta de tirantes negra → `tirantes-negra-01.png`
 
 ## Pendientes (cuando haya créditos de Canva)
 
