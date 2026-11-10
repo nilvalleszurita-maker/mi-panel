@@ -14,6 +14,10 @@ Web app personal (móvil y ordenador) para controlar finanzas y entrenos. Diseñ
   - Vista **Calendario**: días de gym en azul, de carrera en naranja y con las dos cosas partidos en diagonal. Pulsar un día lo abre en la vista Semana. Resumen del mes: días de gym, días de carrera y km.
   - Cada ejercicio muestra un personaje animado haciéndolo y un mapa del cuerpo (frente y espalda) con los músculos principales y secundarios.
   - La planificación está en `js/gym-plan.js`: cambia ejercicios, series o reps ahí sin tocar la lógica.
+- **Outfits**: armario y outfits a partir de `outfits-para-code/armario.json`.
+  - Vista **Outfits**: filtros por clima y situación; cada outfit en cuadrícula (pantalón a la izquierda; base, medio, abrigo y calzado a la derecha; accesorios debajo). Tocando una prenda se cambia por otra del mismo tipo y se guarda como outfit nuevo o sustituyendo el original. Botón para crear outfits desde cero.
+  - Datos en tablas `prendas`, `outfits`, `outfit_prendas` y `outfit_historial` (ver `js/outfits-datos.js`). Una prenda existe una sola vez.
+  - Fotos: guarda cada una en `outfits-para-code/fotos/<id>.png`. `scripts/preparar-armario.py` las convierte a WebP de 600 px al publicar. Si falta una foto se ve una tarjeta gris con el nombre.
 - *Próximamente*: comidas, horario diario y outfits.
 
 ## Cómo usarla
@@ -45,6 +49,9 @@ js/entrenos.js        Módulo de entrenos
 js/gym-plan.js        Planificación del gym (solo datos, editable)
 js/gym-figuras.js     Dibujos del gym: personajes animados y mapa de músculos
 js/gym.js             Módulo de gym
+js/outfits-datos.js   Datos y reglas de Outfits
+js/outfits.js         Módulo de Outfits
+outfits-para-code/    Fuente del armario (armario.json y fotos)
 js/app.js             Pestañas, eventos y copia de seguridad
 sw.js, manifest…      Instalación como app y uso sin conexión
 publicar.sh           Publica la app en Cloudflare

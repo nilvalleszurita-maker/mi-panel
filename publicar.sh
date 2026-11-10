@@ -13,6 +13,9 @@ ARCHIVOS=(index.html manifest.webmanifest sw.js css icons js)
 rm -rf dist
 mkdir -p dist/app
 git archive HEAD "${ARCHIVOS[@]}" | tar -x -C dist/app
+# Armario de Outfits: armario.json y fotos optimizadas desde outfits-para-code/.
+git archive HEAD outfits-para-code | tar -x -C dist
+python3 scripts/preparar-armario.py dist/app dist/outfits-para-code
 node scripts/construir-worker.mjs
 
 npx --yes wrangler@4 deploy "$@"

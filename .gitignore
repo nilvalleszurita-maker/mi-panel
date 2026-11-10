@@ -1,3 +1,5 @@
 node_modules
 .wrangler
 dist
+# Generado por scripts/preparar-armario.py a partir de outfits-para-code/
+data/

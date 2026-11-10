@@ -15,6 +15,7 @@ const TIPOS = {
   '.json': 'application/json',
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
+  '.webp': 'image/webp',
 };
 
 function listar(dir) {

@@ -525,3 +525,98 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
   .entreno-hoy { padding: 20px; }
   .btn-entreno { min-height: 46px; border-radius: 12px; font-size: 14px; }
 }
+
+/* ---------- Outfits ---------- */
+:root { --gris-foto: #cfcfcf; }     /* fondo de las fotos de prendas */
+.segmentado.tres { grid-template-columns: repeat(3, 1fr); }
+.cab-seccion { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.cab-seccion h2 { text-transform: none; }
+.filtros { display: flex; flex-direction: column; gap: 8px; }
+.chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 auto; min-height: 36px; padding: 0 14px; border-radius: 999px; cursor: pointer;
+  background: var(--superficie); border: 1px solid var(--borde); color: var(--texto-2); font-size: 14px; white-space: nowrap;
+}
+.chip.on { background: var(--superficie-2); border-color: var(--acento); color: var(--acento); font-weight: 600; }
+
+.outfits-lista { display: grid; gap: 18px; }
+@media (min-width: 860px) {
+  .vista:has(.outfits-lista) { max-width: 1180px; margin: 0; }
+  /* Columnas de ~300 px: así cada tarjeta de prenda queda casi cuadrada, como sus fotos. */
+  .outfits-lista { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); align-items: start; }
+}
+.outfit, .editor-outfit {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 16px; background: var(--superficie); border-radius: 18px;
+}
+.outfit-cab { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.outfit-cab h3 { font-family: var(--fuente-titulos); font-size: 20px; }
+.outfit-valor { margin: 0; }
+.outfit-nota { margin: 0; font-size: 14px; color: var(--texto-2); }
+
+/* Cuadrícula: pantalón en columna alta; el resto apilado a la derecha. */
+.collage {
+  --fila: 150px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  height: calc(var(--fila) * var(--filas) + 8px * (var(--filas) - 1));
+}
+.collage-derecha { display: grid; grid-auto-rows: 1fr; gap: 8px; min-height: 0; }
+.collage-accesorios { display: flex; gap: 8px; flex-wrap: wrap; }
+@media (min-width: 860px) { .collage { --fila: 140px; } }
+
+.pieza {
+  position: relative; display: grid; place-items: center; overflow: hidden; min-height: 0;
+  padding: 0; border: 0; border-radius: 16px; background: var(--gris-foto); cursor: pointer;
+}
+.pieza img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.pieza-nombre { padding: 10px; color: #3b3f47; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.3; }
+.pieza img + .pieza-nombre { visibility: hidden; } /* con foto, el nombre no se ve (sigue en aria-label) */
+.pieza:hover img, .pieza:focus-visible img { transform: scale(1.03); transition: transform .2s; }
+.pieza-vacia {
+  background: var(--superficie); border: 2px solid var(--borde); color: var(--texto-2); font-size: 14px;
+}
+.pieza-vacia:hover { border-color: var(--acento); color: var(--acento); }
+.pieza-mini { width: 64px; height: 64px; border-radius: 12px; flex: 0 0 auto; }
+.pieza-mini .pieza-nombre { font-size: 9px; padding: 4px; }
+.pieza-mini.pieza-vacia { font-size: 11px; border-width: 1px; }
+.pieza-mini.pieza-vacia span { padding: 4px; }
+
+.etiquetas { display: flex; flex-wrap: wrap; gap: 8px; }
+.etq { padding: 5px 12px; border-radius: 999px; font-size: 13px; }
+.etq-situacion { background: var(--superficie-2); color: var(--acento); }
+.etq-clima { background: color-mix(in srgb, var(--ambar) 16%, transparent); color: var(--ambar); }
+
+.campo { display: flex; flex-direction: column; gap: 6px; font-size: .85rem; color: var(--muted); }
+.campo textarea {
+  width: 100%; padding: 10px 12px; resize: vertical; font: inherit; font-size: 1rem; color: var(--texto);
+  background: var(--superficie-2); border: 1px solid var(--borde); border-radius: 10px;
+}
+.campo textarea:focus { border-color: var(--acento); outline: none; }
+.enlace.peligro { color: var(--neg); align-self: center; }
+
+/* Selector de prendas (hoja que sube desde abajo en el móvil; ventana en escritorio). */
+.selector-fondo {
+  position: fixed; inset: 0; z-index: 40; display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(0, 0, 0, .6);
+}
+.selector {
+  width: 100%; max-width: 640px; max-height: 85dvh; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
+  background: var(--superficie); border-radius: 20px 20px 0 0;
+}
+@media (min-width: 860px) {
+  .selector-fondo { align-items: center; }
+  .selector { border-radius: 20px; }
+}
+.selector-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.pieza-opcion { aspect-ratio: 1; align-content: end; }
+.pieza-opcion.actual { outline: 3px solid var(--acento); outline-offset: 2px; }
+.pieza-opcion .pieza-nombre { position: absolute; inset: 0; display: grid; place-items: center; }
+.pieza-opcion img + .pieza-nombre { visibility: hidden; }
+.pieza-pie {
+  position: relative; z-index: 1; width: 100%; padding: 6px 8px; font-size: 12px; text-align: left;
+  color: var(--texto); background: rgba(15, 17, 21, .72);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
