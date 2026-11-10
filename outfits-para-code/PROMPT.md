@@ -15,7 +15,7 @@ carpeta outfits-para-code/:
 
 - armario.json → mis prendas ("prendas") y outfits ya montados ("outfits").
   Lee también "_como_funciona": explica las reglas.
-- fotos/ → una imagen por prenda, llamada <id>.png. Faltan algunas (están en
+- fotos/ → una imagen por prenda, llamada <id>.png. Si en el futuro falta alguna (ver
   fotos/LEEME.md como pendientes): si falta la imagen, muestra una tarjeta gris
   con el nombre de la prenda. Cuando añada la foto más tarde debe aparecer sola.
 - diseno/opcion1-cuadricula.png → referencia visual de cómo se ve un outfit.

@@ -183,10 +183,9 @@
       ],
       "notas": "Oversize, bolsillo canguro, texto pequeño delante y estampado grande blanco en la espalda.",
       "foto": "fotos/sudadera-capucha-negra-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHaiDPJQUg",
       "capa": "medio",
-      "marca": "Nude Project",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una sudadera negra con capucha oversize, bolsillo canguro, puños y bajo de canalé, pequeño texto estampado en blanco en el centro del pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "marca": "Nude Project"
     },
     {
       "id": "sudadera-rosa-01",
@@ -206,10 +205,9 @@
       ],
       "notas": "Oversize, hombros caídos, logo pequeño bordado. Queda muy bien con gris y negro.",
       "foto": "fotos/sudadera-rosa-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHaiNOY_Ok",
       "capa": "medio",
-      "marca": "STWD",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una sudadera rosa palo oversize sin capucha, cuello redondo de canalé, hombros caídos, pequeño logo bordado en tono claro en el pecho izquierdo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "marca": "STWD"
     },
     {
       "id": "sudadera-blanca-champion-01",
@@ -228,10 +226,9 @@
       ],
       "notas": "Logo grande negro en el pecho: informal/deportiva.",
       "foto": "fotos/sudadera-blanca-champion-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHaiKSJcoI",
       "capa": "medio",
-      "marca": "Champion",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una sudadera blanca sin capucha, cuello redondo, con un logo de texto grande en letra cursiva negra en el pecho, puños de canalé, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "marca": "Champion"
     },
     {
       "id": "short-chandal-blanco-01",
@@ -250,8 +247,7 @@
       ],
       "notas": "Felpa, cintura elástica con cordón.",
       "foto": "fotos/short-chandal-blanco-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto blanco de chándal de felpa, cintura elástica ancha con cordón, bolsillos laterales, largo por encima de la rodilla, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiC9lcqw"
     },
     {
       "id": "bermuda-vaquera-azul-claro-01",
@@ -290,9 +286,8 @@
       ],
       "notas": "Corte recto. La más arreglada de las bermudas.",
       "foto": "fotos/bermuda-vaquera-blanca-01.png",
-      "imagen_canva": null,
-      "marca": "Zara",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo unas bermudas vaqueras blancas, corte recto, cinco bolsillos con remaches plateados, largo por encima de la rodilla, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiM2OpHc",
+      "marca": "Zara"
     },
     {
       "id": "bermuda-vaquera-negra-01",
@@ -311,8 +306,7 @@
       ],
       "notas": "Rotos en los muslos y dobladillo vuelto: informal.",
       "foto": "fotos/bermuda-vaquera-negra-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo unas bermudas vaqueras negras desgastadas (gris carbón), con rotos deshilachados en los muslos y dobladillo vuelto, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiPirrH0"
     },
     {
       "id": "gorra-negra-01",
@@ -356,8 +350,7 @@
       ],
       "notas": "Texto pequeño bordado en negro. Ideal en verano.",
       "foto": "fotos/gorra-blanca-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una gorra de béisbol blanca de algodón, con una palabra pequeña bordada en letra cursiva negra en el frontal, visera curva con pespuntes, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiCn__TM"
     },
     {
       "id": "camiseta-blanca-cangrejo-01",
@@ -377,9 +370,8 @@
       ],
       "notas": "Oversize, estampado pequeño de cangrejo en el pecho. Aire de verano mediterráneo.",
       "foto": "fotos/camiseta-blanca-cangrejo-01.png",
-      "imagen_canva": null,
-      "capa": "base",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta blanca oversize de algodón grueso, cuello redondo, con un pequeño estampado en el pecho izquierdo de un cangrejo dibujado en tono marrón claro y texto en azul marino estilo café francés, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiNK8yXc",
+      "capa": "base"
     },
     {
       "id": "asics-plateadas-01",
@@ -554,10 +546,9 @@
       ],
       "notas": "Encima de sudadera o hoodie da calor sin agobiar.",
       "foto": "fotos/chaleco-gris-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHaiEyFzgs",
       "marca": "Polo Club",
-      "capa": "abrigo",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un chaleco acolchado gris marengo mate sin mangas, cuello alto, cremallera frontal, bolsillos laterales, pequeño parche de goma con logo en el pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "capa": "abrigo"
     },
     {
       "id": "hoodie-cremallera-gris-01",
@@ -599,10 +590,9 @@
       ],
       "notas": "Logo firma pequeño en rosa. Combina con la sudadera y la camisa rosa.",
       "foto": "fotos/camiseta-blanca-stussy-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHaiCDJ0nE",
       "marca": "Stüssy",
-      "capa": "base",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta blanca de algodón, cuello redondo, con un pequeño logo de firma estilo graffiti en rosa fucsia, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "capa": "base"
     },
     {
       "id": "camiseta-blanca-yacht-01",
@@ -622,9 +612,8 @@
       ],
       "notas": "Texto náutico pequeño en azul marino: aire \"old money\".",
       "foto": "fotos/camiseta-blanca-yacht-01.png",
-      "imagen_canva": null,
-      "capa": "base",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta blanca de algodón, cuello redondo, con un pequeño texto en el pecho izquierdo en azul marino estilo club náutico, con una palabra en letra cursiva, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiLOOPUU",
+      "capa": "base"
     },
     {
       "id": "camiseta-blanca-artistic-01",
@@ -644,10 +633,9 @@
       ],
       "notas": "Oversize con bordado pequeño negro en el centro.",
       "foto": "fotos/camiseta-blanca-artistic-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHaiOXdUh8",
       "marca": "Pull&Bear",
-      "capa": "base",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta blanca oversize de algodón grueso, cuello redondo, con un pequeño texto bordado en negro en el centro del pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "capa": "base"
     },
     {
       "id": "camisa-blanca-cubana-01",
@@ -666,10 +654,9 @@
       ],
       "notas": "Tejido con textura (tipo seersucker). La pieza más arreglada para verano.",
       "foto": "fotos/camisa-blanca-cubana-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHaiOThFMc",
       "marca": "Zara",
-      "capa": "base",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camisa blanca de manga corta con cuello cubano abierto, tejido con textura tipo seersucker, botones blancos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "capa": "base"
     },
     {
       "id": "camisa-rosa-lino-01",
@@ -690,9 +677,8 @@
       ],
       "notas": "Lino, bolsillo en el pecho. Abierta sobre camiseta blanca o abrochada para salir.",
       "foto": "fotos/camisa-rosa-lino-01.png",
-      "imagen_canva": null,
-      "capa": "base",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camisa rosa palo de lino de manga larga, cuello clásico, bolsillo en el pecho, botones nacarados, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiOaFlf0",
+      "capa": "base"
     },
     {
       "id": "camiseta-barca-01",
@@ -711,10 +697,9 @@
       ],
       "notas": "Tejido técnico: para gym, fútbol o ver el partido.",
       "foto": "fotos/camiseta-barca-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHaiB4H1vM",
       "marca": "Nike / FC Barcelona",
-      "capa": "base",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta de fútbol de tejido técnico a rayas verticales azul marino y granate, manga corta, cuello redondo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "capa": "base"
     },
     {
       "id": "reloj-viceroy-verde-01",
@@ -758,9 +743,8 @@
       ],
       "notas": "Números romanos, correa de piel negra. El más clásico: para ocasiones arregladas.",
       "foto": "fotos/reloj-raez-blanco-01.png",
-      "imagen_canva": null,
-      "marca": "Pablo Raez",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista de frente, solo un reloj de vestir con caja tonneau de acero, esfera blanca con números romanos negros, correa de piel negra con grabado de cocodrilo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiIBnVgc",
+      "marca": "Pablo Raez"
     },
     {
       "id": "reloj-dg-negro-01",
@@ -804,10 +788,9 @@
       ],
       "notas": "Ajustada, monograma pequeño. La camiseta negra más arreglada.",
       "foto": "fotos/camiseta-negra-ck-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHaiPgLWFM",
       "marca": "Calvin Klein Jeans",
-      "capa": "base",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta negra básica de algodón ajustada, cuello redondo, pequeño monograma blanco en el pecho izquierdo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "capa": "base"
     },
     {
       "id": "camiseta-marino-tomtailor-01",
@@ -827,10 +810,9 @@
       ],
       "notas": "Texto grande blanco en el pecho: informal.",
       "foto": "fotos/camiseta-marino-tomtailor-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHaiLP6D_8",
       "marca": "Tom Tailor",
-      "capa": "base",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta azul marino de algodón, cuello redondo, con texto grande blanco tipográfico en el centro del pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "capa": "base"
     },
     {
       "id": "camiseta-negra-carhartt-01",
@@ -850,10 +832,9 @@
       ],
       "notas": "Algodón grueso, logo blanco en arco en el pecho. Estilo streetwear.",
       "foto": "fotos/camiseta-negra-carhartt-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHaiMkJpA4",
       "marca": "Carhartt WIP",
-      "capa": "base",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta negra de algodón grueso, cuello redondo de canalé, pequeño logo blanco con letras redondeadas en arco en el pecho izquierdo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "capa": "base"
     },
     {
       "id": "camiseta-negra-nude-01",
@@ -936,9 +917,8 @@
       ],
       "notas": "Tejido técnico transpirable, logo de toro.",
       "foto": "fotos/camiseta-gym-toro-01.png",
-      "imagen_canva": null,
-      "capa": "base",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta deportiva negra de tejido técnico con mangas raglán, pequeño logo blanco de cabeza de toro y texto en el pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiPkW2Mo",
+      "capa": "base"
     },
     {
       "id": "hoodie-cremallera-negra-01",
@@ -982,9 +962,8 @@
       ],
       "notas": "Felpa con puño en el tobillo. Para ir y volver del gym en invierno.",
       "foto": "fotos/jogger-gris-fila-01.png",
-      "imagen_canva": null,
-      "marca": "Fila",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón de chándal jogger gris jaspeado claro de felpa, cintura elástica con cordón, puños elásticos en los tobillos, pequeño logo bordado en el muslo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiHcIjAU",
+      "marca": "Fila"
     },
     {
       "id": "short-nike-tech-gris-01",
@@ -1005,9 +984,8 @@
       ],
       "notas": "Bolsillo con cremallera, logo grande negro.",
       "foto": "fotos/short-nike-tech-gris-01.png",
-      "imagen_canva": null,
-      "marca": "Nike",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto gris claro de felpa técnica, cintura elástica con cordón negro, bolsillo lateral con cremallera, logo negro en la pierna, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiGmfsPE",
+      "marca": "Nike"
     },
     {
       "id": "short-nike-negro-01",
@@ -1027,9 +1005,8 @@
       ],
       "notas": "Algodón, logo pequeño bordado blanco.",
       "foto": "fotos/short-nike-negro-01.png",
-      "imagen_canva": null,
-      "marca": "Nike",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto negro de algodón, cintura elástica con cordón, bolsillos laterales, pequeño logo bordado blanco en la pierna, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiI5uHCM",
+      "marca": "Nike"
     },
     {
       "id": "short-negro-paris-01",
@@ -1048,8 +1025,7 @@
       ],
       "notas": "Cordón blanco y texto \"Paris\" en la pierna.",
       "foto": "fotos/short-negro-paris-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto negro de chándal, cintura elástica con cordón blanco, texto blanco con tipografía serif en la parte baja de una pierna, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiKNKCrc"
     },
     {
       "id": "short-tecnico-gris-oscuro-01",
@@ -1068,8 +1044,7 @@
       ],
       "notas": "Tejido ligero con bolsillos de cremallera. Ideal para correr los 10 km.",
       "foto": "fotos/short-tecnico-gris-oscuro-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo pantalón corto deportivo técnico gris oscuro de tejido ligero, cintura elástica con cordón, bolsillos laterales con cremallera, aberturas laterales en el bajo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiCGD4yQ"
     },
     {
       "id": "short-tecnico-negro-02",
@@ -1088,8 +1063,7 @@
       ],
       "notas": "Mismo modelo que el gris oscuro.",
       "foto": "fotos/short-tecnico-negro-02.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo pantalón corto deportivo técnico negro de tejido ligero, cintura elástica con cordón, bolsillos laterales con cremallera, aberturas laterales en el bajo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiEyzHU8"
     },
     {
       "id": "short-tecnico-gris-claro-01",
@@ -1108,8 +1082,7 @@
       ],
       "notas": "Mismo modelo que el gris oscuro.",
       "foto": "fotos/short-tecnico-gris-claro-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo pantalón corto deportivo técnico gris claro de tejido ligero, cintura elástica con cordón, bolsillos laterales con cremallera, aberturas laterales en el bajo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiIgNYs0"
     },
     {
       "id": "short-tecnico-negro-01",
@@ -1128,8 +1101,7 @@
       ],
       "notas": "Nylon ligero, sin logos. Para gym y correr.",
       "foto": "fotos/short-tecnico-negro-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto deportivo negro de nylon ligero con ligero brillo, cintura elástica, sin logos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiMdKnMw"
     },
     {
       "id": "short-felpa-gris-01",
@@ -1149,8 +1121,7 @@
       ],
       "notas": "Liso, cordón negro con puntas metálicas.",
       "foto": "fotos/short-felpa-gris-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto gris jaspeado medio de felpa, liso, cintura elástica con cordón negro de puntas metálicas, bolsillos laterales, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiEX1FvE"
     },
     {
       "id": "jogger-gris-oscuro-01",
@@ -1172,8 +1143,7 @@
       ],
       "notas": "Felpa lisa sin logos, puño en el tobillo. Más neutro que el Fila: también vale para un día cómodo de clase.",
       "foto": "fotos/jogger-gris-oscuro-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón de chándal jogger gris oscuro de felpa lisa, cintura elástica con cordón, puños elásticos en los tobillos, sin logos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiD6wluA"
     },
     {
       "id": "camiseta-tecnica-gris-01",
@@ -1193,8 +1163,7 @@
       ],
       "notas": "Tejido técnico con textura de cuadrícula, transpirable.",
       "foto": "fotos/camiseta-tecnica-gris-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta deportiva gris de tejido técnico ligero con textura de cuadrícula fina, cuello redondo, manga corta, sin logos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "imagen_canva": "MAHaiH48wqE",
       "capa": "base"
     },
     {
@@ -1215,8 +1184,7 @@
       ],
       "notas": "Tejido técnico con textura de cuadrícula, transpirable.",
       "foto": "fotos/camiseta-tecnica-blanca-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta deportiva blanca de tejido técnico ligero con textura de cuadrícula fina, cuello redondo, manga corta, sin logos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "imagen_canva": "MAHaiCeo2a4",
       "capa": "base"
     },
     {
@@ -1237,8 +1205,7 @@
       ],
       "notas": "Tejido técnico con textura de cuadrícula, transpirable.",
       "foto": "fotos/camiseta-tecnica-negra-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta deportiva negra de tejido técnico ligero con textura de cuadrícula fina, cuello redondo, manga corta, sin logos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "imagen_canva": "MAHaiG6zHSU",
       "capa": "base"
     },
     {
@@ -1259,8 +1226,7 @@
       ],
       "notas": "Tejido técnico con textura de cuadrícula, transpirable.",
       "foto": "fotos/camiseta-tecnica-roja-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta deportiva roja de tejido técnico ligero con textura de cuadrícula fina, cuello redondo, manga corta, sin logos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "imagen_canva": "MAHaiA_X774",
       "capa": "base"
     },
     {
@@ -1281,8 +1247,7 @@
       ],
       "notas": "Camiseta técnica de carrera con degradado geométrico gris. Para los 10 km.",
       "foto": "fotos/camiseta-running-stillo-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta técnica de running negra con un degradado geométrico de rombos grises en el pecho, mangas negras, tejido microperforado, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "imagen_canva": "MAHaiCTx6qM",
       "capa": "base"
     },
     {
@@ -1304,8 +1269,7 @@
       ],
       "notas": "Logo bordado negro sobre negro: discreta y arreglada.",
       "foto": "fotos/camiseta-negra-guess-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta negra de algodón, cuello redondo, con un logo de letras serif bordado en negro tono sobre tono en el centro del pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "imagen_canva": "MAHaiDwY_ks",
       "marca": "Guess",
       "capa": "base"
     },
@@ -2348,7 +2312,6 @@
       "tomar_algo",
       "fiesta"
     ],
-    "imagenes_pendientes": "Las prendas con prompt_imagen_pendiente aún no tienen foto (se acabaron los créditos de IA de Canva). Se generan con ese prompt cuando haya créditos.",
     "capas_orden_cuadricula": "abajo (columna izquierda) · base/medio · abrigo · calzado · fila de accesorios"
   },
   "huecos_del_armario": {
