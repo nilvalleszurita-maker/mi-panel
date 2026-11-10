@@ -394,5 +394,28 @@ const Gym = (() => {
     };
   }
 
-  return { id: 'gym', nombre: 'Gym', icono: '🏋️', render, alClic, alEscribir, irAHoy, resumenSemana, estado };
+  // Para Hoy: la sesión que toca en una fecha, con cada ejercicio, si ya está
+  // marcado ese día y el último peso registrado antes de esa fecha.
+  function sesionDe(fecha = U.iso()) {
+    const p = planDe(fecha);
+    const r = regs()[fecha];
+    const ultimoKg = series => {
+      const kgs = series.map(s => U.numero(s.kg)).filter(n => n > 0);
+      return kgs.length ? Math.max(...kgs) : null;
+    };
+    return {
+      sesion: p.sesion, tipo: p.tipo, km: p.km, ritmo: p.ritmo,
+      carrera: r?.carrera || null,
+      ejercicios: ejerciciosDe(p).map(e => {
+        const prev = anterior(fecha, e.id);
+        return {
+          id: e.id, nombre: e.nombre, series: e.series, reps: e.reps,
+          hecho: !!r?.ej[e.id]?.hecho,
+          ultimoKg: prev ? ultimoKg(prev.series) : null,
+        };
+      }),
+    };
+  }
+
+  return { id: 'gym', nombre: 'Gym', icono: '🏋️', render, alClic, alEscribir, irAHoy, resumenSemana, estado, sesionDe };
 })();

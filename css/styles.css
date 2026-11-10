@@ -491,3 +491,37 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
   .kpi-valor { font-size: 26px; }
   .kpi-barra { height: 6px; border-radius: 6px; }
 }
+
+/* Rejilla de secciones de Hoy. Móvil: una columna en el orden del diseño.
+   Escritorio: columnas automáticas (Agenda | Entreno + Hábitos | Comidas | Tareas). */
+.hoy-grid { display: flex; flex-direction: column; gap: 18px; }
+.hoy-col { display: contents; }
+@media (min-width: 860px) {
+  .hoy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; align-items: start; }
+  .hoy-col { display: flex; flex-direction: column; gap: 18px; }
+}
+
+/* Entreno de hoy (tarjeta destacada) */
+.entreno-hoy {
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 18px; background: var(--superficie-2); border-radius: 18px;
+}
+.entreno-cab { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.entreno-cab > div { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.entreno-etq { font-size: 12px; color: var(--texto-2); text-transform: uppercase; letter-spacing: .08em; }
+.entreno-hoy h2 { font-size: 22px; text-transform: none; line-height: 1.2; }
+.pastilla {
+  flex: 0 0 auto; padding: 4px 10px; border-radius: 999px;
+  background: var(--ambar); color: var(--acento-texto); font-size: 12px; font-weight: 600;
+}
+.entreno-progreso { font-size: 13px; color: var(--ambar); font-weight: 600; margin-top: -6px; }
+.entreno-lista { display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: #d3d8e2; }
+.entreno-fila { display: flex; justify-content: space-between; gap: 12px; }
+.entreno-fila > span:last-child { color: var(--texto-2); text-align: right; flex: 0 0 auto; }
+.entreno-fila.hecho > span:first-child { color: var(--verde); }
+.entreno-mas { color: var(--texto-2); }
+.btn-entreno { min-height: 48px; border-radius: 14px; font-size: 15px; }
+@media (min-width: 860px) {
+  .entreno-hoy { padding: 20px; }
+  .btn-entreno { min-height: 46px; border-radius: 12px; font-size: 14px; }
+}

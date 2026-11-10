@@ -95,7 +95,64 @@ const Hoy = (() => {
             </div>` : ''}
         </div>
       </header>
-      ${tarjetas()}`;
+      ${tarjetas()}
+      <div class="hoy-grid">
+        <div class="hoy-col">
+          ${entreno()}
+        </div>
+      </div>`;
+  }
+
+  // ---------- Entreno de hoy ----------
+  // La rutina que toca hoy según js/gym-plan.js, con el último peso de cada ejercicio.
+  const VISIBLES = 3; // ejercicios que se listan; el resto se resume en «+ N más»
+
+  function entreno() {
+    const s = Gym.sesionDe(U.iso());
+    // Hora del entreno, si la agenda de hoy lo tiene.
+    const hora = HoyDatos.agendaDe(U.iso()).find(e => e.categoria === 'gym')?.hora;
+    const pastilla = hora && s.tipo === 'gym' ? `<span class="pastilla">${hora}</span>` : '';
+
+    let cuerpo, boton;
+    if (s.tipo === 'carrera') {
+      const c = s.carrera;
+      const hecha = c && (c.hecho || U.numero(c.km) > 0);
+      cuerpo = `
+        <div class="entreno-lista">
+          <div class="entreno-fila"><span>Objetivo</span><span>${s.km} km · ${U.esc(s.ritmo)}</span></div>
+          ${hecha ? `<div class="entreno-fila hecho"><span>✓ Hecha</span><span>${U.esc(String(c.km || '–'))} km${c.min ? ` · ${U.esc(String(c.min))} min` : ''}</span></div>` : ''}
+        </div>`;
+      boton = hecha ? 'Ver carrera' : 'Registrar carrera';
+    } else {
+      const lista = s.ejercicios;
+      const hechos = lista.filter(e => e.hecho).length;
+      const fila = e => `
+        <div class="entreno-fila ${e.hecho ? 'hecho' : ''}">
+          <span>${e.hecho ? '✓ ' : ''}${U.esc(e.nombre)}</span>
+          <span>${e.series} × ${U.esc(e.reps)}${e.ultimoKg != null ? ` · última ${String(e.ultimoKg).replace('.', ',')} kg` : ''}</span>
+        </div>`;
+      const resto = lista.length - VISIBLES;
+      cuerpo = `
+        ${hechos ? `<span class="entreno-progreso">${hechos} de ${lista.length} hechos</span>` : ''}
+        <div class="entreno-lista">
+          ${lista.slice(0, VISIBLES).map(fila).join('')}
+          ${resto > 0 ? `<span class="entreno-mas">+ ${resto} ${resto === 1 ? 'ejercicio' : 'ejercicios'} más</span>` : ''}
+        </div>`;
+      boton = hechos === lista.length ? 'Ver entreno' : hechos ? 'Seguir entreno' : 'Empezar entreno';
+    }
+
+    return `
+      <section class="entreno-hoy" aria-labelledby="titulo-entreno">
+        <div class="entreno-cab">
+          <div>
+            <span class="entreno-etq">Entreno de hoy</span>
+            <h2 id="titulo-entreno">${U.esc(s.sesion)}</h2>
+          </div>
+          ${pastilla}
+        </div>
+        ${cuerpo}
+        <button class="btn btn-entreno" data-acc="empezar">${boton}</button>
+      </section>`;
   }
 
   function alClic(e, rerender) {
@@ -106,6 +163,7 @@ const Hoy = (() => {
     const acc = b.dataset.acc;
 
     if (acc === 'menu') menuAbierto = !menuAbierto;
+    else if (acc === 'empezar') { Gym.irAHoy(); location.hash = '#gym'; return; }
     else if (acc === 'rapido') {
       menuAbierto = false;
       const que = b.dataset.que;
