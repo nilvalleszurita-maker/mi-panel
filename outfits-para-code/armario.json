@@ -23,7 +23,7 @@
         "casa"
       ],
       "notas": "Comodín: combina con casi todo. En frío funciona como capa base bajo sudadera o chaqueta.",
-      "foto": "fotos/camiseta-blanca-01.png",
+      "foto": "fotos/camiseta-blanca-01.jpg",
       "imagen_canva": "MAHagi-aTZw"
     },
     {
@@ -52,7 +52,7 @@
         "fiesta"
       ],
       "notas": "Por el lavado desgastado y los rotos, queda informal; para fiesta, mejor con una parte de arriba más arreglada.",
-      "foto": "fotos/vaquero-azul-claro-01.png",
+      "foto": "fotos/vaquero-azul-claro-01.jpg",
       "imagen_canva": "MAHagkQNhkU"
     },
     {
@@ -74,7 +74,7 @@
         "gym"
       ],
       "notas": "Igual que la blanca básica. Capa base perfecta bajo sudaderas.",
-      "foto": "fotos/camiseta-negra-01.png",
+      "foto": "fotos/camiseta-negra-01.jpg",
       "imagen_canva": "MAHag6ZdtMQ",
       "capa": "base"
     },
@@ -96,7 +96,7 @@
         "fiesta"
       ],
       "notas": "Corte recto amplio, bragueta de botones. El más \"de noche\" del armario.",
-      "foto": "fotos/vaquero-negro-01.png",
+      "foto": "fotos/vaquero-negro-01.jpg",
       "imagen_canva": "MAHagzCwORU",
       "corte": "recto amplio"
     },
@@ -118,7 +118,7 @@
         "clase"
       ],
       "notas": "Cintura elástica con cordón, tejido ligero. Muy de verano.",
-      "foto": "fotos/pantalon-blanco-elastico-01.png",
+      "foto": "fotos/pantalon-blanco-elastico-01.jpg",
       "imagen_canva": "MAHag6hXgkE",
       "marca": "Hollister",
       "corte": "loose"
@@ -140,7 +140,7 @@
         "tomar_algo"
       ],
       "notas": "Corte recto relajado. Combina muy bien con negro y con rosa.",
-      "foto": "fotos/vaquero-gris-claro-01.png",
+      "foto": "fotos/vaquero-gris-claro-01.jpg",
       "imagen_canva": "MAHag1KqpEU",
       "corte": "recto relajado"
     },
@@ -162,7 +162,7 @@
         "fiesta"
       ],
       "notas": "Sin logos, cuello redondo alto. La más versátil para frío.",
-      "foto": "fotos/sudadera-negra-lisa-01.png",
+      "foto": "fotos/sudadera-negra-lisa-01.jpg",
       "imagen_canva": "MAHah9TLDTg",
       "capa": "medio"
     },
@@ -182,7 +182,7 @@
         "tomar_algo"
       ],
       "notas": "Oversize, bolsillo canguro, texto pequeño delante y estampado grande blanco en la espalda.",
-      "foto": "fotos/sudadera-capucha-negra-01.png",
+      "foto": "fotos/sudadera-capucha-negra-01.jpg",
       "imagen_canva": "MAHaiDPJQUg",
       "capa": "medio",
       "marca": "Nude Project"
@@ -204,7 +204,7 @@
         "tomar_algo"
       ],
       "notas": "Oversize, hombros caídos, logo pequeño bordado. Queda muy bien con gris y negro.",
-      "foto": "fotos/sudadera-rosa-01.png",
+      "foto": "fotos/sudadera-rosa-01.jpg",
       "imagen_canva": "MAHaiNOY_Ok",
       "capa": "medio",
       "marca": "STWD"
@@ -225,7 +225,7 @@
         "clase"
       ],
       "notas": "Logo grande negro en el pecho: informal/deportiva.",
-      "foto": "fotos/sudadera-blanca-champion-01.png",
+      "foto": "fotos/sudadera-blanca-champion-01.jpg",
       "imagen_canva": "MAHaiKSJcoI",
       "capa": "medio",
       "marca": "Champion"
@@ -246,7 +246,7 @@
         "casa"
       ],
       "notas": "Felpa, cintura elástica con cordón.",
-      "foto": "fotos/short-chandal-blanco-01.png",
+      "foto": "fotos/short-chandal-blanco-01.jpg",
       "imagen_canva": "MAHaiC9lcqw"
     },
     {
@@ -265,7 +265,7 @@
         "tomar_algo"
       ],
       "notas": "Holgada, hasta la rodilla, botones.",
-      "foto": "fotos/bermuda-vaquera-azul-claro-01.png",
+      "foto": "fotos/bermuda-vaquera-azul-claro-01.jpg",
       "imagen_canva": "MAHaiMY1OLU"
     },
     {
@@ -285,7 +285,7 @@
         "clase"
       ],
       "notas": "Corte recto. La más arreglada de las bermudas.",
-      "foto": "fotos/bermuda-vaquera-blanca-01.png",
+      "foto": "fotos/bermuda-vaquera-blanca-01.jpg",
       "imagen_canva": "MAHaiM2OpHc",
       "marca": "Zara"
     },
@@ -305,7 +305,7 @@
         "tomar_algo"
       ],
       "notas": "Rotos en los muslos y dobladillo vuelto: informal.",
-      "foto": "fotos/bermuda-vaquera-negra-01.png",
+      "foto": "fotos/bermuda-vaquera-negra-01.jpg",
       "imagen_canva": "MAHaiPirrH0"
     },
     {
@@ -327,7 +327,7 @@
         "tomar_algo"
       ],
       "notas": "Logo bordado negro con contorno blanco. Va con todo lo negro, gris y blanco.",
-      "foto": "fotos/gorra-negra-01.png",
+      "foto": "fotos/gorra-negra-01.jpg",
       "imagen_canva": "MAHah_bux_w",
       "marca": "New Era"
     },
@@ -349,7 +349,7 @@
         "tomar_algo"
       ],
       "notas": "Texto pequeño bordado en negro. Ideal en verano.",
-      "foto": "fotos/gorra-blanca-01.png",
+      "foto": "fotos/gorra-blanca-01.jpg",
       "imagen_canva": "MAHaiCn__TM"
     },
     {
@@ -369,7 +369,7 @@
         "tomar_algo"
       ],
       "notas": "Oversize, estampado pequeño de cangrejo en el pecho. Aire de verano mediterráneo.",
-      "foto": "fotos/camiseta-blanca-cangrejo-01.png",
+      "foto": "fotos/camiseta-blanca-cangrejo-01.jpg",
       "imagen_canva": "MAHaiNK8yXc",
       "capa": "base"
     },
@@ -392,7 +392,7 @@
         "gym"
       ],
       "notas": "Malla blanca con plata, suela gruesa. Van con casi todo lo claro y con vaquero.",
-      "foto": "fotos/asics-plateadas-01.png",
+      "foto": "fotos/asics-plateadas-01.jpg",
       "imagen_canva": "MAHag14_8BE",
       "marca": "Asics"
     },
@@ -415,7 +415,7 @@
         "gym"
       ],
       "notas": "Negro con reflectantes plata. Las mejores para gym y para outfits oscuros.",
-      "foto": "fotos/asics-negras-01.png",
+      "foto": "fotos/asics-negras-01.jpg",
       "imagen_canva": "MAHag2Ym9kE",
       "marca": "Asics"
     },
@@ -437,7 +437,7 @@
         "tomar_algo"
       ],
       "notas": "Blancas con logo pequeño. Algo gastadas: mejor para el día a día.",
-      "foto": "fotos/champion-blancas-01.png",
+      "foto": "fotos/champion-blancas-01.jpg",
       "imagen_canva": "MAHah3m1jeE",
       "marca": "Champion"
     },
@@ -460,7 +460,7 @@
         "clase"
       ],
       "notas": "Totalmente negras, piel sintética y ante. Las más arregladas: perfectas para fiesta.",
-      "foto": "fotos/zapatillas-negras-lisas-01.png",
+      "foto": "fotos/zapatillas-negras-lisas-01.jpg",
       "imagen_canva": "MAHagziyITY"
     },
     {
@@ -481,7 +481,7 @@
         "clase"
       ],
       "notas": "Blancas limpias de piel, talón azul marino. Las más elegantes en blanco.",
-      "foto": "fotos/tommy-blancas-01.png",
+      "foto": "fotos/tommy-blancas-01.jpg",
       "imagen_canva": "MAHah63nf9I",
       "marca": "Tommy Hilfiger"
     },
@@ -503,7 +503,7 @@
         "fiesta"
       ],
       "notas": "La prenda que más abriga del armario.",
-      "foto": "fotos/plumifero-negro-01.png",
+      "foto": "fotos/plumifero-negro-01.jpg",
       "imagen_canva": "MAHag6eIm9U",
       "capa": "abrigo"
     },
@@ -524,7 +524,7 @@
         "fiesta"
       ],
       "notas": "Paño y mangas de piel sintética, parches blancos. Es la pieza protagonista: el resto, sencillo.",
-      "foto": "fotos/varsity-boston-01.png",
+      "foto": "fotos/varsity-boston-01.jpg",
       "imagen_canva": "MAHaiMlxYgA",
       "capa": "abrigo"
     },
@@ -545,7 +545,7 @@
         "tomar_algo"
       ],
       "notas": "Encima de sudadera o hoodie da calor sin agobiar.",
-      "foto": "fotos/chaleco-gris-01.png",
+      "foto": "fotos/chaleco-gris-01.jpg",
       "imagen_canva": "MAHaiEyFzgs",
       "marca": "Polo Club",
       "capa": "abrigo"
@@ -567,7 +567,7 @@
         "tomar_algo"
       ],
       "notas": "Se puede llevar abierta sobre camiseta, como chaqueta ligera.",
-      "foto": "fotos/hoodie-cremallera-gris-01.png",
+      "foto": "fotos/hoodie-cremallera-gris-01.jpg",
       "imagen_canva": "MAHah43EvEo",
       "marca": "Polo Ralph Lauren",
       "capa": "medio"
@@ -589,7 +589,7 @@
         "tomar_algo"
       ],
       "notas": "Logo firma pequeño en rosa. Combina con la sudadera y la camisa rosa.",
-      "foto": "fotos/camiseta-blanca-stussy-01.png",
+      "foto": "fotos/camiseta-blanca-stussy-01.jpg",
       "imagen_canva": "MAHaiCDJ0nE",
       "marca": "Stüssy",
       "capa": "base"
@@ -611,7 +611,7 @@
         "tomar_algo"
       ],
       "notas": "Texto náutico pequeño en azul marino: aire \"old money\".",
-      "foto": "fotos/camiseta-blanca-yacht-01.png",
+      "foto": "fotos/camiseta-blanca-yacht-01.jpg",
       "imagen_canva": "MAHaiLOOPUU",
       "capa": "base"
     },
@@ -632,7 +632,7 @@
         "tomar_algo"
       ],
       "notas": "Oversize con bordado pequeño negro en el centro.",
-      "foto": "fotos/camiseta-blanca-artistic-01.png",
+      "foto": "fotos/camiseta-blanca-artistic-01.jpg",
       "imagen_canva": "MAHaiOXdUh8",
       "marca": "Pull&Bear",
       "capa": "base"
@@ -653,7 +653,7 @@
         "fiesta"
       ],
       "notas": "Tejido con textura (tipo seersucker). La pieza más arreglada para verano.",
-      "foto": "fotos/camisa-blanca-cubana-01.png",
+      "foto": "fotos/camisa-blanca-cubana-01.jpg",
       "imagen_canva": "MAHaiOThFMc",
       "marca": "Zara",
       "capa": "base"
@@ -676,7 +676,7 @@
         "clase"
       ],
       "notas": "Lino, bolsillo en el pecho. Abierta sobre camiseta blanca o abrochada para salir.",
-      "foto": "fotos/camisa-rosa-lino-01.png",
+      "foto": "fotos/camisa-rosa-lino-01.jpg",
       "imagen_canva": "MAHaiOaFlf0",
       "capa": "base"
     },
@@ -696,7 +696,7 @@
         "gym"
       ],
       "notas": "Tejido técnico: para gym, fútbol o ver el partido.",
-      "foto": "fotos/camiseta-barca-01.png",
+      "foto": "fotos/camiseta-barca-01.jpg",
       "imagen_canva": "MAHaiB4H1vM",
       "marca": "Nike / FC Barcelona",
       "capa": "base"
@@ -720,7 +720,7 @@
         "fiesta"
       ],
       "notas": "Estilo diver, brazalete de acero. Deportivo-elegante: va con casi todo.",
-      "foto": "fotos/reloj-viceroy-verde-01.png",
+      "foto": "fotos/reloj-viceroy-verde-01.jpg",
       "imagen_canva": "MAHah0M5L70",
       "marca": "Viceroy"
     },
@@ -742,7 +742,7 @@
         "tomar_algo"
       ],
       "notas": "Números romanos, correa de piel negra. El más clásico: para ocasiones arregladas.",
-      "foto": "fotos/reloj-raez-blanco-01.png",
+      "foto": "fotos/reloj-raez-blanco-01.jpg",
       "imagen_canva": "MAHaiIBnVgc",
       "marca": "Pablo Raez"
     },
@@ -765,7 +765,7 @@
         "fiesta"
       ],
       "notas": "Esfera negra, correa de piel negra. Ideal con outfits negros y de noche.",
-      "foto": "fotos/reloj-dg-negro-01.png",
+      "foto": "fotos/reloj-dg-negro-01.jpg",
       "imagen_canva": "MAHahyvDfsM",
       "marca": "D&G"
     },
@@ -787,7 +787,7 @@
         "fiesta"
       ],
       "notas": "Ajustada, monograma pequeño. La camiseta negra más arreglada.",
-      "foto": "fotos/camiseta-negra-ck-01.png",
+      "foto": "fotos/camiseta-negra-ck-01.jpg",
       "imagen_canva": "MAHaiPgLWFM",
       "marca": "Calvin Klein Jeans",
       "capa": "base"
@@ -809,7 +809,7 @@
         "casa"
       ],
       "notas": "Texto grande blanco en el pecho: informal.",
-      "foto": "fotos/camiseta-marino-tomtailor-01.png",
+      "foto": "fotos/camiseta-marino-tomtailor-01.jpg",
       "imagen_canva": "MAHaiLP6D_8",
       "marca": "Tom Tailor",
       "capa": "base"
@@ -831,7 +831,7 @@
         "tomar_algo"
       ],
       "notas": "Algodón grueso, logo blanco en arco en el pecho. Estilo streetwear.",
-      "foto": "fotos/camiseta-negra-carhartt-01.png",
+      "foto": "fotos/camiseta-negra-carhartt-01.jpg",
       "imagen_canva": "MAHaiMkJpA4",
       "marca": "Carhartt WIP",
       "capa": "base"
@@ -854,7 +854,7 @@
         "fiesta"
       ],
       "notas": "Oversize con textos pequeños discretos. Muy versátil.",
-      "foto": "fotos/camiseta-negra-nude-01.png",
+      "foto": "fotos/camiseta-negra-nude-01.jpg",
       "imagen_canva": "MAHaiMAD4_I",
       "marca": "Nude Project",
       "capa": "base"
@@ -875,7 +875,7 @@
         "casa"
       ],
       "notas": "Canalé ajustado. Para gym en verano o como capa base.",
-      "foto": "fotos/tirantes-blanca-01.png",
+      "foto": "fotos/tirantes-blanca-01.jpg",
       "imagen_canva": "MAHahxdRAVc",
       "capa": "base"
     },
@@ -895,7 +895,7 @@
         "casa"
       ],
       "notas": "Canalé ajustado. Para gym en verano.",
-      "foto": "fotos/tirantes-negra-01.png",
+      "foto": "fotos/tirantes-negra-01.jpg",
       "imagen_canva": "MAHah-Wv718",
       "capa": "base"
     },
@@ -916,7 +916,7 @@
         "gym"
       ],
       "notas": "Tejido técnico transpirable, logo de toro.",
-      "foto": "fotos/camiseta-gym-toro-01.png",
+      "foto": "fotos/camiseta-gym-toro-01.jpg",
       "imagen_canva": "MAHaiPkW2Mo",
       "capa": "base"
     },
@@ -938,7 +938,7 @@
         "gym"
       ],
       "notas": "Igual que la gris; abierta sobre camiseta como chaqueta ligera.",
-      "foto": "fotos/hoodie-cremallera-negra-01.png",
+      "foto": "fotos/hoodie-cremallera-negra-01.jpg",
       "imagen_canva": "MAHahwg3aK0",
       "marca": "Polo Ralph Lauren",
       "capa": "medio"
@@ -961,7 +961,7 @@
         "casa"
       ],
       "notas": "Felpa con puño en el tobillo. Para ir y volver del gym en invierno.",
-      "foto": "fotos/jogger-gris-fila-01.png",
+      "foto": "fotos/jogger-gris-fila-01.jpg",
       "imagen_canva": "MAHaiHcIjAU",
       "marca": "Fila"
     },
@@ -983,7 +983,7 @@
         "clase"
       ],
       "notas": "Bolsillo con cremallera, logo grande negro.",
-      "foto": "fotos/short-nike-tech-gris-01.png",
+      "foto": "fotos/short-nike-tech-gris-01.jpg",
       "imagen_canva": "MAHaiGmfsPE",
       "marca": "Nike"
     },
@@ -1004,7 +1004,7 @@
         "casa"
       ],
       "notas": "Algodón, logo pequeño bordado blanco.",
-      "foto": "fotos/short-nike-negro-01.png",
+      "foto": "fotos/short-nike-negro-01.jpg",
       "imagen_canva": "MAHaiI5uHCM",
       "marca": "Nike"
     },
@@ -1024,7 +1024,7 @@
         "casa"
       ],
       "notas": "Cordón blanco y texto \"Paris\" en la pierna.",
-      "foto": "fotos/short-negro-paris-01.png",
+      "foto": "fotos/short-negro-paris-01.jpg",
       "imagen_canva": "MAHaiKNKCrc"
     },
     {
@@ -1043,7 +1043,7 @@
         "gym"
       ],
       "notas": "Tejido ligero con bolsillos de cremallera. Ideal para correr los 10 km.",
-      "foto": "fotos/short-tecnico-gris-oscuro-01.png",
+      "foto": "fotos/short-tecnico-gris-oscuro-01.jpg",
       "imagen_canva": "MAHaiCGD4yQ"
     },
     {
@@ -1062,7 +1062,7 @@
         "gym"
       ],
       "notas": "Mismo modelo que el gris oscuro.",
-      "foto": "fotos/short-tecnico-negro-02.png",
+      "foto": "fotos/short-tecnico-negro-02.jpg",
       "imagen_canva": "MAHaiEyzHU8"
     },
     {
@@ -1081,7 +1081,7 @@
         "gym"
       ],
       "notas": "Mismo modelo que el gris oscuro.",
-      "foto": "fotos/short-tecnico-gris-claro-01.png",
+      "foto": "fotos/short-tecnico-gris-claro-01.jpg",
       "imagen_canva": "MAHaiIgNYs0"
     },
     {
@@ -1100,7 +1100,7 @@
         "gym"
       ],
       "notas": "Nylon ligero, sin logos. Para gym y correr.",
-      "foto": "fotos/short-tecnico-negro-01.png",
+      "foto": "fotos/short-tecnico-negro-01.jpg",
       "imagen_canva": "MAHaiMdKnMw"
     },
     {
@@ -1120,7 +1120,7 @@
         "casa"
       ],
       "notas": "Liso, cordón negro con puntas metálicas.",
-      "foto": "fotos/short-felpa-gris-01.png",
+      "foto": "fotos/short-felpa-gris-01.jpg",
       "imagen_canva": "MAHaiEX1FvE"
     },
     {
@@ -1142,7 +1142,7 @@
         "clase"
       ],
       "notas": "Felpa lisa sin logos, puño en el tobillo. Más neutro que el Fila: también vale para un día cómodo de clase.",
-      "foto": "fotos/jogger-gris-oscuro-01.png",
+      "foto": "fotos/jogger-gris-oscuro-01.jpg",
       "imagen_canva": "MAHaiD6wluA"
     },
     {
@@ -1162,7 +1162,7 @@
         "gym"
       ],
       "notas": "Tejido técnico con textura de cuadrícula, transpirable.",
-      "foto": "fotos/camiseta-tecnica-gris-01.png",
+      "foto": "fotos/camiseta-tecnica-gris-01.jpg",
       "imagen_canva": "MAHaiH48wqE",
       "capa": "base"
     },
@@ -1183,7 +1183,7 @@
         "gym"
       ],
       "notas": "Tejido técnico con textura de cuadrícula, transpirable.",
-      "foto": "fotos/camiseta-tecnica-blanca-01.png",
+      "foto": "fotos/camiseta-tecnica-blanca-01.jpg",
       "imagen_canva": "MAHaiCeo2a4",
       "capa": "base"
     },
@@ -1204,7 +1204,7 @@
         "gym"
       ],
       "notas": "Tejido técnico con textura de cuadrícula, transpirable.",
-      "foto": "fotos/camiseta-tecnica-negra-01.png",
+      "foto": "fotos/camiseta-tecnica-negra-01.jpg",
       "imagen_canva": "MAHaiG6zHSU",
       "capa": "base"
     },
@@ -1225,7 +1225,7 @@
         "gym"
       ],
       "notas": "Tejido técnico con textura de cuadrícula, transpirable.",
-      "foto": "fotos/camiseta-tecnica-roja-01.png",
+      "foto": "fotos/camiseta-tecnica-roja-01.jpg",
       "imagen_canva": "MAHaiA_X774",
       "capa": "base"
     },
@@ -1246,7 +1246,7 @@
         "gym"
       ],
       "notas": "Camiseta técnica de carrera con degradado geométrico gris. Para los 10 km.",
-      "foto": "fotos/camiseta-running-stillo-01.png",
+      "foto": "fotos/camiseta-running-stillo-01.jpg",
       "imagen_canva": "MAHaiCTx6qM",
       "capa": "base"
     },
@@ -1268,7 +1268,7 @@
         "clase"
       ],
       "notas": "Logo bordado negro sobre negro: discreta y arreglada.",
-      "foto": "fotos/camiseta-negra-guess-01.png",
+      "foto": "fotos/camiseta-negra-guess-01.jpg",
       "imagen_canva": "MAHaiDwY_ks",
       "marca": "Guess",
       "capa": "base"
@@ -1292,7 +1292,7 @@
         "fiesta"
       ],
       "notas": "Piel blanca con paneles grises. Combinan con casi todo, sobre todo con gris, negro y vaquero.",
-      "foto": "fotos/dunk-gris-01.png",
+      "foto": "fotos/dunk-gris-01.jpg",
       "imagen_canva": "MAHah4jrNJ8",
       "marca": "Nike"
     }
