@@ -1,0 +1,1406 @@
+{
+  "prendas": [
+    {
+      "id": "camiseta-blanca-01",
+      "nombre": "Camiseta blanca básica",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta manga corta",
+      "color_principal": "blanco",
+      "colores_secundarios": [],
+      "estampado": "liso",
+      "cuello": "redondo",
+      "tejido": "algodón (punto fino)",
+      "abriga": 1,
+      "formalidad": 2,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "capa": "base",
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "casa"
+      ],
+      "notas": "Comodín: combina con casi todo. En frío funciona como capa base bajo sudadera o chaqueta.",
+      "foto": "fotos/camiseta-blanca-01.png",
+      "imagen_canva": "MAHagi-aTZw"
+    },
+    {
+      "id": "vaquero-azul-claro-01",
+      "nombre": "Vaquero recto azul claro",
+      "marca": "Supply & Demand",
+      "tipo": "parte_abajo",
+      "subtipo": "vaquero",
+      "corte": "recto / straight",
+      "color_principal": "azul claro",
+      "lavado": "desgastado (stone wash)",
+      "detalles": [
+        "rotos pequeños en bolsillos traseros",
+        "bajos deshilachados"
+      ],
+      "abriga": 2,
+      "formalidad": 2,
+      "clima": [
+        "frio",
+        "templado",
+        "calor"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "fiesta"
+      ],
+      "notas": "Por el lavado desgastado y los rotos, queda informal; para fiesta, mejor con una parte de arriba más arreglada.",
+      "foto": "fotos/vaquero-azul-claro-01.png",
+      "imagen_canva": "MAHagkQNhkU"
+    },
+    {
+      "id": "camiseta-negra-01",
+      "nombre": "Camiseta negra básica",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta manga corta",
+      "color_principal": "negro",
+      "abriga": 1,
+      "formalidad": 2,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "fiesta",
+        "gym"
+      ],
+      "notas": "Igual que la blanca básica. Capa base perfecta bajo sudaderas.",
+      "foto": "fotos/camiseta-negra-01.png",
+      "imagen_canva": "MAHag6ZdtMQ",
+      "capa": "base"
+    },
+    {
+      "id": "vaquero-negro-01",
+      "nombre": "Vaquero negro lavado",
+      "tipo": "parte_abajo",
+      "subtipo": "vaquero",
+      "color_principal": "negro deslavado (gris carbón)",
+      "abriga": 2,
+      "formalidad": 3,
+      "clima": [
+        "frio",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "fiesta"
+      ],
+      "notas": "Corte recto amplio, bragueta de botones. El más \"de noche\" del armario.",
+      "foto": "fotos/vaquero-negro-01.png",
+      "imagen_canva": "MAHagzCwORU",
+      "corte": "recto amplio"
+    },
+    {
+      "id": "pantalon-blanco-elastico-01",
+      "nombre": "Pantalón blanco de cintura elástica",
+      "tipo": "parte_abajo",
+      "subtipo": "pantalón relajado (pull-on)",
+      "color_principal": "blanco",
+      "abriga": 1,
+      "formalidad": 2,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta",
+        "clase"
+      ],
+      "notas": "Cintura elástica con cordón, tejido ligero. Muy de verano.",
+      "foto": "fotos/pantalon-blanco-elastico-01.png",
+      "imagen_canva": "MAHag6hXgkE",
+      "marca": "Hollister",
+      "corte": "loose"
+    },
+    {
+      "id": "vaquero-gris-claro-01",
+      "nombre": "Vaquero gris claro lavado",
+      "tipo": "parte_abajo",
+      "subtipo": "vaquero",
+      "color_principal": "gris claro (acid wash)",
+      "abriga": 2,
+      "formalidad": 2,
+      "clima": [
+        "frio",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Corte recto relajado. Combina muy bien con negro y con rosa.",
+      "foto": "fotos/vaquero-gris-claro-01.png",
+      "imagen_canva": "MAHag1KqpEU",
+      "corte": "recto relajado"
+    },
+    {
+      "id": "sudadera-negra-lisa-01",
+      "nombre": "Sudadera negra lisa",
+      "tipo": "parte_arriba",
+      "subtipo": "sudadera cuello redondo",
+      "color_principal": "negro",
+      "abriga": 3,
+      "formalidad": 2,
+      "clima": [
+        "frio",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "fiesta"
+      ],
+      "notas": "Sin logos, cuello redondo alto. La más versátil para frío.",
+      "foto": "fotos/sudadera-negra-lisa-01.png",
+      "imagen_canva": null,
+      "capa": "medio",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una sudadera negra lisa sin capucha, cuello redondo alto de canalé, puños y bajo de canalé, felpa de algodón, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "sudadera-capucha-negra-01",
+      "nombre": "Sudadera con capucha negra (Nude Project)",
+      "tipo": "parte_arriba",
+      "subtipo": "sudadera con capucha",
+      "color_principal": "negro",
+      "abriga": 3,
+      "formalidad": 1,
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Oversize, bolsillo canguro, texto pequeño delante y estampado grande blanco en la espalda.",
+      "foto": "fotos/sudadera-capucha-negra-01.png",
+      "imagen_canva": null,
+      "capa": "medio",
+      "marca": "Nude Project",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una sudadera negra con capucha oversize, bolsillo canguro, puños y bajo de canalé, pequeño texto estampado en blanco en el centro del pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "sudadera-rosa-01",
+      "nombre": "Sudadera rosa palo",
+      "tipo": "parte_arriba",
+      "subtipo": "sudadera cuello redondo",
+      "color_principal": "rosa palo",
+      "abriga": 3,
+      "formalidad": 2,
+      "clima": [
+        "frio",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Oversize, hombros caídos, logo pequeño bordado. Queda muy bien con gris y negro.",
+      "foto": "fotos/sudadera-rosa-01.png",
+      "imagen_canva": null,
+      "capa": "medio",
+      "marca": "STWD",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una sudadera rosa palo oversize sin capucha, cuello redondo de canalé, hombros caídos, pequeño logo bordado en tono claro en el pecho izquierdo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "sudadera-blanca-champion-01",
+      "nombre": "Sudadera blanca con logo",
+      "tipo": "parte_arriba",
+      "subtipo": "sudadera cuello redondo",
+      "color_principal": "blanco",
+      "abriga": 3,
+      "formalidad": 1,
+      "clima": [
+        "frio",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase"
+      ],
+      "notas": "Logo grande negro en el pecho: informal/deportiva.",
+      "foto": "fotos/sudadera-blanca-champion-01.png",
+      "imagen_canva": null,
+      "capa": "medio",
+      "marca": "Champion",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una sudadera blanca sin capucha, cuello redondo, con un logo de texto grande en letra cursiva negra en el pecho, puños de canalé, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "short-chandal-blanco-01",
+      "nombre": "Pantalón corto de chándal blanco",
+      "tipo": "parte_abajo",
+      "subtipo": "short de felpa",
+      "color_principal": "blanco",
+      "abriga": 1,
+      "formalidad": 1,
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "gym",
+        "casa"
+      ],
+      "notas": "Felpa, cintura elástica con cordón.",
+      "foto": "fotos/short-chandal-blanco-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto blanco de chándal de felpa, cintura elástica ancha con cordón, bolsillos laterales, largo por encima de la rodilla, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "bermuda-vaquera-azul-claro-01",
+      "nombre": "Bermuda vaquera azul muy claro",
+      "tipo": "parte_abajo",
+      "subtipo": "bermuda vaquera",
+      "color_principal": "azul muy claro (bleach)",
+      "abriga": 1,
+      "formalidad": 1,
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Holgada, hasta la rodilla, botones.",
+      "foto": "fotos/bermuda-vaquera-azul-claro-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo unas bermudas vaqueras azul muy claro (lavado blanqueado), corte holgado hasta la rodilla, cinco bolsillos, bragueta de botones, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "bermuda-vaquera-blanca-01",
+      "nombre": "Bermuda vaquera blanca",
+      "tipo": "parte_abajo",
+      "subtipo": "bermuda vaquera",
+      "color_principal": "blanco",
+      "abriga": 1,
+      "formalidad": 2,
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta",
+        "clase"
+      ],
+      "notas": "Corte recto. La más arreglada de las bermudas.",
+      "foto": "fotos/bermuda-vaquera-blanca-01.png",
+      "imagen_canva": null,
+      "marca": "Zara",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo unas bermudas vaqueras blancas, corte recto, cinco bolsillos con remaches plateados, largo por encima de la rodilla, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "bermuda-vaquera-negra-01",
+      "nombre": "Bermuda vaquera negra con rotos",
+      "tipo": "parte_abajo",
+      "subtipo": "bermuda vaquera",
+      "color_principal": "negro deslavado",
+      "abriga": 1,
+      "formalidad": 1,
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Rotos en los muslos y dobladillo vuelto: informal.",
+      "foto": "fotos/bermuda-vaquera-negra-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo unas bermudas vaqueras negras desgastadas (gris carbón), con rotos deshilachados en los muslos y dobladillo vuelto, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "gorra-negra-01",
+      "nombre": "Gorra negra LA",
+      "tipo": "accesorio",
+      "subtipo": "gorra",
+      "color_principal": "negro",
+      "abriga": 0,
+      "formalidad": 1,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "gym",
+        "tomar_algo"
+      ],
+      "notas": "Logo bordado negro con contorno blanco. Va con todo lo negro, gris y blanco.",
+      "foto": "fotos/gorra-negra-01.png",
+      "imagen_canva": null,
+      "marca": "New Era",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una gorra de béisbol negra de visera curva, con un monograma de dos letras bordado en negro con contorno blanco en el frontal, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "gorra-blanca-01",
+      "nombre": "Gorra blanca \"Carpe diem\"",
+      "tipo": "accesorio",
+      "subtipo": "gorra",
+      "color_principal": "blanco",
+      "abriga": 0,
+      "formalidad": 1,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "gym",
+        "tomar_algo"
+      ],
+      "notas": "Texto pequeño bordado en negro. Ideal en verano.",
+      "foto": "fotos/gorra-blanca-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una gorra de béisbol blanca de algodón, con una palabra pequeña bordada en letra cursiva negra en el frontal, visera curva con pespuntes, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "camiseta-blanca-cangrejo-01",
+      "nombre": "Camiseta blanca \"Le Crabe Bleu Café\"",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta manga corta",
+      "color_principal": "blanco",
+      "abriga": 1,
+      "formalidad": 2,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Oversize, estampado pequeño de cangrejo en el pecho. Aire de verano mediterráneo.",
+      "foto": "fotos/camiseta-blanca-cangrejo-01.png",
+      "imagen_canva": null,
+      "capa": "base",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta blanca oversize de algodón grueso, cuello redondo, con un pequeño estampado en el pecho izquierdo de un cangrejo dibujado en tono marrón claro y texto en azul marino estilo café francés, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "asics-plateadas-01",
+      "nombre": "Zapatillas retro plateadas",
+      "tipo": "calzado",
+      "subtipo": "zapatilla running retro",
+      "color_principal": "blanco y plata",
+      "abriga": 0,
+      "formalidad": 1,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "gym"
+      ],
+      "notas": "Malla blanca con plata, suela gruesa. Van con casi todo lo claro y con vaquero.",
+      "foto": "fotos/asics-plateadas-01.png",
+      "imagen_canva": "MAHag14_8BE",
+      "marca": "Asics"
+    },
+    {
+      "id": "asics-negras-01",
+      "nombre": "Zapatillas retro negras",
+      "tipo": "calzado",
+      "subtipo": "zapatilla running retro",
+      "color_principal": "negro y plata",
+      "abriga": 0,
+      "formalidad": 1,
+      "clima": [
+        "templado",
+        "frio",
+        "calor"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "gym"
+      ],
+      "notas": "Negro con reflectantes plata. Las mejores para gym y para outfits oscuros.",
+      "foto": "fotos/asics-negras-01.png",
+      "imagen_canva": "MAHag2Ym9kE",
+      "marca": "Asics"
+    },
+    {
+      "id": "champion-blancas-01",
+      "nombre": "Zapatillas blancas de bota baja",
+      "tipo": "calzado",
+      "subtipo": "sneaker baloncesto baja",
+      "color_principal": "blanco",
+      "abriga": 0,
+      "formalidad": 1,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Blancas con logo pequeño. Algo gastadas: mejor para el día a día.",
+      "foto": "fotos/champion-blancas-01.png",
+      "imagen_canva": null,
+      "marca": "Champion",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista lateral de una sola zapatilla, solo una zapatilla blanca de baloncesto baja estilo retro, piel sintética blanca perforada, suela blanca plana con relieve, pequeño parche bordado rojo, blanco y azul marino en el lateral, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "zapatillas-negras-lisas-01",
+      "nombre": "Zapatillas negras lisas",
+      "tipo": "calzado",
+      "subtipo": "sneaker minimal",
+      "color_principal": "negro",
+      "abriga": 0,
+      "formalidad": 3,
+      "clima": [
+        "templado",
+        "frio",
+        "calor"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta",
+        "clase"
+      ],
+      "notas": "Totalmente negras, piel sintética y ante. Las más arregladas: perfectas para fiesta.",
+      "foto": "fotos/zapatillas-negras-lisas-01.png",
+      "imagen_canva": "MAHagziyITY"
+    },
+    {
+      "id": "tommy-blancas-01",
+      "nombre": "Zapatillas blancas de piel",
+      "tipo": "calzado",
+      "subtipo": "sneaker minimal",
+      "color_principal": "blanco (talón azul marino)",
+      "abriga": 0,
+      "formalidad": 3,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta",
+        "clase"
+      ],
+      "notas": "Blancas limpias de piel, talón azul marino. Las más elegantes en blanco.",
+      "foto": "fotos/tommy-blancas-01.png",
+      "imagen_canva": null,
+      "marca": "Tommy Hilfiger",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista lateral de una sola zapatilla, solo una zapatilla blanca minimalista de piel granulada, suela blanca plana, talón azul marino, pequeña bandera bordada roja, blanca y azul en el lateral, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "plumifero-negro-01",
+      "nombre": "Plumífero negro con capucha",
+      "tipo": "abrigo",
+      "subtipo": "chaqueta acolchada",
+      "color_principal": "negro",
+      "abriga": 5,
+      "formalidad": 2,
+      "clima": [
+        "mucho_frio",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "fiesta"
+      ],
+      "notas": "La prenda que más abriga del armario.",
+      "foto": "fotos/plumifero-negro-01.png",
+      "imagen_canva": "MAHag6eIm9U",
+      "capa": "abrigo"
+    },
+    {
+      "id": "varsity-boston-01",
+      "nombre": "Chaqueta varsity negra Boston",
+      "tipo": "abrigo",
+      "subtipo": "chaqueta varsity",
+      "color_principal": "negro y blanco",
+      "abriga": 4,
+      "formalidad": 2,
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "fiesta"
+      ],
+      "notas": "Paño y mangas de piel sintética, parches blancos. Es la pieza protagonista: el resto, sencillo.",
+      "foto": "fotos/varsity-boston-01.png",
+      "imagen_canva": null,
+      "capa": "abrigo",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una chaqueta varsity negra con cuerpo de paño de lana y mangas de piel sintética negra, cuello de camisa, botones de presión, puños y bajo de canalé a rayas blancas y negras, letra B cursiva y parche ovalado bordados en blanco en el pecho, número 49 en la manga, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "chaleco-gris-01",
+      "nombre": "Chaleco acolchado gris marengo",
+      "tipo": "abrigo",
+      "subtipo": "chaleco acolchado",
+      "color_principal": "gris marengo",
+      "abriga": 3,
+      "formalidad": 2,
+      "clima": [
+        "frio",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Encima de sudadera o hoodie da calor sin agobiar.",
+      "foto": "fotos/chaleco-gris-01.png",
+      "imagen_canva": null,
+      "marca": "Polo Club",
+      "capa": "abrigo",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un chaleco acolchado gris marengo mate sin mangas, cuello alto, cremallera frontal, bolsillos laterales, pequeño parche de goma con logo en el pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "hoodie-cremallera-gris-01",
+      "nombre": "Sudadera gris con cremallera y capucha",
+      "tipo": "parte_arriba",
+      "subtipo": "sudadera con capucha y cremallera",
+      "color_principal": "gris jaspeado",
+      "abriga": 3,
+      "formalidad": 2,
+      "clima": [
+        "frio",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Se puede llevar abierta sobre camiseta, como chaqueta ligera.",
+      "foto": "fotos/hoodie-cremallera-gris-01.png",
+      "imagen_canva": null,
+      "marca": "Polo Ralph Lauren",
+      "capa": "medio",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una sudadera gris jaspeado con capucha y cremallera completa, cordones grises, bolsillos canguro, puños de canalé, pequeño logo bordado azul marino en el pecho izquierdo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "camiseta-blanca-stussy-01",
+      "nombre": "Camiseta blanca con logo rosa",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta manga corta",
+      "color_principal": "blanco (logo rosa)",
+      "abriga": 1,
+      "formalidad": 1,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Logo firma pequeño en rosa. Combina con la sudadera y la camisa rosa.",
+      "foto": "fotos/camiseta-blanca-stussy-01.png",
+      "imagen_canva": null,
+      "marca": "Stüssy",
+      "capa": "base",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta blanca de algodón, cuello redondo, con un pequeño logo de firma estilo graffiti en rosa fucsia, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "camiseta-blanca-yacht-01",
+      "nombre": "Camiseta blanca \"Port Meridian Yacht Club\"",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta manga corta",
+      "color_principal": "blanco (texto azul marino)",
+      "abriga": 1,
+      "formalidad": 2,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Texto náutico pequeño en azul marino: aire \"old money\".",
+      "foto": "fotos/camiseta-blanca-yacht-01.png",
+      "imagen_canva": null,
+      "capa": "base",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta blanca de algodón, cuello redondo, con un pequeño texto en el pecho izquierdo en azul marino estilo club náutico, con una palabra en letra cursiva, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "camiseta-blanca-artistic-01",
+      "nombre": "Camiseta blanca \"Artistic Department\"",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta manga corta oversize",
+      "color_principal": "blanco (bordado negro)",
+      "abriga": 1,
+      "formalidad": 1,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Oversize con bordado pequeño negro en el centro.",
+      "foto": "fotos/camiseta-blanca-artistic-01.png",
+      "imagen_canva": null,
+      "marca": "Pull&Bear",
+      "capa": "base",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta blanca oversize de algodón grueso, cuello redondo, con un pequeño texto bordado en negro en el centro del pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "camisa-blanca-cubana-01",
+      "nombre": "Camisa blanca manga corta cuello cubano",
+      "tipo": "parte_arriba",
+      "subtipo": "camisa manga corta",
+      "color_principal": "blanco",
+      "abriga": 1,
+      "formalidad": 4,
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta"
+      ],
+      "notas": "Tejido con textura (tipo seersucker). La pieza más arreglada para verano.",
+      "foto": "fotos/camisa-blanca-cubana-01.png",
+      "imagen_canva": null,
+      "marca": "Zara",
+      "capa": "base",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camisa blanca de manga corta con cuello cubano abierto, tejido con textura tipo seersucker, botones blancos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "camisa-rosa-lino-01",
+      "nombre": "Camisa rosa palo de lino",
+      "tipo": "parte_arriba",
+      "subtipo": "camisa manga larga",
+      "color_principal": "rosa palo",
+      "abriga": 2,
+      "formalidad": 4,
+      "clima": [
+        "templado",
+        "calor"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta",
+        "clase"
+      ],
+      "notas": "Lino, bolsillo en el pecho. Abierta sobre camiseta blanca o abrochada para salir.",
+      "foto": "fotos/camisa-rosa-lino-01.png",
+      "imagen_canva": null,
+      "capa": "base",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camisa rosa palo de lino de manga larga, cuello clásico, bolsillo en el pecho, botones nacarados, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "camiseta-barca-01",
+      "nombre": "Camiseta FC Barcelona",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta deportiva",
+      "color_principal": "azulgrana",
+      "abriga": 1,
+      "formalidad": 0,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "notas": "Tejido técnico: para gym, fútbol o ver el partido.",
+      "foto": "fotos/camiseta-barca-01.png",
+      "imagen_canva": null,
+      "marca": "Nike / FC Barcelona",
+      "capa": "base",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta de fútbol de tejido técnico a rayas verticales azul marino y granate, manga corta, cuello redondo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "reloj-viceroy-verde-01",
+      "nombre": "Reloj cronógrafo acero esfera verde",
+      "tipo": "accesorio",
+      "subtipo": "reloj",
+      "color_principal": "plata y verde",
+      "abriga": 0,
+      "formalidad": 3,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "fiesta"
+      ],
+      "notas": "Estilo diver, brazalete de acero. Deportivo-elegante: va con casi todo.",
+      "foto": "fotos/reloj-viceroy-verde-01.png",
+      "imagen_canva": null,
+      "marca": "Viceroy",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista de frente, solo un reloj cronógrafo de acero estilo buceo con brazalete de eslabones, esfera verde oscuro con tres subesferas, bisel giratorio verde y negro, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "reloj-raez-blanco-01",
+      "nombre": "Reloj tonneau esfera blanca",
+      "tipo": "accesorio",
+      "subtipo": "reloj",
+      "color_principal": "blanco y negro",
+      "abriga": 0,
+      "formalidad": 5,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "fiesta",
+        "tomar_algo"
+      ],
+      "notas": "Números romanos, correa de piel negra. El más clásico: para ocasiones arregladas.",
+      "foto": "fotos/reloj-raez-blanco-01.png",
+      "imagen_canva": null,
+      "marca": "Pablo Raez",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista de frente, solo un reloj de vestir con caja tonneau de acero, esfera blanca con números romanos negros, correa de piel negra con grabado de cocodrilo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "reloj-dg-negro-01",
+      "nombre": "Reloj esfera negra correa de piel",
+      "tipo": "accesorio",
+      "subtipo": "reloj",
+      "color_principal": "negro y plata",
+      "abriga": 0,
+      "formalidad": 4,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "fiesta"
+      ],
+      "notas": "Esfera negra, correa de piel negra. Ideal con outfits negros y de noche.",
+      "foto": "fotos/reloj-dg-negro-01.png",
+      "imagen_canva": null,
+      "marca": "D&G",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista de frente, solo un reloj de acero redondo, esfera negra con números grandes plateados y fecha, correa de piel negra lisa, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    }
+  ],
+  "outfits": [
+    {
+      "id": "basico-denim",
+      "nombre": "Básico denim",
+      "capas": {
+        "base": "camiseta-blanca-01",
+        "abajo": "vaquero-azul-claro-01",
+        "calzado": "asics-plateadas-01",
+        "accesorios": [
+          "reloj-viceroy-verde-01"
+        ]
+      },
+      "clima": [
+        "templado",
+        "calor"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "verano-mediterraneo",
+      "nombre": "Verano mediterráneo",
+      "capas": {
+        "base": "camiseta-blanca-cangrejo-01",
+        "abajo": "bermuda-vaquera-azul-claro-01",
+        "calzado": "champion-blancas-01",
+        "accesorios": [
+          "gorra-blanca-01"
+        ]
+      },
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "total-white",
+      "nombre": "Total white",
+      "capas": {
+        "base": "camisa-blanca-cubana-01",
+        "abajo": "bermuda-vaquera-blanca-01",
+        "calzado": "tommy-blancas-01",
+        "accesorios": [
+          "reloj-viceroy-verde-01"
+        ]
+      },
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "contraste-verano",
+      "nombre": "Contraste verano",
+      "capas": {
+        "base": "camiseta-blanca-artistic-01",
+        "abajo": "bermuda-vaquera-negra-01",
+        "calzado": "asics-negras-01",
+        "accesorios": [
+          "gorra-negra-01"
+        ]
+      },
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "clase"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "negro-sobre-blanco",
+      "nombre": "Negro sobre blanco",
+      "capas": {
+        "base": "camiseta-negra-01",
+        "abajo": "bermuda-vaquera-blanca-01",
+        "calzado": "zapatillas-negras-lisas-01",
+        "accesorios": [
+          "reloj-dg-negro-01"
+        ]
+      },
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "noche-de-verano",
+      "nombre": "Noche de verano",
+      "capas": {
+        "base": "camiseta-negra-01",
+        "abajo": "pantalon-blanco-elastico-01",
+        "calzado": "zapatillas-negras-lisas-01",
+        "accesorios": [
+          "reloj-dg-negro-01"
+        ]
+      },
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "yacht-club",
+      "nombre": "Yacht club",
+      "capas": {
+        "base": "camiseta-blanca-yacht-01",
+        "abajo": "pantalon-blanco-elastico-01",
+        "calzado": "tommy-blancas-01",
+        "accesorios": [
+          "reloj-raez-blanco-01"
+        ]
+      },
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta"
+      ],
+      "nota": "Look \"old money\" de verano."
+    },
+    {
+      "id": "cena-de-verano",
+      "nombre": "Cena de verano",
+      "capas": {
+        "base": "camisa-blanca-cubana-01",
+        "abajo": "vaquero-azul-claro-01",
+        "calzado": "tommy-blancas-01",
+        "accesorios": [
+          "reloj-raez-blanco-01"
+        ]
+      },
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "fiesta",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "gris-y-negro",
+      "nombre": "Gris y negro",
+      "capas": {
+        "base": "camiseta-negra-01",
+        "abajo": "vaquero-gris-claro-01",
+        "calzado": "asics-negras-01",
+        "accesorios": [
+          "gorra-negra-01"
+        ]
+      },
+      "clima": [
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "rosa-y-gris",
+      "nombre": "Rosa y gris",
+      "capas": {
+        "medio": "sudadera-rosa-01",
+        "abajo": "vaquero-gris-claro-01",
+        "calzado": "asics-plateadas-01"
+      },
+      "clima": [
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "camisa-rosa-abierta",
+      "nombre": "Camisa rosa abierta",
+      "capas": {
+        "base": "camiseta-blanca-stussy-01",
+        "medio": "camisa-rosa-lino-01",
+        "abajo": "vaquero-azul-claro-01",
+        "calzado": "champion-blancas-01"
+      },
+      "clima": [
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": "Camisa desabrochada encima de la camiseta."
+    },
+    {
+      "id": "rosa-de-noche",
+      "nombre": "Rosa de noche",
+      "capas": {
+        "base": "camisa-rosa-lino-01",
+        "abajo": "vaquero-negro-01",
+        "calzado": "zapatillas-negras-lisas-01",
+        "accesorios": [
+          "reloj-dg-negro-01"
+        ]
+      },
+      "clima": [
+        "templado"
+      ],
+      "ocasiones": [
+        "fiesta",
+        "tomar_algo"
+      ],
+      "nota": "Camisa abrochada y metida por dentro o suelta."
+    },
+    {
+      "id": "noche-negra",
+      "nombre": "Noche negra",
+      "capas": {
+        "base": "camiseta-negra-01",
+        "abajo": "vaquero-negro-01",
+        "calzado": "zapatillas-negras-lisas-01",
+        "accesorios": [
+          "reloj-dg-negro-01"
+        ]
+      },
+      "clima": [
+        "templado"
+      ],
+      "ocasiones": [
+        "fiesta",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "sporty-denim",
+      "nombre": "Sporty denim",
+      "capas": {
+        "medio": "sudadera-blanca-champion-01",
+        "abajo": "vaquero-azul-claro-01",
+        "calzado": "champion-blancas-01",
+        "accesorios": [
+          "gorra-negra-01"
+        ]
+      },
+      "clima": [
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "zip-gris",
+      "nombre": "Zip gris",
+      "capas": {
+        "base": "camiseta-blanca-01",
+        "medio": "hoodie-cremallera-gris-01",
+        "abajo": "vaquero-negro-01",
+        "calzado": "asics-plateadas-01"
+      },
+      "clima": [
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": "Sudadera abierta, como chaqueta."
+    },
+    {
+      "id": "varsity-clasico",
+      "nombre": "Varsity clásico",
+      "capas": {
+        "base": "camiseta-blanca-01",
+        "abajo": "vaquero-azul-claro-01",
+        "abrigo": "varsity-boston-01",
+        "calzado": "champion-blancas-01"
+      },
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": "La chaqueta es la protagonista: debajo, básico."
+    },
+    {
+      "id": "varsity-noche",
+      "nombre": "Varsity de noche",
+      "capas": {
+        "base": "camiseta-negra-01",
+        "abajo": "vaquero-negro-01",
+        "abrigo": "varsity-boston-01",
+        "calzado": "zapatillas-negras-lisas-01",
+        "accesorios": [
+          "reloj-dg-negro-01"
+        ]
+      },
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "fiesta",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "capas-claras",
+      "nombre": "Capas claras",
+      "capas": {
+        "base": "camiseta-blanca-01",
+        "medio": "sudadera-negra-lisa-01",
+        "abajo": "vaquero-azul-claro-01",
+        "calzado": "asics-plateadas-01"
+      },
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": "Que asome un poco el bajo de la camiseta blanca."
+    },
+    {
+      "id": "total-black",
+      "nombre": "Total black",
+      "capas": {
+        "base": "camiseta-negra-01",
+        "medio": "sudadera-negra-lisa-01",
+        "abajo": "vaquero-negro-01",
+        "calzado": "asics-negras-01",
+        "accesorios": [
+          "reloj-dg-negro-01"
+        ]
+      },
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "hoodie-clase",
+      "nombre": "Hoodie de clase",
+      "capas": {
+        "medio": "sudadera-capucha-negra-01",
+        "abajo": "vaquero-gris-claro-01",
+        "calzado": "asics-negras-01",
+        "accesorios": [
+          "gorra-negra-01"
+        ]
+      },
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "clase"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "blanco-y-negro",
+      "nombre": "Blanco y negro",
+      "capas": {
+        "medio": "sudadera-blanca-champion-01",
+        "abajo": "vaquero-negro-01",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "rosa-y-negro",
+      "nombre": "Rosa y negro",
+      "capas": {
+        "medio": "sudadera-rosa-01",
+        "abajo": "vaquero-negro-01",
+        "calzado": "zapatillas-negras-lisas-01",
+        "accesorios": [
+          "reloj-viceroy-verde-01"
+        ]
+      },
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "chaleco-gris",
+      "nombre": "Chaleco y gris",
+      "capas": {
+        "medio": "sudadera-negra-lisa-01",
+        "abrigo": "chaleco-gris-01",
+        "abajo": "vaquero-gris-claro-01",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "abrigado-negro",
+      "nombre": "Abrigado en negro",
+      "capas": {
+        "base": "camiseta-negra-01",
+        "medio": "sudadera-capucha-negra-01",
+        "abrigo": "plumifero-negro-01",
+        "abajo": "vaquero-negro-01",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "mucho_frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "abrigado-contraste",
+      "nombre": "Abrigado con contraste",
+      "capas": {
+        "base": "camiseta-blanca-01",
+        "medio": "hoodie-cremallera-gris-01",
+        "abrigo": "plumifero-negro-01",
+        "abajo": "vaquero-azul-claro-01",
+        "calzado": "asics-plateadas-01"
+      },
+      "clima": [
+        "mucho_frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "abrigado-noche",
+      "nombre": "Abrigado de noche",
+      "capas": {
+        "base": "camiseta-negra-01",
+        "medio": "sudadera-negra-lisa-01",
+        "abrigo": "plumifero-negro-01",
+        "abajo": "vaquero-negro-01",
+        "calzado": "zapatillas-negras-lisas-01",
+        "accesorios": [
+          "reloj-dg-negro-01"
+        ]
+      },
+      "clima": [
+        "mucho_frio"
+      ],
+      "ocasiones": [
+        "fiesta",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "capas-chaleco",
+      "nombre": "Capas con chaleco",
+      "capas": {
+        "base": "camiseta-blanca-01",
+        "medio": "hoodie-cremallera-gris-01",
+        "abrigo": "chaleco-gris-01",
+        "abajo": "vaquero-negro-01",
+        "calzado": "asics-negras-01",
+        "accesorios": [
+          "gorra-negra-01"
+        ]
+      },
+      "clima": [
+        "mucho_frio",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "gym-barca",
+      "nombre": "Gym Barça",
+      "capas": {
+        "base": "camiseta-barca-01",
+        "abajo": "short-chandal-blanco-01",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "gym-negro",
+      "nombre": "Gym negro",
+      "capas": {
+        "base": "camiseta-negra-01",
+        "abajo": "short-chandal-blanco-01",
+        "calzado": "asics-negras-01",
+        "accesorios": [
+          "gorra-negra-01"
+        ]
+      },
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "gym-invierno",
+      "nombre": "Gym en invierno",
+      "capas": {
+        "base": "camiseta-negra-01",
+        "medio": "hoodie-cremallera-gris-01",
+        "abajo": "short-chandal-blanco-01",
+        "calzado": "asics-plateadas-01"
+      },
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": "La sudadera para ir y volver; dentro, camiseta."
+    }
+  ],
+  "_como_funciona": {
+    "prendas": "Cada prenda aparece UNA vez, con UNA imagen. Se reutiliza en todos los outfits que quieras.",
+    "outfits": "Un outfit es solo una lista de ids de prendas por capas (base, medio, abrigo, abajo, calzado, accesorio). La misma prenda puede estar en muchos outfits.",
+    "imagen_outfit": "Vista en cuadrícula (opción 1): cada prenda en su propia tarjeta con su foto sobre fondo gris, sin recortar. Pantalón en una columna alta a la izquierda; parte de arriba, capa/abrigo y calzado en tarjetas a la derecha. Los huecos vacíos del outfit se muestran como tarjeta \"+ Añadir <tipo>\".",
+    "apartados": [
+      "mucho_frio",
+      "frio",
+      "templado",
+      "calor",
+      "gym",
+      "clase",
+      "tomar_algo",
+      "fiesta"
+    ],
+    "imagenes_pendientes": "Las prendas con prompt_imagen_pendiente aún no tienen foto (se acabaron los créditos de IA de Canva). Se generan con ese prompt cuando haya créditos.",
+    "capas_orden_cuadricula": "abajo (columna izquierda) · base/medio · abrigo · calzado · fila de accesorios"
+  },
+  "huecos_del_armario": {
+    "gym": "Solo hay un short de gym. Un pantalón largo de chándal o unos shorts técnicos negros darían más opciones.",
+    "pantalon_arreglado": "No hay chino ni pantalón de vestir: para algo formal (cena, evento) falta una pieza así.",
+    "zapatillas_running": "Para correr los 10 km lo ideal son zapatillas técnicas de running; las Asics retro son más de calle."
+  }
+}
