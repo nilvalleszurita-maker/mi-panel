@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Trabajo · Días de agencia</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#0F1115}
+a{color:#8FA8FF}a:hover{color:#B7C6FF}
+button,input{font-family:inherit}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 1240px; box-sizing: border-box; background: #0F1115; color: #E8EAF0; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <div style="padding: 28px 20px 8px; display: flex; justify-content: space-between; align-items: flex-start">
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <span style="font-size: 13px; color: #9AA3B2; text-transform: uppercase; letter-spacing: 0.08em">Trabajo · Noviembre</span>
+      <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700">Días de agencia</h1>
+    </div>
+    <button onClick="{{anadir}}" aria-label="Añadir día de trabajo" style="width: 44px; height: 44px; border-radius: 14px; border: none; background: {{accent}}; color: #0F1115; display: flex; align-items: center; justify-content: center; cursor: pointer">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+    </button>
+  </div>
+
+  <div style="padding: 12px 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+    <div style="background: #1F2533; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 6px; grid-column: span 2">
+      <span style="font-size: 12px; color: #B4BDCC">Ganado este mes</span>
+      <span style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; line-height: 1">{{totalTxt}}</span>
+      <div style="height: 8px; border-radius: 8px; background: #2A2F3A; display: flex; overflow: hidden; margin-top: 6px">
+        <div style="width: {{anchoCobrado}}; background: #7DD3A8"></div>
+        <div style="width: {{anchoPendiente}}; background: #F5A524"></div>
+      </div>
+      <div style="display: flex; gap: 16px; font-size: 12px; color: #B4BDCC">
+        <span style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 4px; background: #7DD3A8"></span>Cobrado {{cobradoTxt}}</span>
+        <span style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 4px; background: #F5A524"></span>Pendiente {{pendienteTxt}}</span>
+      </div>
+    </div>
+    <div style="background: #181B22; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 4px">
+      <span style="font-size: 12px; color: #9AA3B2">Días trabajados</span>
+      <span style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 600">{{dias}}</span>
+    </div>
+    <div style="background: #181B22; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 4px">
+      <span style="font-size: 12px; color: #9AA3B2">Horas</span>
+      <span style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 600">{{horasTxt}}</span>
+    </div>
+  </div>
+
+  <div style="padding: 4px 20px 12px">
+    <div style="background: #181B22; border-radius: 16px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 14px; font-weight: 500">Tu tarifa</span>
+        <span style="font-size: 12px; color: #9AA3B2">Ejemplo · pon la tuya</span>
+      </div>
+      <label style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: #B4BDCC">
+        <input type="number" min="0" step="0.5" value="{{tarifa}}" onInput="{{setTarifa}}" aria-label="Tarifa por hora en euros" style="width: 72px; height: 44px; box-sizing: border-box; border-radius: 12px; border: 1px solid #3A4150; background: #0F1115; color: #E8EAF0; font-size: 18px; font-weight: 600; text-align: center">
+        €/h
+      </label>
+    </div>
+  </div>
+
+  <div style="padding: 8px 20px; display: flex; justify-content: space-between; align-items: baseline">
+    <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Jornadas</h2>
+    <span style="font-size: 12px; color: #9AA3B2">Toca para marcar cobrado</span>
+  </div>
+  <div style="padding: 0 20px; display: flex; flex-direction: column; gap: 10px">
+    <sc-for list="{{jornadas}}" as="j" hint-placeholder-count="5">
+      <button onClick="{{j.toggle}}" aria-pressed="{{j.pressed}}" style="min-height: 64px; border-radius: 16px; border: 1px solid #252A34; background: #181B22; color: #E8EAF0; display: flex; align-items: center; gap: 14px; padding: 12px 16px; cursor: pointer; text-align: left">
+        <div style="width: 44px; display: flex; flex-direction: column; align-items: center">
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; line-height: 1">{{j.dia}}</span>
+          <span style="font-size: 11px; color: #9AA3B2; text-transform: uppercase">{{j.sem}}</span>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 15px; font-weight: 500">{{j.lugar}}</span>
+          <span style="font-size: 12px; color: #9AA3B2">{{j.horario}} · {{j.horasTxt}}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px">
+          <span style="font-size: 15px; font-weight: 600">{{j.importeTxt}}</span>
+          <span style="font-size: 11px; font-weight: 600; color: {{j.chipColor}}; background: {{j.chipFondo}}; border-radius: 999px; padding: 2px 8px">{{j.estado}}</span>
+        </div>
+      </button>
+    </sc-for>
+  </div>
+
+  <div style="padding: 14px 20px">
+    <div style="background: #33281A; border-radius: 14px; padding: 12px 14px; display: flex; gap: 10px; align-items: center">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5A524" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+      <span style="font-size: 13px; color: #F5D9A8">{{aviso}}</span>
+    </div>
+  </div>
+
+  <nav aria-label="Secciones" style="margin-top: auto; background: #151820; border-top: 1px solid #252A34; padding: 8px 8px 24px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr))">
+    <a href="Main.dc.html" style="min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #9AA3B2; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path></svg>Hoy</a>
+    <a href="#" style="min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #9AA3B2; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18"></path></svg>Finanzas</a>
+    <a href="#" style="min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #9AA3B2; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"></path></svg>Gym</a>
+    <a href="Notas.dc.html" style="min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #9AA3B2; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h11a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3z"></path><path d="M8 9h6M8 13h4"></path></svg>Estudio</a>
+    <a href="Agencia.dc.html" style="min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: {{accent}}; font-size: 11px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5h8v2"></path></svg>Trabajo</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#8FA8FF","options":["#8FA8FF","#7DD3A8","#F5A524"]},"$preview":{"width":390,"height":1240}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tarifa: '9',
+      jornadas: [
+        { dia: 15, sem: 'sáb', lugar: 'Evento · Fira', ini: '09:00', fin: '17:00', cobrado: false },
+        { dia: 8, sem: 'sáb', lugar: 'Almacén', ini: '08:00', fin: '14:00', cobrado: false },
+        { dia: 7, sem: 'vie', lugar: 'Almacén', ini: '16:00', fin: '22:00', cobrado: true },
+        { dia: 1, sem: 'dom', lugar: 'Evento · estadio', ini: '15:00', fin: '23:00', cobrado: true }
+      ]
+    };
+  }
+  horas(j) { const [a, b] = j.ini.split(':').map(Number), [c, d] = j.fin.split(':').map(Number); return (c * 60 + d - a * 60 - b) / 60; }
+  eur(x) { return (Math.round(x * 100) / 100).toLocaleString('es-ES', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' €'; }
+  renderVals() {
+    const accent = this.props.accent ?? '#8FA8FF';
+    const t = parseFloat(String(this.state.tarifa).replace(',', '.')) || 0;
+    const js = this.state.jornadas;
+    let tot = 0, cob = 0, hrs = 0;
+    js.forEach((j) => { const h = this.horas(j), imp = h * t; hrs += h; tot += imp; if (j.cobrado) cob += imp; });
+    const pen = tot - cob, npen = js.filter((j) => !j.cobrado).length;
+    return {
+      accent: accent,
+      tarifa: this.state.tarifa,
+      setTarifa: (e) => this.setState({ tarifa: e.target.value }),
+      totalTxt: this.eur(tot), cobradoTxt: this.eur(cob), pendienteTxt: this.eur(pen),
+      anchoCobrado: tot ? (cob / tot * 100) + '%' : '0%', anchoPendiente: tot ? (pen / tot * 100) + '%' : '0%',
+      dias: js.length, horasTxt: (Math.round(hrs * 10) / 10).toString().replace('.', ',') + ' h',
+      aviso: npen ? 'Tienes ' + npen + (npen === 1 ? ' día' : ' días') + ' sin cobrar (' + this.eur(pen) + '). Se sumarán a Finanzas al marcarlos.' : 'Todo cobrado este mes. ¡Bien!',
+      anadir: () => this.setState({ jornadas: [{ dia: 22, sem: 'sáb', lugar: 'Nuevo día', ini: '09:00', fin: '15:00', cobrado: false }].concat(js) }),
+      jornadas: js.map((j, i) => {
+        const h = this.horas(j);
+        return {
+          dia: j.dia, sem: j.sem, lugar: j.lugar, horario: j.ini + '–' + j.fin,
+          horasTxt: (Math.round(h * 10) / 10).toString().replace('.', ',') + ' h', importeTxt: this.eur(h * t),
+          estado: j.cobrado ? 'Cobrado' : 'Pendiente', pressed: j.cobrado ? 'true' : 'false',
+          chipColor: j.cobrado ? '#0F1115' : '#0F1115', chipFondo: j.cobrado ? '#7DD3A8' : '#F5A524',
+          toggle: () => this.setState({ jornadas: js.map((x, k) => k === i ? Object.assign({}, x, { cobrado: !x.cobrado }) : x) })
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

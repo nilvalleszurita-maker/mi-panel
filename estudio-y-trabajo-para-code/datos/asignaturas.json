@@ -1,0 +1,48 @@
+{
+  "_nota": "Asignaturas del cuatrimestre con objetivo de nota. Los PESOS de cada evaluación son de ejemplo: cámbialos por los de cada guía docente. 'nota' = null mientras no esté puesta.",
+  "curso": "2026-27 Q1",
+  "asignaturas": [
+    {
+      "id": "informatica",
+      "nombre": "Informàtica",
+      "objetivo": 5.8,
+      "motivo": "Mínimo 5,8 para poder compensar asignaturas de 1º. Sin reevaluación.",
+      "evaluaciones": [
+        { "nombre": "Parcial", "peso": 30, "nota": null, "fecha": null },
+        { "nombre": "Prácticas", "peso": 20, "nota": null, "fecha": null },
+        { "nombre": "Final", "peso": 50, "nota": null, "fecha": null }
+      ]
+    },
+    {
+      "id": "sistemes-mecanics",
+      "nombre": "Sistemes Mecànics",
+      "objetivo": 5,
+      "motivo": "Prioridad alta.",
+      "evaluaciones": [
+        { "nombre": "Examen de vigas", "peso": 20, "nota": null, "fecha": "2026-10-19" },
+        { "nombre": "Trabajo", "peso": 20, "nota": null, "fecha": null },
+        { "nombre": "Final", "peso": 60, "nota": null, "fecha": null }
+      ]
+    },
+    {
+      "id": "metodes-matematics",
+      "nombre": "Mètodes Matemàtics",
+      "objetivo": 4,
+      "motivo": "Con un 4 se puede compensar.",
+      "evaluaciones": [
+        { "nombre": "Parcial", "peso": 40, "nota": null, "fecha": null },
+        { "nombre": "Final", "peso": 60, "nota": null, "fecha": null }
+      ]
+    },
+    {
+      "id": "mecanica-fluids",
+      "nombre": "Mecànica de Fluids",
+      "objetivo": 5,
+      "motivo": "Reconducción a finales de noviembre.",
+      "evaluaciones": [
+        { "nombre": "Parcial / reconducción", "peso": 40, "nota": null, "fecha": null },
+        { "nombre": "Final", "peso": 60, "nota": null, "fecha": null }
+      ]
+    }
+  ]
+}
