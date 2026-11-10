@@ -163,9 +163,8 @@
       ],
       "notas": "Sin logos, cuello redondo alto. La más versátil para frío.",
       "foto": "fotos/sudadera-negra-lisa-01.png",
-      "imagen_canva": null,
-      "capa": "medio",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una sudadera negra lisa sin capucha, cuello redondo alto de canalé, puños y bajo de canalé, felpa de algodón, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHah9TLDTg",
+      "capa": "medio"
     },
     {
       "id": "sudadera-capucha-negra-01",
@@ -271,8 +270,7 @@
       ],
       "notas": "Holgada, hasta la rodilla, botones.",
       "foto": "fotos/bermuda-vaquera-azul-claro-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo unas bermudas vaqueras azul muy claro (lavado blanqueado), corte holgado hasta la rodilla, cinco bolsillos, bragueta de botones, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiMY1OLU"
     },
     {
       "id": "bermuda-vaquera-blanca-01",
@@ -492,9 +490,8 @@
       ],
       "notas": "Blancas limpias de piel, talón azul marino. Las más elegantes en blanco.",
       "foto": "fotos/tommy-blancas-01.png",
-      "imagen_canva": null,
-      "marca": "Tommy Hilfiger",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista lateral de una sola zapatilla, solo una zapatilla blanca minimalista de piel granulada, suela blanca plana, talón azul marino, pequeña bandera bordada roja, blanca y azul en el lateral, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHah63nf9I",
+      "marca": "Tommy Hilfiger"
     },
     {
       "id": "plumifero-negro-01",
@@ -536,9 +533,8 @@
       ],
       "notas": "Paño y mangas de piel sintética, parches blancos. Es la pieza protagonista: el resto, sencillo.",
       "foto": "fotos/varsity-boston-01.png",
-      "imagen_canva": null,
-      "capa": "abrigo",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una chaqueta varsity negra con cuerpo de paño de lana y mangas de piel sintética negra, cuello de camisa, botones de presión, puños y bajo de canalé a rayas blancas y negras, letra B cursiva y parche ovalado bordados en blanco en el pecho, número 49 en la manga, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHaiMlxYgA",
+      "capa": "abrigo"
     },
     {
       "id": "chaleco-gris-01",
@@ -740,9 +736,8 @@
       ],
       "notas": "Estilo diver, brazalete de acero. Deportivo-elegante: va con casi todo.",
       "foto": "fotos/reloj-viceroy-verde-01.png",
-      "imagen_canva": null,
-      "marca": "Viceroy",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista de frente, solo un reloj cronógrafo de acero estilo buceo con brazalete de eslabones, esfera verde oscuro con tres subesferas, bisel giratorio verde y negro, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHah0M5L70",
+      "marca": "Viceroy"
     },
     {
       "id": "reloj-raez-blanco-01",
@@ -879,10 +874,9 @@
       ],
       "notas": "Oversize con textos pequeños discretos. Muy versátil.",
       "foto": "fotos/camiseta-negra-nude-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHaiMAD4_I",
       "marca": "Nude Project",
-      "capa": "base",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta negra oversize de algodón, hombros caídos, con textos muy pequeños en blanco repartidos por el pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "capa": "base"
     },
     {
       "id": "tirantes-blanca-01",
@@ -1335,8 +1329,7 @@
       ],
       "notas": "Piel blanca con paneles grises. Combinan con casi todo, sobre todo con gris, negro y vaquero.",
       "foto": "fotos/dunk-gris-01.png",
-      "imagen_canva": null,
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista lateral de una sola zapatilla, solo una zapatilla baja estilo baloncesto retro de piel, puntera y laterales blancos con paneles grises claros, cordones grises, suela blanca, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "imagen_canva": "MAHah4jrNJ8",
       "marca": "Nike"
     }
   ],
