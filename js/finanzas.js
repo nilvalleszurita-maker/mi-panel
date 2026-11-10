@@ -14,6 +14,7 @@ const Finanzas = (() => {
   let formAbierto = false;
   let moviendo = false;       // formulario de traspaso abierto
   let editandoCuentas = false;
+  let editandoFijos = false;
   let enfocar = null;         // selector del campo donde poner el cursor tras pintar
 
   const datos = () => Store.get().finanzas;
@@ -72,6 +73,8 @@ const Finanzas = (() => {
         <div class="tarjeta"><span class="muted">Gastos</span><strong class="neg">${U.euros(gastos)}</strong></div>
         <div class="tarjeta"><span class="muted">Balance</span><strong class="${balance >= 0 ? 'pos' : 'neg'}">${U.euros(balance)}</strong></div>
       </section>
+
+      ${seccionFijos()}
 
       ${formAbierto ? formulario() : `<button class="btn ancho" data-acc="abrir">+ Añadir movimiento</button>`}
 
@@ -328,6 +331,67 @@ const Finanzas = (() => {
       </form>`;
   }
 
+  // ---------- Gastos fijos ----------
+  // Cada mes se marcan como pagados: se crea un gasto con «fijo_id» que resta de Dinero.
+  const fijos = () => (datos().fijos || []).filter(x => x.activo !== false);
+  const pagoDe = (fijo, clave = claveMes(mes.a, mes.m)) =>
+    datos().movimientos.find(x => x.fijo_id === fijo.id && x.fecha.startsWith(clave)) || null;
+  // Fecha del pago: hoy si se mira el mes actual; si no, el mismo día dentro del mes visible.
+  function fechaPago() {
+    const h = new Date();
+    if (h.getFullYear() === mes.a && h.getMonth() === mes.m) return U.iso(h);
+    const ultimo = new Date(mes.a, mes.m + 1, 0).getDate();
+    return U.iso(new Date(mes.a, mes.m, Math.min(h.getDate(), ultimo)));
+  }
+
+  function seccionFijos() {
+    const lista = fijos();
+    if (editandoFijos) {
+      return `
+        <section class="bloque fijos">
+          <div class="cab-bloque"><h3>Gastos fijos</h3><button class="enlace" data-acc="editar-fijos">Listo</button></div>
+          <div class="editor-cuentas">
+            ${lista.map(x => `
+              <div class="cuenta-fila fijo-fila-edit">
+                <input data-fijo="${x.id}" data-campo="nombre" value="${U.esc(x.nombre)}" maxlength="30" aria-label="Nombre del gasto fijo">
+                <input data-fijo="${x.id}" data-campo="importe" value="${x.importe || ''}" inputmode="decimal" placeholder="0" aria-label="Importe de ${U.esc(x.nombre)} en euros">
+                <button class="icon-btn peq" data-acc="borrar-fijo" data-id="${x.id}" aria-label="Quitar ${U.esc(x.nombre)}">×</button>
+              </div>`).join('')}
+            <button class="enlace" data-acc="nuevo-fijo">+ Añadir gasto fijo</button>
+            <p class="muted peq nota">Cambiar un importe no modifica los meses ya pagados.</p>
+          </div>
+        </section>`;
+    }
+    const total = lista.reduce((s, x) => s + x.importe, 0);
+    const pagado = lista.reduce((s, x) => s + (pagoDe(x)?.importe || 0), 0);
+    return `
+      <section class="bloque fijos">
+        <div class="cab-bloque">
+          <h3>Gastos fijos</h3>
+          <button class="enlace" data-acc="editar-fijos">Editar</button>
+        </div>
+        ${lista.length ? `
+          <ul class="lista fijos-lista">
+            ${lista.map(x => {
+              const pago = pagoDe(x);
+              const d = pago && U.deIso(pago.fecha);
+              return `
+                <li>
+                  <button class="fijo-check ${pago ? 'on' : ''}" data-acc="fijo-pagar" data-id="${x.id}" aria-pressed="${!!pago}"
+                    aria-label="${U.esc(x.nombre)}: ${pago ? 'pagado, pulsa para desmarcar' : 'marcar como pagado'}">${pago ? '✓' : ''}</button>
+                  <div class="crece">
+                    <div>${U.esc(x.nombre)}</div>
+                    <div class="peq ${pago ? 'pos' : 'muted'}">${pago ? `Pagado el ${d.getDate()} ${U.MESES[d.getMonth()].slice(0, 3)}` : 'Pendiente'}</div>
+                  </div>
+                  <strong>${U.euros(pago ? pago.importe : x.importe)}</strong>
+                </li>`;
+            }).join('')}
+          </ul>
+          <p class="muted peq nota">Pagado ${U.euros(pagado)} de ${U.euros(total)}. Se restan de Dinero, pero no cuentan en el presupuesto mensual de Hoy.</p>`
+        : `<p class="vacio">No tienes gastos fijos. Pulsa «Editar» para añadirlos.</p>`}
+      </section>`;
+  }
+
   function fila(x) {
     const d = U.deIso(x.fecha);
     const fecha = `<div class="fecha-mini"><strong>${d.getDate()}</strong><span>${U.MESES[d.getMonth()].slice(0, 3)}</span></div>`;
@@ -353,7 +417,7 @@ const Finanzas = (() => {
       <li>
         ${fecha}
         <div class="crece">
-          <div>${U.esc(x.categoria)}</div>
+          <div>${U.esc(x.categoria)}${x.fijo_id ? ' <span class="chip">fijo</span>' : ''}</div>
           ${x.nota ? `<div class="muted peq">${U.esc(x.nota)}</div>` : ''}
         </div>
         <strong class="${x.tipo === 'ingreso' ? 'pos' : 'neg'}">${x.tipo === 'ingreso' ? '+' : '−'}${U.euros(x.importe)}</strong>
@@ -385,6 +449,28 @@ const Finanzas = (() => {
     } else if (acc === 'borrar') {
       if (!confirm('¿Borrar este movimiento? Su importe se devolverá al saldo.')) return;
       f.movimientos = f.movimientos.filter(x => x.id !== b.dataset.id);
+      Store.guardar();
+    } else if (acc === 'fijo-pagar') {
+      const fijo = f.fijos.find(x => x.id === b.dataset.id);
+      const pago = pagoDe(fijo);
+      if (pago) f.movimientos = f.movimientos.filter(x => x !== pago);
+      else f.movimientos.push({
+        id: Store.id(), tipo: 'gasto', importe: fijo.importe, categoria: 'Gastos fijos', fecha: fechaPago(),
+        nota: fijo.nombre, creado: Date.now(), fijo_id: fijo.id,
+      });
+      Store.guardar();
+    } else if (acc === 'editar-fijos') {
+      editandoFijos = !editandoFijos;
+      if (!editandoFijos) { f.fijos = f.fijos.filter(x => x.nombre.trim()); Store.guardar(); }
+    } else if (acc === 'nuevo-fijo') {
+      const x = { id: `fijo-${Store.id()}`, nombre: 'Nuevo gasto fijo', importe: 0, activo: true };
+      f.fijos.push(x);
+      Store.guardar();
+      enfocar = `[data-fijo="${x.id}"][data-campo="nombre"]`;
+    } else if (acc === 'borrar-fijo') {
+      const x = f.fijos.find(y => y.id === b.dataset.id);
+      if (!confirm(`¿Quitar «${x.nombre}» de los gastos fijos? Los meses ya pagados se quedan en tus movimientos.`)) return;
+      f.fijos = f.fijos.filter(y => y !== x);
       Store.guardar();
     } else if (acc === 'mover') {
       moviendo = !moviendo;
@@ -430,6 +516,14 @@ const Finanzas = (() => {
   // para no perder el foco); el anillo se actualiza al pulsar «Listo».
   // Al escribir un saldo se ajusta el saldo de partida para que el actual sea ese.
   function alEscribir(e) {
+    if (e.target.dataset.fijo) {
+      const x = datos().fijos.find(y => y.id === e.target.dataset.fijo);
+      if (!x) return;
+      if (e.target.dataset.campo === 'nombre') x.nombre = e.target.value;
+      else x.importe = U.numero(e.target.value);
+      Store.guardar();
+      return;
+    }
     const t = e.target, c = datos().cuentas.find(x => x.id === t.dataset.cuenta);
     if (!c) return;
     if (t.dataset.campo === 'nombre') c.nombre = t.value;
@@ -481,8 +575,9 @@ const Finanzas = (() => {
   }
 
   // Para Hoy: gasto entre dos fechas (AAAA-MM-DD, ambas incluidas) y dinero total.
-  const gastoEntre = (desde, hasta) => redondo(datos().movimientos
-    .filter(x => x.tipo === 'gasto' && x.fecha >= desde && x.fecha <= hasta)
+  // Con «sinFijos», no cuenta los gastos fijos marcados como pagados.
+  const gastoEntre = (desde, hasta, { sinFijos = false } = {}) => redondo(datos().movimientos
+    .filter(x => x.tipo === 'gasto' && x.fecha >= desde && x.fecha <= hasta && !(sinFijos && x.fijo_id))
     .reduce((s, x) => s + x.importe, 0));
   const dineroTotal = () => { const s = saldos(); return redondo(datos().cuentas.reduce((t, c) => t + s[c.id], 0)); };
 

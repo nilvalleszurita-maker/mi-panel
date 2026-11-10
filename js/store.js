@@ -17,13 +17,21 @@ const Store = (() => {
         .map((nombre, i) => ({ id: 'c' + i, nombre, base: 0, color: i + 1, principal: nombre === 'Dinero' })),
       // Movimientos de dinero entre categorías: { id, de, a, importe, fecha, creado }
       traspasos: [],
+      // Gastos fijos de cada mes: { id, nombre, importe, activo }. Al marcar uno como
+      // pagado se crea un movimiento de gasto con «fijo_id» (resta de Dinero como
+      // cualquier gasto, pero no cuenta en el presupuesto mensual de Hoy).
+      fijos: [
+        { id: 'fijo-curso', nombre: 'Curso', importe: 167, activo: true },
+        { id: 'fijo-gym', nombre: 'Gym', importe: 27, activo: true },
+        { id: 'fijo-claude', nombre: 'Claude Pro', importe: 20, activo: true },
+      ],
     },
     entrenos: { plan: {}, hechos: {} },
     // Registro del gym por fecha (AAAA-MM-DD). Ver la estructura en js/gym.js.
     gym: { registros: {} },
     // Preferencias de la pantalla Hoy (nombre del saludo y objetivos).
     ajustes: {
-      nombre: 'Nil', presupuestoSemanal: 120, objetivoProteina: 150, objetivoKcal: 3000,
+      nombre: 'Nil', presupuestoMensual: 100, objetivoProteina: 150, objetivoKcal: 3000,
       metaAhorro: { nombre: 'el piso', objetivo: 25000 },
     },
     // Datos de la pantalla Hoy que aún no tienen pantalla propia (comidas, hábitos,

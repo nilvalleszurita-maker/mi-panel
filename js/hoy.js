@@ -27,9 +27,14 @@ const Hoy = (() => {
   // ---------- Tarjetas resumen ----------
   function tarjetas() {
     const a = ajustes();
-    const lunes = U.lunes(), domingo = new Date(lunes); domingo.setDate(domingo.getDate() + 6);
-    const gasto = Finanzas.gastoEntre(U.iso(lunes), U.iso(domingo));
-    const pasado = gasto > a.presupuestoSemanal;
+    const lunes = U.lunes();
+    // Gasto del mes en curso sin los gastos fijos (curso, gym…), frente al presupuesto.
+    const hoy = new Date();
+    const primero = U.iso(new Date(hoy.getFullYear(), hoy.getMonth(), 1));
+    const ultimo = U.iso(new Date(hoy.getFullYear(), hoy.getMonth() + 1, 0));
+    const gasto = Finanzas.gastoEntre(primero, ultimo, { sinFijos: true });
+    const presupuesto = a.presupuestoMensual;
+    const pasado = gasto > presupuesto;
     const gym = Gym.resumenSemana(lunes);
     const prot = HoyDatos.totalesComidas(U.iso()).proteina_g;
     const ahorro = Finanzas.dineroTotal();
@@ -40,10 +45,10 @@ const Hoy = (() => {
     return `
       <section class="kpis" aria-label="Resumen">
         <article class="kpi">
-          <span class="kpi-titulo"><span class="solo-movil">Gasto semana</span><span class="solo-escritorio">Gasto esta semana</span></span>
-          <span class="kpi-valor ${pasado ? 'neg' : ''}">${euros0(gasto)} <span class="kpi-de solo-escritorio">/ ${euros0(a.presupuestoSemanal)}</span></span>
-          ${barra(gasto, a.presupuestoSemanal, pasado ? 'var(--neg)' : 'var(--acento)')}
-          <span class="kpi-pie solo-movil">${pasado ? `${euros0(gasto - a.presupuestoSemanal)} de más` : `de ${euros0(a.presupuestoSemanal)}`}</span>
+          <span class="kpi-titulo">Gasto mensual</span>
+          <span class="kpi-valor ${pasado ? 'neg' : ''}">${euros0(gasto)} <span class="kpi-de solo-escritorio">/ ${euros0(presupuesto)}</span></span>
+          ${barra(gasto, presupuesto, pasado ? 'var(--neg)' : 'var(--acento)')}
+          <span class="kpi-pie solo-movil">${pasado ? `${euros0(gasto - presupuesto)} de más` : `de ${euros0(presupuesto)}`}</span>
         </article>
 
         <article class="kpi solo-escritorio">
@@ -54,12 +59,12 @@ const Hoy = (() => {
 
         <article class="kpi">
           <span class="kpi-titulo"><span class="solo-movil">Racha gym</span><span class="solo-escritorio">Entrenos esta semana</span></span>
-          <span class="kpi-valor"><span class="solo-movil">${gym.gym} ${gym.gym === 1 ? 'día' : 'días'}</span><span class="solo-escritorio">${gym.gym} <span class="kpi-de">/ ${gym.planGym} gym · ${gym.carreras} / ${gym.planCarreras} carreras</span></span></span>
+          <span class="kpi-valor"><span class="solo-movil">${gym.dias} ${gym.dias === 1 ? 'día' : 'días'}</span><span class="solo-escritorio">${gym.dias} <span class="kpi-de">/ 7 días</span></span></span>
           <div class="kpi-segmentos solo-movil" role="presentation">
-            ${Array.from({ length: gym.planGym }, (_, i) => `<div class="${i < gym.gym ? 'on' : ''}"></div>`).join('')}
+            ${Array.from({ length: 7 }, (_, i) => `<div class="${i < gym.dias ? 'on' : ''}"></div>`).join('')}
           </div>
-          <div class="solo-escritorio">${barra(gym.gym, gym.planGym, 'var(--ambar)')}</div>
-          <span class="kpi-pie solo-movil">${gym.gym} de ${gym.planGym} esta semana</span>
+          <div class="solo-escritorio">${barra(gym.dias, 7, 'var(--ambar)')}</div>
+          <span class="kpi-pie solo-movil">${gym.dias} de 7 esta semana</span>
         </article>
 
         <article class="kpi">
