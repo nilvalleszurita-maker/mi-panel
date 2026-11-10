@@ -110,12 +110,12 @@ const Outfits = (() => {
     const cabTiempo = t ? `
         <div class="tiempo-cifra">${String(Math.round(t.max * 10) / 10).replace('.', ',')}<span>°C</span></div>
         <div class="tiempo-texto">
-          <strong>Barcelona · ${U.esc(t.cielo)}</strong>
+          <strong>${D.LUGAR.nombre} · ${U.esc(t.cielo)}</strong>
           <span class="muted peq">máx ${String(t.max).replace('.', ',')} °C · mín ${String(t.min).replace('.', ',')} °C</span>
           ${t.lluvia ? `<span class="peq tiempo-aviso">☂ Puede llover: mejor calzado que aguante.</span>` : ''}
         </div>`
-      : pidiendoTiempo ? `<p class="muted">Mirando el tiempo en Barcelona…</p>`
-      : `<p class="muted">Sin conexión para ver el tiempo: elige el clima a mano.</p>`;
+      : pidiendoTiempo ? `<p class="muted">Mirando el tiempo en ${D.LUGAR.nombre}…</p>`
+      : `<p class="muted">No se ha podido consultar el tiempo ahora mismo (sin conexión o el servicio no responde): elige el clima a mano.</p>`;
 
     const chipsClima = D.CLIMAS.map(c => `
       <button class="chip ${clima === c ? 'on' : ''}" data-acc="hoy-clima" data-v="${c}" aria-pressed="${clima === c}">

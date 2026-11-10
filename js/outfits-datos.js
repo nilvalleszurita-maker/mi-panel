@@ -217,9 +217,11 @@ const OutfitsDatos = (() => {
     return 'otro';
   }
 
-  // ---------- Tiempo de Barcelona (Open-Meteo, sin clave) ----------
+  // ---------- Tiempo del día (Open-Meteo, sin clave) ----------
   // Se pide una vez al día y se guarda aparte (no son datos tuyos ni van a Supabase).
-  const URL_TIEMPO = 'https://api.open-meteo.com/v1/forecast?latitude=41.3874&longitude=2.1686'
+  // Para cambiar de ciudad, basta con cambiar LUGAR.
+  const LUGAR = { nombre: 'Terrassa', lat: 41.5633, lon: 2.0089 };
+  const URL_TIEMPO = `https://api.open-meteo.com/v1/forecast?latitude=${LUGAR.lat}&longitude=${LUGAR.lon}`
     + '&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Europe%2FMadrid&forecast_days=1';
   const CLAVE_TIEMPO = 'mi-panel:tiempo';
 
@@ -241,7 +243,8 @@ const OutfitsDatos = (() => {
   const lluvioso = c => c >= 51 && c <= 99 && !(c >= 71 && c <= 77);
 
   let tiempoHoy = null;
-  try { const t = JSON.parse(localStorage.getItem(CLAVE_TIEMPO)); if (t?.fecha === U.iso()) tiempoHoy = t; } catch { /* sin acceso */ }
+  // Solo vale el guardado si es de hoy y de este lugar.
+  try { const t = JSON.parse(localStorage.getItem(CLAVE_TIEMPO)); if (t?.fecha === U.iso() && t.lugar === LUGAR.nombre) tiempoHoy = t; } catch { /* sin acceso */ }
 
   // Devuelve una promesa con { fecha, max, min, codigo, cielo, clima, lluvia } o null si no hay conexión.
   function tiempo() {
@@ -250,7 +253,7 @@ const OutfitsDatos = (() => {
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(j => {
         const max = j.daily.temperature_2m_max[0], min = j.daily.temperature_2m_min[0], codigo = j.daily.weather_code[0];
-        tiempoHoy = { fecha: U.iso(), max, min, codigo, cielo: cielo(codigo), clima: climaDe(max), lluvia: lluvioso(codigo) };
+        tiempoHoy = { fecha: U.iso(), lugar: LUGAR.nombre, max, min, codigo, cielo: cielo(codigo), clima: climaDe(max), lluvia: lluvioso(codigo) };
         try { localStorage.setItem(CLAVE_TIEMPO, JSON.stringify(tiempoHoy)); } catch { /* da igual */ }
         return tiempoHoy;
       })
@@ -303,7 +306,7 @@ const OutfitsDatos = (() => {
 
   return {
     CLIMAS, SITUACIONES, NOMBRES, CAPAS, TIPO_DE_CAPA,
-    tiempo, tiempoGuardado, climaDe, propuestas, ponerHoy, quitarHoy, puestoEl, historial,
+    LUGAR, tiempo, tiempoGuardado, climaDe, propuestas, ponerHoy, quitarHoy, puestoEl, historial,
     asegurar, prendas, prenda, outfits, outfit, foto, fondo, capasDe, idsDe, outfitsCon,
     valoracion, candidatas, guardarOutfit, borrarOutfit, colorBase,
     guardarPrenda, borrarPrenda, procesarFoto, guardarFoto, quitarFoto, tieneFotoSubida,
