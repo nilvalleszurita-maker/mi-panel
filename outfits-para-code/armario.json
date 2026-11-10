@@ -793,6 +793,374 @@
       "imagen_canva": null,
       "marca": "D&G",
       "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista de frente, solo un reloj de acero redondo, esfera negra con números grandes plateados y fecha, correa de piel negra lisa, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "camiseta-negra-ck-01",
+      "nombre": "Camiseta negra con monograma",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta manga corta",
+      "color_principal": "negro (logo blanco)",
+      "abriga": 1,
+      "formalidad": 3,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "fiesta"
+      ],
+      "notas": "Ajustada, monograma pequeño. La camiseta negra más arreglada.",
+      "foto": "fotos/camiseta-negra-ck-01.png",
+      "imagen_canva": null,
+      "marca": "Calvin Klein Jeans",
+      "capa": "base",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta negra básica de algodón ajustada, cuello redondo, pequeño monograma blanco en el pecho izquierdo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "camiseta-marino-tomtailor-01",
+      "nombre": "Camiseta azul marino con texto",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta manga corta",
+      "color_principal": "azul marino",
+      "abriga": 1,
+      "formalidad": 1,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "casa"
+      ],
+      "notas": "Texto grande blanco en el pecho: informal.",
+      "foto": "fotos/camiseta-marino-tomtailor-01.png",
+      "imagen_canva": null,
+      "marca": "Tom Tailor",
+      "capa": "base",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta azul marino de algodón, cuello redondo, con texto grande blanco tipográfico en el centro del pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "camiseta-negra-carhartt-01",
+      "nombre": "Camiseta negra logo arco",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta manga corta",
+      "color_principal": "negro (logo blanco)",
+      "abriga": 1,
+      "formalidad": 1,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "notas": "Algodón grueso, logo blanco en arco en el pecho. Estilo streetwear.",
+      "foto": "fotos/camiseta-negra-carhartt-01.png",
+      "imagen_canva": null,
+      "marca": "Carhartt WIP",
+      "capa": "base",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta negra de algodón grueso, cuello redondo de canalé, pequeño logo blanco con letras redondeadas en arco en el pecho izquierdo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "camiseta-negra-nude-01",
+      "nombre": "Camiseta negra oversize texto pequeño",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta manga corta oversize",
+      "color_principal": "negro",
+      "abriga": 1,
+      "formalidad": 2,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "fiesta"
+      ],
+      "notas": "Oversize con textos pequeños discretos. Muy versátil.",
+      "foto": "fotos/camiseta-negra-nude-01.png",
+      "imagen_canva": null,
+      "marca": "Nude Project",
+      "capa": "base",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta negra oversize de algodón, hombros caídos, con textos muy pequeños en blanco repartidos por el pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "tirantes-blanca-01",
+      "nombre": "Camiseta de tirantes blanca",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta de tirantes",
+      "color_principal": "blanco",
+      "abriga": 0,
+      "formalidad": 1,
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "gym",
+        "casa"
+      ],
+      "notas": "Canalé ajustado. Para gym en verano o como capa base.",
+      "foto": "fotos/tirantes-blanca-01.png",
+      "imagen_canva": "MAHahxdRAVc",
+      "capa": "base"
+    },
+    {
+      "id": "tirantes-negra-01",
+      "nombre": "Camiseta de tirantes negra",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta de tirantes",
+      "color_principal": "negro",
+      "abriga": 0,
+      "formalidad": 1,
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "gym",
+        "casa"
+      ],
+      "notas": "Canalé ajustado. Para gym en verano.",
+      "foto": "fotos/tirantes-negra-01.png",
+      "imagen_canva": "MAHah-Wv718",
+      "capa": "base"
+    },
+    {
+      "id": "camiseta-gym-toro-01",
+      "nombre": "Camiseta técnica gym negra",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta deportiva",
+      "color_principal": "negro",
+      "abriga": 0,
+      "formalidad": 0,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "notas": "Tejido técnico transpirable, logo de toro.",
+      "foto": "fotos/camiseta-gym-toro-01.png",
+      "imagen_canva": null,
+      "capa": "base",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta deportiva negra de tejido técnico con mangas raglán, pequeño logo blanco de cabeza de toro y texto en el pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "hoodie-cremallera-negra-01",
+      "nombre": "Sudadera negra con cremallera y capucha",
+      "tipo": "parte_arriba",
+      "subtipo": "sudadera con capucha y cremallera",
+      "color_principal": "negro",
+      "abriga": 3,
+      "formalidad": 2,
+      "clima": [
+        "frio",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "gym"
+      ],
+      "notas": "Igual que la gris; abierta sobre camiseta como chaqueta ligera.",
+      "foto": "fotos/hoodie-cremallera-negra-01.png",
+      "imagen_canva": "MAHahwg3aK0",
+      "marca": "Polo Ralph Lauren",
+      "capa": "medio"
+    },
+    {
+      "id": "jogger-gris-fila-01",
+      "nombre": "Pantalón de chándal gris",
+      "tipo": "parte_abajo",
+      "subtipo": "jogger de felpa",
+      "color_principal": "gris jaspeado",
+      "abriga": 3,
+      "formalidad": 0,
+      "clima": [
+        "frio",
+        "mucho_frio",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym",
+        "casa"
+      ],
+      "notas": "Felpa con puño en el tobillo. Para ir y volver del gym en invierno.",
+      "foto": "fotos/jogger-gris-fila-01.png",
+      "imagen_canva": null,
+      "marca": "Fila",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón de chándal jogger gris jaspeado claro de felpa, cintura elástica con cordón, puños elásticos en los tobillos, pequeño logo bordado en el muslo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "short-nike-tech-gris-01",
+      "nombre": "Short de felpa gris claro (Tech)",
+      "tipo": "parte_abajo",
+      "subtipo": "short de felpa",
+      "color_principal": "gris claro",
+      "abriga": 1,
+      "formalidad": 1,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym",
+        "casa",
+        "clase"
+      ],
+      "notas": "Bolsillo con cremallera, logo grande negro.",
+      "foto": "fotos/short-nike-tech-gris-01.png",
+      "imagen_canva": null,
+      "marca": "Nike",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto gris claro de felpa técnica, cintura elástica con cordón negro, bolsillo lateral con cremallera, logo negro en la pierna, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "short-nike-negro-01",
+      "nombre": "Short de algodón negro",
+      "tipo": "parte_abajo",
+      "subtipo": "short de felpa",
+      "color_principal": "negro",
+      "abriga": 1,
+      "formalidad": 1,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym",
+        "casa"
+      ],
+      "notas": "Algodón, logo pequeño bordado blanco.",
+      "foto": "fotos/short-nike-negro-01.png",
+      "imagen_canva": null,
+      "marca": "Nike",
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto negro de algodón, cintura elástica con cordón, bolsillos laterales, pequeño logo bordado blanco en la pierna, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "short-negro-paris-01",
+      "nombre": "Short negro \"Paris\"",
+      "tipo": "parte_abajo",
+      "subtipo": "short de felpa",
+      "color_principal": "negro (texto blanco)",
+      "abriga": 1,
+      "formalidad": 1,
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "gym",
+        "casa"
+      ],
+      "notas": "Cordón blanco y texto \"Paris\" en la pierna.",
+      "foto": "fotos/short-negro-paris-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto negro de chándal, cintura elástica con cordón blanco, texto blanco con tipografía serif en la parte baja de una pierna, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "short-tecnico-gris-oscuro-01",
+      "nombre": "Short técnico gris oscuro",
+      "tipo": "parte_abajo",
+      "subtipo": "short técnico",
+      "color_principal": "gris oscuro",
+      "abriga": 0,
+      "formalidad": 0,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "notas": "Tejido ligero con bolsillos de cremallera. Ideal para correr los 10 km.",
+      "foto": "fotos/short-tecnico-gris-oscuro-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo pantalón corto deportivo técnico gris oscuro de tejido ligero, cintura elástica con cordón, bolsillos laterales con cremallera, aberturas laterales en el bajo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "short-tecnico-negro-02",
+      "nombre": "Short técnico negro (bolsillos cremallera)",
+      "tipo": "parte_abajo",
+      "subtipo": "short técnico",
+      "color_principal": "negro",
+      "abriga": 0,
+      "formalidad": 0,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "notas": "Mismo modelo que el gris oscuro.",
+      "foto": "fotos/short-tecnico-negro-02.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo pantalón corto deportivo técnico negro de tejido ligero, cintura elástica con cordón, bolsillos laterales con cremallera, aberturas laterales en el bajo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "short-tecnico-gris-claro-01",
+      "nombre": "Short técnico gris claro",
+      "tipo": "parte_abajo",
+      "subtipo": "short técnico",
+      "color_principal": "gris claro",
+      "abriga": 0,
+      "formalidad": 0,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "notas": "Mismo modelo que el gris oscuro.",
+      "foto": "fotos/short-tecnico-gris-claro-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo pantalón corto deportivo técnico gris claro de tejido ligero, cintura elástica con cordón, bolsillos laterales con cremallera, aberturas laterales en el bajo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "short-tecnico-negro-01",
+      "nombre": "Short técnico negro brillo",
+      "tipo": "parte_abajo",
+      "subtipo": "short técnico",
+      "color_principal": "negro",
+      "abriga": 0,
+      "formalidad": 0,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "notas": "Nylon ligero, sin logos. Para gym y correr.",
+      "foto": "fotos/short-tecnico-negro-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto deportivo negro de nylon ligero con ligero brillo, cintura elástica, sin logos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "short-felpa-gris-01",
+      "nombre": "Short de felpa gris jaspeado",
+      "tipo": "parte_abajo",
+      "subtipo": "short de felpa",
+      "color_principal": "gris jaspeado",
+      "abriga": 1,
+      "formalidad": 1,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym",
+        "casa"
+      ],
+      "notas": "Liso, cordón negro con puntas metálicas.",
+      "foto": "fotos/short-felpa-gris-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto gris jaspeado medio de felpa, liso, cintura elástica con cordón negro de puntas metálicas, bolsillos laterales, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
     }
   ],
   "outfits": [
@@ -1344,26 +1712,6 @@
       "nota": ""
     },
     {
-      "id": "gym-negro",
-      "nombre": "Gym negro",
-      "capas": {
-        "base": "camiseta-negra-01",
-        "abajo": "short-chandal-blanco-01",
-        "calzado": "asics-negras-01",
-        "accesorios": [
-          "gorra-negra-01"
-        ]
-      },
-      "clima": [
-        "calor",
-        "templado"
-      ],
-      "ocasiones": [
-        "gym"
-      ],
-      "nota": ""
-    },
-    {
       "id": "gym-invierno",
       "nombre": "Gym en invierno",
       "capas": {
@@ -1379,6 +1727,276 @@
         "gym"
       ],
       "nota": "La sudadera para ir y volver; dentro, camiseta."
+    },
+    {
+      "id": "streetwear-negro",
+      "nombre": "Streetwear negro",
+      "capas": {
+        "base": "camiseta-negra-carhartt-01",
+        "abajo": "vaquero-gris-claro-01",
+        "calzado": "asics-negras-01",
+        "accesorios": [
+          "gorra-negra-01"
+        ]
+      },
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "oversize-y-bermuda",
+      "nombre": "Oversize y bermuda",
+      "capas": {
+        "base": "camiseta-negra-nude-01",
+        "abajo": "bermuda-vaquera-azul-claro-01",
+        "calzado": "asics-plateadas-01"
+      },
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "negro-limpio",
+      "nombre": "Negro limpio",
+      "capas": {
+        "base": "camiseta-negra-ck-01",
+        "abajo": "pantalon-blanco-elastico-01",
+        "calzado": "tommy-blancas-01",
+        "accesorios": [
+          "reloj-viceroy-verde-01"
+        ]
+      },
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "ck-noche",
+      "nombre": "Monograma de noche",
+      "capas": {
+        "base": "camiseta-negra-ck-01",
+        "abajo": "vaquero-negro-01",
+        "calzado": "zapatillas-negras-lisas-01",
+        "accesorios": [
+          "reloj-dg-negro-01"
+        ]
+      },
+      "clima": [
+        "templado"
+      ],
+      "ocasiones": [
+        "fiesta",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "marino-y-denim",
+      "nombre": "Marino y denim",
+      "capas": {
+        "base": "camiseta-marino-tomtailor-01",
+        "abajo": "vaquero-azul-claro-01",
+        "calzado": "champion-blancas-01"
+      },
+      "clima": [
+        "templado",
+        "calor"
+      ],
+      "ocasiones": [
+        "clase"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "zip-negro",
+      "nombre": "Zip negro",
+      "capas": {
+        "base": "camiseta-blanca-01",
+        "medio": "hoodie-cremallera-negra-01",
+        "abajo": "vaquero-gris-claro-01",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "zip-negro-noche",
+      "nombre": "Zip negro de noche",
+      "capas": {
+        "base": "camiseta-negra-nude-01",
+        "medio": "hoodie-cremallera-negra-01",
+        "abajo": "vaquero-negro-01",
+        "calzado": "zapatillas-negras-lisas-01"
+      },
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "gym-tecnico",
+      "nombre": "Gym técnico",
+      "capas": {
+        "base": "camiseta-gym-toro-01",
+        "abajo": "short-tecnico-gris-oscuro-01",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "gym-tirantes-blanca",
+      "nombre": "Gym tirantes blanca",
+      "capas": {
+        "base": "tirantes-blanca-01",
+        "abajo": "short-tecnico-negro-02",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "gym-tirantes-negra",
+      "nombre": "Gym tirantes negra",
+      "capas": {
+        "base": "tirantes-negra-01",
+        "abajo": "short-tecnico-gris-claro-01",
+        "calzado": "asics-plateadas-01"
+      },
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "gym-negro",
+      "nombre": "Gym negro",
+      "capas": {
+        "base": "camiseta-negra-01",
+        "abajo": "short-nike-negro-01",
+        "calzado": "asics-negras-01",
+        "accesorios": [
+          "gorra-negra-01"
+        ]
+      },
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "gym-gris",
+      "nombre": "Gym gris",
+      "capas": {
+        "base": "camiseta-gym-toro-01",
+        "abajo": "short-nike-tech-gris-01",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "carrera-10k",
+      "nombre": "Carrera 10 km",
+      "capas": {
+        "base": "camiseta-gym-toro-01",
+        "abajo": "short-tecnico-negro-01",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": "Tejidos técnicos: los que mejor van para correr."
+    },
+    {
+      "id": "gym-invierno-largo",
+      "nombre": "Gym en invierno (largo)",
+      "capas": {
+        "base": "camiseta-gym-toro-01",
+        "medio": "hoodie-cremallera-negra-01",
+        "abajo": "jogger-gris-fila-01",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "frio",
+        "mucho_frio"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": "Para ir y volver; dentro, camiseta técnica."
+    },
+    {
+      "id": "casa-comodo",
+      "nombre": "Cómodo en casa",
+      "capas": {
+        "base": "camiseta-marino-tomtailor-01",
+        "abajo": "short-felpa-gris-01"
+      },
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "casa"
+      ],
+      "nota": ""
     }
   ],
   "_como_funciona": {
@@ -1399,8 +2017,8 @@
     "capas_orden_cuadricula": "abajo (columna izquierda) · base/medio · abrigo · calzado · fila de accesorios"
   },
   "huecos_del_armario": {
-    "gym": "Solo hay un short de gym. Un pantalón largo de chándal o unos shorts técnicos negros darían más opciones.",
     "pantalon_arreglado": "No hay chino ni pantalón de vestir: para algo formal (cena, evento) falta una pieza así.",
-    "zapatillas_running": "Para correr los 10 km lo ideal son zapatillas técnicas de running; las Asics retro son más de calle."
+    "zapatillas_running": "Para correr los 10 km lo ideal son zapatillas técnicas de running; las Asics retro son más de calle.",
+    "pantalon_largo_gym": "Solo hay un jogger largo (Fila). Uno negro daría más combinaciones en invierno."
   }
 }

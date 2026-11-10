@@ -2,22 +2,28 @@
 
 Cada foto se llama <id>.png, con el id de la prenda en armario.json.
 
-## Ya generadas (ya están en esta carpeta)
+## Ya en esta carpeta
+
+- Camiseta blanca básica → `camiseta-blanca-01.png`
+- Vaquero recto azul claro → `vaquero-azul-claro-01.png`
+- Camiseta negra básica → `camiseta-negra-01.png`
+- Vaquero negro lavado → `vaquero-negro-01.png`
+- Pantalón blanco de cintura elástica → `pantalon-blanco-elastico-01.png`
+- Vaquero gris claro lavado → `vaquero-gris-claro-01.png`
+- Zapatillas retro plateadas → `asics-plateadas-01.png`
+- Zapatillas retro negras → `asics-negras-01.png`
+- Zapatillas negras lisas → `zapatillas-negras-lisas-01.png`
+- Plumífero negro con capucha → `plumifero-negro-01.png`
+
+## Generadas en Canva, falta descargarlas aquí
 
 | Prenda | Archivo | Enlace |
 |---|---|---|
-| Camiseta blanca básica | `camiseta-blanca-01.png` | https://www.canva.com/M/MAHagi-aTZw |
-| Vaquero recto azul claro | `vaquero-azul-claro-01.png` | https://www.canva.com/M/MAHagkQNhkU |
-| Camiseta negra básica | `camiseta-negra-01.png` | https://www.canva.com/M/MAHag6ZdtMQ |
-| Vaquero negro lavado | `vaquero-negro-01.png` | https://www.canva.com/M/MAHagzCwORU |
-| Pantalón blanco de cintura elástica | `pantalon-blanco-elastico-01.png` | https://www.canva.com/M/MAHag6hXgkE |
-| Vaquero gris claro lavado | `vaquero-gris-claro-01.png` | https://www.canva.com/M/MAHag1KqpEU |
-| Zapatillas retro plateadas | `asics-plateadas-01.png` | https://www.canva.com/M/MAHag14_8BE |
-| Zapatillas retro negras | `asics-negras-01.png` | https://www.canva.com/M/MAHag2Ym9kE |
-| Zapatillas negras lisas | `zapatillas-negras-lisas-01.png` | https://www.canva.com/M/MAHagziyITY |
-| Plumífero negro con capucha | `plumifero-negro-01.png` | https://www.canva.com/M/MAHag6eIm9U |
+| Camiseta de tirantes blanca | `tirantes-blanca-01.png` | https://www.canva.com/M/MAHahxdRAVc |
+| Camiseta de tirantes negra | `tirantes-negra-01.png` | https://www.canva.com/M/MAHah-Wv718 |
+| Sudadera negra con cremallera y capucha | `hoodie-cremallera-negra-01.png` | https://www.canva.com/M/MAHahwg3aK0 |
 
-## Pendientes (se generarán cuando se renueven los créditos de Canva)
+## Pendientes (cuando haya créditos de Canva)
 
 - Sudadera negra lisa → `sudadera-negra-lisa-01.png`
 - Sudadera con capucha negra (Nude Project) → `sudadera-capucha-negra-01.png`
@@ -44,5 +50,19 @@ Cada foto se llama <id>.png, con el id de la prenda en armario.json.
 - Reloj cronógrafo acero esfera verde → `reloj-viceroy-verde-01.png`
 - Reloj tonneau esfera blanca → `reloj-raez-blanco-01.png`
 - Reloj esfera negra correa de piel → `reloj-dg-negro-01.png`
+- Camiseta negra con monograma → `camiseta-negra-ck-01.png`
+- Camiseta azul marino con texto → `camiseta-marino-tomtailor-01.png`
+- Camiseta negra logo arco → `camiseta-negra-carhartt-01.png`
+- Camiseta negra oversize texto pequeño → `camiseta-negra-nude-01.png`
+- Camiseta técnica gym negra → `camiseta-gym-toro-01.png`
+- Pantalón de chándal gris → `jogger-gris-fila-01.png`
+- Short de felpa gris claro (Tech) → `short-nike-tech-gris-01.png`
+- Short de algodón negro → `short-nike-negro-01.png`
+- Short negro "Paris" → `short-negro-paris-01.png`
+- Short técnico gris oscuro → `short-tecnico-gris-oscuro-01.png`
+- Short técnico negro (bolsillos cremallera) → `short-tecnico-negro-02.png`
+- Short técnico gris claro → `short-tecnico-gris-claro-01.png`
+- Short técnico negro brillo → `short-tecnico-negro-01.png`
+- Short de felpa gris jaspeado → `short-felpa-gris-01.png`
 
 Mientras falte una foto, la app muestra una tarjeta gris con el nombre de la prenda.
