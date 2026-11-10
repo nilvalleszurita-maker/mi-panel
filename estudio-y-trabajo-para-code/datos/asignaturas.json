@@ -7,12 +7,47 @@
       "nombre": "Sistemes Mecànics",
       "objetivo": 5,
       "evaluaciones": [
-        { "id": "sm-a1", "nombre": "Examen 1 (vigas)", "peso": 20, "nota": null, "fecha": "2026-10-19" },
-        { "id": "sm-a2", "nombre": "Examen 2", "peso": 20, "nota": null, "fecha": null },
-        { "id": "sm-a3", "nombre": "Examen 3 (final)", "peso": 40, "nota": null, "fecha": "2027-01-15" },
-        { "id": "sm-a4", "nombre": "Trabajo del curso", "peso": 20, "nota": null, "fecha": null, "nota_extra": "Incluye la competencia transversal (comunicación oral y escrita)" }
+        {
+          "id": "sm-a1",
+          "nombre": "Examen 1 (vigas)",
+          "peso": 20,
+          "nota": null,
+          "fecha": "2026-10-19"
+        },
+        {
+          "id": "sm-a2",
+          "nombre": "Examen 2",
+          "peso": 20,
+          "nota": null,
+          "fecha": null
+        },
+        {
+          "id": "sm-a3",
+          "nombre": "Examen 3 (final)",
+          "peso": 40,
+          "nota": null,
+          "fecha": "2027-01-15"
+        },
+        {
+          "id": "sm-a4",
+          "nombre": "Trabajo del curso",
+          "peso": 20,
+          "nota": null,
+          "fecha": null,
+          "nota_extra": "Incluye la competencia transversal (comunicación oral y escrita)"
+        }
       ],
-      "reevaluacion": { "sustituye": ["sm-a1", "sm-a2", "sm-a3"], "mantiene": ["sm-a4"], "regla": "Si la nota final tras re-evaluación es < 5, sustituye a la inicial solo si es mayor. Si es ≥ 5, la nota final es 5." }
+      "reevaluacion": {
+        "sustituye": [
+          "sm-a1",
+          "sm-a2",
+          "sm-a3"
+        ],
+        "mantiene": [
+          "sm-a4"
+        ],
+        "regla": "Si la nota final tras re-evaluación es < 5, sustituye a la inicial solo si es mayor. Si es ≥ 5, la nota final es 5."
+      }
     },
     {
       "id": "informatica",
@@ -20,11 +55,56 @@
       "objetivo": 5.8,
       "objetivo_motivo": "Mínimo 5,8 para compensar asignaturas de 1º",
       "evaluaciones": [
-        { "id": "inf-parcial", "nombre": "Examen parcial", "peso": 25, "nota": null, "fecha": null },
-        { "id": "inf-controles", "nombre": "Controles", "peso": 20, "nota": null, "fecha": null, "subnotas": [ { "nombre": "Control 1", "nota": null }, { "nombre": "Control 2", "nota": null, "fecha": "2026-11-30", "fecha_aprox": true, "fecha_texto": "lunes 30 nov o miércoles 2 dic" } ] },
-        { "id": "inf-problemas", "nombre": "Resolución de problemas", "peso": 10, "nota": null, "fecha": null },
-        { "id": "inf-proyecto", "nombre": "Proyecto", "peso": 10, "nota": null, "fecha": null, "nota_extra": "Incluye la competencia transversal" },
-        { "id": "inf-final", "nombre": "Examen final", "peso": 35, "nota": null, "fecha": "2027-01-08" }
+        {
+          "id": "inf-parcial",
+          "nombre": "Examen parcial",
+          "peso": 25,
+          "nota": null,
+          "fecha": null
+        },
+        {
+          "id": "inf-controles",
+          "nombre": "Controles",
+          "peso": 20,
+          "nota": null,
+          "fecha": null,
+          "subnotas": [
+            {
+              "nombre": "Control 1",
+              "nota": 7.5
+            },
+            {
+              "nombre": "Control 2",
+              "nota": null,
+              "fecha": "2026-11-30",
+              "fecha_aprox": true,
+              "fecha_texto": "lunes 30 nov o miércoles 2 dic"
+            }
+          ],
+          "regla": "Nota = media de Control 1 y Control 2 (cada uno cuenta un 10 % de la final)"
+        },
+        {
+          "id": "inf-problemas",
+          "nombre": "Resolución de problemas",
+          "peso": 10,
+          "nota": null,
+          "fecha": null
+        },
+        {
+          "id": "inf-proyecto",
+          "nombre": "Proyecto",
+          "peso": 10,
+          "nota": null,
+          "fecha": null,
+          "nota_extra": "Incluye la competencia transversal"
+        },
+        {
+          "id": "inf-final",
+          "nombre": "Examen final",
+          "peso": 35,
+          "nota": null,
+          "fecha": "2027-01-08"
+        }
       ],
       "reevaluacion": null
     },
@@ -33,13 +113,55 @@
       "nombre": "Mecànica de Fluids",
       "objetivo": 5,
       "evaluaciones": [
-        { "id": "mf-p1", "nombre": "1r parcial", "peso": 40, "nota": null, "fecha": null },
-        { "id": "mf-p2", "nombre": "2n parcial", "peso": 40, "nota": null, "fecha": "2027-01-21" },
-        { "id": "mf-lab-part", "nombre": "Prácticas · participación (asistencia)", "peso": 10, "nota": null, "fecha": null },
-        { "id": "mf-lab-test", "nombre": "Prácticas · test de contenidos", "peso": 10, "nota": null, "fecha": "2027-01-21", "nota_extra": "Junto con el 2n parcial" }
+        {
+          "id": "mf-p1",
+          "nombre": "1r parcial",
+          "peso": 40,
+          "nota": null,
+          "fecha": null
+        },
+        {
+          "id": "mf-p2",
+          "nombre": "2n parcial",
+          "peso": 40,
+          "nota": null,
+          "fecha": "2027-01-21"
+        },
+        {
+          "id": "mf-lab-part",
+          "nombre": "Prácticas · participación (asistencia)",
+          "peso": 10,
+          "nota": null,
+          "fecha": null
+        },
+        {
+          "id": "mf-lab-test",
+          "nombre": "Prácticas · test de contenidos",
+          "peso": 10,
+          "nota": null,
+          "fecha": "2027-01-21",
+          "nota_extra": "Junto con el 2n parcial"
+        }
       ],
-      "reconduccion": { "id": "mf-recon", "fecha": "2026-11-23", "sustituye": "mf-p1", "nota_maxima": 5, "requisito": "1r parcial < 5", "regla": "Se puntúa de 0 a 5 y sustituye la nota del 1r parcial si es mayor." },
-      "reevaluacion": { "sustituye": ["mf-p1", "mf-p2"], "mantiene": ["mf-lab-part", "mf-lab-test"], "regla": "Si la nota final tras re-evaluación es < 5, sustituye a la inicial solo si es mayor. Si es ≥ 5, la nota final es 5." }
+      "reconduccion": {
+        "id": "mf-recon",
+        "fecha": "2026-11-23",
+        "sustituye": "mf-p1",
+        "nota_maxima": 5,
+        "requisito": "1r parcial < 5",
+        "regla": "Se puntúa de 0 a 5 y sustituye la nota del 1r parcial si es mayor."
+      },
+      "reevaluacion": {
+        "sustituye": [
+          "mf-p1",
+          "mf-p2"
+        ],
+        "mantiene": [
+          "mf-lab-part",
+          "mf-lab-test"
+        ],
+        "regla": "Si la nota final tras re-evaluación es < 5, sustituye a la inicial solo si es mayor. Si es ≥ 5, la nota final es 5."
+      }
     },
     {
       "id": "metodes-matematics",
@@ -47,20 +169,72 @@
       "objetivo": 4,
       "objetivo_motivo": "Con un 4 se puede compensar",
       "evaluaciones": [
-        { "id": "mm-e1", "nombre": "1r examen", "peso": 42, "nota": null, "fecha": null },
-        { "id": "mm-oral", "nombre": "Entrevista oral", "peso": 15, "nota": null, "fecha": "2026-12-14", "fecha_aprox": true, "fecha_texto": "semana del 14 al 20 dic" },
-        { "id": "mm-e2", "nombre": "2n examen", "peso": 43, "nota": null, "fecha": "2027-01-13" }
+        {
+          "id": "mm-e1",
+          "nombre": "1r examen",
+          "peso": 42,
+          "nota": null,
+          "fecha": null
+        },
+        {
+          "id": "mm-oral",
+          "nombre": "Entrevista oral",
+          "peso": 15,
+          "nota": null,
+          "fecha": "2026-12-14",
+          "fecha_aprox": true,
+          "fecha_texto": "semana del 14 al 20 dic"
+        },
+        {
+          "id": "mm-e2",
+          "nombre": "2n examen",
+          "peso": 43,
+          "nota": null,
+          "fecha": "2027-01-13"
+        }
       ],
       "reevaluacion": null
     }
   ],
   "examenes": [
-    { "fecha": "2026-11-23", "asignatura": "mecanica-fluids", "nombre": "Reconducción 1r parcial" },
-    { "fecha": "2026-11-30", "asignatura": "informatica", "nombre": "Control 2", "fecha_aprox": true, "fecha_texto": "lunes 30 nov o miércoles 2 dic" },
-    { "fecha": "2026-12-14", "asignatura": "metodes-matematics", "nombre": "Entrevista oral", "fecha_aprox": true, "fecha_texto": "semana del 14 al 20 dic" },
-    { "fecha": "2027-01-08", "asignatura": "informatica", "nombre": "Examen final" },
-    { "fecha": "2027-01-13", "asignatura": "metodes-matematics", "nombre": "2n examen" },
-    { "fecha": "2027-01-15", "asignatura": "sistemes-mecanics", "nombre": "Examen 3 (final)" },
-    { "fecha": "2027-01-21", "asignatura": "mecanica-fluids", "nombre": "2n parcial + test de prácticas" }
+    {
+      "fecha": "2026-11-23",
+      "asignatura": "mecanica-fluids",
+      "nombre": "Reconducción 1r parcial"
+    },
+    {
+      "fecha": "2026-11-30",
+      "asignatura": "informatica",
+      "nombre": "Control 2",
+      "fecha_aprox": true,
+      "fecha_texto": "lunes 30 nov o miércoles 2 dic"
+    },
+    {
+      "fecha": "2026-12-14",
+      "asignatura": "metodes-matematics",
+      "nombre": "Entrevista oral",
+      "fecha_aprox": true,
+      "fecha_texto": "semana del 14 al 20 dic"
+    },
+    {
+      "fecha": "2027-01-08",
+      "asignatura": "informatica",
+      "nombre": "Examen final"
+    },
+    {
+      "fecha": "2027-01-13",
+      "asignatura": "metodes-matematics",
+      "nombre": "2n examen"
+    },
+    {
+      "fecha": "2027-01-15",
+      "asignatura": "sistemes-mecanics",
+      "nombre": "Examen 3 (final)"
+    },
+    {
+      "fecha": "2027-01-21",
+      "asignatura": "mecanica-fluids",
+      "nombre": "2n parcial + test de prácticas"
+    }
   ]
 }

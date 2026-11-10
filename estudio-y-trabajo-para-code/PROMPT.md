@@ -40,7 +40,9 @@ PESTAÑA ESTUDIO (exámenes + calculadora de notas)
 - Reglas especiales del JSON:
   · Fluids: la RECONDUCCIÓN se puntúa sobre 5 y sustituye al 1r parcial si es
     mayor (nota efectiva del 1r parcial = max(parcial, reconducción)).
-  · Informàtica: "Controles" (20 %) es la media de los controles.
+  · Informàtica: "Controles" (20 %) = media de Control 1 y Control 2. Muestra
+    los dos por separado (cada uno equivale a un 10 %) y la media calculada.
+    Control 1 ya tiene nota: 7,5.
   · Re-evaluación (Sistemes y Fluids): muestra la regla como texto informativo;
     si se usa, la nota final máxima es 5.
 - Poder editar asignaturas, objetivos, evaluaciones, pesos y fechas. Avisar si
