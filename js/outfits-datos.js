@@ -34,14 +34,71 @@ const OutfitsDatos = (() => {
   let fondos = {};          // id → gris de fondo de su foto (data/fotos/fondos.json)
   const fondosListos = fetch('data/fotos/fondos.json').then(r => r.ok ? r.json() : {}).then(f => { fondos = f; }).catch(() => {});
 
+  // ---------- Fotos subidas desde la app ----------
+  // Se guardan en IndexedDB (localStorage se quedaría pequeño), una por prenda:
+  // { blob, fondo }. Tienen prioridad sobre la de data/fotos/. Más adelante irían
+  // a Supabase Storage.
+  const BD = (() => {
+    let db = null;
+    const abrir = () => db ? Promise.resolve(db) : new Promise((ok, mal) => {
+      const r = indexedDB.open('mi-panel-fotos', 1);
+      r.onupgradeneeded = () => r.result.createObjectStore('fotos');
+      r.onsuccess = () => ok(db = r.result);
+      r.onerror = () => mal(r.error);
+    });
+    const escribir = fn => abrir().then(d => new Promise((ok, mal) => {
+      const t = d.transaction('fotos', 'readwrite');
+      fn(t.objectStore('fotos'));
+      t.oncomplete = () => ok();
+      t.onerror = () => mal(t.error);
+    }));
+    const todas = () => abrir().then(d => new Promise((ok, mal) => {
+      const res = {};
+      const c = d.transaction('fotos').objectStore('fotos').openCursor();
+      c.onsuccess = () => { const cur = c.result; if (cur) { res[cur.key] = cur.value; cur.continue(); } else ok(res); };
+      c.onerror = () => mal(c.error);
+    }));
+    return { poner: (k, v) => escribir(s => s.put(v, k)), quitar: k => escribir(s => s.delete(k)), todas };
+  })();
+  const locales = {};       // id → { url, fondo }
+  const localesListas = (typeof indexedDB === 'undefined' ? Promise.resolve({}) : BD.todas().catch(() => ({})))
+    .then(todas => { for (const [id, v] of Object.entries(todas)) locales[id] = { url: URL.createObjectURL(v.blob), fondo: v.fondo }; });
+
+  // Reduce una imagen elegida en el móvil a 600 px (JPEG) y calcula su color de borde.
+  async function procesarFoto(archivo) {
+    const bmp = await createImageBitmap(archivo);
+    const k = Math.min(1, 600 / Math.max(bmp.width, bmp.height));
+    const lienzo = document.createElement('canvas');
+    lienzo.width = Math.round(bmp.width * k); lienzo.height = Math.round(bmp.height * k);
+    const ctx = lienzo.getContext('2d');
+    ctx.drawImage(bmp, 0, 0, lienzo.width, lienzo.height);
+    const { width: w, height: h } = lienzo;
+    const borde = [ctx.getImageData(0, 0, w, 3), ctx.getImageData(0, h - 3, w, 3), ctx.getImageData(0, 0, 3, h), ctx.getImageData(w - 3, 0, 3, h)];
+    let r = 0, g = 0, b = 0, n = 0;
+    for (const { data } of borde) for (let i = 0; i < data.length; i += 4) { r += data[i]; g += data[i + 1]; b += data[i + 2]; n++; }
+    const hex = v => Math.round(v / n).toString(16).padStart(2, '0');
+    const blob = await new Promise(ok => lienzo.toBlob(ok, 'image/jpeg', 0.82));
+    return { blob, fondo: `#${hex(r)}${hex(g)}${hex(b)}` };
+  }
+  async function guardarFoto(id, foto) {
+    await BD.poner(id, foto);
+    if (locales[id]) URL.revokeObjectURL(locales[id].url);
+    locales[id] = { url: URL.createObjectURL(foto.blob), fondo: foto.fondo };
+  }
+  async function quitarFoto(id) {
+    await BD.quitar(id).catch(() => {});
+    if (locales[id]) { URL.revokeObjectURL(locales[id].url); delete locales[id]; }
+  }
+  const tieneFotoSubida = id => !!locales[id];
+
   // Carga el armario de data/armario.json la primera vez. Devuelve una promesa.
   function asegurar() {
-    if (a().sembrado) return fondosListos.then(() => true);
+    if (a().sembrado) return Promise.all([fondosListos, localesListas]).then(() => true);
     if (cargando) return cargando;
     cargando = fetch('data/armario.json')
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(importar)
-      .then(ok => fondosListos.then(() => ok))
+      .then(ok => Promise.all([fondosListos, localesListas]).then(() => ok))
       .catch(() => false)
       .finally(() => { cargando = null; });
     return cargando;
@@ -72,8 +129,8 @@ const OutfitsDatos = (() => {
   const prenda = id => a().prendas.find(p => p.id === id) || null;
   const outfits = () => a().outfits;
   const outfit = id => a().outfits.find(o => o.id === id) || null;
-  const foto = id => `data/fotos/${encodeURIComponent(id)}.webp`;
-  const fondo = id => fondos[id] || null;
+  const foto = id => locales[id]?.url || `data/fotos/${encodeURIComponent(id)}.webp`;
+  const fondo = id => locales[id]?.fondo || fondos[id] || null;
 
   // Capas de un outfit: { abajo, base, medio, abrigo, calzado: id|null, accesorio: [ids] }
   function capasDe(outfitId) {
@@ -117,6 +174,32 @@ const OutfitsDatos = (() => {
     }
     Store.guardar();
     return id;
+  }
+
+  // ---------- Prendas ----------
+  const slug = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  // Crea (sin id) o actualiza una prenda. El id no cambia al editar: los outfits la siguen encontrando.
+  function guardarPrenda(datos, id = null) {
+    const t = a();
+    if (id) {
+      const i = t.prendas.findIndex(p => p.id === id);
+      t.prendas[i] = { ...t.prendas[i], ...datos, id };
+    } else {
+      id = `${slug(datos.nombre) || 'prenda'}-${Store.id().slice(-4)}`;
+      t.prendas.unshift({ ...datos, id });
+    }
+    Store.guardar();
+    return id;
+  }
+  // Borra la prenda y la quita de los outfits que la usan. Devuelve cuántos outfits la tenían.
+  function borrarPrenda(id) {
+    const t = a();
+    const afectados = outfitsCon(id).length;
+    t.prendas = t.prendas.filter(p => p.id !== id);
+    t.outfit_prendas = t.outfit_prendas.filter(r => r.prenda_id !== id);
+    Store.guardar();
+    quitarFoto(id);
+    return afectados;
   }
 
   function borrarOutfit(id) {
@@ -223,5 +306,6 @@ const OutfitsDatos = (() => {
     tiempo, tiempoGuardado, climaDe, propuestas, ponerHoy, quitarHoy, puestoEl, historial,
     asegurar, prendas, prenda, outfits, outfit, foto, fondo, capasDe, idsDe, outfitsCon,
     valoracion, candidatas, guardarOutfit, borrarOutfit, colorBase,
+    guardarPrenda, borrarPrenda, procesarFoto, guardarFoto, quitarFoto, tieneFotoSubida,
   };
 })();

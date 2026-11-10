@@ -16,6 +16,13 @@ const Outfits = (() => {
   let editor = null;              // { origen: id|null, b: borrador } mientras se edita o crea
   let selector = null;            // { capa, i } mientras se elige una prenda para una capa
   let elVista = null;
+  // Armario
+  let filtroTipo = '';
+  let filtroColor = '';
+  let ficha = null;               // id de la prenda abierta
+  let formPrenda = null;          // { id|null } mientras se añade o edita una prenda
+  let fotoNueva = null;           // foto elegida en el formulario: { blob, fondo, url }
+  let quitarSubida = false;       // en el formulario: volver a la foto original
 
   const N = k => D.NOMBRES[k] || k;
   const vacio = () => ({ nombre: '', clima: [], ocasiones: [], nota: '', capas: { abajo: null, base: null, medio: null, abrigo: null, calzado: null, accesorio: [] } });
@@ -34,12 +41,13 @@ const Outfits = (() => {
     }
 
     el.innerHTML = `
-      ${editor ? '' : `
+      ${editor || ficha || formPrenda ? '' : `
       <div class="segmentado tres" role="tablist">
         ${[['hoy', 'Outfit de hoy'], ['outfits', 'Outfits'], ['armario', 'Armario']].map(([v, t]) =>
           `<button type="button" role="tab" aria-selected="${vista === v}" class="${vista === v ? 'activo' : ''}" data-acc="vista" data-v="${v}">${t}</button>`).join('')}
       </div>`}
-      ${editor ? vistaEditor() : vista === 'outfits' ? vistaOutfits() : vista === 'hoy' ? vistaHoy() : `<p class="vacio">Esta vista llega en la siguiente parte.</p>`}
+      ${editor ? vistaEditor() : vista === 'outfits' ? vistaOutfits() : vista === 'hoy' ? vistaHoy()
+        : formPrenda ? vistaFormPrenda() : ficha && D.prenda(ficha) ? vistaFicha(D.prenda(ficha)) : vistaArmario()}
       ${selector ? vistaSelector() : ''}`;
   }
 
@@ -265,6 +273,144 @@ const Outfits = (() => {
       </div>`;
   }
 
+  // ---------- Vista Armario ----------
+  const TIPOS = ['parte_arriba', 'parte_abajo', 'abrigo', 'calzado', 'accesorio'];
+  const OCASIONES = ['clase', 'gym', 'tomar_algo', 'fiesta', 'casa'];
+  const MUESTRA = {
+    blanco: '#f3f3f1', negro: '#111318', gris: '#9ca3af', azul: '#6b9be8', rosa: '#f2b8c6', verde: '#4ade80',
+    rojo: '#ef4444', beige: '#d8c3a5', 'marrón': '#8b5e3c', plata: '#c4c7cc', otro: '#6b7280',
+    multicolor: 'conic-gradient(#ef4444, #f5a524, #4ade80, #6b9be8, #d55181, #ef4444)',
+  };
+  const NOMBRE_COLOR = c => c.charAt(0).toUpperCase() + c.slice(1);
+
+  function vistaArmario() {
+    const todas = D.prendas();
+    const colores = [...new Set(todas.map(D.colorBase))].sort();
+    const lista = todas.filter(p => (!filtroTipo || p.tipo === filtroTipo) && (!filtroColor || D.colorBase(p) === filtroColor));
+    return `
+      <div class="cab-seccion">
+        <h2>${lista.length} ${lista.length === 1 ? 'prenda' : 'prendas'}</h2>
+        <button class="btn btn-mini" data-acc="prenda-nueva">+ Añadir prenda</button>
+      </div>
+      <div class="filtros">
+        <div class="chips" role="group" aria-label="Tipo">
+          <button class="chip ${!filtroTipo ? 'on' : ''}" data-acc="f-tipo" data-v="" aria-pressed="${!filtroTipo}">Todo</button>
+          ${TIPOS.map(t => `<button class="chip ${filtroTipo === t ? 'on' : ''}" data-acc="f-tipo" data-v="${t}" aria-pressed="${filtroTipo === t}">${N(t)}</button>`).join('')}
+        </div>
+        <div class="chips" role="group" aria-label="Color">
+          <button class="chip ${!filtroColor ? 'on' : ''}" data-acc="f-color" data-v="" aria-pressed="${!filtroColor}">Todos los colores</button>
+          ${colores.map(c => `<button class="chip ${filtroColor === c ? 'on' : ''}" data-acc="f-color" data-v="${c}" aria-pressed="${filtroColor === c}"><span class="muestra" style="background:${MUESTRA[c] || MUESTRA.otro}"></span>${NOMBRE_COLOR(c)}</button>`).join('')}
+        </div>
+      </div>
+      ${lista.length ? `
+        <div class="armario-lista">
+          ${lista.map(p => `
+            <button class="pieza pieza-opcion" data-acc="ficha" data-prenda="${U.esc(p.id)}" ${estiloFondo(p.id)}>
+              ${img(p.id)}
+              <span class="pieza-nombre">${U.esc(p.nombre)}</span>
+              <span class="pieza-pie">${U.esc(p.nombre)}</span>
+            </button>`).join('')}
+        </div>` : `<p class="vacio">No hay prendas con ese filtro.</p>`}`;
+  }
+
+  const puntos = (v, etq) => `
+    <div class="valor-fila"><span class="muted">${etq}</span>
+      <span class="puntos" role="img" aria-label="${v} de 5">${[1, 2, 3, 4, 5].map(i => `<i class="${i <= v ? 'on' : ''}"></i>`).join('')}</span>
+      <span class="peq muted">${v}/5</span></div>`;
+
+  function vistaFicha(p) {
+    const usos = D.outfitsCon(p.id);
+    const detalles = [['Subtipo', p.subtipo], ['Color', p.color_principal], ['Estampado', p.estampado], ['Tejido', p.tejido],
+      ['Corte', p.corte], ['Cuello', p.cuello], ['Lavado', p.lavado], ['Detalles', p.detalles]].filter(([, v]) => v);
+    return `
+      <div class="cab-seccion">
+        <button class="enlace" data-acc="cerrar-ficha">‹ Armario</button>
+        <button class="enlace" data-acc="prenda-editar" data-prenda="${U.esc(p.id)}">Editar</button>
+      </div>
+      <article class="ficha">
+        <div class="pieza ficha-foto" ${estiloFondo(p.id)}>${img(p.id)}<span class="pieza-nombre">Sin foto todavía</span></div>
+        <div class="ficha-datos">
+          <div>
+            <h2>${U.esc(p.nombre)}</h2>
+            <p class="muted">${N(p.tipo)}${p.marca ? ` · ${U.esc(p.marca)}` : ''}</p>
+          </div>
+          ${puntos(p.abriga ?? 0, 'Abriga')}
+          ${puntos(p.formalidad ?? 0, 'Formalidad')}
+          ${(p.clima || []).length ? `<div class="etiquetas">${p.clima.map(x => `<span class="etq etq-clima">${N(x)}</span>`).join('')}</div>` : ''}
+          ${(p.ocasiones || []).length ? `<div class="etiquetas">${p.ocasiones.map(x => `<span class="etq etq-situacion">${N(x)}</span>`).join('')}</div>` : ''}
+          ${p.notas ? `<p class="ficha-notas">${U.esc(p.notas)}</p>` : ''}
+          ${detalles.length ? `<dl class="ficha-detalles">${detalles.map(([k, v]) => `<dt>${k}</dt><dd>${U.esc(Array.isArray(v) ? v.join(', ') : v)}</dd>`).join('')}</dl>` : ''}
+        </div>
+      </article>
+      <section class="bloque">
+        <h3>${usos.length ? `En ${usos.length} ${usos.length === 1 ? 'outfit' : 'outfits'}` : 'Todavía no está en ningún outfit'}</h3>
+        ${usos.length ? `<ul class="lista usos">${usos.map(o => `
+          <li><button class="uso" data-acc="editar" data-outfit="${U.esc(o.id)}">
+            <span class="uso-fotos">${D.idsDe(D.capasDe(o.id)).slice(0, 4).map(id => `<span class="pieza pieza-micro" ${estiloFondo(id)}>${img(id)}</span>`).join('')}</span>
+            <span class="crece">${U.esc(o.nombre)}</span><span class="muted">›</span>
+          </button></li>`).join('')}</ul>` : ''}
+      </section>
+      <button class="enlace peligro" data-acc="prenda-borrar" data-prenda="${U.esc(p.id)}">Borrar esta prenda</button>`;
+  }
+
+  function vistaFormPrenda() {
+    const p = formPrenda.id ? D.prenda(formPrenda.id) : {};
+    const sel = (v, x) => v === x ? 'selected' : '';
+    const marcado = (lista, v) => (lista || []).includes(v) ? 'checked' : '';
+    const escala = (nombre, valor) => `
+      <div class="escala" role="radiogroup">
+        ${[0, 1, 2, 3, 4, 5].map(i => `<label><input type="radio" name="${nombre}" value="${i}" ${Number(valor ?? 2) === i ? 'checked' : ''}><span>${i}</span></label>`).join('')}
+      </div>`;
+    const fotoActual = fotoNueva ? fotoNueva.url : (!quitarSubida && formPrenda.id ? D.foto(formPrenda.id) : (formPrenda.id ? `data/fotos/${encodeURIComponent(formPrenda.id)}.webp` : null));
+    return `
+      <div class="cab-seccion">
+        <button class="enlace" data-acc="cerrar-form">‹ ${formPrenda.id ? 'Volver' : 'Armario'}</button>
+        <span class="muted peq">${formPrenda.id ? 'Editar prenda' : 'Nueva prenda'}</span>
+      </div>
+      <form class="editor-outfit form-prenda" id="form-prenda">
+        <div class="foto-campo">
+          <div class="pieza ficha-foto" ${fotoNueva ? `style="background:${fotoNueva.fondo}"` : formPrenda.id ? estiloFondo(formPrenda.id) : ''}>
+            ${fotoActual ? `<img src="${fotoActual}" alt="" onerror="this.remove()">` : ''}<span class="pieza-nombre">Sin foto</span>
+          </div>
+          <label class="btn btn-sec btn-mini">${fotoActual ? 'Cambiar foto' : 'Añadir foto'}
+            <input type="file" accept="image/*" data-campo="foto" hidden>
+          </label>
+          ${fotoNueva || (formPrenda.id && D.tieneFotoSubida(formPrenda.id) && !quitarSubida) ? `<button type="button" class="enlace" data-acc="foto-original">Quitar foto subida</button>` : ''}
+        </div>
+        <label class="campo">Nombre *<input name="nombre" required maxlength="60" value="${U.esc(p.nombre || '')}" placeholder="Ej. Camiseta blanca básica"></label>
+        <div class="dos-col">
+          <label class="campo">Tipo
+            <select name="tipo">${TIPOS.map(t => `<option value="${t}" ${sel(p.tipo || 'parte_arriba', t)}>${N(t)}</option>`).join('')}</select>
+          </label>
+          <label class="campo">Marca<input name="marca" maxlength="40" value="${U.esc(p.marca || '')}"></label>
+        </div>
+        <div class="dos-col">
+          <label class="campo">Subtipo<input name="subtipo" maxlength="40" value="${U.esc(p.subtipo || '')}" placeholder="Ej. sudadera con capucha"></label>
+          <label class="campo">Color<input name="color_principal" maxlength="40" value="${U.esc(p.color_principal || '')}" placeholder="Ej. negro"></label>
+        </div>
+        <label class="campo">Capa (si es parte de arriba)
+          <select name="capa">
+            <option value="" ${sel(p.capa || '', '')}>—</option>
+            <option value="base" ${sel(p.capa, 'base')}>Base (camiseta, camisa)</option>
+            <option value="medio" ${sel(p.capa, 'medio')}>Capa media (sudadera, jersey)</option>
+            <option value="abrigo" ${sel(p.capa, 'abrigo')}>Abrigo</option>
+          </select>
+        </label>
+        <div class="campo">Abriga${escala('abriga', p.abriga)}</div>
+        <div class="campo">Formalidad${escala('formalidad', p.formalidad)}</div>
+        <div class="campo">Clima<div class="chips">${D.CLIMAS.map(c => `<label class="chip-check"><input type="checkbox" name="clima" value="${c}" ${marcado(p.clima, c)}><span>${N(c)}</span></label>`).join('')}</div></div>
+        <div class="campo">Ocasiones<div class="chips">${OCASIONES.map(c => `<label class="chip-check"><input type="checkbox" name="ocasiones" value="${c}" ${marcado(p.ocasiones, c)}><span>${N(c)}</span></label>`).join('')}</div></div>
+        <label class="campo">Notas<textarea name="notas" rows="3" maxlength="300">${U.esc(p.notas || '')}</textarea></label>
+        <button class="btn ancho">${formPrenda.id ? 'Guardar cambios' : 'Añadir al armario'}</button>
+      </form>`;
+  }
+
+  function cerrarForm() {
+    if (fotoNueva) URL.revokeObjectURL(fotoNueva.url);
+    formPrenda = fotoNueva = null;
+    quitarSubida = false;
+  }
+
   // ---------- Eventos ----------
   function alClic(e, rerender) {
     const b = e.target.closest('[data-acc]');
@@ -273,7 +419,21 @@ const Outfits = (() => {
     // Clic en el fondo oscuro del selector (no dentro de él): cerrar.
     if (acc === 'cerrar-selector' && b.classList.contains('selector-fondo') && e.target !== b) return;
 
-    if (acc === 'vista') vista = b.dataset.v;
+    if (acc === 'vista') { vista = b.dataset.v; ficha = null; cerrarForm(); }
+    else if (acc === 'f-tipo') filtroTipo = b.dataset.v;
+    else if (acc === 'f-color') filtroColor = b.dataset.v;
+    else if (acc === 'ficha') { ficha = b.dataset.prenda; window.scrollTo(0, 0); }
+    else if (acc === 'cerrar-ficha') ficha = null;
+    else if (acc === 'prenda-nueva') { cerrarForm(); formPrenda = { id: null }; window.scrollTo(0, 0); }
+    else if (acc === 'prenda-editar') { cerrarForm(); formPrenda = { id: b.dataset.prenda }; window.scrollTo(0, 0); }
+    else if (acc === 'cerrar-form') cerrarForm();
+    else if (acc === 'foto-original') { if (fotoNueva) { URL.revokeObjectURL(fotoNueva.url); fotoNueva = null; } else quitarSubida = true; }
+    else if (acc === 'prenda-borrar') {
+      const p = D.prenda(b.dataset.prenda), n = D.outfitsCon(p.id).length;
+      if (!confirm(`¿Borrar «${p.nombre}» del armario?${n ? ` Está en ${n} ${n === 1 ? 'outfit' : 'outfits'}: se quitará de ${n === 1 ? 'él' : 'ellos'}.` : ''}`)) return;
+      D.borrarPrenda(p.id);
+      ficha = null;
+    }
     else if (acc === 'hoy-clima') { climaManual = b.dataset.v === D.tiempoGuardado()?.clima ? null : b.dataset.v; indiceHoy = 0; }
     else if (acc === 'hoy-situacion') { situacionHoy = b.dataset.v; indiceHoy = 0; }
     else if (acc === 'hoy-otro') indiceHoy++;
@@ -319,11 +479,53 @@ const Outfits = (() => {
     rerender();
   }
 
+  // Guardar el formulario de prenda.
+  async function alEnviar(e, rerender) {
+    if (e.target.id !== 'form-prenda') return;
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const nombre = String(f.get('nombre') || '').trim();
+    if (!nombre) return;
+    const datos = {
+      nombre, tipo: f.get('tipo'), marca: String(f.get('marca')).trim(), subtipo: String(f.get('subtipo')).trim(),
+      color_principal: String(f.get('color_principal')).trim().toLowerCase(),
+      capa: f.get('tipo') === 'parte_arriba' || f.get('tipo') === 'abrigo' ? (f.get('capa') || (f.get('tipo') === 'abrigo' ? 'abrigo' : 'base')) : undefined,
+      abriga: Number(f.get('abriga')), formalidad: Number(f.get('formalidad')),
+      clima: f.getAll('clima'), ocasiones: f.getAll('ocasiones'), notas: String(f.get('notas')).trim(),
+    };
+    if (datos.capa === undefined) delete datos.capa;
+    const id = D.guardarPrenda(datos, formPrenda.id);
+    try {
+      if (fotoNueva) await D.guardarFoto(id, { blob: fotoNueva.blob, fondo: fotoNueva.fondo });
+      else if (quitarSubida) await D.quitarFoto(id);
+    } catch { alert('La prenda se ha guardado, pero no se ha podido guardar la foto en este dispositivo.'); }
+    cerrarForm();
+    ficha = id;
+    rerender();
+  }
+
   // Nombre y nota se guardan en el borrador al escribir (sin repintar).
-  function alEscribir(e) {
+  function alEscribir(e, rerender) {
+    if (e.target.dataset.campo === 'foto' && e.target.files?.[0]) {
+      D.procesarFoto(e.target.files[0]).then(foto => {
+        if (fotoNueva) URL.revokeObjectURL(fotoNueva.url);
+        // Se conserva lo ya escrito en el formulario al repintar la foto.
+        const form = document.getElementById('form-prenda');
+        const escrito = form ? Object.fromEntries([...form.elements].filter(x => x.name && x.type !== 'file' && x.type !== 'radio' && x.type !== 'checkbox').map(x => [x.name, x.value])) : {};
+        const marcas = form ? [...form.elements].filter(x => (x.type === 'radio' || x.type === 'checkbox')).map(x => [x.name, x.value, x.checked]) : [];
+        fotoNueva = { ...foto, url: URL.createObjectURL(foto.blob) };
+        rerender();
+        const n = document.getElementById('form-prenda');
+        if (n) {
+          for (const [k, v] of Object.entries(escrito)) if (n.elements[k]) n.elements[k].value = v;
+          for (const [k, v, c] of marcas) { const x = [...n.elements].find(y => y.name === k && y.value === v); if (x) x.checked = c; }
+        }
+      }).catch(() => alert('No se ha podido leer esa imagen.'));
+      return;
+    }
     const campo = e.target.dataset.campo;
     if (editor && (campo === 'nombre' || campo === 'nota')) editor.b[campo] = e.target.value;
   }
 
-  return { id: 'outfits', nombre: 'Outfits', icono: '👕', render, alClic, alEscribir };
+  return { id: 'outfits', nombre: 'Outfits', icono: '👕', render, alClic, alEscribir, alEnviar };
 })();

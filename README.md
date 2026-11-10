@@ -16,6 +16,8 @@ Web app personal (móvil y ordenador) para controlar finanzas y entrenos. Diseñ
   - La planificación está en `js/gym-plan.js`: cambia ejercicios, series o reps ahí sin tocar la lógica.
 - **Outfits**: armario y outfits a partir de `outfits-para-code/armario.json`.
   - Vista **Outfits**: filtros por clima y situación; cada outfit en cuadrícula (pantalón a la izquierda; base, medio, abrigo y calzado a la derecha; accesorios debajo). Tocando una prenda se cambia por otra del mismo tipo y se guarda como outfit nuevo o sustituyendo el original. Botón para crear outfits desde cero.
+  - Vista **Outfit de hoy**: tiempo de Barcelona (Open-Meteo) → clima por temperatura máxima (< 8 mucho frío, 8–15 frío, 15–22 templado, > 22 calor), situación del día, «Otro» y «Me lo pongo» (historial; evita lo usado en los 3 días anteriores).
+  - Vista **Armario**: prendas con filtros por tipo y color, ficha con los outfits donde aparece, y añadir, editar o borrar prendas (al borrarla se quita de sus outfits). Las fotos subidas desde la app se guardan en el dispositivo (IndexedDB) y no van en la copia de seguridad JSON.
   - Datos en tablas `prendas`, `outfits`, `outfit_prendas` y `outfit_historial` (ver `js/outfits-datos.js`). Una prenda existe una sola vez.
   - Fotos: guarda cada una en `outfits-para-code/fotos/<id>.png`. `scripts/preparar-armario.py` las convierte a WebP de 600 px al publicar. Si falta una foto se ve una tarjeta gris con el nombre.
 - *Próximamente*: comidas, horario diario y outfits.

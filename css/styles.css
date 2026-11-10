@@ -637,3 +637,59 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 @media (min-width: 860px) {
   .vista:has(.tiempo-hoy) { max-width: 560px; }
 }
+
+/* Armario */
+.armario-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+@media (min-width: 860px) {
+  .vista:has(.armario-lista) { max-width: 1180px; margin: 0; }
+  .armario-lista { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+}
+.muestra { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; border: 1px solid rgba(255, 255, 255, .25); }
+
+.ficha { display: flex; flex-direction: column; gap: 16px; }
+.ficha-foto { width: 100%; aspect-ratio: 1; cursor: default; }
+.ficha-datos { display: flex; flex-direction: column; gap: 12px; }
+.ficha-datos h2 { font-size: 24px; text-transform: none; }
+.ficha-datos p { margin: 4px 0 0; }
+.ficha-notas { color: var(--texto-2); font-size: 15px; }
+.ficha-detalles { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0; font-size: 14px; }
+.ficha-detalles dt { color: var(--muted); }
+.ficha-detalles dd { margin: 0; }
+@media (min-width: 860px) {
+  .vista:has(.ficha) { max-width: 880px; }
+  .ficha { flex-direction: row; align-items: flex-start; gap: 28px; }
+  .ficha-foto { width: 360px; flex: 0 0 auto; }
+  .ficha-datos { flex: 1; }
+}
+.valor-fila { display: flex; align-items: center; gap: 12px; }
+.valor-fila > .muted:first-child { width: 86px; font-size: 14px; }
+.puntos { display: flex; gap: 6px; }
+.puntos i { width: 22px; height: 8px; border-radius: 4px; background: var(--pista); }
+.puntos i.on { background: var(--acento); }
+
+.usos { list-style: none; margin: 0; padding: 0; }
+.usos li { padding: 0; border-top: 1px solid var(--borde); }
+.usos li:first-child { border-top: 0; }
+.uso { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 0; background: none; border: 0; text-align: left; font-size: 15px; cursor: pointer; }
+.uso-fotos { display: flex; gap: 4px; }
+.pieza-micro { width: 36px; height: 36px; border-radius: 8px; cursor: inherit; }
+
+/* Formulario de prenda */
+.form-prenda input:not([type]), .form-prenda input[name], .form-prenda select { width: 100%; }
+.foto-campo { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.foto-campo .ficha-foto { width: min(100%, 280px); }
+.escala { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+.escala label { position: relative; }
+.escala input, .chip-check input { position: absolute; opacity: 0; pointer-events: none; }
+.escala span {
+  display: grid; place-items: center; min-height: 44px; border-radius: 10px; cursor: pointer;
+  background: var(--superficie-2); border: 1px solid var(--borde); color: var(--texto-2); font-weight: 600;
+}
+.escala input:checked + span { background: var(--acento); border-color: var(--acento); color: var(--acento-texto); }
+.escala input:focus-visible + span, .chip-check input:focus-visible + span { outline: 2px solid var(--acento); outline-offset: 2px; }
+.chip-check { position: relative; }
+.chip-check span {
+  display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px; cursor: pointer;
+  background: var(--superficie); border: 1px solid var(--borde); color: var(--texto-2); font-size: 14px;
+}
+.chip-check input:checked + span { background: var(--superficie-2); border-color: var(--acento); color: var(--acento); font-weight: 600; }
