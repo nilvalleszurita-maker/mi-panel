@@ -1,8 +1,8 @@
 # Fotos de las prendas
 
-Descarga cada imagen desde su enlace de Canva (botón Descargar, formato PNG) y guárdala en esta carpeta con el nombre EXACTO de la columna «Archivo».
+Cada foto se llama <id>.png, con el id de la prenda en armario.json.
 
-## Ya generadas (descargar ahora)
+## Ya generadas (ya están en esta carpeta)
 
 | Prenda | Archivo | Enlace |
 |---|---|---|

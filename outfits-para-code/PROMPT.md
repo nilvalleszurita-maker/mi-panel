@@ -1,8 +1,8 @@
 # Pestaña Outfits — instrucciones para Claude Code
 
 ## Antes de empezar
-1. Copia la carpeta `outfits-para-code/` dentro de la carpeta de tu app.
-2. Descarga las fotos ya generadas siguiendo `fotos/LEEME.md`.
+1. La carpeta `outfits-para-code/` ya está en el repositorio (rama `outfits-datos`).
+2. Las fotos ya generadas están en `fotos/` (ver `fotos/LEEME.md`).
 3. Abre Claude Code en la carpeta de tu app y pega el prompt de abajo.
 
 ---
