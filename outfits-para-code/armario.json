@@ -336,9 +336,8 @@
       ],
       "notas": "Logo bordado negro con contorno blanco. Va con todo lo negro, gris y blanco.",
       "foto": "fotos/gorra-negra-01.png",
-      "imagen_canva": null,
-      "marca": "New Era",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una gorra de béisbol negra de visera curva, con un monograma de dos letras bordado en negro con contorno blanco en el frontal, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHah_bux_w",
+      "marca": "New Era"
     },
     {
       "id": "gorra-blanca-01",
@@ -449,9 +448,8 @@
       ],
       "notas": "Blancas con logo pequeño. Algo gastadas: mejor para el día a día.",
       "foto": "fotos/champion-blancas-01.png",
-      "imagen_canva": null,
-      "marca": "Champion",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista lateral de una sola zapatilla, solo una zapatilla blanca de baloncesto baja estilo retro, piel sintética blanca perforada, suela blanca plana con relieve, pequeño parche bordado rojo, blanco y azul marino en el lateral, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHah3m1jeE",
+      "marca": "Champion"
     },
     {
       "id": "zapatillas-negras-lisas-01",
@@ -583,10 +581,9 @@
       ],
       "notas": "Se puede llevar abierta sobre camiseta, como chaqueta ligera.",
       "foto": "fotos/hoodie-cremallera-gris-01.png",
-      "imagen_canva": null,
+      "imagen_canva": "MAHah43EvEo",
       "marca": "Polo Ralph Lauren",
-      "capa": "medio",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una sudadera gris jaspeado con capucha y cremallera completa, cordones grises, bolsillos canguro, puños de canalé, pequeño logo bordado azul marino en el pecho izquierdo, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "capa": "medio"
     },
     {
       "id": "camiseta-blanca-stussy-01",
@@ -790,9 +787,8 @@
       ],
       "notas": "Esfera negra, correa de piel negra. Ideal con outfits negros y de noche.",
       "foto": "fotos/reloj-dg-negro-01.png",
-      "imagen_canva": null,
-      "marca": "D&G",
-      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista de frente, solo un reloj de acero redondo, esfera negra con números grandes plateados y fecha, correa de piel negra lisa, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+      "imagen_canva": "MAHahyvDfsM",
+      "marca": "D&G"
     },
     {
       "id": "camiseta-negra-ck-01",
