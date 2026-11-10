@@ -37,6 +37,8 @@ const Store = (() => {
     // Datos de la pantalla Hoy que aún no tienen pantalla propia (comidas, hábitos,
     // tareas, agenda). Estructura de tablas: ver js/hoy-datos.js.
     hoy: { sembrado: false, comidas: [], habitos: [], habitos_registro: [], tareas: [], agenda: [] },
+    // Asignaturas y evaluaciones (tablas: ver js/estudio-datos.js).
+    estudio: { sembrado: false, curso: '', asignaturas: [], evaluaciones: [] },
     // Armario y outfits (tablas: ver js/outfits-datos.js).
     armario: { sembrado: false, prendas: [], outfits: [], outfit_prendas: [], outfit_historial: [] },
   });

@@ -104,8 +104,29 @@ const Hoy = (() => {
       <div class="hoy-grid">
         <div class="hoy-col">
           ${entreno()}
+          ${examen()}
         </div>
       </div>`;
+  }
+
+  // ---------- Próximo examen (de la pestaña Estudio) ----------
+  function examen() {
+    const x = Estudio.proximoExamen();
+    if (!x) {
+      // La primera vez, las asignaturas aún no están cargadas: se cargan y se repinta.
+      EstudioDatos.asegurar().then(ok => { if (ok && Estudio.proximoExamen() && location.hash.replace('#', '') in { '': 1, hoy: 1 }) document.getElementById('vista') && Hoy.render(document.getElementById('vista')); });
+      return '';
+    }
+    const cuando = x.aprox && x.fecha_texto ? x.fecha_texto : Estudio.fechaTxt(x.fecha);
+    return `
+      <a class="examen-hoy" href="#estudio">
+        <div class="crece">
+          <span class="muted peq">Próximo examen</span>
+          <strong>${U.esc(x.nombre)}</strong>
+          <span class="muted peq">${U.esc(x.asignatura)} · ${U.esc(cuando)}</span>
+        </div>
+        <span class="examen-hoy-dias ${x.dias <= 14 ? 'cerca' : ''}">${x.dias === 0 ? 'Hoy' : `${x.dias} ${x.dias === 1 ? 'día' : 'días'}`}</span>
+      </a>`;
   }
 
   // ---------- Entreno de hoy ----------

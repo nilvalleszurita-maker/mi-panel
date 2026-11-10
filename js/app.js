@@ -2,7 +2,7 @@
 // Para añadir una sección nueva (Comidas, Horario, Outfits…) basta con crear
 // su archivo en js/, incluirlo en index.html y añadirlo a esta lista.
 // La primera es la pantalla de inicio.
-const MODULOS = [Hoy, Finanzas, Gym, Outfits];
+const MODULOS = [Hoy, Finanzas, Gym, Estudio, Outfits];
 
 // Iconos del menú (trazos del diseño). Si un módulo no tiene, se usa su emoji.
 const trazo = d => `<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
@@ -10,6 +10,7 @@ const ICONOS = {
   hoy: trazo('<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path>'),
   finanzas: trazo('<rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18"></path>'),
   gym: trazo('<path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"></path>'),
+  estudio: trazo('<path d="M4 5h11a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3z"></path><path d="M8 9h6M8 13h4"></path>'),
   outfits: trazo('<path d="M10 6a2 2 0 1 1 3 1.7c-.6.4-1 1-1 1.7V10"></path><path d="M12 10l-8.6 6.4A1.4 1.4 0 0 0 4.2 19h15.6a1.4 1.4 0 0 0 .8-2.6z"></path>'),
 };
 

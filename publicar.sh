@@ -16,6 +16,8 @@ git archive HEAD "${ARCHIVOS[@]}" | tar -x -C dist/app
 # Armario de Outfits: armario.json y fotos optimizadas desde outfits-para-code/.
 git archive HEAD outfits-para-code | tar -x -C dist
 python3 scripts/preparar-armario.py dist/app dist/outfits-para-code
+# Asignaturas de Estudio.
+git show HEAD:estudio-y-trabajo-para-code/datos/asignaturas.json > dist/app/data/asignaturas.json
 node scripts/construir-worker.mjs
 
 npx --yes wrangler@4 deploy "$@"

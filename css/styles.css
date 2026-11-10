@@ -702,3 +702,80 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 }
 .fijo-check.on { background: var(--acento); border-color: var(--acento); }
 .fijo-fila-edit { grid-template-columns: 1fr 96px 32px; }
+
+/* ---------- Estudio ---------- */
+.estudio-cab { padding-top: 12px; }
+@media (min-width: 860px) { .estudio-cab { padding-top: 0; } }
+.examen-grande {
+  display: flex; align-items: center; gap: 16px; padding: 18px;
+  background: #33281a; border-radius: 20px;
+}
+.vacio-examen p { margin: 0; color: #f5d9a8; }
+.examen-dias {
+  width: 84px; height: 84px; flex: 0 0 auto; border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--ambar); color: var(--acento-texto);
+}
+.examen-dias strong { font-family: var(--fuente-titulos); font-size: 36px; font-weight: 700; line-height: 1; }
+.examen-dias span { font-size: 12px; font-weight: 600; }
+.examen-info { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.examen-info strong { font-family: var(--fuente-titulos); font-size: 18px; font-weight: 600; }
+.examen-info span, .examen-etq { font-size: 13px; color: #f5d9a8; }
+.examen-etq { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+.examenes-lista { gap: 0; padding: 4px 16px; }
+.examen-fila { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-top: 1px solid var(--borde); }
+.examen-fila:first-child { border-top: 0; }
+.examen-d { width: 54px; flex: 0 0 auto; font-family: var(--fuente-titulos); font-size: 17px; font-weight: 600; color: #d3d8e2; }
+.examen-d.cerca { color: var(--ambar); }
+.fijar { display: flex; gap: 8px; align-items: center; margin-top: 6px; }
+.fijar input { min-height: 36px; max-width: 170px; }
+.enlace.peq { font-size: 13px; padding: 2px 0; }
+.examen-info .enlace { color: var(--ambar); }
+
+.calc {
+  display: flex; flex-direction: column; gap: 14px; padding: 20px;
+  background: var(--superficie-2); border-radius: 20px;
+}
+.calc-cab { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.calc-cab h3 { font-family: var(--fuente-titulos); font-size: 20px; }
+.calc-motivo { display: block; margin-top: 4px; font-size: 13px; color: var(--texto-2); }
+.calc-cab .pastilla { white-space: nowrap; }
+.calc-nec { display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; }
+.calc-nec strong { font-family: var(--fuente-titulos); font-size: 54px; font-weight: 700; line-height: 1; }
+.calc-nec span { font-size: 14px; color: var(--texto-2); padding-bottom: 8px; }
+.calc-barra { display: flex; flex-direction: column; gap: 6px; }
+.calc-barra .kpi-barra { height: 8px; }
+.calc-pie { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; color: var(--texto-2); }
+.calc-regla { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.45; }
+.aviso-pesos { margin: 0; color: var(--ambar); font-size: 13px; }
+
+.evaluaciones { display: flex; flex-direction: column; gap: 10px; }
+.eval { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--superficie); border-radius: 16px; }
+.eval-nombre { font-size: 15px; font-weight: 500; }
+.eval-parte { margin-left: 18px; }
+.eval-recon { border: 1px dashed var(--borde); }
+.nota-campo { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 11px; color: var(--muted); }
+.nota-campo input {
+  width: 64px; min-height: 44px; padding: 0; text-align: center; font-size: 18px; font-weight: 600;
+  background: var(--fondo); border: 1px solid #3a4150; border-radius: 12px;
+}
+.nota-campo input.con-nota { border-color: var(--acento); }
+.nota-calculada { display: flex; flex-direction: column; align-items: center; min-width: 64px; font-size: 11px; color: var(--muted); }
+.nota-calculada strong { font-family: var(--fuente-titulos); font-size: 20px; color: var(--texto); }
+
+.editor-asig h3 { margin-top: 4px; }
+.ed-eval { display: flex; flex-direction: column; gap: 8px; padding: 12px; background: var(--superficie-2); border-radius: 12px; }
+.ed-eval-fila { display: flex; gap: 8px; align-items: flex-end; }
+.ed-eval-fila > input { flex: 1; }
+.ed-eval-fila .campo { flex: 1; }
+.ed-peso { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; color: var(--muted); }
+.ed-peso input { width: 64px; text-align: center; }
+
+/* Próximo examen en Hoy */
+.examen-hoy {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px; color: var(--texto); text-decoration: none;
+  background: var(--superficie); border-radius: 16px;
+}
+.examen-hoy .crece { display: flex; flex-direction: column; gap: 2px; }
+.examen-hoy strong { font-size: 15px; font-weight: 500; }
+.examen-hoy-dias { font-family: var(--fuente-titulos); font-size: 15px; font-weight: 600; color: var(--texto-2); white-space: nowrap; }
+.examen-hoy-dias.cerca { color: var(--ambar); }
