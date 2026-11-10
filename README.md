@@ -19,7 +19,7 @@ Web app personal (móvil y ordenador) para controlar finanzas y entrenos. Diseñ
   - Vista **Armario**: prendas con filtros por tipo y color, ficha con los outfits donde aparece, y añadir, editar o borrar prendas (al borrarla se quita de sus outfits). Las fotos subidas desde la app se guardan en el dispositivo (IndexedDB) y no van en la copia de seguridad JSON.
   - Datos en tablas `prendas`, `outfits`, `outfit_prendas` y `outfit_historial` (ver `js/outfits-datos.js`). Una prenda existe una sola vez.
   - Sincronización: cada vez que se abre, la app compara con `armario.json` y añade las prendas y outfits nuevos, y actualiza lo que cambie en el JSON si no lo has editado en la app (lo que borras en la app no vuelve). `scripts/armario-v1.json` es la primera versión, que sirve de referencia a los móviles que la cargaron antes de existir la sincronización.
-  - Fotos: guarda cada una en `outfits-para-code/fotos/<id>.png`. `scripts/preparar-armario.py` las convierte a WebP de 600 px al publicar. Si falta una foto se ve una tarjeta gris con el nombre.
+  - Fotos: guarda cada una en `outfits-para-code/fotos/<id>.jpg` (también vale `.png`). `scripts/preparar-armario.py` las convierte a WebP de 600 px al publicar. Si falta una foto se ve una tarjeta gris con el nombre.
 - *Próximamente*: comidas, horario diario y outfits.
 
 ## Cómo usarla

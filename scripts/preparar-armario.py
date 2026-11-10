@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Prepara los datos de Outfits para la app.
 
-Lee outfits-para-code/ (la fuente: armario.json y fotos/<id>.png) y escribe en
+Lee outfits-para-code/ (la fuente: armario.json y fotos/<id>.jpg o .png) y escribe en
 <destino>/data/:
   - armario.json  sin los campos que son solo para el autor
                   (imagen_canva, prompt_imagen_pendiente).
@@ -56,7 +56,9 @@ def main(destino: Path, ORIGEN: Path = ORIGEN_POR_DEFECTO) -> None:
 
     hechas = 0
     fondos = {}
-    for png in sorted((ORIGEN / 'fotos').glob('*.png')):
+    # Fotos en JPG o PNG (si hubiera las dos de una prenda, se usa la última por orden).
+    EXTENSIONES = {'.jpg', '.jpeg', '.png'}
+    for png in sorted(f for f in (ORIGEN / 'fotos').iterdir() if f.suffix.lower() in EXTENSIONES):
         with Image.open(png) as im:
             im = im.convert('RGB')
             im.thumbnail((LADO, LADO), Image.LANCZOS)
