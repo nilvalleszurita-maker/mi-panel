@@ -38,10 +38,14 @@ PESTAÑA ESTUDIO (calculadora de notas)
 PESTAÑA TRABAJO (días de agencia)
 - Botón "+" para añadir un día: fecha, lugar, hora inicio y fin, notas.
 - Ajuste de tarifa €/h (y opción de importe fijo por día si un trabajo es así).
-- Resumen del mes: ganado, cobrado, pendiente (barra verde/naranja), días y horas.
+- BRUTO Y NETO: la tarifa es en bruto. Neto = bruto × 398,02 / 435.
+  Muestra siempre los dos: el neto en grande y el bruto al lado (en el resumen
+  del mes y en cada jornada). Guarda el factor 398,02/435 en ajustes para poder
+  cambiarlo si cambia la retención.
+- Resumen del mes: ganado (neto y bruto), cobrado, pendiente (barra verde/naranja), días y horas.
 - Lista de jornadas; tocando una se marca como cobrada.
 - IMPORTANTE: al marcar una jornada como cobrada, crea automáticamente un
-  ingreso en Finanzas (categoría "Agencia") con la fecha de cobro; al desmarcarla,
+  ingreso en Finanzas por el importe NETO (categoría "Agencia") con la fecha de cobro; al desmarcarla,
   bórralo. Así no lo apunto dos veces.
 - Aviso si hay días pendientes de cobrar desde hace más de 30 días.
 - Selector de mes para ver meses anteriores.

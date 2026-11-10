@@ -30,7 +30,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
 
   <div style="padding: 12px 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
     <div style="background: #1F2533; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 6px; grid-column: span 2">
-      <span style="font-size: 12px; color: #B4BDCC">Ganado este mes</span>
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-size: 12px; color: #B4BDCC">Ganado este mes · neto</span><span style="font-size: 12px; color: #B4BDCC">Bruto {{totalBrutoTxt}}</span></div>
       <span style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; line-height: 1">{{totalTxt}}</span>
       <div style="height: 8px; border-radius: 8px; background: #2A2F3A; display: flex; overflow: hidden; margin-top: 6px">
         <div style="width: {{anchoCobrado}}; background: #7DD3A8"></div>
@@ -55,7 +55,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
     <div style="background: #181B22; border-radius: 16px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
       <div style="display: flex; flex-direction: column; gap: 2px">
         <span style="font-size: 14px; font-weight: 500">Tu tarifa</span>
-        <span style="font-size: 12px; color: #9AA3B2">Ejemplo · pon la tuya</span>
+        <span style="font-size: 12px; color: #9AA3B2">Bruto · ejemplo, pon la tuya</span>
       </div>
       <label style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: #B4BDCC">
         <input type="number" min="0" step="0.5" value="{{tarifa}}" onInput="{{setTarifa}}" aria-label="Tarifa por hora en euros" style="width: 72px; height: 44px; box-sizing: border-box; border-radius: 12px; border: 1px solid #3A4150; background: #0F1115; color: #E8EAF0; font-size: 18px; font-weight: 600; text-align: center">
@@ -81,6 +81,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
         </div>
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px">
           <span style="font-size: 15px; font-weight: 600">{{j.importeTxt}}</span>
+          <span style="font-size: 11px; color: #9AA3B2">{{j.brutoTxt}} bruto</span>
           <span style="font-size: 11px; font-weight: 600; color: {{j.chipColor}}; background: {{j.chipFondo}}; border-radius: 999px; padding: 2px 8px">{{j.estado}}</span>
         </div>
       </button>
@@ -125,21 +126,22 @@ class Component extends DCLogic {
     const js = this.state.jornadas;
     let tot = 0, cob = 0, hrs = 0;
     js.forEach((j) => { const h = this.horas(j), imp = h * t; hrs += h; tot += imp; if (j.cobrado) cob += imp; });
+    const NETO = 398.02 / 435;
     const pen = tot - cob, npen = js.filter((j) => !j.cobrado).length;
     return {
       accent: accent,
       tarifa: this.state.tarifa,
       setTarifa: (e) => this.setState({ tarifa: e.target.value }),
-      totalTxt: this.eur(tot), cobradoTxt: this.eur(cob), pendienteTxt: this.eur(pen),
+      totalTxt: this.eur(tot * NETO), totalBrutoTxt: this.eur(tot), cobradoTxt: this.eur(cob * NETO), pendienteTxt: this.eur(pen * NETO),
       anchoCobrado: tot ? (cob / tot * 100) + '%' : '0%', anchoPendiente: tot ? (pen / tot * 100) + '%' : '0%',
       dias: js.length, horasTxt: (Math.round(hrs * 10) / 10).toString().replace('.', ',') + ' h',
-      aviso: npen ? 'Tienes ' + npen + (npen === 1 ? ' día' : ' días') + ' sin cobrar (' + this.eur(pen) + '). Se sumarán a Finanzas al marcarlos.' : 'Todo cobrado este mes. ¡Bien!',
+      aviso: npen ? 'Tienes ' + npen + (npen === 1 ? ' día' : ' días') + ' sin cobrar (' + this.eur(pen * NETO) + ' netos). Se sumarán a Finanzas al marcarlos.' : 'Todo cobrado este mes. ¡Bien!',
       anadir: () => this.setState({ jornadas: [{ dia: 22, sem: 'sáb', lugar: 'Nuevo día', ini: '09:00', fin: '15:00', cobrado: false }].concat(js) }),
       jornadas: js.map((j, i) => {
         const h = this.horas(j);
         return {
           dia: j.dia, sem: j.sem, lugar: j.lugar, horario: j.ini + '–' + j.fin,
-          horasTxt: (Math.round(h * 10) / 10).toString().replace('.', ',') + ' h', importeTxt: this.eur(h * t),
+          horasTxt: (Math.round(h * 10) / 10).toString().replace('.', ',') + ' h', importeTxt: this.eur(h * t * NETO), brutoTxt: this.eur(h * t),
           estado: j.cobrado ? 'Cobrado' : 'Pendiente', pressed: j.cobrado ? 'true' : 'false',
           chipColor: j.cobrado ? '#0F1115' : '#0F1115', chipFondo: j.cobrado ? '#7DD3A8' : '#F5A524',
           toggle: () => this.setState({ jornadas: js.map((x, k) => k === i ? Object.assign({}, x, { cobrado: !x.cobrado }) : x) })
