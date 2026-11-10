@@ -1161,6 +1161,187 @@
       "foto": "fotos/short-felpa-gris-01.png",
       "imagen_canva": null,
       "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón corto gris jaspeado medio de felpa, liso, cintura elástica con cordón negro de puntas metálicas, bolsillos laterales, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "jogger-gris-oscuro-01",
+      "nombre": "Pantalón de chándal gris oscuro",
+      "tipo": "parte_abajo",
+      "subtipo": "jogger de felpa",
+      "color_principal": "gris oscuro",
+      "abriga": 3,
+      "formalidad": 1,
+      "clima": [
+        "frio",
+        "mucho_frio",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym",
+        "casa",
+        "clase"
+      ],
+      "notas": "Felpa lisa sin logos, puño en el tobillo. Más neutro que el Fila: también vale para un día cómodo de clase.",
+      "foto": "fotos/jogger-gris-oscuro-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo un pantalón de chándal jogger gris oscuro de felpa lisa, cintura elástica con cordón, puños elásticos en los tobillos, sin logos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave."
+    },
+    {
+      "id": "camiseta-tecnica-gris-01",
+      "nombre": "Camiseta técnica gris",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta deportiva",
+      "color_principal": "gris",
+      "abriga": 0,
+      "formalidad": 0,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "notas": "Tejido técnico con textura de cuadrícula, transpirable.",
+      "foto": "fotos/camiseta-tecnica-gris-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta deportiva gris de tejido técnico ligero con textura de cuadrícula fina, cuello redondo, manga corta, sin logos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "capa": "base"
+    },
+    {
+      "id": "camiseta-tecnica-blanca-01",
+      "nombre": "Camiseta técnica blanca",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta deportiva",
+      "color_principal": "blanca",
+      "abriga": 0,
+      "formalidad": 0,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "notas": "Tejido técnico con textura de cuadrícula, transpirable.",
+      "foto": "fotos/camiseta-tecnica-blanca-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta deportiva blanca de tejido técnico ligero con textura de cuadrícula fina, cuello redondo, manga corta, sin logos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "capa": "base"
+    },
+    {
+      "id": "camiseta-tecnica-negra-01",
+      "nombre": "Camiseta técnica negra",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta deportiva",
+      "color_principal": "negra",
+      "abriga": 0,
+      "formalidad": 0,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "notas": "Tejido técnico con textura de cuadrícula, transpirable.",
+      "foto": "fotos/camiseta-tecnica-negra-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta deportiva negra de tejido técnico ligero con textura de cuadrícula fina, cuello redondo, manga corta, sin logos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "capa": "base"
+    },
+    {
+      "id": "camiseta-tecnica-roja-01",
+      "nombre": "Camiseta técnica roja",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta deportiva",
+      "color_principal": "roja",
+      "abriga": 0,
+      "formalidad": 0,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "notas": "Tejido técnico con textura de cuadrícula, transpirable.",
+      "foto": "fotos/camiseta-tecnica-roja-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta deportiva roja de tejido técnico ligero con textura de cuadrícula fina, cuello redondo, manga corta, sin logos, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "capa": "base"
+    },
+    {
+      "id": "camiseta-running-stillo-01",
+      "nombre": "Camiseta de running negra y gris",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta deportiva",
+      "color_principal": "negro y gris",
+      "abriga": 0,
+      "formalidad": 0,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "notas": "Camiseta técnica de carrera con degradado geométrico gris. Para los 10 km.",
+      "foto": "fotos/camiseta-running-stillo-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta técnica de running negra con un degradado geométrico de rombos grises en el pecho, mangas negras, tejido microperforado, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "capa": "base"
+    },
+    {
+      "id": "camiseta-negra-guess-01",
+      "nombre": "Camiseta negra con logo bordado",
+      "tipo": "parte_arriba",
+      "subtipo": "camiseta manga corta",
+      "color_principal": "negro",
+      "abriga": 1,
+      "formalidad": 3,
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "tomar_algo",
+        "fiesta",
+        "clase"
+      ],
+      "notas": "Logo bordado negro sobre negro: discreta y arreglada.",
+      "foto": "fotos/camiseta-negra-guess-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista desde arriba (flat lay), solo una camiseta negra de algodón, cuello redondo, con un logo de letras serif bordado en negro tono sobre tono en el centro del pecho, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "marca": "Guess",
+      "capa": "base"
+    },
+    {
+      "id": "dunk-gris-01",
+      "nombre": "Zapatillas Dunk gris y blanco",
+      "tipo": "calzado",
+      "subtipo": "sneaker baja retro",
+      "color_principal": "blanco y gris",
+      "abriga": 0,
+      "formalidad": 2,
+      "clima": [
+        "calor",
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo",
+        "fiesta"
+      ],
+      "notas": "Piel blanca con paneles grises. Combinan con casi todo, sobre todo con gris, negro y vaquero.",
+      "foto": "fotos/dunk-gris-01.png",
+      "imagen_canva": null,
+      "prompt_imagen_pendiente": "foto realista de producto de catálogo, vista lateral de una sola zapatilla, solo una zapatilla baja estilo baloncesto retro de piel, puntera y laterales blancos con paneles grises claros, cordones grises, suela blanca, centrada sobre fondo gris claro liso, sin otros objetos, luz suave.",
+      "marca": "Nike"
     }
   ],
   "outfits": [
@@ -1864,7 +2045,7 @@
       "id": "gym-tecnico",
       "nombre": "Gym técnico",
       "capas": {
-        "base": "camiseta-gym-toro-01",
+        "base": "camiseta-tecnica-gris-01",
         "abajo": "short-tecnico-gris-oscuro-01",
         "calzado": "asics-negras-01"
       },
@@ -1950,7 +2131,7 @@
       "id": "carrera-10k",
       "nombre": "Carrera 10 km",
       "capas": {
-        "base": "camiseta-gym-toro-01",
+        "base": "camiseta-running-stillo-01",
         "abajo": "short-tecnico-negro-01",
         "calzado": "asics-negras-01"
       },
@@ -1995,6 +2176,171 @@
       ],
       "ocasiones": [
         "casa"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "dunk-gris-denim",
+      "nombre": "Grises con Dunk",
+      "capas": {
+        "base": "camiseta-negra-01",
+        "medio": "hoodie-cremallera-gris-01",
+        "abajo": "vaquero-negro-01",
+        "calzado": "dunk-gris-01"
+      },
+      "clima": [
+        "templado",
+        "frio"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "dunk-verano",
+      "nombre": "Dunk de verano",
+      "capas": {
+        "base": "camiseta-blanca-01",
+        "abajo": "bermuda-vaquera-azul-claro-01",
+        "calzado": "dunk-gris-01",
+        "accesorios": [
+          "gorra-blanca-01"
+        ]
+      },
+      "clima": [
+        "calor"
+      ],
+      "ocasiones": [
+        "clase",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "guess-noche",
+      "nombre": "Negro bordado",
+      "capas": {
+        "base": "camiseta-negra-guess-01",
+        "abajo": "vaquero-gris-claro-01",
+        "calzado": "dunk-gris-01",
+        "accesorios": [
+          "reloj-dg-negro-01"
+        ]
+      },
+      "clima": [
+        "templado",
+        "calor"
+      ],
+      "ocasiones": [
+        "fiesta",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "guess-varsity",
+      "nombre": "Varsity y bordado",
+      "capas": {
+        "base": "camiseta-negra-guess-01",
+        "abajo": "vaquero-negro-01",
+        "abrigo": "varsity-boston-01",
+        "calzado": "zapatillas-negras-lisas-01"
+      },
+      "clima": [
+        "frio"
+      ],
+      "ocasiones": [
+        "fiesta",
+        "tomar_algo"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "comodo-clase",
+      "nombre": "Cómodo para clase",
+      "capas": {
+        "base": "camiseta-negra-nude-01",
+        "medio": "hoodie-cremallera-negra-01",
+        "abajo": "jogger-gris-oscuro-01",
+        "calzado": "dunk-gris-01"
+      },
+      "clima": [
+        "frio",
+        "templado"
+      ],
+      "ocasiones": [
+        "clase"
+      ],
+      "nota": "Para días largos de clase o de estudio."
+    },
+    {
+      "id": "gym-tecnico-blanca",
+      "nombre": "Gym técnico blanco",
+      "capas": {
+        "base": "camiseta-tecnica-blanca-01",
+        "abajo": "short-tecnico-negro-02",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "gym-tecnico-negro",
+      "nombre": "Gym técnico negro",
+      "capas": {
+        "base": "camiseta-tecnica-negra-01",
+        "abajo": "short-tecnico-gris-claro-01",
+        "calzado": "asics-plateadas-01"
+      },
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "gym-tecnico-rojo",
+      "nombre": "Gym técnico rojo",
+      "capas": {
+        "base": "camiseta-tecnica-roja-01",
+        "abajo": "short-tecnico-negro-01",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "calor",
+        "templado"
+      ],
+      "ocasiones": [
+        "gym"
+      ],
+      "nota": ""
+    },
+    {
+      "id": "gym-invierno-oscuro",
+      "nombre": "Gym en invierno (oscuro)",
+      "capas": {
+        "base": "camiseta-tecnica-gris-01",
+        "medio": "hoodie-cremallera-negra-01",
+        "abajo": "jogger-gris-oscuro-01",
+        "calzado": "asics-negras-01"
+      },
+      "clima": [
+        "frio",
+        "mucho_frio"
+      ],
+      "ocasiones": [
+        "gym"
       ],
       "nota": ""
     }

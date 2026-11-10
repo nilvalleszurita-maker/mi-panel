@@ -65,4 +65,13 @@ Cada foto se llama <id>.png, con el id de la prenda en armario.json.
 - Short técnico negro brillo → `short-tecnico-negro-01.png`
 - Short de felpa gris jaspeado → `short-felpa-gris-01.png`
 
+- Pantalón de chándal gris oscuro → `jogger-gris-oscuro-01.png`
+- Camiseta técnica gris → `camiseta-tecnica-gris-01.png`
+- Camiseta técnica blanca → `camiseta-tecnica-blanca-01.png`
+- Camiseta técnica negra → `camiseta-tecnica-negra-01.png`
+- Camiseta técnica roja → `camiseta-tecnica-roja-01.png`
+- Camiseta de running negra y gris → `camiseta-running-stillo-01.png`
+- Camiseta negra con logo bordado → `camiseta-negra-guess-01.png`
+- Zapatillas Dunk gris y blanco → `dunk-gris-01.png`
+
 Mientras falte una foto, la app muestra una tarjeta gris con el nombre de la prenda.
