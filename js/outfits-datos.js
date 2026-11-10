@@ -92,36 +92,97 @@ const OutfitsDatos = (() => {
   const tieneFotoSubida = id => !!locales[id];
 
   // Carga el armario de data/armario.json la primera vez. Devuelve una promesa.
+  // Carga data/armario.json y lo sincroniza con lo guardado (una vez por sesión).
+  // La primera vez lo importa entero; después añade lo nuevo y actualiza lo que haya
+  // cambiado en el JSON, sin pisar lo que hayas editado o borrado en la app.
+  // Devuelve una promesa: true si hay armario para mostrar.
+  let sincronizado = false;
+  let ultimoCambio = null;        // { prendasNuevas, outfitsNuevos, actualizados } de la última sincronización
   function asegurar() {
-    if (a().sembrado) return Promise.all([fondosListos, localesListas]).then(() => true);
+    if (sincronizado) return Promise.all([fondosListos, localesListas]).then(() => true);
     if (cargando) return cargando;
-    cargando = fetch('data/armario.json')
-      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(importar)
+    const pedir = url => fetch(url, { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    // Móvil que cargó el armario con la versión anterior de la app (sin huellas):
+    // su punto de partida es la primera versión del armario (data/armario-v1.json).
+    const anterior = a().sembrado && !a().origen ? pedir('data/armario-v1.json') : Promise.resolve(null);
+    cargando = Promise.all([pedir('data/armario.json'), anterior])
+      .then(([json, v1]) => { sincronizar(json, v1); sincronizado = true; return true; })
+      .catch(() => a().sembrado)   // sin conexión: se usa el armario ya guardado
       .then(ok => Promise.all([fondosListos, localesListas]).then(() => ok))
-      .catch(() => false)
       .finally(() => { cargando = null; });
     return cargando;
   }
+  const estaSincronizado = () => sincronizado;
+  // Resumen de lo que trajo la última sincronización (solo se entrega una vez).
+  const tomarCambio = () => { const c = ultimoCambio; ultimoCambio = null; return c; };
 
-  // Convierte el formato de armario.json ({prendas, outfits con capas}) en tablas.
-  function importar(json) {
+  // «Huella» de una prenda o un outfit: para saber si ha cambiado en el JSON o en la app.
+  const huellaPrenda = ({ id, ...resto }) => JSON.stringify(Object.keys(resto).sort().map(k => [k, resto[k]]));
+  function capasJson(o) {
+    const c = { abajo: null, base: null, medio: null, abrigo: null, calzado: null, accesorio: [] };
+    for (const [k, v] of Object.entries(o.capas || {})) {
+      if (k === 'accesorios' || k === 'accesorio') c.accesorio = (Array.isArray(v) ? v : [v]).filter(Boolean);
+      else c[k] = v || null;
+    }
+    return c;
+  }
+  const huellaOutfit = (o, c) => JSON.stringify([o.nombre, o.clima || [], o.ocasiones || [], o.nota || '', CAPAS.map(k => c[k])]);
+  const limpiarPrenda = ({ imagen_canva, prompt_imagen_pendiente, foto, ...p }) => p;
+
+  // Escribe las capas de un outfit en outfit_prendas (sin prendas que ya no existan).
+  function ponerCapas(outfitId, c) {
     const t = a();
-    t.prendas = json.prendas.map(({ imagen_canva, prompt_imagen_pendiente, foto, ...p }) => p);
-    t.outfits = [];
-    t.outfit_prendas = [];
-    for (const o of json.outfits) {
-      t.outfits.push({ id: o.id, nombre: o.nombre, clima: o.clima || [], ocasiones: o.ocasiones || [], nota: o.nota || '' });
-      for (const [capa, valor] of Object.entries(o.capas || {})) {
-        const lista = Array.isArray(valor) ? valor : [valor];
-        lista.forEach((prenda_id, orden) => t.outfit_prendas.push({
-          id: Store.id(), outfit_id: o.id, prenda_id, capa: capa === 'accesorios' ? 'accesorio' : capa, orden,
-        }));
+    t.outfit_prendas = t.outfit_prendas.filter(r => r.outfit_id !== outfitId);
+    for (const capa of CAPAS) {
+      const v = c[capa];
+      (Array.isArray(v) ? v : [v]).filter(id => id && prenda(id)).forEach((prenda_id, orden) =>
+        t.outfit_prendas.push({ id: Store.id(), outfit_id: outfitId, prenda_id, capa, orden }));
+    }
+  }
+
+  function sincronizar(json, v1 = null) {
+    const t = a();
+    // t.origen guarda la huella de cada cosa tal como vino del JSON la última vez.
+    if (!t.origen) {
+      t.origen = { prendas: {}, outfits: {} };
+      // Armario cargado con la versión anterior de la app: venía de la primera versión
+      // del JSON. Lo que no está, lo borraste; lo que difiere, lo editaste.
+      if (t.sembrado && v1) {
+        for (const p of v1.prendas.map(limpiarPrenda)) t.origen.prendas[p.id] = huellaPrenda(p);
+        for (const o of v1.outfits) t.origen.outfits[o.id] = huellaOutfit(o, capasJson(o));
       }
     }
+    const res = { prendasNuevas: 0, outfitsNuevos: 0, actualizados: 0 };
+
+    for (const pj of json.prendas.map(limpiarPrenda)) {
+      const hj = huellaPrenda(pj), origen = t.origen.prendas[pj.id];
+      const i = t.prendas.findIndex(p => p.id === pj.id);
+      if (i < 0) {
+        if (origen === undefined) { t.prendas.push(pj); t.origen.prendas[pj.id] = hj; res.prendasNuevas++; }
+        continue; // si ya se importó y no está, la borraste tú: no vuelve
+      }
+      if (hj !== origen && huellaPrenda(t.prendas[i]) === origen) {
+        t.prendas[i] = pj; t.origen.prendas[pj.id] = hj; res.actualizados++;
+      }
+    }
+
+    for (const oj of json.outfits) {
+      const cj = capasJson(oj), hj = huellaOutfit(oj, cj), origen = t.origen.outfits[oj.id];
+      const fila = { id: oj.id, nombre: oj.nombre, clima: oj.clima || [], ocasiones: oj.ocasiones || [], nota: oj.nota || '' };
+      const i = t.outfits.findIndex(o => o.id === oj.id);
+      if (i < 0) {
+        if (origen === undefined) { t.outfits.push(fila); ponerCapas(oj.id, cj); t.origen.outfits[oj.id] = hj; res.outfitsNuevos++; }
+        continue;
+      }
+      if (hj !== origen && huellaOutfit(t.outfits[i], capasDe(oj.id)) === origen) {
+        t.outfits[i] = fila; ponerCapas(oj.id, cj); t.origen.outfits[oj.id] = hj; res.actualizados++;
+      }
+    }
+
+    const habia = t.sembrado;
     t.sembrado = true;
     Store.guardar();
-    return true;
+    if (habia && (res.prendasNuevas || res.outfitsNuevos || res.actualizados)) ultimoCambio = res;
   }
 
   // ---------- Consultas ----------
@@ -213,7 +274,10 @@ const OutfitsDatos = (() => {
   function colorBase(p) {
     const t = (p.color_principal || '').toLowerCase();
     if (/azulgrana|multicolor/.test(t) || / y /.test(t.replace(/\(.*\)/, ''))) return 'multicolor';
-    for (const c of ['blanco', 'negro', 'gris', 'azul', 'rosa', 'verde', 'rojo', 'beige', 'marrón', 'plata']) if (t.startsWith(c)) return c;
+    // Por la raíz, para aceptar también femenino y plural («blanca», «negras»…).
+    const RAICES = [['blanc', 'blanco'], ['negr', 'negro'], ['gris', 'gris'], ['azul', 'azul'], ['rosa', 'rosa'], ['verde', 'verde'],
+      ['roj', 'rojo'], ['beige', 'beige'], ['marr', 'marrón'], ['plat', 'plata']];
+    for (const [raiz, c] of RAICES) if (t.startsWith(raiz)) return c;
     return 'otro';
   }
 
@@ -307,7 +371,7 @@ const OutfitsDatos = (() => {
   return {
     CLIMAS, SITUACIONES, NOMBRES, CAPAS, TIPO_DE_CAPA,
     LUGAR, tiempo, tiempoGuardado, climaDe, propuestas, ponerHoy, quitarHoy, puestoEl, historial,
-    asegurar, prendas, prenda, outfits, outfit, foto, fondo, capasDe, idsDe, outfitsCon,
+    asegurar, estaSincronizado, tomarCambio, prendas, prenda, outfits, outfit, foto, fondo, capasDe, idsDe, outfitsCon,
     valoracion, candidatas, guardarOutfit, borrarOutfit, colorBase,
     guardarPrenda, borrarPrenda, procesarFoto, guardarFoto, quitarFoto, tieneFotoSubida,
   };

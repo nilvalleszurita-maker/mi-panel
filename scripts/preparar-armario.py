@@ -46,6 +46,14 @@ def main(destino: Path, ORIGEN: Path = ORIGEN_POR_DEFECTO) -> None:
             p.pop(campo, None)
     (salida / 'armario.json').write_text(json.dumps(datos, ensure_ascii=False, indent=1), encoding='utf-8')
 
+    # Primera versión del armario (la que cargaron los móviles antes de que la app
+    # sincronizara): sirve para saber qué ha editado o borrado cada uno desde entonces.
+    v1 = json.loads((RAIZ / 'scripts' / 'armario-v1.json').read_text(encoding='utf-8'))
+    for p in v1['prendas']:
+        for campo in SOLO_AUTOR:
+            p.pop(campo, None)
+    (salida / 'armario-v1.json').write_text(json.dumps({'prendas': v1['prendas'], 'outfits': v1['outfits']}, ensure_ascii=False), encoding='utf-8')
+
     hechas = 0
     fondos = {}
     for png in sorted((ORIGEN / 'fotos').glob('*.png')):

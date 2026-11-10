@@ -39,6 +39,17 @@ const Outfits = (() => {
       });
       return;
     }
+    // Armario ya guardado: se muestra al momento y se sincroniza con armario.json en
+    // segundo plano (prendas y outfits nuevos, fotos y colores de fondo).
+    if (!D.estaSincronizado()) {
+      D.asegurar().then(() => { if (elVista === el && el.isConnected && location.hash === '#outfits') render(el); });
+    }
+    const cambio = D.tomarCambio();
+    const avisoCambio = cambio ? `<p class="aviso-suave">Armario actualizado: ${[
+      cambio.prendasNuevas && `${cambio.prendasNuevas} ${cambio.prendasNuevas === 1 ? 'prenda nueva' : 'prendas nuevas'}`,
+      cambio.outfitsNuevos && `${cambio.outfitsNuevos} ${cambio.outfitsNuevos === 1 ? 'outfit nuevo' : 'outfits nuevos'}`,
+      cambio.actualizados && `${cambio.actualizados} ${cambio.actualizados === 1 ? 'cambio' : 'cambios'} en lo que ya tenías`,
+    ].filter(Boolean).join(', ')}.</p>` : '';
 
     el.innerHTML = `
       ${editor || ficha || formPrenda ? '' : `
@@ -46,6 +57,7 @@ const Outfits = (() => {
         ${[['hoy', 'Outfit de hoy'], ['outfits', 'Outfits'], ['armario', 'Armario']].map(([v, t]) =>
           `<button type="button" role="tab" aria-selected="${vista === v}" class="${vista === v ? 'activo' : ''}" data-acc="vista" data-v="${v}">${t}</button>`).join('')}
       </div>`}
+      ${avisoCambio}
       ${editor ? vistaEditor() : vista === 'outfits' ? vistaOutfits() : vista === 'hoy' ? vistaHoy()
         : formPrenda ? vistaFormPrenda() : ficha && D.prenda(ficha) ? vistaFicha(D.prenda(ficha)) : vistaArmario()}
       ${selector ? vistaSelector() : ''}`;
