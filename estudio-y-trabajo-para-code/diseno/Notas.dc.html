@@ -16,14 +16,44 @@ button,input{font-family:inherit}
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 </style>
 </helmet>
-<div style="width: 390px; height: 1240px; box-sizing: border-box; background: #0F1115; color: #E8EAF0; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+<div style="width: 390px; height: 1900px; box-sizing: border-box; background: #0F1115; color: #E8EAF0; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
 
   <div style="padding: 28px 20px 8px; display: flex; flex-direction: column; gap: 4px">
     <span style="font-size: 13px; color: #9AA3B2; text-transform: uppercase; letter-spacing: 0.08em">Estudio · Q1 2026-27</span>
-    <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700">Calculadora de notas</h1>
+    <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700">Notas y exámenes</h1>
   </div>
 
-  <div style="padding: 12px 20px; display: flex; gap: 8px; flex-wrap: wrap">
+  <div style="padding: 12px 20px 4px">
+    <div style="background: #33281A; border-radius: 20px; padding: 18px; display: flex; align-items: center; gap: 16px">
+      <div style="width: 84px; height: 84px; border-radius: 18px; background: #F5A524; color: #0F1115; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0">
+        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; line-height: 1">{{prox.dias}}</span>
+        <span style="font-size: 12px; font-weight: 600">{{prox.diasLabel}}</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0">
+        <span style="font-size: 12px; color: #F5D9A8; text-transform: uppercase; letter-spacing: 0.08em">Próximo examen</span>
+        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">{{prox.nombre}}</span>
+        <span style="font-size: 13px; color: #F5D9A8">{{prox.asig}} · {{prox.fechaTxt}}</span>
+      </div>
+    </div>
+  </div>
+  <div style="padding: 8px 20px 4px">
+    <div style="background: #181B22; border-radius: 18px; padding: 4px 16px; display: flex; flex-direction: column">
+      <sc-for list="{{resto}}" as="x" hint-placeholder-count="6">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid #252A34">
+          <span style="width: 54px; font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 600; color: {{x.color}}">{{x.dias}} d</span>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0">
+            <span style="font-size: 14px; font-weight: 500">{{x.nombre}}</span>
+            <span style="font-size: 12px; color: #9AA3B2">{{x.asig}} · {{x.fechaTxt}}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="padding: 20px 20px 4px">
+    <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Calculadora</h2>
+  </div>
+  <div style="padding: 8px 20px; display: flex; gap: 8px; flex-wrap: wrap">
     <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
       <button onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid {{t.borde}}; background: {{t.fondo}}; color: {{t.color}}; font-size: 13px; font-weight: 600; cursor: pointer">{{t.corto}}</button>
     </sc-for>
@@ -51,23 +81,20 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
           <span>{{sel.pendienteTxt}} por evaluar</span>
         </div>
       </div>
+      <span style="font-size: 12px; color: #9AA3B2; line-height: 1.45">{{sel.regla}}</span>
     </div>
   </div>
 
-  <div style="padding: 16px 20px 8px; display: flex; justify-content: space-between; align-items: baseline">
-    <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600">Evaluaciones</h2>
-    <span style="font-size: 12px; color: #9AA3B2">Pesos de ejemplo · editables</span>
-  </div>
   <div style="padding: 0 20px; display: flex; flex-direction: column; gap: 10px">
-    <sc-for list="{{sel.evals}}" as="e" hint-placeholder-count="3">
-      <div style="background: #181B22; border-radius: 16px; padding: 14px 16px; display: flex; align-items: center; gap: 12px">
+    <sc-for list="{{sel.evals}}" as="e" hint-placeholder-count="4">
+      <div style="background: #181B22; border-radius: 16px; padding: 12px 16px; display: flex; align-items: center; gap: 12px">
         <div style="flex: 1; display: flex; flex-direction: column; gap: 3px">
           <span style="font-size: 15px; font-weight: 500">{{e.nombre}}</span>
-          <span style="font-size: 12px; color: #9AA3B2">{{e.peso}} % de la nota · {{e.estado}}</span>
+          <span style="font-size: 12px; color: #9AA3B2">{{e.detalle}}</span>
         </div>
         <label style="display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 11px; color: #9AA3B2">
-          Nota
-          <input type="number" min="0" max="10" step="0.1" value="{{e.valor}}" placeholder="–" onInput="{{e.set}}" aria-label="Nota de {{e.nombre}}" style="width: 64px; height: 44px; box-sizing: border-box; border-radius: 12px; border: 1px solid {{e.borde}}; background: #0F1115; color: #E8EAF0; font-size: 18px; font-weight: 600; text-align: center">
+          {{e.sobre}}
+          <input type="number" min="0" max="{{e.max}}" step="0.1" value="{{e.valor}}" placeholder="–" onInput="{{e.set}}" aria-label="Nota de {{e.nombre}}" style="width: 64px; height: 44px; box-sizing: border-box; border-radius: 12px; border: 1px solid {{e.borde}}; background: #0F1115; color: #E8EAF0; font-size: 18px; font-weight: 600; text-align: center">
         </label>
       </div>
     </sc-for>
@@ -94,49 +121,70 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
   </nav>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#8FA8FF","options":["#8FA8FF","#7DD3A8","#F5A524"]},"$preview":{"width":390,"height":1240}}'>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#8FA8FF","options":["#8FA8FF","#7DD3A8","#F5A524"]},"$preview":{"width":390,"height":1900}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.state = {
       sel: 0,
       asig: [
-        { nombre: 'Informàtica', corto: 'Informàtica', objetivo: 5.8, motivo: 'Mínimo 5,8 para compensar 1º · sin reevaluación',
-          evals: [{ n: 'Parcial', p: 30, v: '' }, { n: 'Prácticas', p: 20, v: '' }, { n: 'Final', p: 50, v: '' }] },
         { nombre: 'Sistemes Mecànics', corto: 'Sist. Mecànics', objetivo: 5, motivo: 'Prioridad alta',
-          evals: [{ n: 'Examen de vigas', p: 20, v: '' }, { n: 'Trabajo', p: 20, v: '' }, { n: 'Final', p: 60, v: '' }] },
-        { nombre: 'Mètodes Matemàtics', corto: 'Mètodes', objetivo: 4, motivo: 'Con un 4 compensas',
-          evals: [{ n: 'Parcial', p: 40, v: '' }, { n: 'Final', p: 60, v: '' }] },
-        { nombre: 'Mecànica de Fluids', corto: 'Fluids', objetivo: 5, motivo: 'Reconducción a finales de noviembre',
-          evals: [{ n: 'Parcial / reconducción', p: 40, v: '' }, { n: 'Final', p: 60, v: '' }] }
+          regla: 'Re-evaluación: sustituye los 3 exámenes (80 %) y mantiene el trabajo. Si apruebas en re-evaluación, la nota final es un 5.',
+          evals: [{ n: 'Examen 1 (vigas)', p: 20, v: '', d: 'Hecho el 19 oct' }, { n: 'Examen 2', p: 20, v: '', d: '' }, { n: 'Examen 3', p: 40, v: '', d: 'Final · 15 ene' }, { n: 'Trabajo del curso', p: 20, v: '', d: 'Incluye comunicación oral y escrita' }] },
+        { nombre: 'Informàtica', corto: 'Informàtica', objetivo: 5.8, motivo: 'Mínimo 5,8 para compensar 1º',
+          regla: 'Sin re-evaluación: lo que saques en el curso es la nota final.',
+          evals: [{ n: 'Examen parcial', p: 25, v: '', d: '' }, { n: 'Controles', p: 20, v: '', d: 'Control 2 · 1.ª semana dic' }, { n: 'Resolución de problemas', p: 10, v: '', d: '' }, { n: 'Proyecto', p: 10, v: '', d: 'Incluye competencia transversal' }, { n: 'Examen final', p: 35, v: '', d: '8 ene' }] },
+        { nombre: 'Mecànica de Fluids', corto: 'Fluids', objetivo: 5, motivo: 'Reconducción el 23 nov',
+          regla: 'Reconducción (si el 1r parcial < 5): se puntúa sobre 5 y sustituye al parcial si es mayor. Re-evaluación: sustituye los parciales, mantiene prácticas; aprobado = 5.',
+          evals: [{ n: '1r parcial', p: 40, v: '', d: '' }, { n: 'Reconducción', p: 0, v: '', d: 'Sustituye al 1r parcial si es mayor · 23 nov', sust: 0, max: 5 }, { n: '2n parcial', p: 40, v: '', d: 'Final · 21 ene' }, { n: 'Prácticas · participación', p: 10, v: '', d: 'Control de asistencia' }, { n: 'Prácticas · test', p: 10, v: '', d: 'Junto al 2n parcial · 21 ene' }] },
+        { nombre: 'Mètodes Matemàtics (Mates 3)', corto: 'Mates 3', objetivo: 4, motivo: 'Con un 4 compensas',
+          regla: 'Solo evaluación por parciales: 1r examen, 2n examen y entrevista oral.',
+          evals: [{ n: '1r examen', p: 42, v: '', d: '' }, { n: 'Entrevista oral', p: 15, v: '', d: 'Semana 14–20 dic' }, { n: '2n examen', p: 43, v: '', d: 'Final · 13 ene' }] }
+      ],
+      examenes: [
+        { f: '2026-11-23', n: 'Reconducción 1r parcial', a: 'Fluids', txt: 'lun 23 nov' },
+        { f: '2026-11-30', n: 'Control 2', a: 'Informàtica', txt: 'lun 30 nov o mié 2 dic' },
+        { f: '2026-12-14', n: 'Entrevista oral', a: 'Mates 3', txt: 'semana 14–20 dic' },
+        { f: '2027-01-08', n: 'Examen final', a: 'Informàtica', txt: 'vie 8 ene' },
+        { f: '2027-01-13', n: '2n examen', a: 'Mates 3', txt: 'mié 13 ene' },
+        { f: '2027-01-15', n: 'Examen 3 (final)', a: 'Sistemes Mecànics', txt: 'vie 15 ene' },
+        { f: '2027-01-21', n: '2n parcial + test de prácticas', a: 'Fluids', txt: 'jue 21 ene' }
       ]
     };
   }
   calc(a) {
+    const val = a.evals.map((e) => { const v = parseFloat(String(e.v).replace(',', '.')); return isNaN(v) ? null : v; });
+    a.evals.forEach((e, i) => { if (e.sust !== undefined && val[i] !== null) { const t = e.sust; val[t] = val[t] === null ? val[i] : Math.max(val[t], val[i]); } });
     let hecho = 0, pend = 0;
-    a.evals.forEach((e) => { const v = parseFloat(e.v); if (!isNaN(v)) hecho += v * e.p / 100; else pend += e.p; });
-    const nec = pend > 0 ? (a.objetivo - hecho) / (pend / 100) : null;
-    return { hecho, pend, nec };
+    a.evals.forEach((e, i) => { if (e.sust !== undefined) return; if (val[i] !== null) hecho += val[i] * e.p / 100; else pend += e.p; });
+    return { hecho, pend, nec: pend > 0 ? (a.objetivo - hecho) / (pend / 100) : null };
   }
   fmt(x) { return (Math.round(x * 100) / 100).toString().replace('.', ','); }
   renderVals() {
     const accent = this.props.accent ?? '#8FA8FF';
-    const { sel, asig } = this.state;
+    const { sel, asig, examenes } = this.state;
+    const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+    const prox = examenes.map((x) => { const d = new Date(x.f + 'T00:00:00'); return Object.assign({}, x, { dias: Math.round((d - hoy) / 86400000) }); }).filter((x) => x.dias >= 0);
+    const p0 = prox[0] || { n: 'Sin exámenes', a: '', txt: '', dias: 0 };
     const a = asig[sel], c = this.calc(a);
     let necTxt, necLabel, col;
     if (c.nec === null) { const ok = c.hecho >= a.objetivo; necTxt = this.fmt(c.hecho); necLabel = ok ? 'nota final · ¡objetivo cumplido!' : 'nota final · no llega al objetivo'; col = ok ? '#7DD3A8' : '#FF8A80'; }
-    else if (c.nec <= 0) { necTxt = '✓'; necLabel = 'ya tienes el objetivo asegurado'; col = '#7DD3A8'; }
+    else if (c.nec <= 0) { necTxt = '✓'; necLabel = 'objetivo asegurado'; col = '#7DD3A8'; }
     else if (c.nec > 10) { necTxt = this.fmt(c.nec); necLabel = 'necesitas de media · imposible'; col = '#FF8A80'; }
     else { necTxt = this.fmt(c.nec); necLabel = 'necesitas de media en lo que falta'; col = c.nec > 7 ? '#F5A524' : '#E8EAF0'; }
     return {
       accent: accent,
+      prox: { nombre: p0.n, asig: p0.a, fechaTxt: p0.txt, dias: p0.dias, diasLabel: p0.dias === 1 ? 'día' : 'días' },
+      resto: prox.slice(1).map((x) => ({ nombre: x.n, asig: x.a, fechaTxt: x.txt, dias: x.dias, color: x.dias <= 14 ? '#F5A524' : '#D3D8E2' })),
       tabs: asig.map((x, i) => ({ corto: x.corto, pressed: i === sel ? 'true' : 'false', fondo: i === sel ? accent : '#181B22', color: i === sel ? '#0F1115' : '#D3D8E2', borde: i === sel ? accent : '#3A4150', pick: () => this.setState({ sel: i }) })),
       sel: {
-        nombre: a.nombre, motivo: a.motivo, objetivoTxt: this.fmt(a.objetivo),
+        nombre: a.nombre, motivo: a.motivo, regla: a.regla, objetivoTxt: this.fmt(a.objetivo),
         necesariaTxt: necTxt, necesariaLabel: necLabel, colorNecesaria: col,
         acumuladoTxt: this.fmt(c.hecho), pendienteTxt: c.pend + ' %', anchoHecho: Math.min(100, c.hecho * 10) + '%',
         evals: a.evals.map((e, j) => ({
-          nombre: e.n, peso: e.p, valor: e.v, estado: e.v === '' ? 'pendiente' : 'hecho', borde: e.v === '' ? '#3A4150' : accent,
+          nombre: e.n, valor: e.v, max: e.max || 10, sobre: e.max ? 'Sobre 5' : 'Nota',
+          detalle: (e.sust !== undefined ? '' : e.p + ' %') + (e.d ? (e.sust !== undefined ? '' : ' · ') + e.d : ''),
+          borde: e.v === '' ? '#3A4150' : accent,
           set: (ev) => {
             const nuevo = asig.map((x, i) => i !== sel ? x : Object.assign({}, x, { evals: x.evals.map((y, k) => k !== j ? y : Object.assign({}, y, { v: ev.target.value })) }));
             this.setState({ asig: nuevo });

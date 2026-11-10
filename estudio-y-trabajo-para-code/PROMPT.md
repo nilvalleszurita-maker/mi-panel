@@ -14,13 +14,20 @@ Todo está en la carpeta estudio-y-trabajo-para-code/:
   tal cual. Úsalos como referencia de layout, colores y comportamiento, y
   rehazlos con el mismo stack y estilo que ya usa mi app. La lógica de cálculo
   está en el <script> de cada archivo: puedes reutilizar las fórmulas.
-- datos/asignaturas.json → mis asignaturas con su objetivo de nota.
+- datos/asignaturas.json → mis asignaturas con los pesos REALES de cada
+  evaluación, sus reglas (reconducción, re-evaluación) y las fechas de exámenes.
 
 Antes de escribir código:
 1. Revisa cómo está hecha la app y cómo guardo los datos de Finanzas.
 2. Explícame en un plan corto qué archivos vas a crear o tocar. Espera mi OK.
 
-PESTAÑA ESTUDIO (calculadora de notas)
+PESTAÑA ESTUDIO (exámenes + calculadora de notas)
+- Arriba, CUENTA ATRÁS: una tarjeta grande con el examen más cercano (días que
+  faltan, nombre, asignatura, fecha) y debajo la lista del resto de exámenes con
+  los días que quedan a cada uno (en naranja si faltan ≤ 14 días). Los exámenes
+  ya pasados desaparecen. Si la fecha es aproximada (fecha_aprox), muestra el
+  texto de fecha_texto y deja editar la fecha cuando sea segura.
+- El examen más cercano también aparece en la pantalla "Hoy".
 - Selector de asignatura arriba (chips).
 - Tarjeta grande con la nota que NECESITO de media en lo que queda para llegar
   al objetivo: necesaria = (objetivo − Σ nota·peso/100) / (pesos pendientes/100).
@@ -30,8 +37,14 @@ PESTAÑA ESTUDIO (calculadora de notas)
 - Barra con lo ya asegurado (sobre 10) y % pendiente.
 - Lista de evaluaciones: nombre, peso, fecha, y campo para poner la nota
   (vacío = pendiente). Se recalcula al escribir.
-- Poder editar asignaturas, objetivos, evaluaciones y pesos (los del JSON son de
-  ejemplo). Avisar si los pesos no suman 100 %.
+- Reglas especiales del JSON:
+  · Fluids: la RECONDUCCIÓN se puntúa sobre 5 y sustituye al 1r parcial si es
+    mayor (nota efectiva del 1r parcial = max(parcial, reconducción)).
+  · Informàtica: "Controles" (20 %) es la media de los controles.
+  · Re-evaluación (Sistemes y Fluids): muestra la regla como texto informativo;
+    si se usa, la nota final máxima es 5.
+- Poder editar asignaturas, objetivos, evaluaciones, pesos y fechas. Avisar si
+  los pesos no suman 100 %.
 - Resumen de todas las asignaturas abajo.
 - Las evaluaciones con fecha aparecen en la pantalla "Hoy" como próximo examen.
 
