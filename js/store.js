@@ -33,10 +33,14 @@ const Store = (() => {
     ajustes: {
       nombre: 'Nil', presupuestoMensual: 100, objetivoProteina: 150, objetivoKcal: 3000,
       metaAhorro: { nombre: 'el piso', objetivo: 25000 },
+      // Trabajo: neto = bruto × factorNeto (retención actual: 398,02 / 435).
+      factorNeto: 398.02 / 435,
     },
     // Datos de la pantalla Hoy que aún no tienen pantalla propia (comidas, hábitos,
     // tareas, agenda). Estructura de tablas: ver js/hoy-datos.js.
     hoy: { sembrado: false, comidas: [], habitos: [], habitos_registro: [], tareas: [], agenda: [] },
+    // Días de agencia (tabla jornadas_trabajo: ver js/trabajo.js).
+    trabajo: { jornadas: [] },
     // Asignaturas y evaluaciones (tablas: ver js/estudio-datos.js).
     estudio: { sembrado: false, curso: '', asignaturas: [], evaluaciones: [] },
     // Armario y outfits (tablas: ver js/outfits-datos.js).

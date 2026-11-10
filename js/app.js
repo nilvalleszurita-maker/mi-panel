@@ -2,7 +2,9 @@
 // Para añadir una sección nueva (Comidas, Horario, Outfits…) basta con crear
 // su archivo en js/, incluirlo en index.html y añadirlo a esta lista.
 // La primera es la pantalla de inicio.
-const MODULOS = [Hoy, Finanzas, Gym, Estudio, Outfits];
+const MODULOS = [Hoy, Finanzas, Gym, Estudio, Trabajo, Outfits];
+// En el móvil caben estas en la barra; el resto va en el menú «Más».
+const EN_BARRA = 5;
 
 // Iconos del menú (trazos del diseño). Si un módulo no tiene, se usa su emoji.
 const trazo = d => `<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
@@ -11,6 +13,8 @@ const ICONOS = {
   finanzas: trazo('<rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18"></path>'),
   gym: trazo('<path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"></path>'),
   estudio: trazo('<path d="M4 5h11a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3z"></path><path d="M8 9h6M8 13h4"></path>'),
+  trabajo: trazo('<rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5h8v2"></path>'),
+  mas: trazo('<circle cx="5" cy="12" r="1.4"></circle><circle cx="12" cy="12" r="1.4"></circle><circle cx="19" cy="12" r="1.4"></circle>'),
   outfits: trazo('<path d="M10 6a2 2 0 1 1 3 1.7c-.6.4-1 1-1 1.7V10"></path><path d="M12 10l-8.6 6.4A1.4 1.4 0 0 0 4.2 19h15.6a1.4 1.4 0 0 0 .8-2.6z"></path>'),
 };
 
@@ -19,18 +23,44 @@ const tabs = document.getElementById('tabs');
 const elegir = () => MODULOS.find(m => m.id === location.hash.slice(1)) || MODULOS[0];
 let actual = elegir();
 
+let masAbierto = false;
 function pintar() {
-  tabs.innerHTML = MODULOS.map(m => `
-    <a href="#${m.id}" class="tab ${m === actual ? 'activa' : ''}" ${m === actual ? 'aria-current="page"' : ''}>
+  const enMas = MODULOS.slice(EN_BARRA);
+  const tab = (m, extra = '') => `
+    <a href="#${m.id}" class="tab ${extra} ${m === actual ? 'activa' : ''}" ${m === actual ? 'aria-current="page"' : ''}>
       ${ICONOS[m.id] || `<span aria-hidden="true">${m.icono}</span>`}<span>${m.nombre}</span>
-    </a>`).join('');
+    </a>`;
+  // Escritorio: todas en el lateral. Móvil: las primeras en la barra y el resto en «Más».
+  tabs.innerHTML = MODULOS.map((m, i) => tab(m, i >= EN_BARRA ? 'en-mas' : '')).join('') + (enMas.length ? `
+    <button class="tab tab-mas ${enMas.includes(actual) ? 'activa' : ''}" id="btn-mas" aria-expanded="${masAbierto}" aria-haspopup="menu">
+      ${ICONOS.mas}<span>Más</span>
+    </button>
+    <div class="menu-mas" role="menu" ${masAbierto ? '' : 'hidden'}>
+      ${enMas.map(m => `<a role="menuitem" href="#${m.id}" class="${m === actual ? 'activa' : ''}">${ICONOS[m.id] || m.icono}<span>${m.nombre}</span></a>`).join('')}
+      <button role="menuitem" data-mas="ajustes">${trazo('<circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"></path>')}<span>Ajustes y copia</span></button>
+    </div>` : '');
   document.getElementById('titulo-pantalla').textContent = actual.nombre;
   document.body.classList.toggle('en-hoy', actual.id === 'hoy');
   document.title = actual.id === 'hoy' ? 'Mi Panel' : `${actual.nombre} · Mi Panel`;
   render();
 }
 
+// Menú «Más» del móvil.
+tabs.addEventListener('click', e => {
+  if (e.target.closest('#btn-mas')) { masAbierto = !masAbierto; pintarMenuMas(); return; }
+  if (e.target.closest('[data-mas=ajustes]')) { masAbierto = false; pintarMenuMas(); abrirAjustes(); return; }
+  if (e.target.closest('.menu-mas a')) { masAbierto = false; }
+});
+document.addEventListener('click', e => {
+  if (masAbierto && !e.target.closest('#btn-mas, .menu-mas')) { masAbierto = false; pintarMenuMas(); }
+});
+function pintarMenuMas() {
+  document.querySelector('.menu-mas')?.toggleAttribute('hidden', !masAbierto);
+  document.getElementById('btn-mas')?.setAttribute('aria-expanded', masAbierto);
+}
+
 window.addEventListener('hashchange', () => {
+  masAbierto = false;
   actual = elegir();
   pintar();
   window.scrollTo(0, 0);

@@ -1,6 +1,6 @@
 # Mi Panel
 
-Web app personal (móvil y ordenador) para controlar finanzas y entrenos. Diseño oscuro, sin dependencias ni instalación.
+Web app personal (móvil y ordenador) para controlar finanzas, gym, estudio, trabajo y outfits. Diseño oscuro, sin dependencias ni instalación.
 
 ## Secciones
 
@@ -20,7 +20,15 @@ Web app personal (móvil y ordenador) para controlar finanzas y entrenos. Diseñ
   - Datos en tablas `prendas`, `outfits`, `outfit_prendas` y `outfit_historial` (ver `js/outfits-datos.js`). Una prenda existe una sola vez.
   - Sincronización: cada vez que se abre, la app compara con `armario.json` y añade las prendas y outfits nuevos, y actualiza lo que cambie en el JSON si no lo has editado en la app (lo que borras en la app no vuelve). `scripts/armario-v1.json` es la primera versión, que sirve de referencia a los móviles que la cargaron antes de existir la sincronización.
   - Fotos: guarda cada una en `outfits-para-code/fotos/<id>.jpg` (también vale `.png`). `scripts/preparar-armario.py` las convierte a WebP de 600 px al publicar. Si falta una foto se ve una tarjeta gris con el nombre.
-- *Próximamente*: comidas, horario diario y outfits.
+- **Estudio**: cuenta atrás de exámenes y calculadora de notas a partir de `estudio-y-trabajo-para-code/datos/asignaturas.json`.
+  - Próximo examen en grande con los días que faltan; el resto en lista (en naranja si quedan 14 días o menos). Las fechas aproximadas se pueden fijar.
+  - Por asignatura: escribe las notas que tengas y ves lo asegurado y la nota que necesitas en lo que falta para aprobar (con reconducciones y partes con media). Editor de evaluaciones con aviso si los pesos no suman 100.
+  - El próximo examen aparece también en Hoy.
+- **Trabajo**: días de agencia.
+  - Cada día con lugar, horas (vale el turno de noche) e importe **por hora o fijo por día**, y si es **bruto o neto**: el bruto se pasa a neto con la retención (`neto = bruto × 398,02/435`, se cambia abajo con «Cambiar»); el neto se suma tal cual. Al escribir un lugar ya usado se rellenan sus horas e importe.
+  - Resumen del mes en neto y bruto, cobrado/pendiente, días y horas, con selector de mes.
+  - Tocar un día lo marca como cobrado y crea el ingreso «Agencia» en Finanzas (se suma a Dinero); desmarcarlo o borrar ese ingreso lo deja pendiente. Aviso si hay días sin cobrar de hace más de 30 días.
+- En el móvil la barra es Hoy · Finanzas · Gym · Estudio · Trabajo · **Más** (Outfits y Ajustes).
 
 ## Cómo usarla
 
@@ -52,6 +60,10 @@ js/gym-figuras.js     Dibujos del gym: personajes animados y mapa de músculos
 js/gym.js             Módulo de gym
 js/outfits-datos.js   Datos y reglas de Outfits
 js/outfits.js         Módulo de Outfits
+js/estudio-datos.js   Datos y cálculos de Estudio
+js/estudio.js         Módulo de Estudio
+js/trabajo.js         Módulo de Trabajo
+estudio-y-trabajo-para-code/  Fuente de asignaturas y diseños
 outfits-para-code/    Fuente del armario (armario.json y fotos)
 js/app.js             Pestañas, eventos y copia de seguridad
 sw.js, manifest…      Instalación como app y uso sin conexión

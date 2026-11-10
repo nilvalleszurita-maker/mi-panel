@@ -3,7 +3,7 @@
 const Finanzas = (() => {
   const CATEGORIAS = {
     gasto: ['Comida', 'Casa', 'Transporte', 'Ocio', 'Ropa', 'Salud', 'Suscripciones', 'Otros'],
-    ingreso: ['Nómina', 'Extra', 'Otros'],
+    ingreso: ['Nómina', 'Agencia', 'Extra', 'Otros'],
   };
   const COLORES = 8; // huecos de la paleta en css (--serie-1 … --serie-8)
 
@@ -417,7 +417,7 @@ const Finanzas = (() => {
       <li>
         ${fecha}
         <div class="crece">
-          <div>${U.esc(x.categoria)}${x.fijo_id ? ' <span class="chip">fijo</span>' : ''}</div>
+          <div>${U.esc(x.categoria)}${x.fijo_id ? ' <span class="chip">fijo</span>' : ''}${x.jornada_id ? ' <span class="chip">trabajo</span>' : ''}</div>
           ${x.nota ? `<div class="muted peq">${U.esc(x.nota)}</div>` : ''}
         </div>
         <strong class="${x.tipo === 'ingreso' ? 'pos' : 'neg'}">${x.tipo === 'ingreso' ? '+' : '−'}${U.euros(x.importe)}</strong>
