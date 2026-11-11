@@ -12,11 +12,8 @@ const Hoy = (() => {
     return t.charAt(0).toUpperCase() + t.slice(1);
   }
 
-  // Acciones del botón «+».
+  // Menú ⋯ de arriba a la derecha (igual que el de las demás pantallas).
   const RAPIDO = [
-    { id: 'gasto', texto: 'Añadir gasto', icono: '−' },
-    { id: 'ingreso', texto: 'Añadir ingreso', icono: '+' },
-    { id: 'entreno', texto: 'Registrar entreno', icono: '🏋️' },
     { id: 'cosas', texto: 'Cosas buenas', icono: '✦' },
     { id: 'ajustes', texto: 'Ajustes y copia', icono: '⋯' },
   ];
@@ -89,10 +86,9 @@ const Hoy = (() => {
           <h1>Hola, ${U.esc(ajustes().nombre)}</h1>
         </div>
         <div class="rapido">
-          <button class="btn-mas" data-acc="menu" aria-label="Añadir algo rápido"
+          <button class="btn-mas btn-puntos" data-acc="menu" aria-label="Menú"
             aria-expanded="${menuAbierto}" aria-haspopup="menu">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
-            <span class="solo-escritorio">Añadir rápido</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg>
           </button>
           ${menuAbierto ? `
             <div class="menu-rapido" role="menu">
@@ -276,8 +272,6 @@ const Hoy = (() => {
     else if (acc === 'rapido') {
       menuAbierto = false;
       const que = b.dataset.que;
-      if (que === 'gasto' || que === 'ingreso') { Finanzas.abrirFormulario(que); location.hash = '#finanzas'; return; }
-      if (que === 'entreno') { Gym.irAHoy(); location.hash = '#gym'; return; }
       if (que === 'ajustes') { rerender(); abrirAjustes(); return; }
       if (que === 'cosas') { location.hash = '#cosas-buenas'; return; }
     } else return;

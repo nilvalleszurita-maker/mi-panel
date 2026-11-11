@@ -1010,3 +1010,7 @@ a.nav-ajustes { text-decoration: none; }
 .cb-texto { margin: 0; white-space: pre-wrap; }
 .cb-acciones { display: flex; gap: 14px; }
 .cb-acciones .enlace { padding: 0; font-size: 14px; }
+
+/* Botón ⋯ de Hoy: sin giro y del mismo tamaño en móvil y escritorio. */
+.btn-puntos[aria-expanded="true"] svg { transform: none; }
+@media (min-width: 860px) { .btn-mas.btn-puntos { width: 48px; padding: 0; justify-content: center; } }
