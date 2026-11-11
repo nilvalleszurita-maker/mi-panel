@@ -105,8 +105,8 @@ const Hoy = (() => {
       ${tarjetas()}
       <div class="hoy-grid">
         <div class="hoy-col">
-          ${entreno()}
           ${examen()}
+          ${entreno()}
         </div>
         <div class="hoy-col">
           ${comidas()}
@@ -135,9 +135,7 @@ const Hoy = (() => {
   }
 
   // ---------- Comidas de hoy (de la pestaña Comidas) ----------
-  // Dos versiones: 'completa' (siguiente comida, progreso, kcal y recordatorios)
-  // y 'simple' (solo la siguiente comida con su botón «Comido»).
-  let varianteComidas = 'completa';
+  // Siguiente comida con su botón «Comido», progreso del día, kcal y recordatorios.
   const kcalTxt = n => Math.round(n).toLocaleString('es-ES', { useGrouping: 'always' });
   const protTxt = n => `${(Math.round(n * 10) / 10).toLocaleString('es-ES')} g`;
 
@@ -157,15 +155,13 @@ const Hoy = (() => {
       return `
         <div class="comidas-sig">
           <a class="crece" href="#comidas">
-            <span class="muted peq">${varianteComidas === 'simple' ? 'Siguiente comida · ' : ''}${U.esc(C.etiqueta(sig))}</span>
+            <span class="muted peq">${U.esc(C.etiqueta(sig))}</span>
             <strong>${C.platosDe(f, sig).map(p => U.esc(p.nombre)).join(' + ')}</strong>
             <span class="muted peq">${kcalTxt(t.kcal)} kcal · ${protTxt(t.proteina)} proteína</span>
           </a>
           <button class="check" data-acc="com-comido" data-franja="${sig}">Comido</button>
         </div>`;
     };
-
-    if (varianteComidas === 'simple') return `<section class="comidas-hoy simple" aria-label="Siguiente comida">${siguiente()}</section>`;
 
     const total = C.totalComido(f);
     const obj = C.objetivos();
@@ -284,5 +280,5 @@ const Hoy = (() => {
     rerender();
   }
 
-  return { id: 'hoy', nombre: 'Hoy', icono: '☀️', render, alClic, ponerVarianteComidas: v => { varianteComidas = v; } };
+  return { id: 'hoy', nombre: 'Hoy', icono: '☀️', render, alClic };
 })();

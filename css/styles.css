@@ -928,9 +928,8 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 .comidas-hoy { display: flex; flex-direction: column; gap: 14px; padding: 18px; background: var(--superficie); border-radius: 18px; }
 .comidas-hoy h2 { font-size: 20px; text-transform: none; line-height: 1.2; }
 .comidas-hoy .enlace { align-self: flex-start; font-size: 14px; text-decoration: none; }
-.comidas-hoy.simple { padding: 14px 16px; border-radius: 16px; }
 .comidas-sig { display: flex; align-items: center; gap: 12px; }
-.comidas-hoy:not(.simple) .comidas-sig { padding: 12px 14px; border-radius: 12px; background: var(--superficie-2); }
+.comidas-hoy .comidas-sig { padding: 12px 14px; border-radius: 12px; background: var(--superficie-2); }
 .comidas-sig .crece { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; color: var(--texto); text-decoration: none; }
 .comidas-sig strong { font-size: 15px; font-weight: 500; }
 .comidas-puntos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
