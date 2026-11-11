@@ -1,0 +1,249 @@
+{
+  "objetivos": {
+    "kcalDia": 3100,
+    "proteinaDia": 140,
+    "notaDiaCorrer": "Los días de correr 10 km: subir el arroz/pasta de la comida a 160 g"
+  },
+  "ordenComidas": ["desayuno", "mediaManana", "comida", "merienda", "cena"],
+  "etiquetasComidas": {
+    "desayuno": "Desayuno",
+    "mediaManana": "Media mañana",
+    "comida": "Comida",
+    "merienda": "Merienda",
+    "cena": "Cena"
+  },
+  "recordatorioCreatina": {
+    "activo": true,
+    "conComida": ["mediaManana", "merienda"],
+    "fin": "2027-01-31"
+  },
+  "alimentos": {
+    "galletas-principe": { "nombre": "Galletas Príncipe", "base": "unidad", "kcal": 67, "proteina": 0.83 },
+    "leche-entera": { "nombre": "Leche entera Llet Nostra", "base": "100ml", "kcal": 64, "proteina": 3.1 },
+    "papilla-8-cereales": { "nombre": "Papilla Nestlé 8 cereales con miel", "base": "100g", "kcal": 407, "proteina": 9 },
+    "jamon-serrano": { "nombre": "Jamón serrano", "base": "100g", "kcal": 250, "proteina": 30 },
+    "platano": { "nombre": "Plátano", "base": "unidad", "kcal": 105, "proteina": 1.3 },
+    "avena": { "nombre": "Copos de avena", "base": "100g", "kcal": 375, "proteina": 13.2 },
+    "pasta": { "nombre": "Pasta (en crudo)", "base": "100g", "kcal": 360, "proteina": 12 },
+    "fideos": { "nombre": "Fideos (en crudo)", "base": "100g", "kcal": 360, "proteina": 12 },
+    "arroz": { "nombre": "Arroz (en crudo)", "base": "100g", "kcal": 350, "proteina": 6.8 },
+    "atun-lata": { "nombre": "Atún en lata (escurrido)", "base": "unidad", "kcal": 110, "proteina": 14 },
+    "tomate-frito": { "nombre": "Tomate frito", "base": "100g", "kcal": 80, "proteina": 1.5 },
+    "tomate": { "nombre": "Tomate natural", "base": "100g", "kcal": 20, "proteina": 1 },
+    "lomo-cerdo": { "nombre": "Lomo / carne de cerdo", "base": "100g", "kcal": 147, "proteina": 22 },
+    "aceite-oliva": { "nombre": "Aceite de oliva", "base": "100ml", "kcal": 900, "proteina": 0 },
+    "pechuga-pollo": { "nombre": "Pechuga de pollo", "base": "100g", "kcal": 110, "proteina": 22.7 },
+    "pollo-rebozado": { "nombre": "Pollo rebozado", "base": "100g", "kcal": 253, "proteina": 25.3 },
+    "hamburguesa": { "nombre": "Hamburguesa (125 g)", "base": "unidad", "kcal": 280, "proteina": 20 },
+    "salchicha": { "nombre": "Salchicha", "base": "unidad", "kcal": 100, "proteina": 4 },
+    "huevo": { "nombre": "Huevo", "base": "unidad", "kcal": 75, "proteina": 6.5 },
+    "aguacate": { "nombre": "Aguacate (entero)", "base": "unidad", "kcal": 260, "proteina": 3 },
+    "caldo-pollo": { "nombre": "Caldo de pollo", "base": "100ml", "kcal": 7, "proteina": 0.7 },
+    "croqueta-jamon": { "nombre": "Croqueta de jamón (frita)", "base": "unidad", "kcal": 85, "proteina": 2.5 }
+  },
+  "platos": {
+    "desayuno-fijo": {
+      "nombre": "Galletas Príncipe con leche", "tipo": "desayuno",
+      "ingredientes": [
+        { "alimento": "galletas-principe", "cantidad": 6, "unidad": "ud" },
+        { "alimento": "leche-entera", "cantidad": 250, "unidad": "ml" }
+      ],
+      "kcalAprox": 562, "proteinaAprox": 12.7
+    },
+    "papilla-jamon": {
+      "nombre": "Papilla con jamón", "tipo": "mediaManana",
+      "ingredientes": [
+        { "alimento": "papilla-8-cereales", "cantidad": 40, "unidad": "g" },
+        { "alimento": "leche-entera", "cantidad": 200, "unidad": "ml" },
+        { "alimento": "jamon-serrano", "cantidad": 40, "unidad": "g" }
+      ],
+      "kcalAprox": 391, "proteinaAprox": 21.8
+    },
+    "merienda-platano-avena": {
+      "nombre": "Plátano chafado con leche y avena", "tipo": "merienda",
+      "ingredientes": [
+        { "alimento": "platano", "cantidad": 1, "unidad": "ud" },
+        { "alimento": "leche-entera", "cantidad": 200, "unidad": "ml" },
+        { "alimento": "avena", "cantidad": 40, "unidad": "g" }
+      ],
+      "kcalAprox": 383, "proteinaAprox": 12.8
+    },
+    "leche-cena": {
+      "nombre": "2 vasos de leche", "tipo": "cena-extra",
+      "ingredientes": [
+        { "alimento": "leche-entera", "cantidad": 500, "unidad": "ml" }
+      ],
+      "kcalAprox": 320, "proteinaAprox": 15.5
+    },
+    "pasta-atun": {
+      "nombre": "Pasta con atún y tomate", "tipo": "comida",
+      "ingredientes": [
+        { "alimento": "pasta", "cantidad": 140, "unidad": "g" },
+        { "alimento": "atun-lata", "cantidad": 2, "unidad": "ud" },
+        { "alimento": "tomate-frito", "cantidad": 100, "unidad": "g" }
+      ],
+      "kcalAprox": 804, "proteinaAprox": 46.3
+    },
+    "arroz-lomo": {
+      "nombre": "Arroz con lomo y tomate", "tipo": "comida",
+      "ingredientes": [
+        { "alimento": "arroz", "cantidad": 140, "unidad": "g" },
+        { "alimento": "lomo-cerdo", "cantidad": 150, "unidad": "g" },
+        { "alimento": "tomate", "cantidad": 100, "unidad": "g" },
+        { "alimento": "aceite-oliva", "cantidad": 10, "unidad": "ml" }
+      ],
+      "kcalAprox": 820, "proteinaAprox": 43.5
+    },
+    "pollo-rebozado-arroz": {
+      "nombre": "Pollo rebozado con arroz", "tipo": "comida",
+      "ingredientes": [
+        { "alimento": "pollo-rebozado", "cantidad": 150, "unidad": "g" },
+        { "alimento": "arroz", "cantidad": 110, "unidad": "g" },
+        { "alimento": "tomate", "cantidad": 100, "unidad": "g" }
+      ],
+      "kcalAprox": 784, "proteinaAprox": 46.4
+    },
+    "macarrones-salchichas": {
+      "nombre": "Macarrones con salchichas", "tipo": "comida",
+      "ingredientes": [
+        { "alimento": "pasta", "cantidad": 140, "unidad": "g" },
+        { "alimento": "salchicha", "cantidad": 3, "unidad": "ud" },
+        { "alimento": "tomate-frito", "cantidad": 100, "unidad": "g" }
+      ],
+      "kcalAprox": 884, "proteinaAprox": 30.3
+    },
+    "hamburguesas-arroz": {
+      "nombre": "Hamburguesas con arroz", "tipo": "comida",
+      "ingredientes": [
+        { "alimento": "hamburguesa", "cantidad": 2, "unidad": "ud" },
+        { "alimento": "arroz", "cantidad": 90, "unidad": "g" },
+        { "alimento": "tomate", "cantidad": 100, "unidad": "g" }
+      ],
+      "kcalAprox": 895, "proteinaAprox": 47.1
+    },
+    "arroz-meloso": {
+      "nombre": "Arroz meloso con cerdo y salchichas", "tipo": "comida",
+      "ingredientes": [
+        { "alimento": "arroz", "cantidad": 140, "unidad": "g" },
+        { "alimento": "lomo-cerdo", "cantidad": 100, "unidad": "g" },
+        { "alimento": "salchicha", "cantidad": 2, "unidad": "ud" },
+        { "alimento": "tomate", "cantidad": 100, "unidad": "g" },
+        { "alimento": "caldo-pollo", "cantidad": 300, "unidad": "ml" },
+        { "alimento": "aceite-oliva", "cantidad": 10, "unidad": "ml" }
+      ],
+      "kcalAprox": 968, "proteinaAprox": 42.6
+    },
+    "pasta-bolonesa": {
+      "nombre": "Pasta boloñesa", "tipo": "comida",
+      "ingredientes": [
+        { "alimento": "pasta", "cantidad": 140, "unidad": "g" },
+        { "alimento": "hamburguesa", "cantidad": 1, "unidad": "ud" },
+        { "alimento": "tomate-frito", "cantidad": 100, "unidad": "g" }
+      ],
+      "kcalAprox": 864, "proteinaAprox": 38.3
+    },
+    "pollo-plancha-arroz": {
+      "nombre": "Pollo a la plancha con arroz y ensalada", "tipo": "cena",
+      "ingredientes": [
+        { "alimento": "pechuga-pollo", "cantidad": 150, "unidad": "g" },
+        { "alimento": "arroz", "cantidad": 60, "unidad": "g" },
+        { "alimento": "tomate", "cantidad": 100, "unidad": "g" },
+        { "alimento": "aguacate", "cantidad": 0.5, "unidad": "ud" },
+        { "alimento": "aceite-oliva", "cantidad": 15, "unidad": "ml" }
+      ],
+      "kcalAprox": 660, "proteinaAprox": 40.6
+    },
+    "sopa-fideos-croquetas": {
+      "nombre": "Sopa de fideos con huevo + croquetas", "tipo": "cena",
+      "ingredientes": [
+        { "alimento": "fideos", "cantidad": 40, "unidad": "g" },
+        { "alimento": "caldo-pollo", "cantidad": 300, "unidad": "ml" },
+        { "alimento": "huevo", "cantidad": 1, "unidad": "ud" },
+        { "alimento": "croqueta-jamon", "cantidad": 5, "unidad": "ud" },
+        { "alimento": "tomate", "cantidad": 100, "unidad": "g" }
+      ],
+      "kcalAprox": 685, "proteinaAprox": 26.9
+    },
+    "tortilla-salchichas": {
+      "nombre": "Tortilla con salchichas y aguacate", "tipo": "cena",
+      "ingredientes": [
+        { "alimento": "huevo", "cantidad": 3, "unidad": "ud" },
+        { "alimento": "aceite-oliva", "cantidad": 5, "unidad": "ml" },
+        { "alimento": "salchicha", "cantidad": 2, "unidad": "ud" },
+        { "alimento": "aguacate", "cantidad": 0.5, "unidad": "ud" }
+      ],
+      "kcalAprox": 600, "proteinaAprox": 29.0
+    },
+    "revuelto-atun": {
+      "nombre": "Revuelto de huevos con atún", "tipo": "cena",
+      "ingredientes": [
+        { "alimento": "huevo", "cantidad": 3, "unidad": "ud" },
+        { "alimento": "atun-lata", "cantidad": 1, "unidad": "ud" },
+        { "alimento": "aceite-oliva", "cantidad": 5, "unidad": "ml" },
+        { "alimento": "aguacate", "cantidad": 0.5, "unidad": "ud" }
+      ],
+      "kcalAprox": 510, "proteinaAprox": 35.0
+    },
+    "sopa-pasta-pollo": {
+      "nombre": "Sopa de pasta con pollo", "tipo": "cena",
+      "ingredientes": [
+        { "alimento": "fideos", "cantidad": 60, "unidad": "g" },
+        { "alimento": "caldo-pollo", "cantidad": 300, "unidad": "ml" },
+        { "alimento": "pechuga-pollo", "cantidad": 150, "unidad": "g" },
+        { "alimento": "aguacate", "cantidad": 0.5, "unidad": "ud" }
+      ],
+      "kcalAprox": 532, "proteinaAprox": 44.8
+    },
+    "croquetas-pollo": {
+      "nombre": "Croquetas con pollo a la plancha", "tipo": "cena",
+      "ingredientes": [
+        { "alimento": "croqueta-jamon", "cantidad": 4, "unidad": "ud" },
+        { "alimento": "pechuga-pollo", "cantidad": 120, "unidad": "g" },
+        { "alimento": "aceite-oliva", "cantidad": 5, "unidad": "ml" },
+        { "alimento": "tomate", "cantidad": 100, "unidad": "g" }
+      ],
+      "kcalAprox": 537, "proteinaAprox": 38.2
+    },
+    "lomo-huevos": {
+      "nombre": "Lomo con huevos y aguacate", "tipo": "cena",
+      "ingredientes": [
+        { "alimento": "lomo-cerdo", "cantidad": 150, "unidad": "g" },
+        { "alimento": "huevo", "cantidad": 2, "unidad": "ud" },
+        { "alimento": "aceite-oliva", "cantidad": 5, "unidad": "ml" },
+        { "alimento": "aguacate", "cantidad": 0.5, "unidad": "ud" },
+        { "alimento": "tomate", "cantidad": 100, "unidad": "g" }
+      ],
+      "kcalAprox": 566, "proteinaAprox": 48.5
+    }
+  },
+  "semana": {
+    "lunes": {
+      "desayuno": ["desayuno-fijo"], "mediaManana": ["papilla-jamon"], "comida": ["pasta-atun"],
+      "merienda": ["merienda-platano-avena"], "cena": ["pollo-plancha-arroz", "leche-cena"]
+    },
+    "martes": {
+      "desayuno": ["desayuno-fijo"], "mediaManana": ["papilla-jamon"], "comida": ["arroz-lomo"],
+      "merienda": ["merienda-platano-avena"], "cena": ["sopa-fideos-croquetas", "leche-cena"]
+    },
+    "miercoles": {
+      "desayuno": ["desayuno-fijo"], "mediaManana": ["papilla-jamon"], "comida": ["pollo-rebozado-arroz"],
+      "merienda": ["merienda-platano-avena"], "cena": ["tortilla-salchichas", "leche-cena"]
+    },
+    "jueves": {
+      "desayuno": ["desayuno-fijo"], "mediaManana": ["papilla-jamon"], "comida": ["macarrones-salchichas"],
+      "merienda": ["merienda-platano-avena"], "cena": ["revuelto-atun", "leche-cena"]
+    },
+    "viernes": {
+      "desayuno": ["desayuno-fijo"], "mediaManana": ["papilla-jamon"], "comida": ["hamburguesas-arroz"],
+      "merienda": ["merienda-platano-avena"], "cena": ["sopa-pasta-pollo", "leche-cena"]
+    },
+    "sabado": {
+      "desayuno": ["desayuno-fijo"], "mediaManana": ["papilla-jamon"], "comida": ["arroz-meloso"],
+      "merienda": ["merienda-platano-avena"], "cena": ["croquetas-pollo", "leche-cena"]
+    },
+    "domingo": {
+      "desayuno": ["desayuno-fijo"], "mediaManana": ["papilla-jamon"], "comida": ["pasta-bolonesa"],
+      "merienda": ["merienda-platano-avena"], "cena": ["lomo-huevos", "leche-cena"]
+    }
+  }
+}

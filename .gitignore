@@ -2,4 +2,6 @@ node_modules
 .wrangler
 dist
 # Generado por scripts/preparar-armario.py a partir de outfits-para-code/
-data/
+data/*
+# Menú de Comidas: datos iniciales que sí van en git.
+!data/menu-comidas.json

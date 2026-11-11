@@ -36,7 +36,9 @@ const Hoy = (() => {
     const presupuesto = a.presupuestoMensual;
     const pasado = gasto > presupuesto;
     const gym = Gym.resumenSemana(lunes);
-    const prot = HoyDatos.totalesComidas(U.iso()).proteina_g;
+    // Proteína de las comidas marcadas hoy en Comidas.
+    const prot = Math.round(ComidasDatos.totalComido(U.iso()).proteina);
+    const objProt = ComidasDatos.objetivos().proteinaDia;
     const ahorro = Finanzas.dineroTotal();
 
     const barra = (v, max, color) => `
@@ -69,9 +71,9 @@ const Hoy = (() => {
 
         <article class="kpi">
           <span class="kpi-titulo"><span class="solo-movil">Proteína</span><span class="solo-escritorio">Proteína hoy</span></span>
-          <span class="kpi-valor">${prot} g <span class="kpi-de solo-escritorio">/ ${a.objetivoProteina} g</span></span>
-          ${barra(prot, a.objetivoProteina, 'var(--acento)')}
-          <span class="kpi-pie solo-movil">de ${a.objetivoProteina} g</span>
+          <span class="kpi-valor">${prot} g <span class="kpi-de solo-escritorio">/ ${objProt} g</span></span>
+          ${barra(prot, objProt, 'var(--acento)')}
+          <span class="kpi-pie solo-movil">de ${objProt} g</span>
         </article>
       </section>`;
   }

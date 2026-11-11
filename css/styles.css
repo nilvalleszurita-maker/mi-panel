@@ -839,3 +839,87 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 .calculo-jornada { margin: 0; min-height: 1.2em; color: var(--texto-2); font-size: 14px; }
 .calculo-jornada strong { color: var(--verde); }
 .form-jornada h3 { font-family: var(--fuente-titulos); font-size: 18px; }
+
+/* ---------- Comidas ---------- */
+.com-progreso, .com-extras { display: flex; flex-direction: column; gap: 14px; }
+.com-extra { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.com-extra + .com-extra, .com-aviso + .com-extra { padding-top: 14px; border-top: 1px solid var(--borde); }
+.interruptor {
+  flex: 0 0 auto; position: relative; width: 50px; height: 30px; padding: 0; border-radius: 999px; cursor: pointer;
+  background: var(--pista); border: 1px solid var(--borde); transition: background .2s;
+}
+.interruptor span {
+  position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--texto); transition: transform .2s;
+}
+.interruptor.on { background: var(--ambar); border-color: var(--ambar); }
+.interruptor.on span { transform: translateX(20px); background: var(--acento-texto); }
+.com-aviso {
+  display: flex; flex-direction: column; gap: 10px; padding: 12px 14px; border-radius: 12px;
+  background: #33281a; color: #f8d9a8; font-size: .9rem;
+}
+.com-aviso.ok { flex-direction: row; justify-content: space-between; align-items: center; background: #1b2e27; color: var(--verde); }
+.com-aviso .enlace { align-self: auto; padding: 0; }
+.com-aviso-botones { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.com-franjas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.com-franja { display: flex; flex-direction: column; gap: 12px; }
+.com-franja-cab { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.com-franja-cab h3 { margin: 0 0 2px; }
+.com-franja.hecha { border-color: color-mix(in srgb, var(--verde) 45%, var(--borde)); }
+.com-franja.hecha .com-plato-nombre { color: var(--muted); }
+.com-plato { display: flex; flex-direction: column; gap: 6px; }
+.com-plato + .com-plato { padding-top: 10px; border-top: 1px dashed var(--borde); }
+.com-plato-nombre {
+  align-self: flex-start; padding: 0; border: 0; background: none; color: var(--texto); cursor: pointer;
+  font: inherit; font-weight: 600; text-align: left;
+}
+.com-ings { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; font-size: .88rem; }
+.com-ings li { display: flex; justify-content: space-between; gap: 12px; }
+.com-ings li > span:last-child { white-space: nowrap; }
+.com-chip {
+  display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; vertical-align: 2px;
+  border: 1px solid var(--borde); color: var(--muted); font: 500 .7rem/1.5 var(--fuente); white-space: nowrap;
+}
+.com-chip.creatina { border-color: var(--ambar); color: var(--ambar); }
+.com-chip.hoy { border-color: var(--acento); color: var(--acento); }
+.com-dia-platos .com-chip { margin-left: 6px; }
+
+.com-pista { margin-top: -6px; }
+.com-semana { display: grid; gap: 12px; }
+@media (min-width: 860px) { .com-semana { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.com-dia { display: flex; flex-direction: column; gap: 8px; }
+.com-dia.hoy { border-color: var(--acento); background: var(--superficie-2); }
+.com-dia-cab { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.com-dia-cab h3 { margin: 0; }
+.com-cuenta { padding: 2px 9px; border-radius: 999px; background: var(--pista); font-size: .8rem; font-weight: 600; color: var(--muted); }
+.com-cuenta.todo { background: var(--verde); color: var(--acento-texto); }
+.com-dia-total { margin: 0; font-size: .9rem; color: var(--muted); }
+.com-dia-total strong { color: var(--texto); }
+.com-dia-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.com-dia-lista li { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; padding: 7px 0; border-top: 1px solid var(--borde); font-size: .9rem; }
+.com-dia-franja { color: var(--muted); font-size: .8rem; padding-top: 2px; }
+.com-dia-lista li.hecha .com-dia-franja::after { content: ' ✓'; color: var(--verde); }
+.com-enlace { padding: 0; border: 0; background: none; color: var(--texto); font: inherit; text-align: left; cursor: pointer; text-decoration: underline; text-decoration-color: var(--borde); text-underline-offset: 3px; }
+.com-enlace:hover { color: var(--acento); }
+
+.com-hoja { gap: 12px; }
+.campo-com { display: flex; flex-direction: column; gap: 6px; font-size: .85rem; color: var(--muted); }
+.com-ed-total { margin: 0; color: var(--muted); }
+.com-ed-total strong { color: var(--texto); font-size: 1.1rem; }
+.com-ed-ings { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.com-ed-ings li { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-top: 1px solid var(--borde); }
+.com-ed-nombre { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; font-size: .92rem; }
+.com-ed-cant { display: flex; align-items: center; gap: 6px; }
+.com-ed-cant input { width: 72px; text-align: right; }
+.com-ed-cant .muted { width: 22px; font-size: .85rem; }
+.com-anadir { display: grid; grid-template-columns: minmax(0, 1fr) 70px auto; gap: 8px; align-items: center; }
+.com-anadir .btn { grid-column: 1 / -1; }
+.com-anadir #ed-unidad { font-size: .85rem; }
+.com-nuevo-alimento { display: flex; flex-direction: column; gap: 10px; padding-top: 10px; border-top: 1px solid var(--borde); }
+.com-ed-pie { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: sticky; bottom: calc(-18px - env(safe-area-inset-bottom)); padding: 10px 0 0; background: var(--superficie); }
+.com-opcion {
+  display: flex; flex-direction: column; gap: 4px; padding: 14px; border-radius: 12px; text-align: left; cursor: pointer;
+  background: var(--superficie-2); border: 1px solid var(--borde); color: var(--texto); font: inherit;
+}
+.com-opcion:hover { border-color: var(--acento); }

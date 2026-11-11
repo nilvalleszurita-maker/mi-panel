@@ -43,6 +43,8 @@ const Store = (() => {
     trabajo: { jornadas: [] },
     // Asignaturas y evaluaciones (tablas: ver js/estudio-datos.js).
     estudio: { sembrado: false, curso: '', asignaturas: [], evaluaciones: [] },
+    // Comidas: menú base y registro diario por fecha (ver js/comidas-datos.js).
+    comidas: { menu: null, registro: {} },
     // Armario y outfits (tablas: ver js/outfits-datos.js).
     armario: { sembrado: false, prendas: [], outfits: [], outfit_prendas: [], outfit_historial: [] },
   });

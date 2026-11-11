@@ -1,6 +1,6 @@
 # Mi Panel
 
-Web app personal (móvil y ordenador) para controlar finanzas, gym, estudio, trabajo y outfits. Diseño oscuro, sin dependencias ni instalación.
+Web app personal (móvil y ordenador) para controlar finanzas, gym, estudio, trabajo, comidas y outfits. Diseño oscuro, sin dependencias ni instalación.
 
 ## Secciones
 
@@ -28,7 +28,12 @@ Web app personal (móvil y ordenador) para controlar finanzas, gym, estudio, tra
   - Cada día con lugar, horas (vale el turno de noche) e importe **por hora o fijo por día**, y si es **bruto o neto**: el bruto se pasa a neto con la retención (`neto = bruto × 398,02/435`, se cambia abajo con «Cambiar»); el neto se suma tal cual. Al escribir un lugar ya usado se rellenan sus horas e importe.
   - Resumen del mes en neto y bruto, cobrado/pendiente, días y horas, con selector de mes.
   - Tocar un día lo marca como cobrado y crea el ingreso «Agencia» en Finanzas (se suma a Dinero); desmarcarlo o borrar ese ingreso lo deja pendiente. Aviso si hay días sin cobrar de hace más de 30 días.
-- En el móvil la barra es Hoy · Finanzas · Gym · Estudio · Trabajo · **Más** (Outfits y Ajustes).
+- **Comidas**: plan de comidas semanal a partir de `data/menu-comidas.json` (alimentos, platos, menú y objetivos: 3.100 kcal y 140 g de proteína). Solo texto.
+  - Vista **Hoy**: barras de kcal y proteína de lo marcado como comido; las 5 comidas con su plato, ingredientes, kcal y proteína, y el check «Comido»; check «Creatina tomada» (hasta el 31/01/2027); interruptor «Hoy corro», que propone subir el arroz o la pasta de la comida a 160 g solo ese día.
+  - Vista **Semana**: los 7 días con sus platos y el total de kcal y proteína; hoy resaltado y, en los días pasados, cuántas comidas marcaste (4/5).
+  - Tocando un plato se edita: cantidades, quitar o añadir ingredientes, cambiarlo por otro plato, crear uno nuevo y añadir alimentos al catálogo. Al guardar eliges «Solo hoy» (cambio de esa fecha) o «Cambiar en el menú semanal».
+  - Las kcal y la proteína se calculan siempre con los ingredientes. Se guardan aparte el menú base y el registro de cada día (ver `js/comidas-datos.js`). La proteína de la pantalla Hoy sale de aquí.
+- En el móvil la barra es Hoy · Finanzas · Gym · Estudio · Trabajo · **Más** (Comidas, Outfits y Ajustes).
 
 ## Cómo usarla
 
@@ -63,6 +68,9 @@ js/outfits.js         Módulo de Outfits
 js/estudio-datos.js   Datos y cálculos de Estudio
 js/estudio.js         Módulo de Estudio
 js/trabajo.js         Módulo de Trabajo
+js/comidas-datos.js   Datos y cálculos de Comidas
+js/comidas.js         Módulo de Comidas
+data/menu-comidas.json  Menú inicial de Comidas
 estudio-y-trabajo-para-code/  Fuente de asignaturas y diseños
 outfits-para-code/    Fuente del armario (armario.json y fotos)
 js/app.js             Pestañas, eventos y copia de seguridad
