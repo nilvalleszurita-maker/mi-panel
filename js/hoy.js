@@ -108,6 +108,9 @@ const Hoy = (() => {
           ${entreno()}
           ${examen()}
         </div>
+        <div class="hoy-col">
+          ${comidas()}
+        </div>
       </div>`;
   }
 
@@ -129,6 +132,81 @@ const Hoy = (() => {
         </div>
         <span class="examen-hoy-dias ${x.dias <= 14 ? 'cerca' : ''}">${x.dias === 0 ? 'Hoy' : `${x.dias} ${x.dias === 1 ? 'día' : 'días'}`}</span>
       </a>`;
+  }
+
+  // ---------- Comidas de hoy (de la pestaña Comidas) ----------
+  // Dos versiones: 'completa' (siguiente comida, progreso, kcal y recordatorios)
+  // y 'simple' (solo la siguiente comida con su botón «Comido»).
+  let varianteComidas = 'completa';
+  const kcalTxt = n => Math.round(n).toLocaleString('es-ES', { useGrouping: 'always' });
+  const protTxt = n => `${(Math.round(n * 10) / 10).toLocaleString('es-ES')} g`;
+
+  function comidas() {
+    const C = ComidasDatos;
+    if (!C.listo()) {
+      C.asegurar().then(ok => { if (ok && location.hash.replace('#', '') in { '': 1, hoy: 1 }) Hoy.render(document.getElementById('vista')); });
+      return '';
+    }
+    const f = U.iso();
+    const orden = C.orden();
+    const sig = orden.find(fr => !C.comido(f, fr));
+    const hechas = C.contarComidas(f);
+    const siguiente = () => {
+      if (!sig) return `<div class="comidas-sig"><strong class="pos">✓ Todas las comidas de hoy hechas</strong></div>`;
+      const t = C.totalFranja(f, sig);
+      return `
+        <div class="comidas-sig">
+          <a class="crece" href="#comidas">
+            <span class="muted peq">${varianteComidas === 'simple' ? 'Siguiente comida · ' : ''}${U.esc(C.etiqueta(sig))}</span>
+            <strong>${C.platosDe(f, sig).map(p => U.esc(p.nombre)).join(' + ')}</strong>
+            <span class="muted peq">${kcalTxt(t.kcal)} kcal · ${protTxt(t.proteina)} proteína</span>
+          </a>
+          <button class="check" data-acc="com-comido" data-franja="${sig}">Comido</button>
+        </div>`;
+    };
+
+    if (varianteComidas === 'simple') return `<section class="comidas-hoy simple" aria-label="Siguiente comida">${siguiente()}</section>`;
+
+    const total = C.totalComido(f);
+    const obj = C.objetivos();
+    const conCreatina = C.creatinaActiva(f) && !C.creatinaTomada(f);
+    const corro = C.corro(f), aplicado = C.corroAplicado(f);
+    const recordatorios = [
+      conCreatina ? `
+        <div class="comidas-rec">
+          <span>Creatina <span class="muted peq">· con la ${(C.creatina().conComida || []).map(x => C.etiqueta(x).toLowerCase()).join(' o la ')}</span></span>
+          <button class="check" data-acc="com-creatina">Tomada</button>
+        </div>` : '',
+      !corro ? `
+        <div class="comidas-rec">
+          <span>¿Hoy corres? <span class="muted peq">· arroz o pasta a 160 g</span></span>
+          <button class="interruptor" role="switch" aria-checked="false" aria-label="Hoy corro" data-acc="com-corro"><span></span></button>
+        </div>`
+      : !aplicado && C.carbosComida(f).length ? `
+        <div class="comidas-rec">
+          <span>Hoy corres <span class="muted peq">· sube el arroz o la pasta a 160 g</span></span>
+          <button class="btn btn-mini" data-acc="com-aplicar">Aplicar</button>
+        </div>` : '',
+    ].join('');
+    return `
+      <section class="comidas-hoy" aria-labelledby="titulo-comidas">
+        <div class="entreno-cab">
+          <div>
+            <span class="entreno-etq">Comidas de hoy</span>
+            <h2 id="titulo-comidas">${hechas} de ${orden.length} comidas</h2>
+          </div>
+          <a class="enlace" href="#comidas">Ver menú</a>
+        </div>
+        <ol class="comidas-puntos" aria-label="Comidas del día">
+          ${orden.map(fr => `<li class="${C.comido(f, fr) ? 'on' : ''} ${fr === sig ? 'sig' : ''}"><span></span>${U.esc(C.etiqueta(fr).replace('Media mañana', 'M. mañana'))}</li>`).join('')}
+        </ol>
+        ${siguiente()}
+        <div class="barra-fila">
+          <div class="barra-cab"><span class="muted">Kcal</span><span><strong>${kcalTxt(total.kcal)}</strong> <span class="muted">/ ${kcalTxt(obj.kcalDia)}</span></span></div>
+          <div class="barra"><div style="width:${pctBarra(total.kcal, obj.kcalDia)}%"></div></div>
+        </div>
+        ${recordatorios ? `<div class="comidas-recs">${recordatorios}</div>` : ''}
+      </section>`;
   }
 
   // ---------- Entreno de hoy ----------
@@ -191,6 +269,10 @@ const Hoy = (() => {
     const acc = b.dataset.acc;
 
     if (acc === 'menu') menuAbierto = !menuAbierto;
+    else if (acc === 'com-comido') ComidasDatos.alternarComido(U.iso(), b.dataset.franja);
+    else if (acc === 'com-creatina') ComidasDatos.alternarCreatina(U.iso());
+    else if (acc === 'com-corro') ComidasDatos.ponerCorro(U.iso(), true);
+    else if (acc === 'com-aplicar') ComidasDatos.aplicarCorro(U.iso());
     else if (acc === 'empezar') { Gym.irAHoy(); location.hash = '#gym'; return; }
     else if (acc === 'rapido') {
       menuAbierto = false;
@@ -202,5 +284,5 @@ const Hoy = (() => {
     rerender();
   }
 
-  return { id: 'hoy', nombre: 'Hoy', icono: '☀️', render, alClic };
+  return { id: 'hoy', nombre: 'Hoy', icono: '☀️', render, alClic, ponerVarianteComidas: v => { varianteComidas = v; } };
 })();

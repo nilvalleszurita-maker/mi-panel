@@ -923,3 +923,22 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
   background: var(--superficie-2); border: 1px solid var(--borde); color: var(--texto); font: inherit;
 }
 .com-opcion:hover { border-color: var(--acento); }
+
+/* Comidas en Hoy */
+.comidas-hoy { display: flex; flex-direction: column; gap: 14px; padding: 18px; background: var(--superficie); border-radius: 18px; }
+.comidas-hoy h2 { font-size: 20px; text-transform: none; line-height: 1.2; }
+.comidas-hoy .enlace { align-self: flex-start; font-size: 14px; text-decoration: none; }
+.comidas-hoy.simple { padding: 14px 16px; border-radius: 16px; }
+.comidas-sig { display: flex; align-items: center; gap: 12px; }
+.comidas-hoy:not(.simple) .comidas-sig { padding: 12px 14px; border-radius: 12px; background: var(--superficie-2); }
+.comidas-sig .crece { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; color: var(--texto); text-decoration: none; }
+.comidas-sig strong { font-size: 15px; font-weight: 500; }
+.comidas-puntos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.comidas-puntos li { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); text-align: center; }
+.comidas-puntos li span { width: 100%; height: 6px; border-radius: 999px; background: var(--pista); }
+.comidas-puntos li.on span { background: var(--verde); }
+.comidas-puntos li.on { color: var(--texto-2); }
+.comidas-puntos li.sig span { background: var(--acento); opacity: .45; }
+.comidas-puntos li.sig { color: var(--texto); font-weight: 600; }
+.comidas-recs { display: flex; flex-direction: column; gap: 10px; padding-top: 12px; border-top: 1px solid var(--borde); }
+.comidas-rec { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; }
