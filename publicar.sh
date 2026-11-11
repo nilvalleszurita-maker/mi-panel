@@ -8,7 +8,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-ARCHIVOS=(index.html manifest.webmanifest sw.js css icons js data/menu-comidas.json)
+ARCHIVOS=(index.html manifest.webmanifest sw.js css icons js data/menu-comidas.json data/habilidades.json)
 
 rm -rf dist
 mkdir -p dist/app

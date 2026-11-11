@@ -941,3 +941,72 @@ input:focus, select:focus { border-color: var(--acento); outline: none; }
 .comidas-puntos li.sig { color: var(--texto); font-weight: 600; }
 .comidas-recs { display: flex; flex-direction: column; gap: 10px; padding-top: 12px; border-top: 1px solid var(--borde); }
 .comidas-rec { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; }
+
+/* ---------- Menú ⋯ de la cabecera ---------- */
+.topbar { position: sticky; }
+.menu-top {
+  position: absolute; right: 12px; top: calc(100% - 4px); z-index: 30; min-width: 200px;
+  display: flex; flex-direction: column; padding: 6px;
+  background: var(--superficie-2); border: 1px solid var(--borde); border-radius: 14px; box-shadow: 0 12px 32px rgba(0, 0, 0, .45);
+}
+.menu-top[hidden] { display: none; }
+.menu-top a, .menu-top button {
+  display: flex; align-items: center; min-height: 46px; padding: 0 12px; border-radius: 10px;
+  color: var(--texto); text-decoration: none; font-size: 15px; background: none; border: 0; cursor: pointer; text-align: left;
+}
+.menu-top a:hover, .menu-top button:hover { background: var(--superficie); }
+a.nav-ajustes { text-decoration: none; }
+@media (min-width: 860px) {
+  .nav-cosas { margin-top: auto; }
+  .nav-cosas + .nav-ajustes { margin-top: 0; }
+}
+
+/* ---------- Hábitos (al final de Hoy) ---------- */
+.habitos { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+.habitos-titulo { font-size: 13px; color: var(--texto-2); text-transform: uppercase; letter-spacing: .08em; }
+.habitos-lista { display: grid; gap: 12px; }
+@media (min-width: 860px) { .habitos-lista { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
+.hab-tarjeta { display: flex; flex-direction: column; gap: 12px; padding: 16px; background: var(--superficie); border-radius: 16px; }
+.hab-cab { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.hab-titulo { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.hab-titulo h3 { margin: 0; font-size: 16px; }
+.hab-estado { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: var(--pista); color: var(--muted); }
+.hab-estado.n1 { background: #33281a; color: var(--ambar); }
+.hab-estado.n2 { background: #1b2e27; color: var(--verde); }
+.hab-campo { display: flex; flex-direction: column; gap: 6px; font-size: .85rem; color: var(--muted); }
+.hab-con-unidad { display: flex; align-items: center; gap: 8px; }
+.hab-racha { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; padding-top: 10px; border-top: 1px solid var(--borde); }
+.hab-fuego { font-weight: 600; }
+.hab-texto {
+  width: 100%; padding: 10px 12px; resize: vertical; font: inherit; font-size: 1rem; color: var(--texto);
+  background: var(--superficie-2); border: 1px solid var(--borde); border-radius: 10px;
+}
+.hab-texto:focus { border-color: var(--acento); outline: none; }
+.hab-buena { margin: 0; padding: 12px 14px; border-radius: 12px; background: var(--superficie-2); white-space: pre-wrap; }
+.hab-botones { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hab-botones .enlace { align-self: center; margin-left: auto; text-decoration: none; }
+.hab-skill { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+.hab-semana { font-size: 12px; color: var(--acento); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+.hab-skill-nombre { font-family: var(--fuente-titulos); font-size: 18px; font-weight: 600; }
+.hab-practica { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.hab-semana-dias { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hab-dia { display: flex; flex-direction: column; align-items: center; width: 22px; font-size: 11px; color: var(--muted); }
+.hab-dia i { font-style: normal; font-size: 16px; line-height: 1.2; color: var(--pista); }
+.hab-dia.on i { color: var(--verde); }
+.hab-dia.hoy { color: var(--texto); font-weight: 600; }
+.hab-semana-dias .muted { margin-left: auto; }
+.hab-pregunta { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 14px; border-radius: 12px; background: #262d45; }
+.hab-fin { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border-radius: 12px; background: #1b2e27; }
+.hab-fin > strong { color: var(--verde); font-size: 18px; }
+
+/* ---------- Página Cosas buenas ---------- */
+.cb-volver { text-decoration: none; color: var(--acento); }
+.cb-resumen { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.cb-total { font-family: var(--fuente-titulos); font-size: 20px; }
+.cb-recuerdo { display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 16px; background: #262d45; border: 1px solid var(--acento); }
+.cb-mes { display: flex; flex-direction: column; gap: 10px; }
+.cb-mes h2 { text-transform: capitalize; font-size: 15px; color: var(--texto-2); margin-top: 6px; }
+.cb-item { display: flex; flex-direction: column; gap: 8px; }
+.cb-texto { margin: 0; white-space: pre-wrap; }
+.cb-acciones { display: flex; gap: 14px; }
+.cb-acciones .enlace { padding: 0; font-size: 14px; }

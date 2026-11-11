@@ -17,6 +17,7 @@ const Hoy = (() => {
     { id: 'gasto', texto: 'Añadir gasto', icono: '−' },
     { id: 'ingreso', texto: 'Añadir ingreso', icono: '+' },
     { id: 'entreno', texto: 'Registrar entreno', icono: '🏋️' },
+    { id: 'cosas', texto: 'Cosas buenas', icono: '✦' },
     { id: 'ajustes', texto: 'Ajustes y copia', icono: '⋯' },
   ];
 
@@ -111,7 +112,8 @@ const Hoy = (() => {
         <div class="hoy-col">
           ${comidas()}
         </div>
-      </div>`;
+      </div>
+      ${Habitos.seccion()}`;
   }
 
   // ---------- Próximo examen (de la pestaña Estudio) ----------
@@ -261,6 +263,7 @@ const Hoy = (() => {
     const b = e.target.closest('[data-acc]');
     // Un clic fuera del menú lo cierra.
     if (menuAbierto && !e.target.closest('.rapido')) { menuAbierto = false; rerender(); return; }
+    if (Habitos.alClic(e, rerender)) return;
     if (!b) return;
     const acc = b.dataset.acc;
 
@@ -276,9 +279,10 @@ const Hoy = (() => {
       if (que === 'gasto' || que === 'ingreso') { Finanzas.abrirFormulario(que); location.hash = '#finanzas'; return; }
       if (que === 'entreno') { Gym.irAHoy(); location.hash = '#gym'; return; }
       if (que === 'ajustes') { rerender(); abrirAjustes(); return; }
+      if (que === 'cosas') { location.hash = '#cosas-buenas'; return; }
     } else return;
     rerender();
   }
 
-  return { id: 'hoy', nombre: 'Hoy', icono: '☀️', render, alClic };
+  return { id: 'hoy', nombre: 'Hoy', icono: '☀️', render, alClic, alEscribir: e => Habitos.alEscribir(e) };
 })();

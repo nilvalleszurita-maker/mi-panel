@@ -5,6 +5,8 @@
 const MODULOS = [Hoy, Finanzas, Gym, Estudio, Trabajo, Comidas, Outfits];
 // En el móvil caben estas en la barra; el resto va en el menú «Más».
 const EN_BARRA = 5;
+// Páginas sin pestaña propia (se abren desde menús).
+const PAGINAS = [CosasBuenas];
 
 // Iconos del menú (trazos del diseño). Si un módulo no tiene, se usa su emoji.
 const trazo = d => `<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
@@ -21,7 +23,7 @@ const ICONOS = {
 
 const vista = document.getElementById('vista');
 const tabs = document.getElementById('tabs');
-const elegir = () => MODULOS.find(m => m.id === location.hash.slice(1)) || MODULOS[0];
+const elegir = () => [...MODULOS, ...PAGINAS].find(m => m.id === location.hash.slice(1)) || MODULOS[0];
 let actual = elegir();
 
 let masAbierto = false;
@@ -62,6 +64,7 @@ function pintarMenuMas() {
 
 window.addEventListener('hashchange', () => {
   masAbierto = false;
+  cerrarMenuTop?.();
   actual = elegir();
   pintar();
   window.scrollTo(0, 0);
@@ -143,7 +146,14 @@ async function pintarEstado() {
 const dlg = document.getElementById('dlg-ajustes');
 // Global: también la usa el menú «+» de la pantalla Hoy.
 function abrirAjustes() { pintarEstado(); dlg.showModal(); }
-document.getElementById('btn-ajustes').onclick = abrirAjustes;
+// Menú ⋯ de la cabecera: Cosas buenas y Ajustes.
+const menuTop = document.getElementById('menu-top');
+const btnTop = document.getElementById('btn-ajustes');
+const cerrarMenuTop = () => { menuTop.hidden = true; btnTop.setAttribute('aria-expanded', 'false'); };
+btnTop.onclick = e => { e.stopPropagation(); menuTop.hidden = !menuTop.hidden; btnTop.setAttribute('aria-expanded', String(!menuTop.hidden)); };
+document.getElementById('btn-ajustes-menu').onclick = () => { cerrarMenuTop(); abrirAjustes(); };
+menuTop.querySelector('a').onclick = cerrarMenuTop;
+document.addEventListener('click', e => { if (!menuTop.hidden && !e.target.closest('#menu-top')) cerrarMenuTop(); });
 document.getElementById('btn-ajustes-lateral').onclick = abrirAjustes;
 document.getElementById('btn-aviso').onclick = abrirAjustes;
 document.getElementById('btn-exportar').onclick = () => {

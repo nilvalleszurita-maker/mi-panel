@@ -5,3 +5,4 @@ dist
 data/*
 # Menú de Comidas: datos iniciales que sí van en git.
 !data/menu-comidas.json
+!data/habilidades.json

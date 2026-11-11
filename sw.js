@@ -1,10 +1,10 @@
 // Service worker: guarda los archivos de la app para que funcione sin conexión.
 // Estrategia "red primero": si hay internet usa la versión más nueva,
 // si no, tira de la copia guardada.
-const CACHE = 'mi-panel-v20';
+const CACHE = 'mi-panel-v21';
 const ARCHIVOS = [
   './', 'index.html', 'css/styles.css', 'manifest.webmanifest',
-  'js/store.js', 'js/utils.js', 'js/hoy-datos.js', 'js/hoy.js', 'js/finanzas.js', 'js/gym-plan.js', 'js/gym-figuras.js', 'js/gym.js', 'js/estudio-datos.js', 'js/estudio.js', 'js/trabajo.js', 'js/comidas-datos.js', 'js/comidas.js', 'data/menu-comidas.json', 'js/outfits-datos.js', 'js/outfits.js', 'js/app.js',
+  'js/store.js', 'js/utils.js', 'js/hoy-datos.js', 'js/hoy.js', 'js/finanzas.js', 'js/gym-plan.js', 'js/gym-figuras.js', 'js/gym.js', 'js/estudio-datos.js', 'js/estudio.js', 'js/trabajo.js', 'js/comidas-datos.js', 'js/comidas.js', 'data/menu-comidas.json', 'js/habitos-datos.js', 'js/habitos.js', 'data/habilidades.json', 'js/outfits-datos.js', 'js/outfits.js', 'js/app.js',
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png',
 ];
 
