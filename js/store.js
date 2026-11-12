@@ -45,6 +45,8 @@ const Store = (() => {
     estudio: { sembrado: false, curso: '', asignaturas: [], evaluaciones: [] },
     // Hábitos: registro por fecha y habilidad de la semana (ver js/habitos-datos.js).
     habitos: { registro: {}, habilidad: { indice: 0, inicio: null, resultados: {} } },
+    // Cuidado personal: forma de la cara, favoritos… (ver js/cuidado.js).
+    cuidado: { forma: null, origenForma: null, favoritos: [] },
     // Comidas: menú base y registro diario por fecha (ver js/comidas-datos.js).
     comidas: { menu: null, registro: {} },
     // Armario y outfits (tablas: ver js/outfits-datos.js).
