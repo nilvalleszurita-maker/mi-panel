@@ -109,6 +109,7 @@ const Hoy = (() => {
           ${comidas()}
         </div>
       </div>
+      ${Cuidado.tarjetaHoy()}
       ${Habitos.seccion()}`;
   }
 
@@ -260,6 +261,7 @@ const Hoy = (() => {
     // Un clic fuera del menú lo cierra.
     if (menuAbierto && !e.target.closest('.rapido')) { menuAbierto = false; rerender(); return; }
     if (Habitos.alClic(e, rerender)) return;
+    if (b?.dataset.acc === 'cp-hecho') { Cuidado.hechoHoy(b.dataset.id); rerender(); return; }
     if (!b) return;
     const acc = b.dataset.acc;
 

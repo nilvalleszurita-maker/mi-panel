@@ -5,10 +5,13 @@
 // Store.get().cuidado:
 //   forma ('ovalada'|'redonda'|…|null), origenForma ('manual'|'escaner'), piel (tipo de piel o null),
 //   favoritos [{ id, seccion ('pelo'|'cejas'|'barba'|'gafas'), forma, texto, fecha }]
+//   recordatorios { id: { cada_dias, ultimo ('AAAA-MM-DD' o null), previo } }
+//     (nombres y días por defecto en el JSON; aquí solo lo que cambias y cuándo lo hiciste)
 const Cuidado = (() => {
   const SECCIONES = [['pelo', 'Pelo'], ['cejas', 'Cejas'], ['barba', 'Barba'], ['gafas', 'Gafas']];
   let datos = null, cargando = null;
   let seccion = 'pelo';
+  let editandoRec = false;
   let test = null; // { paso, respuestas: [] } mientras se hace el test de piel
   const RUTINAS = [['manana', 'Mañana', '☀'], ['noche', 'Noche', '☾']];
   const c = () => Store.get().cuidado;
@@ -233,6 +236,8 @@ const Cuidado = (() => {
 
       ${tarjetaPiel()}
 
+      ${tarjetaRecordatorios()}
+
       ${favoritos()}`;
   }
 
@@ -290,6 +295,77 @@ const Cuidado = (() => {
       test = null;
     }
   }
+  // ---------- Recordatorios ----------
+  const diasDesde = f => Math.round((U.deIso(U.iso()) - U.deIso(f)) / 864e5);
+  function recordatorios() {
+    if (!datos) return null;
+    const guardados = c().recordatorios;
+    return datos.recordatorios.map(r => {
+      const g = guardados[r.id] || {};
+      const cada = g.cada_dias || r.cada_dias;
+      const falta = g.ultimo ? cada - diasDesde(g.ultimo) : null;
+      return { id: r.id, nombre: r.nombre, cada, ultimo: g.ultimo || null, previo: g.previo, falta };
+    });
+  }
+  const textoFalta = r => r.ultimo === null ? 'Pulsa «Hecho hoy» la próxima vez que lo hagas'
+    : r.falta < 0 ? `Toca desde hace ${-r.falta} ${r.falta === -1 ? 'día' : 'días'}`
+    : r.falta === 0 ? 'Toca hoy'
+    : `En ${r.falta} ${r.falta === 1 ? 'día' : 'días'}${r.falta > 3 ? ` · cada ${r.cada}` : ''}`;
+  function hechoHoy(id) {
+    const g = c().recordatorios[id] ||= {};
+    if (g.ultimo === U.iso()) { g.ultimo = g.previo ?? null; delete g.previo; } // deshacer
+    else { g.previo = g.ultimo ?? null; g.ultimo = U.iso(); }
+    Store.guardar();
+  }
+  function tarjetaRecordatorios() {
+    const lista = recordatorios();
+    return `
+      <section class="tarjeta cp-recs">
+        <div class="cab-seccion"><h2>Recordatorios</h2>
+          <button class="enlace" data-acc="cp-rec-editar">${editandoRec ? 'Listo' : 'Editar'}</button></div>
+        <ul class="cp-rec-lista">
+          ${lista.map(r => `
+            <li>
+              <div class="crece">
+                <strong>${U.esc(r.nombre)}</strong>
+                ${editandoRec
+                  ? `<label class="cp-cada">Cada <input inputmode="numeric" data-rec="${r.id}" value="${r.cada}" aria-label="Días entre ${U.esc(r.nombre)}"> días</label>`
+                  : `<span class="peq ${r.falta !== null && r.falta <= 3 ? 'cp-pronto' : 'muted'}">${textoFalta(r)}</span>`}
+              </div>
+              ${editandoRec ? '' : botonHecho(r)}
+            </li>`).join('')}
+        </ul>
+        <p class="muted peq nota">Los que tocan en 3 días o menos salen en Hoy.</p>
+      </section>`;
+  }
+  const botonHecho = r => r.ultimo === U.iso()
+    ? `<button class="check on" data-acc="cp-hecho" data-id="${r.id}" aria-pressed="true">✓ Hecho hoy</button>`
+    : `<button class="check" data-acc="cp-hecho" data-id="${r.id}">Hecho hoy</button>`;
+
+  // Tarjeta para Hoy con los recordatorios que tocan en ≤ 3 días ('' si no hay ninguno).
+  function tarjetaHoy() {
+    const lista = recordatorios();
+    if (!lista) {
+      asegurar().then(ok => { if (ok && location.hash.replace('#', '') in { '': 1, hoy: 1 }) Hoy.render(document.getElementById('vista')); });
+      return '';
+    }
+    const pronto = lista.filter(r => (r.falta !== null && r.falta <= 3) || r.ultimo === U.iso())
+      .sort((a, b) => (a.ultimo === U.iso()) - (b.ultimo === U.iso()) || a.falta - b.falta);
+    if (!pronto.length) return '';
+    return `
+      <section class="cp-hoy" aria-labelledby="titulo-cp-hoy">
+        <div class="cab-seccion"><h2 class="habitos-titulo" id="titulo-cp-hoy">Cuidado personal</h2><a class="enlace" href="#cuidado">Ver</a></div>
+        <ul class="cp-rec-lista">
+          ${pronto.map(r => `
+            <li>
+              <div class="crece"><strong>${U.esc(r.nombre)}</strong>
+                <span class="peq ${r.ultimo === U.iso() ? 'pos' : 'cp-pronto'}">${r.ultimo === U.iso() ? 'Hecho hoy' : textoFalta(r)}</span></div>
+              ${botonHecho(r)}
+            </li>`).join('')}
+        </ul>
+      </section>`;
+  }
+
   // Pasos de cada rutina (para la tarjeta de Hoy). null si aún no se han cargado.
   const rutinas = () => datos ? datos.piel.base : null;
 
@@ -338,6 +414,8 @@ const Cuidado = (() => {
       case 'cp-test-cancelar': test = null; break;
       case 'cp-test-op': responderTest(Number(b.dataset.i)); break;
       case 'cp-paso': HabitosDatos.alternarPaso(U.iso(), b.dataset.r, Number(b.dataset.i), datos.piel.base[b.dataset.r].length); break;
+      case 'cp-hecho': hechoHoy(b.dataset.id); break;
+      case 'cp-rec-editar': editandoRec = !editandoRec; break;
       case 'cp-quitar': c().favoritos = c().favoritos.filter(f => f.id !== b.dataset.id); Store.guardar(); break;
       default: return;
     }
@@ -346,11 +424,16 @@ const Cuidado = (() => {
 
   // La foto subida se analiza al momento (y no se guarda).
   function alEscribir(e) {
+    if (e.target.dataset.rec) {
+      const n = Math.round(Number(e.target.value));
+      if (n >= 1) { (c().recordatorios[e.target.dataset.rec] ||= {}).cada_dias = n; Store.guardar(); }
+      return;
+    }
     if (e.target.id !== 'cp-foto') return;
     const f = e.target.files?.[0];
     e.target.value = '';
     if (f) escanearFoto(f);
   }
 
-  return { alEscribir, id: 'cuidado', nombre: 'Cuidado personal', icono: '🪞', render, alClic, tarjetaEstilo, asegurar, rutinas };
+  return { alEscribir, id: 'cuidado', nombre: 'Cuidado personal', icono: '🪞', render, alClic, tarjetaEstilo, asegurar, rutinas, tarjetaHoy, hechoHoy };
 })();
