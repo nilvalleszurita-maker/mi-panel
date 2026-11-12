@@ -342,6 +342,20 @@ const Cuidado = (() => {
     ? `<button class="check on" data-acc="cp-hecho" data-id="${r.id}" aria-pressed="true">✓ Hecho hoy</button>`
     : `<button class="check" data-acc="cp-hecho" data-id="${r.id}">Hecho hoy</button>`;
 
+  // Para otras pantallas (Gym → Fotos): { texto, pronto } o null si aún no se ha cargado.
+  function estadoRecordatorio(id) {
+    const r = recordatorios()?.find(x => x.id === id);
+    if (!r) { if (!datos) asegurar(); return null; }
+    return { texto: textoFalta(r), pronto: r.falta !== null && r.falta <= 3 };
+  }
+  // Marca como hecho hoy sin deshacer si ya lo estaba (al guardar una foto de progreso).
+  function marcarHecho(id) {
+    const g = c().recordatorios[id] ||= {};
+    if (g.ultimo === U.iso()) return;
+    g.previo = g.ultimo ?? null; g.ultimo = U.iso();
+    Store.guardar();
+  }
+
   // Tarjeta para Hoy con los recordatorios que tocan en ≤ 3 días ('' si no hay ninguno).
   function tarjetaHoy() {
     const lista = recordatorios();
@@ -435,5 +449,5 @@ const Cuidado = (() => {
     if (f) escanearFoto(f);
   }
 
-  return { alEscribir, id: 'cuidado', nombre: 'Cuidado personal', icono: '🪞', render, alClic, tarjetaEstilo, asegurar, rutinas, tarjetaHoy, hechoHoy };
+  return { alEscribir, id: 'cuidado', nombre: 'Cuidado personal', icono: '🪞', render, alClic, tarjetaEstilo, asegurar, rutinas, tarjetaHoy, hechoHoy, estadoRecordatorio, marcarHecho };
 })();
