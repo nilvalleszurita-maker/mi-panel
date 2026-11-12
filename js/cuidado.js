@@ -3,12 +3,14 @@
 // Las recomendaciones se leen de data/cuidado.json (copia de
 // cuidado-personal-para-code/datos/recomendaciones.json al publicar).
 // Store.get().cuidado:
-//   forma ('ovalada'|'redonda'|…|null), origenForma ('manual'|'escaner'),
+//   forma ('ovalada'|'redonda'|…|null), origenForma ('manual'|'escaner'), piel (tipo de piel o null),
 //   favoritos [{ id, seccion ('pelo'|'cejas'|'barba'|'gafas'), forma, texto, fecha }]
 const Cuidado = (() => {
   const SECCIONES = [['pelo', 'Pelo'], ['cejas', 'Cejas'], ['barba', 'Barba'], ['gafas', 'Gafas']];
   let datos = null, cargando = null;
   let seccion = 'pelo';
+  let test = null; // { paso, respuestas: [] } mientras se hace el test de piel
+  const RUTINAS = [['manana', 'Mañana', '☀'], ['noche', 'Noche', '☾']];
   const c = () => Store.get().cuidado;
   const nombreCorto = f => f.nombre.split(' (')[0];
   const enCuidado = () => location.hash === '#cuidado';
@@ -229,8 +231,67 @@ const Cuidado = (() => {
           <p class="muted peq nota">Son puntos de partida para probar, no reglas. Toca ☆ para guardar un estilo.</p>
         </section>` : ''}
 
+      ${tarjetaPiel()}
+
       ${favoritos()}`;
   }
+
+  // ---------- Piel ----------
+  function tarjetaPiel() {
+    const P = datos.piel, tipo = c().piel && P.tipos[c().piel];
+    let cuerpo;
+    if (test) {
+      const q = P.test[test.paso];
+      cuerpo = `
+        <div class="cp-test">
+          <span class="muted peq">Pregunta ${test.paso + 1} de ${P.test.length}</span>
+          <strong>${U.esc(q.pregunta)}</strong>
+          <div class="cp-test-ops">
+            ${Object.keys(q.opciones).map((t, i) => `<button class="btn btn-sec" data-acc="cp-test-op" data-i="${i}">${U.esc(t)}</button>`).join('')}
+          </div>
+          <button class="enlace" data-acc="cp-test-cancelar">Cancelar</button>
+        </div>`;
+    } else {
+      const hoy = U.iso(), hecho = HabitosDatos.piel(hoy);
+      const r = HabitosDatos.rachas('piel');
+      cuerpo = `
+        <div class="chips">
+          ${Object.entries(P.tipos).map(([k, t]) => `
+            <button class="chip ${c().piel === k ? 'on' : ''}" data-acc="cp-piel" data-v="${k}" aria-pressed="${c().piel === k}">${U.esc(t.nombre)}</button>`).join('')}
+        </div>
+        <button class="enlace" data-acc="cp-test">${tipo ? 'Repetir el test' : '¿No lo sabes? Haz el test (2 preguntas)'}</button>
+        ${tipo ? `<ul class="cp-consejos">${tipo.consejos.map(t => `<li>${U.esc(t)}</li>`).join('')}</ul>` : ''}
+        <div class="cp-rutinas">
+          ${RUTINAS.map(([k, n, icono]) => `
+            <div class="cp-rutina">
+              <span class="cp-rutina-tit">${icono} ${n} ${hecho.hechas?.[k] ? '<span class="pos">✓</span>' : ''}</span>
+              ${P.base[k].map((paso, i) => {
+                const on = hecho[k].includes(i);
+                return `<button class="cp-paso ${on ? 'on' : ''}" data-acc="cp-paso" data-r="${k}" data-i="${i}" aria-pressed="${on}"><span class="cp-caja" aria-hidden="true">${on ? '✓' : ''}</span>${U.esc(paso)}</button>`;
+              }).join('')}
+            </div>`).join('')}
+        </div>
+        <p class="muted peq nota">Es un hábito de Hoy: 🔥 ${r.actual} ${r.actual === 1 ? 'día seguido' : 'días seguidos'} (mejor: ${r.mejor}). Mínimo: una rutina completa · Completo: mañana y noche.</p>`;
+    }
+    return `
+      <section class="tarjeta cp-piel">
+        <div class="cab-seccion"><h2>Cuidado de la piel</h2><span class="muted peq">${tipo ? `Piel ${U.esc(tipo.nombre.toLowerCase())}` : 'Tu tipo de piel'}</span></div>
+        ${cuerpo}
+      </section>`;
+  }
+  function responderTest(i) {
+    const q = datos.piel.test[test.paso];
+    test.respuestas.push(Object.values(q.opciones)[i]);
+    test.paso++;
+    if (test.paso >= datos.piel.test.length) {
+      const [base, sensible] = test.respuestas;
+      c().piel = sensible || base || 'normal';
+      Store.guardar();
+      test = null;
+    }
+  }
+  // Pasos de cada rutina (para la tarjeta de Hoy). null si aún no se han cargado.
+  const rutinas = () => datos ? datos.piel.base : null;
 
   function favoritos() {
     const lista = c().favoritos;
@@ -272,6 +333,11 @@ const Cuidado = (() => {
       case 'cp-cancelar': pararCamara(); escaner = { estado: 'listo', texto: '', n: 0 }; break;
       case 'cp-seccion': seccion = b.dataset.v; break;
       case 'cp-fav': alternarFavorito(seccion, datos.formas[c().forma][seccion][Number(b.dataset.i)]); break;
+      case 'cp-piel': c().piel = b.dataset.v; Store.guardar(); break;
+      case 'cp-test': test = { paso: 0, respuestas: [] }; break;
+      case 'cp-test-cancelar': test = null; break;
+      case 'cp-test-op': responderTest(Number(b.dataset.i)); break;
+      case 'cp-paso': HabitosDatos.alternarPaso(U.iso(), b.dataset.r, Number(b.dataset.i), datos.piel.base[b.dataset.r].length); break;
       case 'cp-quitar': c().favoritos = c().favoritos.filter(f => f.id !== b.dataset.id); Store.guardar(); break;
       default: return;
     }
@@ -286,5 +352,5 @@ const Cuidado = (() => {
     if (f) escanearFoto(f);
   }
 
-  return { alEscribir, id: 'cuidado', nombre: 'Cuidado personal', icono: '🪞', render, alClic, tarjetaEstilo, asegurar };
+  return { alEscribir, id: 'cuidado', nombre: 'Cuidado personal', icono: '🪞', render, alClic, tarjetaEstilo, asegurar, rutinas };
 })();

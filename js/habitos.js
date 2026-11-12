@@ -43,6 +43,7 @@ const Habitos = (() => {
             </label>`)}
           ${tarjeta('buena', 'Cosa buena del día', 'Escribe algo bueno que te haya pasado', cosaBuena(r.buena))}
           ${tarjetaHabilidad()}
+          ${tarjetaPiel()}
         </div>
       </section>`;
   }
@@ -108,6 +109,23 @@ const Habitos = (() => {
       <p class="muted peq nota">Habilidades aprendidas: <strong>${s.aprendidas}</strong></p>`);
   }
 
+  // Rutina de piel: los pasos están en Cuidado personal; aquí se marca cada rutina entera.
+  function tarjetaPiel() {
+    const pasos = Cuidado.rutinas();
+    if (!pasos) {
+      Cuidado.asegurar().then(ok => { if (ok && location.hash.replace('#', '') in { '': 1, hoy: 1 }) Hoy.render(document.getElementById('vista')); });
+      return tarjeta('piel', 'Rutina de piel', 'Mínimo: una rutina · Completo: mañana y noche', '<p class="muted">Cargando…</p>');
+    }
+    const p = D.piel(U.iso());
+    const boton = (k, n) => {
+      const hechos = p[k].length, total = pasos[k].length, on = !!p.hechas?.[k];
+      return `<button class="check ${on ? 'on' : ''}" data-acc="hb-rutina" data-r="${k}" aria-pressed="${on}">${on ? '✓ ' : ''}${n} <span class="peq">${hechos}/${total}</span></button>`;
+    };
+    return tarjeta('piel', 'Rutina de piel', 'Mínimo: una rutina · Completo: mañana y noche', `
+      <div class="hab-botones">${boton('manana', '☀ Mañana')}${boton('noche', '☾ Noche')}
+        <a class="enlace" href="#cuidado">Ver pasos →</a></div>`);
+  }
+
   // Actualiza estado y racha de una tarjeta sin repintar (no se cierra el teclado).
   function refrescar(id) {
     const e = document.getElementById(`hb-est-${id}`), r = document.getElementById(`hb-racha-${id}`);
@@ -132,6 +150,7 @@ const Habitos = (() => {
         const n = b.dataset.nivel;
         D.ponerPractica(hoy, D.dia(hoy).practica === n ? null : n); break;
       }
+      case 'hb-rutina': D.alternarRutina(hoy, b.dataset.r, Cuidado.rutinas()[b.dataset.r].length); break;
       case 'hb-responder': D.responder(b.dataset.si === '1'); break;
       default: return false;
     }

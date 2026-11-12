@@ -1041,3 +1041,17 @@ a.nav-ajustes { text-decoration: none; }
 .cp-escaner-botones { display: grid; grid-template-columns: 1fr; gap: 10px; width: 100%; max-width: 360px; }
 .cp-escaner-botones .btn { display: flex; align-items: center; justify-content: center; }
 .btn.deshabilitado { opacity: .4; pointer-events: none; }
+.cp-piel { display: flex; flex-direction: column; gap: 14px; }
+.cp-piel > .enlace { margin-top: -6px; }
+.cp-test { display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 12px; background: var(--superficie-2); }
+.cp-test-ops { display: flex; flex-direction: column; gap: 8px; }
+.cp-test-ops .btn { background: var(--superficie); text-align: left; justify-content: flex-start; }
+.cp-consejos { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--texto-2); }
+.cp-rutinas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cp-rutina { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: var(--superficie-2); }
+.cp-rutina-tit { font-size: 12px; color: var(--texto-2); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+.cp-paso { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border: 0; background: none; color: var(--texto); font: inherit; font-size: 14px; text-align: left; cursor: pointer; }
+.cp-caja { flex: 0 0 auto; width: 20px; height: 20px; display: grid; place-items: center; border-radius: 6px; border: 1.5px solid #3a4150; font-size: 12px; font-weight: 700; color: var(--acento-texto); }
+.cp-paso.on .cp-caja { background: var(--acento); border-color: var(--acento); }
+.cp-paso.on { color: var(--texto-2); }
+@media (max-width: 380px) { .cp-rutinas { grid-template-columns: 1fr; } }
