@@ -39,12 +39,6 @@ Web app personal (móvil y ordenador) para controlar finanzas, gym, estudio, tra
   - Habilidad de la semana: las 60 de `data/habilidades.json`, una por semana desde la semana en que se instaló. Desde el domingo pregunta «¿La has aprendido?» (Sí/No) y pasa a la siguiente; si no contestas, sigue preguntando y no se salta ninguna.
   - **Cosas buenas** (menú ⋯ de arriba, menú «+» de Hoy o lateral del ordenador): todas las que has escrito por meses, con editar, borrar y «Recuerdo aleatorio».
   - Se guarda por fecha (páginas, horas de móvil, texto y práctica) más el índice de la habilidad, el inicio de su semana y el Sí/No de cada una. Las rachas se calculan del historial (ver `js/habitos-datos.js`).
-- **Cuidado personal** (en «Más»), con los datos de `cuidado-personal-para-code/datos/recomendaciones.json`:
-  - Escáner de la forma de la cara con MediaPipe Face Landmarker, con la cámara frontal (media de 10 fotogramas) o con una foto. Se analiza en el móvil y la imagen no se guarda ni se envía; MediaPipe se descarga de internet al escanear. La forma se puede corregir a mano.
-  - Recomendaciones de pelo, cejas, barba y gafas según la forma; ☆ para guardar favoritos, que también salen en Outfits → Outfit de hoy.
-  - Tipo de piel (test de 2 preguntas o a mano), consejos y rutina de mañana y noche, que es también el hábito «Rutina de piel» de Hoy.
-  - Recordatorios (corte, barba, entrecejo, foto de progreso) cada X días con «Hecho hoy»; los que tocan en ≤ 3 días salen en Hoy.
-- **Gym → Fotos**: fotos de progreso guardadas solo en el dispositivo (IndexedDB, base `mi-panel-progreso`), con vista antes / ahora, descargar y borrar. No van en la copia JSON.
 - En el móvil la barra es Hoy · Finanzas · Gym · Estudio · Trabajo · **Más** (Comidas, Outfits y Ajustes).
 
 ## Cómo usarla
@@ -75,7 +69,6 @@ js/finanzas.js        Módulo de finanzas
 js/gym-plan.js        Planificación del gym (solo datos, editable)
 js/gym-figuras.js     Dibujos del gym: personajes animados y mapa de músculos
 js/gym.js             Módulo de gym
-js/gym-fotos.js       Fotos de progreso del gym (IndexedDB)
 js/outfits-datos.js   Datos y reglas de Outfits
 js/outfits.js         Módulo de Outfits
 js/estudio-datos.js   Datos y cálculos de Estudio
@@ -87,8 +80,6 @@ data/menu-comidas.json  Menú inicial de Comidas
 js/habitos-datos.js   Datos y rachas de Hábitos
 js/habitos.js         Tarjetas de Hábitos (en Hoy) y página Cosas buenas
 data/habilidades.json Las 60 habilidades de la semana
-js/cuidado.js         Cuidado personal (escáner, recomendaciones, piel, recordatorios)
-cuidado-personal-para-code/  Datos y diseño de Cuidado personal
 estudio-y-trabajo-para-code/  Fuente de asignaturas y diseños
 outfits-para-code/    Fuente del armario (armario.json y fotos)
 js/app.js             Pestañas, eventos y copia de seguridad

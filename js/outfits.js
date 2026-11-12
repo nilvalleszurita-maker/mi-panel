@@ -174,8 +174,7 @@ const Outfits = (() => {
           <ul class="lista historial">
             ${hist.map(h => `<li><span class="muted">${fechaRelativa(h.fecha)}</span><span class="crece">${U.esc(D.outfit(h.outfit_id)?.nombre || 'Outfit borrado')}</span></li>`).join('')}
           </ul>
-        </section>` : ''}
-      ${Cuidado.tarjetaEstilo()}`;
+        </section>` : ''}`;
   }
 
   function fechaRelativa(f) {

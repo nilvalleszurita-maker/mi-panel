@@ -2,7 +2,7 @@
 // Para añadir una sección nueva (Comidas, Horario, Outfits…) basta con crear
 // su archivo en js/, incluirlo en index.html y añadirlo a esta lista.
 // La primera es la pantalla de inicio.
-const MODULOS = [Hoy, Finanzas, Gym, Estudio, Trabajo, Comidas, Outfits, Cuidado];
+const MODULOS = [Hoy, Finanzas, Gym, Estudio, Trabajo, Comidas, Outfits];
 // En el móvil caben estas en la barra; el resto va en el menú «Más».
 const EN_BARRA = 5;
 // Páginas sin pestaña propia (se abren desde menús).
@@ -17,7 +17,6 @@ const ICONOS = {
   estudio: trazo('<path d="M4 5h11a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3z"></path><path d="M8 9h6M8 13h4"></path>'),
   trabajo: trazo('<rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5h8v2"></path>'),
   comidas: trazo('<path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"></path><path d="M17 21V3c-2 1-3 3.5-3 7 0 1.5 1 2.5 3 2.5"></path>'),
-  cuidado: trazo('<circle cx="12" cy="9" r="5"></circle><path d="M12 14v7M9 18h6"></path>'),
   mas: trazo('<circle cx="5" cy="12" r="1.4"></circle><circle cx="12" cy="12" r="1.4"></circle><circle cx="19" cy="12" r="1.4"></circle>'),
   outfits: trazo('<path d="M10 6a2 2 0 1 1 3 1.7c-.6.4-1 1-1 1.7V10"></path><path d="M12 10l-8.6 6.4A1.4 1.4 0 0 0 4.2 19h15.6a1.4 1.4 0 0 0 .8-2.6z"></path>'),
 };

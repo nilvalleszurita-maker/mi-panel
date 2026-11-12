@@ -1,9 +1,7 @@
 // Datos y cálculos de Hábitos (solo se muestran en la pantalla Hoy).
 //
 // Store.get().habitos:
-//   registro  { 'AAAA-MM-DD': { paginas, movil (horas), buena (texto), practica ('minimo'|'completo'),
-//               piel: { manana: [pasos hechos], noche: [pasos hechos], hechas: { manana, noche } } } }
-//   (la rutina de piel se marca en Cuidado personal o en Hoy; «hechas» indica qué rutinas están completas)
+//   registro  { 'AAAA-MM-DD': { paginas, movil (horas), buena (texto), practica ('minimo'|'completo') } }
 //   habilidad { indice (posición en data/habilidades.json), inicio (lunes AAAA-MM-DD de su semana),
 //               resultados { id: { aprendida: true|false, fecha } } }
 // Las rachas no se guardan: se calculan siempre a partir del registro.
@@ -36,7 +34,6 @@ const HabitosDatos = (() => {
       case 'movil': return r.movil == null ? 0 : r.movil < 3 ? 2 : r.movil < 4 ? 1 : 0;
       case 'buena': return r.buena && r.buena.trim() ? 2 : 0;
       case 'habilidad': return r.practica === 'completo' ? 2 : r.practica === 'minimo' ? 1 : 0;
-      case 'piel': { const n = ['manana', 'noche'].filter(k => r.piel?.hechas?.[k]).length; return n; }
     }
     return 0;
   }
@@ -55,30 +52,6 @@ const HabitosDatos = (() => {
       previa = x;
     }
     return { actual, mejor: Math.max(mejor, actual) };
-  }
-
-  // ---------- Rutina de piel (pasos de Cuidado personal) ----------
-  const piel = f => dia(f).piel || { manana: [], noche: [], hechas: {} };
-  function guardarPiel(f, p) {
-    const vacia = !p.manana.length && !p.noche.length;
-    poner(f, 'piel', vacia ? null : p);
-  }
-  // Marca o desmarca un paso; total = nº de pasos de esa rutina.
-  function alternarPaso(f, rutina, i, total) {
-    const p = structuredClone(piel(f));
-    p.hechas ||= {};
-    p[rutina] = p[rutina].includes(i) ? p[rutina].filter(x => x !== i) : [...p[rutina], i].sort();
-    p.hechas[rutina] = p[rutina].length >= total;
-    guardarPiel(f, p);
-  }
-  // Marca o desmarca la rutina entera (desde la tarjeta de Hoy).
-  function alternarRutina(f, rutina, total) {
-    const p = structuredClone(piel(f));
-    p.hechas ||= {};
-    const completa = p[rutina].length >= total;
-    p[rutina] = completa ? [] : Array.from({ length: total }, (_, i) => i);
-    p.hechas[rutina] = !completa;
-    guardarPiel(f, p);
   }
 
   // Todas las cosas buenas, de la más reciente a la más antigua.
@@ -129,7 +102,7 @@ const HabitosDatos = (() => {
   }
 
   return {
-    dia, nivel, rachas, piel, alternarPaso, alternarRutina, ponerPaginas, ponerMovil, ponerBuena, ponerPractica, cosasBuenas,
+    dia, nivel, rachas, ponerPaginas, ponerMovil, ponerBuena, ponerPractica, cosasBuenas,
     asegurar, habilidades, habilidad, responder,
   };
 })();

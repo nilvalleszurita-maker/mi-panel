@@ -9,7 +9,7 @@
 const Gym = (() => {
   // Estado de la vista (no se guarda).
   const hoy = new Date();
-  let vista = 'registro';          // 'registro' | 'calendario' | 'fotos' (js/gym-fotos.js)
+  let vista = 'registro';          // 'registro' | 'calendario'
   let semana = U.lunes();          // lunes de la semana visible
   let abierto = U.diaSemana();     // día desplegado (0 = lunes), null = ninguno
   let cal = { a: hoy.getFullYear(), m: hoy.getMonth() };
@@ -90,12 +90,11 @@ const Gym = (() => {
   // ---------- Pintado ----------
   function render(el) {
     el.innerHTML = `
-      <div class="segmentado tres">
+      <div class="segmentado">
         <button type="button" class="${vista === 'registro' ? 'activo' : ''}" data-acc="vista" data-v="registro">Semana</button>
         <button type="button" class="${vista === 'calendario' ? 'activo' : ''}" data-acc="vista" data-v="calendario">Calendario</button>
-        <button type="button" class="${vista === 'fotos' ? 'activo' : ''}" data-acc="vista" data-v="fotos">Fotos</button>
       </div>
-      ${vista === 'registro' ? vistaSemana() : vista === 'fotos' ? GymFotos.vista() : vistaCalendario()}`;
+      ${vista === 'registro' ? vistaSemana() : vistaCalendario()}`;
 
     if (desplazar) {
       el.querySelector('.gym-dia.abierto')?.scrollIntoView({ block: 'start' });
@@ -302,7 +301,6 @@ const Gym = (() => {
 
   // ---------- Eventos ----------
   function alClic(e, rerender) {
-    if (GymFotos.alClic(e, rerender)) return;
     const b = e.target.closest('[data-acc]');
     if (!b) return;
     const acc = b.dataset.acc, fecha = b.dataset.fecha;
@@ -347,7 +345,6 @@ const Gym = (() => {
   // Guardado automático al escribir. No se repinta la vista para no perder el
   // foco ni cerrar el teclado; solo se repinta al marcar o desmarcar casillas.
   function alEscribir(e, rerender) {
-    if (GymFotos.alEscribir(e, rerender)) return;
     const t = e.target, g = t.dataset.g, fecha = t.dataset.fecha;
     if (!g || !fecha) return;
     const r = registro(fecha, true);
