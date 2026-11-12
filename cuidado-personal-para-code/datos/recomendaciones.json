@@ -1,0 +1,95 @@
+{
+  "_nota": "Recomendaciones orientativas de estilismo masculino según la forma de la cara. No son reglas: son puntos de partida para probar.",
+  "formas": {
+    "ovalada": {
+      "nombre": "Ovalada",
+      "descripcion": "Largo algo mayor que el ancho, pómulos ligeramente más anchos que frente y mandíbula. Es la forma más equilibrada.",
+      "pelo": ["Casi cualquier corte te queda bien: aprovecha para probar.", "Quiff o pompadour con laterales cortos (fade).", "Texturizado con flequillo hacia delante (crop) o peinado hacia un lado.", "Evita flequillos muy largos y pesados que tapen la frente entera."],
+      "cejas": ["Mantén su forma natural con un ligero arco.", "Limpia solo el entrecejo y los pelos sueltos de debajo.", "Péinalas hacia arriba con un cepillito o gel transparente."],
+      "barba": ["Barba corta y uniforme (3–5 mm) o barba de 3 días.", "Mantén las mejillas limpias y la línea del cuello definida."],
+      "gafas": ["Casi todas: cuadradas, rectangulares o redondas."]
+    },
+    "redonda": {
+      "nombre": "Redonda",
+      "descripcion": "Largo y ancho parecidos, mandíbula suave y pómulos llenos.",
+      "pelo": ["Busca altura arriba y laterales muy cortos (fade alto) para alargar la cara.", "Quiff, pompadour o pelo de punta texturizado.", "Raya lateral marcada o peinado con algo de asimetría.", "Evita flequillos rectos y cortes redondeados tipo casco."],
+      "cejas": ["Un arco algo más marcado ayuda a dar estructura.", "No las rellenes ni las alargues hacia fuera.", "Limpia el entrecejo y deja el grosor natural."],
+      "barba": ["Barba más larga en el mentón y corta en los laterales: alarga la cara.", "Perilla o barba en ancla si te gusta.", "Evita barba muy ancha en las mejillas."],
+      "gafas": ["Rectangulares o cuadradas, con ángulos marcados."]
+    },
+    "cuadrada": {
+      "nombre": "Cuadrada",
+      "descripcion": "Frente, pómulos y mandíbula de ancho parecido, mandíbula marcada y angulosa.",
+      "pelo": ["Cortes clásicos y cortos te quedan muy bien: buzz cut, crew cut, fade.", "Raya lateral con laterales cortos.", "Algo de textura arriba suaviza los ángulos.", "Evita volumen ancho en los laterales."],
+      "cejas": ["Cejas rectas o con un arco suave, con su grosor natural.", "Limpia el entrecejo; no las afines demasiado."],
+      "barba": ["Barba corta o de 3 días: resalta la mandíbula sin endurecerla.", "Si la llevas larga, redondea un poco el mentón."],
+      "gafas": ["Redondas u ovaladas, para equilibrar los ángulos."]
+    },
+    "alargada": {
+      "nombre": "Alargada",
+      "descripcion": "Largo claramente mayor que el ancho, con frente, pómulos y mandíbula de ancho parecido.",
+      "pelo": ["Evita mucha altura arriba: alarga más la cara.", "Flequillo hacia delante o hacia un lado (crop, flequillo texturizado).", "Laterales no demasiado rapados, algo de volumen a los lados.", "Mejor fade bajo o medio que alto."],
+      "cejas": ["Cejas más rectas y horizontales ensanchan visualmente.", "No marques un arco muy alto.", "Limpia el entrecejo y los pelos sueltos."],
+      "barba": ["Barba más llena en las mejillas y corta en el mentón.", "Evita perillas largas que alarguen."],
+      "gafas": ["Monturas anchas y con altura, tipo aviador o cuadradas grandes."]
+    },
+    "corazon": {
+      "nombre": "Corazón (triángulo invertido)",
+      "descripcion": "Frente y pómulos anchos, mandíbula y mentón más estrechos.",
+      "pelo": ["Algo de longitud y textura arriba, sin mucho volumen en la frente.", "Flequillo lateral o peinado hacia un lado para reducir la frente.", "Laterales no demasiado cortos.", "Evita cortes muy altos con laterales rapados al cero."],
+      "cejas": ["Arco suave y natural.", "No las afines en exceso: el grosor equilibra la frente.", "Limpia el entrecejo."],
+      "barba": ["Barba completa o algo más llena en la mandíbula: da anchura abajo.", "Barba de 3 días o corta y uniforme también funciona."],
+      "gafas": ["Monturas más anchas abajo o ligeras (al aire, metálicas finas)."]
+    },
+    "diamante": {
+      "nombre": "Diamante",
+      "descripcion": "Pómulos anchos con frente y mandíbula más estrechas.",
+      "pelo": ["Algo de volumen en la frente y en el mentón para equilibrar los pómulos.", "Flequillo hacia delante o peinado texturizado.", "Laterales no completamente rapados."],
+      "cejas": ["Arco suave, con algo de longitud hacia fuera.", "Mantén el grosor natural; limpia el entrecejo."],
+      "barba": ["Barba que dé algo de anchura en el mentón.", "Barba corta y uniforme."],
+      "gafas": ["Ovaladas o sin montura en la parte inferior."]
+    }
+  },
+  "piel": {
+    "_nota": "Tipo de piel elegido por el usuario con un test de 4 preguntas, no por la foto.",
+    "base": {
+      "manana": ["Limpiador suave", "Hidratante", "Protector solar SPF 30+ (todo el año)"],
+      "noche": ["Limpiador suave", "Hidratante"]
+    },
+    "tipos": {
+      "grasa": { "nombre": "Grasa", "consejos": ["Limpiador en gel con ácido salicílico.", "Hidratante ligera oil-free (no la saltes: si no hidratas, la piel produce más grasa).", "Protector solar en gel o fluido, toque seco."] },
+      "seca": { "nombre": "Seca", "consejos": ["Limpiador en crema o leche, sin espuma fuerte.", "Hidratante más densa con ceramidas o ácido hialurónico.", "Evita agua muy caliente en la cara."] },
+      "mixta": { "nombre": "Mixta", "consejos": ["Limpiador suave en gel.", "Hidratante ligera en toda la cara; algo más en las zonas secas.", "Protector solar fluido."] },
+      "normal": { "nombre": "Normal", "consejos": ["Rutina básica: limpiador suave, hidratante y protector solar.", "Constancia antes que muchos productos."] },
+      "sensible": { "nombre": "Sensible", "consejos": ["Productos sin perfume ni alcohol.", "Prueba los productos nuevos de uno en uno.", "Protector solar mineral (óxido de zinc)."] }
+    },
+    "test": [
+      { "pregunta": "Dos horas después de lavarte la cara, ¿cómo la notas?", "opciones": { "Brillante en toda la cara": "grasa", "Tirante o con zonas que se pelan": "seca", "Brillo solo en frente y nariz": "mixta", "Normal, cómoda": "normal" } },
+      { "pregunta": "¿Se te enrojece o pica con productos nuevos?", "opciones": { "Sí, a menudo": "sensible", "No": null } }
+    ]
+  },
+  "recordatorios": [
+    { "id": "corte", "nombre": "Corte de pelo", "cada_dias": 28 },
+    { "id": "barba", "nombre": "Arreglar barba", "cada_dias": 7 },
+    { "id": "cejas", "nombre": "Limpiar entrecejo", "cada_dias": 14 },
+    { "id": "foto-progreso", "nombre": "Foto de progreso del gym", "cada_dias": 21 }
+  ],
+  "deteccion_forma": {
+    "_nota": "Puntos de MediaPipe Face Landmarker (478 puntos). Umbrales orientativos: ajustar probando. El usuario siempre puede corregir la forma a mano.",
+    "medidas": {
+      "largo": "distancia 10 (frente arriba) → 152 (mentón)",
+      "ancho_frente": "distancia 54 → 284",
+      "ancho_pomulos": "distancia 234 → 454",
+      "ancho_mandibula": "distancia 172 → 397"
+    },
+    "reglas_en_orden": [
+      "ratio = largo / ancho_pomulos",
+      "si ratio >= 1.55 → alargada",
+      "si ancho_pomulos > ancho_frente*1.08 y ancho_pomulos > ancho_mandibula*1.12 → diamante",
+      "si ancho_frente > ancho_mandibula*1.15 y ancho_frente >= ancho_pomulos*0.95 → corazon",
+      "si ratio < 1.3 y |ancho_mandibula - ancho_pomulos| / ancho_pomulos < 0.10 → cuadrada",
+      "si ratio < 1.3 → redonda",
+      "en otro caso → ovalada"
+    ]
+  }
+}
