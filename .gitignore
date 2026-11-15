@@ -7,3 +7,5 @@ data/*
 !data/menu-comidas.json
 !data/habilidades.json
 video-promo/out
+# Estado temporal del servidor de Impeccable
+.impeccable/live/
