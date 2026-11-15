@@ -1,0 +1,58 @@
+{
+  "hoy": {
+    "width": 1170,
+    "height": 2532
+  },
+  "hoy-larga": {
+    "width": 1170,
+    "height": 6606
+  },
+  "barra": {
+    "width": 1170,
+    "height": 228
+  },
+  "finanzas": {
+    "width": 1170,
+    "height": 2532
+  },
+  "finanzas-larga": {
+    "width": 1170,
+    "height": 7365
+  },
+  "gym": {
+    "width": 1170,
+    "height": 2532
+  },
+  "gym-larga": {
+    "width": 1170,
+    "height": 11931
+  },
+  "comidas": {
+    "width": 1170,
+    "height": 2532
+  },
+  "comidas-larga": {
+    "width": 1170,
+    "height": 5034
+  },
+  "estudio": {
+    "width": 1170,
+    "height": 2532
+  },
+  "estudio-larga": {
+    "width": 1170,
+    "height": 6000
+  },
+  "trabajo": {
+    "width": 1170,
+    "height": 2532
+  },
+  "outfits": {
+    "width": 1170,
+    "height": 2532
+  },
+  "habitos": {
+    "width": 1170,
+    "height": 2532
+  }
+}
