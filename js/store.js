@@ -49,6 +49,8 @@ const Store = (() => {
     comidas: { menu: null, registro: {} },
     // Armario y outfits (tablas: ver js/outfits-datos.js).
     armario: { sembrado: false, prendas: [], outfits: [], outfit_prendas: [], outfit_historial: [] },
+    // Mood: registro diario de ánimo, etiquetas y PIN opcional (ver js/mood.js).
+    mood: { entradas: {}, etiquetas: ['Estudio', 'Exámenes', 'Gym', 'Correr', 'Trabajo', 'Amigos', 'Familia', 'Dormí mal', 'Mucho móvil', 'Proyectos'], pinHash: null },
   });
 
   function cargar() {

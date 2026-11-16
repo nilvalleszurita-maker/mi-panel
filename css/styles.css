@@ -1014,3 +1014,57 @@ a.nav-ajustes { text-decoration: none; }
 /* Botón ⋯ de Hoy: sin giro y del mismo tamaño en móvil y escritorio. */
 .btn-puntos[aria-expanded="true"] svg { transform: none; }
 @media (min-width: 860px) { .btn-mas.btn-puntos { width: 48px; padding: 0; justify-content: center; } }
+
+/* ---------- Mood ---------- */
+.mood-registro { display: flex; flex-direction: column; gap: 14px; background: var(--superficie-2); border-radius: 20px; padding: 18px; }
+.mood-registro h2 { text-transform: none; }
+.mood-fecha { width: auto; min-height: 36px; padding: 0 8px; font-size: .85rem; background: var(--superficie); }
+.mood-caras { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.mood-cara {
+  min-height: 74px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  border-radius: 14px; border: 2px solid transparent; background: var(--superficie); color: var(--c); cursor: pointer; padding: 6px 0;
+}
+.mood-cara span { font-size: 10.5px; font-weight: 600; }
+.mood-cara.on { border-color: var(--c); background: color-mix(in srgb, var(--c) 20%, var(--superficie)); }
+.mood-energia { display: flex; align-items: center; gap: 12px; }
+.mood-energia > span { width: 58px; }
+.mood-energia-botones { flex: 1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.mood-energia-botones button { height: 40px; border: 0; border-radius: 10px; background: var(--superficie); color: var(--muted); font-weight: 600; cursor: pointer; }
+.mood-energia-botones button.on { background: var(--ambar); color: var(--acento-texto); }
+.mood-registro .chip { min-height: 34px; font-size: 13px; }
+.mood-registro .btn[disabled], .mood-sacar[disabled] { background: #3a4150; color: var(--texto-2); cursor: default; }
+.mood-registro .enlace.peligro { align-self: center; }
+.mood-diario, #mood-lista { display: flex; flex-direction: column; gap: 10px; }
+.mood-diario .chips { flex-wrap: nowrap; overflow-x: auto; }
+.mood-tarjeta { display: flex; gap: 12px; padding: 14px; background: var(--superficie); border-radius: 16px; border-left: 4px solid var(--c); }
+.mood-tarjeta-cara { width: 40px; display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 0 0 auto; font-size: 11px; color: var(--muted); }
+.mood-tarjeta-cab { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 14px; }
+.mood-tarjeta-cab span { font-size: 12px; font-weight: 600; }
+.mood-tarjeta p { margin: 6px 0 0; font-size: 14px; color: #d3d8e2; line-height: 1.4; }
+.mood-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.mood-tags span { font-size: 11px; color: var(--texto-2); background: var(--borde); border-radius: 999px; padding: 3px 8px; }
+#mood-contenido { display: flex; flex-direction: column; gap: 12px; }
+.mood-semana { background: var(--superficie); border: 1px solid var(--borde); border-radius: 18px; overflow: hidden; }
+.mood-semana-cab { width: 100%; display: flex; flex-direction: column; gap: 12px; padding: 16px; background: none; border: 0; text-align: left; cursor: pointer; }
+.mood-semana-cab strong { font-family: var(--fuente-titulos); }
+.mood-barras { display: flex; align-items: flex-end; gap: 6px; height: 72px; }
+.mood-barra { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%; }
+.mood-barra div { width: 100%; border-radius: 6px; }
+.mood-barra span { font-size: 10px; color: var(--muted); }
+.mood-dato { background: var(--superficie-2); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 2px; }
+.mood-dato span { font-size: 11px; color: var(--muted); }
+.mood-dato strong { font-size: 16px; }
+.mood-frase { font-size: 13px; color: #d3d8e2; font-style: italic; line-height: 1.4; }
+.mood-semana-dias { border-top: 1px solid var(--borde); padding: 4px 16px 12px; }
+.mood-semana-dias div { display: grid; grid-template-columns: 76px 64px 1fr; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--borde); font-size: 12px; align-items: baseline; }
+.mood-tarro { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.mood-sacar { background: var(--verde); }
+.mood-recuerdo { width: 100%; text-align: left; background: var(--superficie-2); border-radius: 18px; padding: 18px; border-left: 4px solid var(--verde); display: flex; flex-direction: column; gap: 6px; }
+.mood-recuerdo p { margin: 0; font-size: 16px; line-height: 1.45; }
+.mood-bloqueo { align-items: stretch; max-width: 420px; margin: 40px auto; text-align: center; }
+.mood-bloqueo h2 { text-transform: none; }
+.mood-bloqueo .bloque-form { display: flex; flex-direction: column; gap: 10px; }
+.mood-bloqueo input { text-align: center; letter-spacing: .4em; font-size: 1.3rem; }
+@media (min-width: 860px) {
+  .vista:has(.mood-registro) { max-width: 720px; }
+}
