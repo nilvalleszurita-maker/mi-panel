@@ -28,7 +28,7 @@ const Store = (() => {
     },
     entrenos: { plan: {}, hechos: {} },
     // Registro del gym por fecha (AAAA-MM-DD). Ver la estructura en js/gym.js.
-    gym: { registros: {} },
+    gym: { registros: {}, tiposExtra: [] },
     // Preferencias de la pantalla Hoy (nombre del saludo y objetivos).
     ajustes: {
       nombre: 'Nil', presupuestoMensual: 100, objetivoProteina: 150, objetivoKcal: 3000,
