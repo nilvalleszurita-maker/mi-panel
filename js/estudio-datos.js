@@ -120,6 +120,15 @@ const EstudioDatos = (() => {
     };
     mezclar('asignaturas', asignaturas, 'asignaturas', false);
     mezclar('evaluaciones', evaluaciones, 'evaluaciones', true);
+    // Evaluaciones que venían del JSON y ya no están en él (p. ej. una re-evaluación
+    // quitada): se quitan solo si no las has tocado y no tienen nota tuya.
+    const enJson = new Set(evaluaciones.map(n => n.id));
+    t.evaluaciones = t.evaluaciones.filter(x => {
+      const delJson = t.origen.evaluaciones[x.id] !== undefined;
+      if (!delJson || enJson.has(x.id) || x.nota !== null || huella(x) !== t.origen.evaluaciones[x.id]) return true;
+      delete t.origen.evaluaciones[x.id]; delete t.origen.notas[x.id];
+      return false;
+    });
     t.sembrado = true;
     Store.guardar();
   }

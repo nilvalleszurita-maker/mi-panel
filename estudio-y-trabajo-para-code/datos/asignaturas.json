@@ -37,19 +37,7 @@
           "nota_extra": "Incluye la competencia transversal (comunicación oral y escrita)"
         }
       ],
-      "reevaluacion": {
-        "sustituye": [
-          "sm-a1",
-          "sm-a2",
-          "sm-a3"
-        ],
-        "mantiene": [
-          "sm-a4"
-        ],
-        "regla": "Si la nota final tras re-evaluación es < 5, sustituye a la inicial solo si es mayor. Si es ≥ 5, la nota final es 5.",
-        "id": "sm-reev",
-        "fecha_texto": ""
-      }
+      "reevaluacion": null
     },
     {
       "id": "informatica",
