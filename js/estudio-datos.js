@@ -7,7 +7,10 @@
 //                 nombre_examen, orden,
 //                 tipo: 'normal' | 'media' (su nota es la media de sus partes) |
 //                       'parte' (de una «media», padre_id) |
-//                       'reconduccion' (sobre nota_maxima; sustituye a sustituye_id si es mayor)
+//                       'reconduccion' (sobre nota_maxima; sustituye a sustituye_id si es mayor) |
+//                       'reevaluacion' (examen de junio sobre 10 que sustituye a sustituye_ids; el
+//                                       resto mantiene su nota; si la final es ≥ 5 queda en 5 y si
+//                                       es < 5 solo cuenta si mejora la del curso)
 // La primera vez se carga data/asignaturas.json; después se sincroniza con él sin
 // pisar tus notas ni lo que edites en la app.
 const EstudioDatos = (() => {
@@ -30,7 +33,7 @@ const EstudioDatos = (() => {
       const nombre = id => a.evaluaciones.find(x => x.id === id)?.nombre || id;
       const reglas = [];
       if (a.reconduccion) reglas.push(`Reconducción (${a.reconduccion.requisito}): ${a.reconduccion.regla}`);
-      if (a.reevaluacion) {
+      if (a.reevaluacion && !a.reevaluacion.id) {
         reglas.push(`Re-evaluación: sustituye ${a.reevaluacion.sustituye.map(nombre).join(', ')}`
           + (a.reevaluacion.mantiene?.length ? ` y mantiene ${a.reevaluacion.mantiene.map(nombre).join(', ')}` : '')
           + `. ${a.reevaluacion.regla} Si se usa, la nota final máxima es 5.`);
@@ -60,9 +63,21 @@ const EstudioDatos = (() => {
           fila({
             id: a.reconduccion.id, nombre: `Reconducción ${ev.nombre}`, peso: 0, fecha: a.reconduccion.fecha || null,
             tipo: 'reconduccion', sustituye_id: ev.id, nota_maxima: a.reconduccion.nota_maxima || 5,
-            nota_extra: `Sobre ${a.reconduccion.nota_maxima || 5}; sustituye al ${ev.nombre} si es mayor (${a.reconduccion.requisito})`,
+            nota_extra: `Sobre ${a.reconduccion.nota_maxima || 5}; cuenta la más alta entre esta y el ${ev.nombre}`
+              + (a.reconduccion.requisito ? ` · solo si ${a.reconduccion.requisito}` : ''),
           });
         }
+      }
+      // Re-evaluación de junio: una fila más donde poner la nota (si el JSON le da id).
+      const rv = a.reevaluacion;
+      if (rv?.id) {
+        const sust = rv.sustituye.map(nombre), mant = (rv.mantiene || []).map(nombre);
+        fila({
+          id: rv.id, nombre: `Re-evaluación${rv.fecha_texto ? ` (${rv.fecha_texto})` : ''}`, peso: 0, fecha: rv.fecha || null,
+          fecha_aprox: !!rv.fecha_aprox, fecha_texto: rv.fecha_texto || '',
+          tipo: 'reevaluacion', sustituye_ids: [...rv.sustituye], nota_maxima: 10,
+          nota_extra: `Sustituye ${sust.join(' y ')}${mant.length ? `; mantiene ${mant.join(' y ')}` : ''}. Si sale ≥ 5, la final es 5`,
+        });
       }
     });
     // Nombre de examen de tu lista (p. ej. «2n parcial + test de prácticas»).
@@ -149,7 +164,7 @@ const EstudioDatos = (() => {
     };
     let asegurado = 0, pendiente = 0, total = 0;
     for (const ev of evs) {
-      if (ev.tipo === 'reconduccion' || ev.tipo === 'media') continue;
+      if (ev.tipo === 'reconduccion' || ev.tipo === 'media' || ev.tipo === 'reevaluacion') continue;
       total += ev.peso;
       const v = efectiva(ev);
       if (v !== null) asegurado += v * ev.peso / 100; else pendiente += ev.peso;
@@ -158,13 +173,39 @@ const EstudioDatos = (() => {
     return {
       asegurado: redondear(asegurado), pendiente: redondear(pendiente), totalPesos: redondear(total),
       necesaria: pendiente > 0 ? redondear((a.objetivo - asegurado) / (pendiente / 100)) : null,
-      efectiva,
+      efectiva, reev: reevaluacion(a, evs, efectiva, asegurado, pendiente),
     };
+  }
+
+  // Re-evaluación: nota = reev·(pesos sustituidos)/100 + lo que mantiene su nota.
+  //   ≥ 5 → la final es 5;  < 5 → la final es max(curso, re-evaluación).
+  // necesita: nota sobre 10 en junio para llegar a min(objetivo, 5).
+  function reevaluacion(a, evs, efectiva, asegurado, pendiente) {
+    const rv = evs.find(x => x.tipo === 'reevaluacion');
+    if (!rv) return null;
+    const ids = new Set((rv.sustituye_ids || []).filter(id => evs.some(x => x.id === id)));
+    const cuentan = evs.filter(x => !['reconduccion', 'media', 'reevaluacion'].includes(x.tipo));
+    const pesoSust = cuentan.filter(x => ids.has(x.id)).reduce((s, x) => s + x.peso, 0);
+    if (!pesoSust) return null;
+    const mantiene = cuentan.filter(x => !ids.has(x.id)).reduce((s, x) => s + (efectiva(x) ?? 0) * x.peso / 100, 0);
+    const meta = Math.min(a.objetivo, 5);
+    const necesita = Math.round(Math.max(0, (meta - mantiene) / (pesoSust / 100)) * 100) / 100;
+    let final = null;
+    if (rv.nota !== null) {
+      const conReev = rv.nota * pesoSust / 100 + mantiene;
+      final = conReev >= 5 ? 5 : Math.max(pendiente > 0 ? 0 : asegurado, conReev);
+      final = Math.round(final * 1000) / 1000;
+    }
+    return { id: rv.id, nombre: rv.nombre, nota: rv.nota, final, necesita, posible: necesita <= 10 };
   }
 
   // Estado de la nota necesaria para mostrar (texto, etiqueta y tono).
   function veredicto(asigId) {
     const a = asignatura(asigId), c = calculo(asigId);
+    if (c.reev && c.reev.final !== null) {
+      const ok = c.reev.final >= a.objetivo;
+      return { c, valor: c.reev.final, etiqueta: `nota final tras la re-evaluación · ${ok ? '¡objetivo cumplido!' : 'no llega al objetivo'}`, tono: ok ? 'ok' : 'mal', corto: ok ? 'Aprobada (re-ev.)' : 'No llega' };
+    }
     if (c.necesaria === null) {
       const ok = c.asegurado >= a.objetivo;
       return { c, valor: c.asegurado, etiqueta: ok ? 'nota final · ¡objetivo cumplido!' : 'nota final · no llega al objetivo', tono: ok ? 'ok' : 'mal', corto: ok ? 'Aprobada' : 'No llega' };
