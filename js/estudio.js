@@ -100,8 +100,21 @@ const Estudio = (() => {
           <div class="calc-pie"><span>Llevas ${fmt(c.asegurado)} de 10 asegurados</span><span>${fmt(c.pendiente)} % por evaluar</span></div>
         </div>
         ${avisoPesos}
+        ${lineaReev(a, v)}
         ${(a.reglas || []).map(r => `<p class="calc-regla">${U.esc(r)}</p>`).join('')}
       </section>`;
+  }
+
+  // Aviso de la re-evaluación: si con el curso no llegas, cuánto necesitas en junio.
+  function lineaReev(a, v) {
+    const r = v.c.reev;
+    if (!r || r.final !== null) return '';
+    const noLlega = v.c.necesaria === null ? v.c.asegurado < a.objetivo : v.c.necesaria > 10;
+    if (!noLlega) return '';
+    const meta = Math.min(a.objetivo, 5);
+    return `<p class="calc-reev">${r.posible
+      ? `Re-evaluación${r.nombre.includes('(') ? ' ' + U.esc(r.nombre.slice(r.nombre.indexOf('('))) : ''}: necesitas un <strong>${fmt(r.necesita)}</strong> sobre 10 para llegar al ${fmt(meta)}.`
+      : 'Ni con un 10 en la re-evaluación llegarías al objetivo con las notas que se mantienen.'}</p>`;
   }
 
   function listaEvaluaciones() {
@@ -111,7 +124,7 @@ const Estudio = (() => {
         <input data-nota="${ev.id}" value="${ev.nota === null ? '' : String(ev.nota).replace('.', ',')}" inputmode="decimal" placeholder="–" autocomplete="off" aria-label="Nota de ${U.esc(ev.nombre)}" class="${ev.nota === null ? '' : 'con-nota'}">
       </label>`;
     const detalle = ev => [
-      ev.tipo === 'reconduccion' ? '' : `${fmt(ev.peso)} %`,
+      ev.tipo === 'reconduccion' || ev.tipo === 'reevaluacion' ? '' : `${fmt(ev.peso)} %`,
       ev.fecha ? (ev.fecha_aprox && ev.fecha_texto ? ev.fecha_texto : fechaTxt(ev.fecha)) : '',
       ev.nota_extra,
     ].filter(Boolean).map(U.esc).join(' · ');
@@ -127,7 +140,7 @@ const Estudio = (() => {
               </div>`;
           }
           return `
-            <div class="eval ${ev.tipo === 'parte' ? 'eval-parte' : ''} ${ev.tipo === 'reconduccion' ? 'eval-recon' : ''}">
+            <div class="eval ${ev.tipo === 'parte' ? 'eval-parte' : ''} ${ev.tipo === 'reconduccion' ? 'eval-recon' : ''} ${ev.tipo === 'reevaluacion' ? 'eval-reev' : ''}">
               <div class="crece"><div class="eval-nombre">${U.esc(ev.nombre)}</div><div class="muted peq">${detalle(ev)}</div></div>
               ${campo(ev, ev.nota_maxima || 10)}
             </div>`;
@@ -165,7 +178,7 @@ const Estudio = (() => {
           <div class="ed-eval ${ev.tipo === 'parte' ? 'eval-parte' : ''}">
             <div class="ed-eval-fila">
               ${inp(ev.id, 'nombre', ev.nombre, 'aria-label="Nombre" maxlength="60"')}
-              ${ev.tipo === 'reconduccion' || ev.tipo === 'media' ? `<span class="muted peq ed-peso">${ev.tipo === 'media' ? `${fmt(ev.peso)} % (suma de partes)` : 'sin peso'}</span>`
+              ${['reconduccion', 'media', 'reevaluacion'].includes(ev.tipo) ? `<span class="muted peq ed-peso">${ev.tipo === 'media' ? `${fmt(ev.peso)} % (suma de partes)` : 'sin peso'}</span>`
                 : `<label class="ed-peso">${inp(ev.id, 'peso', String(ev.peso).replace('.', ','), 'inputmode="decimal" aria-label="Peso en %"')}<span>%</span></label>`}
               <button class="icon-btn peq" data-acc="borrar-eval" data-id="${ev.id}" aria-label="Borrar ${U.esc(ev.nombre)}">×</button>
             </div>

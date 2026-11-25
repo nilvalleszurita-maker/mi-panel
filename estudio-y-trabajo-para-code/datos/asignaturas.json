@@ -46,7 +46,9 @@
         "mantiene": [
           "sm-a4"
         ],
-        "regla": "Si la nota final tras re-evaluación es < 5, sustituye a la inicial solo si es mayor. Si es ≥ 5, la nota final es 5."
+        "regla": "Si la nota final tras re-evaluación es < 5, sustituye a la inicial solo si es mayor. Si es ≥ 5, la nota final es 5.",
+        "id": "sm-reev",
+        "fecha_texto": ""
       }
     },
     {
@@ -160,7 +162,9 @@
           "mf-lab-part",
           "mf-lab-test"
         ],
-        "regla": "Si la nota final tras re-evaluación es < 5, sustituye a la inicial solo si es mayor. Si es ≥ 5, la nota final es 5."
+        "regla": "Un solo examen que vale el total de los exámenes (80 %); las prácticas mantienen su nota. Si la nota final es ≥ 5, queda en 5; si es < 5, solo sustituye a la del curso si es mayor.",
+        "id": "mf-reev",
+        "fecha_texto": "junio"
       }
     },
     {
@@ -171,14 +175,14 @@
       "evaluaciones": [
         {
           "id": "mm-e1",
-          "nombre": "1r examen",
+          "nombre": "Examen parcial",
           "peso": 42,
           "nota": null,
           "fecha": null
         },
         {
           "id": "mm-oral",
-          "nombre": "Entrevista oral",
+          "nombre": "Prueba oral",
           "peso": 15,
           "nota": null,
           "fecha": "2026-12-14",
@@ -187,13 +191,32 @@
         },
         {
           "id": "mm-e2",
-          "nombre": "2n examen",
+          "nombre": "Examen final",
           "peso": 43,
           "nota": null,
           "fecha": "2027-01-13"
         }
       ],
-      "reevaluacion": null
+      "reevaluacion": {
+        "id": "mm-reev",
+        "fecha_texto": "junio",
+        "sustituye": [
+          "mm-e1",
+          "mm-e2"
+        ],
+        "mantiene": [
+          "mm-oral"
+        ],
+        "regla": "Un solo examen que vale el total de los exámenes (85 %); la prueba oral mantiene su nota. Si la nota final es ≥ 5, queda en 5; si es < 5, solo sustituye a la del curso si es mayor."
+      },
+      "reconduccion": {
+        "id": "mm-recon",
+        "fecha": "2027-01-13",
+        "sustituye": "mm-e1",
+        "nota_maxima": 5,
+        "requisito": "Examen parcial < 5",
+        "regla": "Se puntúa de 0 a 5 y sustituye la nota del Examen parcial si es mayor. Mismo día que el examen final."
+      }
     }
   ],
   "examenes": [
@@ -212,7 +235,7 @@
     {
       "fecha": "2026-12-14",
       "asignatura": "metodes-matematics",
-      "nombre": "Entrevista oral",
+      "nombre": "Prueba oral",
       "fecha_aprox": true,
       "fecha_texto": "semana del 14 al 20 dic"
     },
@@ -224,7 +247,7 @@
     {
       "fecha": "2027-01-13",
       "asignatura": "metodes-matematics",
-      "nombre": "2n examen"
+      "nombre": "Examen final + reconducción del parcial"
     },
     {
       "fecha": "2027-01-15",
