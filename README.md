@@ -10,7 +10,10 @@ Web app personal (móvil y ordenador) para controlar finanzas, gym, estudio, tra
   - Resumen mensual (ingresos, gastos y balance), gasto por categoría y lista de movimientos y traspasos (borrarlos deshace su efecto en los saldos).
 - **Gym**: registro diario de la planificación semanal.
   - Vista **Semana**: los 7 días con su sesión (se abre el de hoy). Cada ejercicio tiene casilla de hecho, una fila de kg y reps por serie, el objetivo de repeticiones, lo que hiciste la última vez (en gris) y botones para añadir o quitar series. Los días de carrera tienen distancia, tiempo (`52` o `52:30`) y el ritmo calculado en min/km. Notas por día. Todo se guarda al escribir.
-  - Vista **Calendario**: días de gym en azul, de carrera en naranja y con las dos cosas partidos en diagonal. Pulsar un día lo abre en la vista Semana. Resumen del mes: días de gym, días de carrera y km.
+  - **Tipos de entreno**: al abrir un día marcas uno o varios: Gym (azul), Carrera (verde), Boxeo (naranja) y los que añadas con «+ Otro tipo» (p. ej. Fútbol, con su propio color). Boxeo tiene ficha: duración, intensidad 1–5, qué has hecho (técnica, saco, manoplas, sparring, comba, físico), rounds y notas. Los tipos añadidos tienen duración y notas.
+  - **Boxeo esta semana** (arriba de la vista Semana): sesiones hechas frente al objetivo y los días que quedan. Sin días fijos: 2 por semana, cualquier día de lunes a jueves (`GYM_BOXEO` en `js/gym-plan.js`).
+  - **Esta semana** (abajo): entrenos por tipo frente a lo planificado y el total.
+  - Vista **Calendario**: cada día del color de su entreno; con dos o tres entrenos, partido en franjas. Pulsar un día lo abre en la vista Semana. Arriba, **Entrenos este mes**: el total (un día con gym y boxeo cuenta 2) con el desglose por tipo y en cuántos días. Debajo, días entrenados y km.
   - Cada ejercicio muestra un personaje animado haciéndolo y un mapa del cuerpo (frente y espalda) con los músculos principales y secundarios.
   - La planificación está en `js/gym-plan.js`: cambia ejercicios, series o reps ahí sin tocar la lógica.
 - **Outfits**: armario y outfits a partir de `outfits-para-code/armario.json`.

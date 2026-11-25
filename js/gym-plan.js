@@ -120,3 +120,8 @@ const GYM_PLAN = [
     ritmo: 'suave',
   },
 ];
+
+// Boxeo: cuántas sesiones por semana y qué días se puede ir (0 = lunes … 6 = domingo).
+// No hay días fijos: cualquiera de estos días cuenta. La vista Semana avisa de
+// cuántas faltan y qué días quedan.
+const GYM_BOXEO = { porSemana: 2, dias: [0, 1, 2, 3] };
